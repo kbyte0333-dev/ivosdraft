@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service | InvictusOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #090b10;
+  --card: #11141c;
+  --title: #f8fafc;
+  --body: #94a3b8;
+  --accent: #38bdf8;
+  --line: rgba(255, 255, 255, 0.08);
+  --font-h: 'Space Grotesk', sans-serif;
+  --font-p: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  margin: 0; 
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--font-p);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+.box {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.nav {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--line);
+  background: rgba(9, 11, 16, 0.8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-family: var(--font-h);
+  font-weight: 700;
+  color: var(--title);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.back {
+  font-family: var(--font-h);
+  font-size: 0.85rem;
+  color: var(--body);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back:hover {
+  color: var(--title);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  padding: 5rem 0;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 6rem;
+  height: max-content;
+}
+
+@media (max-width: 767px) {
+  .sidebar { display: none; }
+}
+
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.side-link {
+  font-family: var(--font-h);
+  font-size: 0.85rem;
+  color: var(--body);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.side-link:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.pane {
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.hero h1 {
+  font-family: var(--font-h);
+  font-size: 3.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--title);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.hero p {
+  font-family: var(--font-h);
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.node {
+  scroll-margin-top: 7rem;
+}
+
+.node h2 {
+  font-family: var(--font-h);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--title);
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.node p {
+  font-weight: 300;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.lbl {
+  font-family: var(--font-h);
+  font-size: 0.85rem;
+  color: var(--title);
+}
+
+.val {
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 3rem 0;
+  font-family: var(--font-h);
+  font-size: 0.8rem;
+}
+
+.foot-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="box nav-flex">
+    <a href="index.html" class="brand">invictus.os</a>
+    <a href="index.html" class="back">← Back to Home</a>
+  </div>
+</header>
+
+<div class="box">
+  <main class="grid">
+    <aside class="sidebar">
+      <nav class="side-menu">
+        <a href="#license" class="side-link">01 / License & Open Source</a>
+        <a href="#acceptable-use" class="side-link">02 / Acceptable Use</a>
+        <a href="#disclaimer" class="side-link">03 / Disclaimer & Liability</a>
+        <a href="#hardware" class="side-link">04 / Hardware Support</a>
+        <a href="#third-party" class="side-link">05 / Third-Party Apps</a>
+        <a href="#updates" class="side-link">06 / Changes to Terms</a>
+      </nav>
+    </aside>
+
+    <section class="pane">
+      <div class="hero">
+        <h1>Terms of Service</h1>
+        <p>Software Usage Agreement & Guidelines</p>
+      </div>
+
+      <div id="license" class="node">
+        <h2>01. License & Open Source</h2>
+        <p>InvictusOS is open-source software distributed under public permissive licensing terms. You are free to download, install, modify, redistribute, and audit the operating system code in accordance with the underlying open-source licenses specified in our source repository.</p>
+      </div>
+
+      <div id="acceptable-use" class="node">
+        <h2>02. Acceptable Use</h2>
+        <p>You may use InvictusOS for personal, educational, or commercial purposes. However, you agree not to use the operating system or its related infrastructure to engage in illegal activities, distribute malicious software, or attempt to compromise other computer networks.</p>
+        <div class="table">
+          <div class="row">
+            <span class="lbl">Commercial Use</span>
+            <span class="val">Permitted</span>
+          </div>
+          <div class="row">
+            <span class="lbl">Code Modification</span>
+            <span class="val">Permitted</span>
+          </div>
+          <div class="row">
+            <span class="lbl">Malicious Exploitation</span>
+            <span class="val">Strictly prohibited</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="disclaimer" class="node">
+        <h2>03. Disclaimer & Limitation of Liability</h2>
+        <p>InvictusOS is provided "as-is" without warranty of any kind, express or implied. The core developers and contributors are not liable for any data loss, hardware damage, or system downtime resulting from installing, running, or modifying this software.</p>
+      </div>
+
+      <div id="hardware" class="node">
+        <h2>04. Hardware Compatibility</h2>
+        <p>While InvictusOS is lightweight and optimized for low-resource systems (down to 512MB RAM), we cannot guarantee compatibility with every hardware combination or legacy device component. Users are responsible for backing up important data before installation.</p>
+      </div>
+
+      <div id="third-party" class="node">
+        <h2>05. Third-Party Software</h2>
+        <p>If you choose to install third-party applications, drivers, or software packages on InvictusOS, those applications operate under their own independent terms and privacy policies. The InvictusOS core team is not responsible for third-party software behavior.</p>
+      </div>
+
+      <div id="updates" class="node">
+        <h2>06. Changes to Terms</h2>
+        <p>We may update these terms from time to time as the operating system evolves. Any updates will be published directly to this page. Questions regarding our terms can be directed to <a href="mailto:terms@invictusos.org" class="contact-link">terms@invictusos.org</a>.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="box foot-flex">
+    <div>© 2026 InvictusOS Team</div>
+    <div>Built for efficiency & freedom.</div>
+  </div>
+</footer>
+
+</body>
+</html>
