@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg" href="invicn.svg">
+  <title>InvictusOS | Installation Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #09090b;
+      --bg-card:   #111113;
+      --border:    rgba(255,255,255,0.07);
+      --border-md: rgba(255,255,255,0.11);
+      --text:      #f4f4f5;
+      --muted:     #a1a1aa;
+      --dim:       #52525b;
+      --blue:      #60a5fa;
+      --blue-dim:  rgba(96,165,250,0.08);
+      --red:       #f87171;
+      --red-dim:   rgba(242,131,131,0.7);
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Inter', system-ui, sans-serif;
+      --nav-h:     60px;
+      --max:       1080px;
+      --r:         10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 32px); }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      position: fixed; top: 0; inset-inline: 0;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(9,9,11,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      z-index: 200;
+    }
+
+    .nav-brand {
+      font-weight: 700; font-size: 0.9rem; letter-spacing: -0.01em;
+      color: var(--text); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      flex-shrink: 0;
+    }
+    .nav-right {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      filter: brightness(1.1);
+    }
+
+    .nav-logo span {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex; gap: 0.1rem; list-style: none;
+      margin-right: 0.75rem;
+    }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500;
+      padding: 0.35rem 0.75rem; border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--text); color: var(--bg);
+      padding: 0.42rem 1rem; border-radius: 7px;
+      font-size: 0.8rem; font-weight: 700; text-decoration: none;
+      transition: opacity 0.15s; white-space: nowrap; flex-shrink: 0;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 1.25rem;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-md);
+      border-radius: 7px;
+      width: 36px; height: 36px;
+      align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      padding: 0;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .hamburger:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.18); }
+    .hamburger svg { width: 16px; height: 16px; }
+    .hamburger .bar {
+      fill: none; stroke: var(--text); stroke-width: 1.5;
+      stroke-linecap: round;
+      transform-origin: center;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.open .bar-top    { transform: translateY(5px) rotate(45deg); }
+    .hamburger.open .bar-mid    { opacity: 0; transform: scaleX(0); }
+    .hamburger.open .bar-bot    { transform: translateY(-5px) rotate(-45deg); }
+
+
+    .mobile-menu {
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: rgba(9,9,11,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-md);
+      z-index: 190;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1),
+                  padding 0.3s ease,
+                  opacity 0.3s ease;
+      opacity: 0;
+    }
+    .mobile-menu.open {
+      max-height: 400px;
+      padding: 1.25rem 5% 1.5rem;
+      opacity: 1;
+    }
+    .mobile-menu ul {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .mobile-menu ul a {
+      display: block;
+      color: var(--muted); text-decoration: none;
+      font-size: 0.95rem; font-weight: 500;
+      padding: 0.65rem 0.75rem;
+      border-radius: 7px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .mobile-menu ul a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+    .mobile-menu .mobile-cta {
+      display: block;
+      background: var(--text); color: var(--bg);
+      padding: 0.7rem 1rem; border-radius: 8px;
+      font-size: 0.875rem; font-weight: 700; text-decoration: none;
+      text-align: center;
+      transition: opacity 0.15s;
+    }
+    .mobile-menu .mobile-cta:hover { opacity: 0.85; }
+
+    .toast {
+      position: fixed; top: var(--nav-h); inset-inline: 0;
+      background: #16120a;
+      border-bottom: 1px solid rgba(251,191,36,0.18);
+      padding: 0.65rem 5%;
+      display: flex; align-items: center; gap: 0.75rem;
+      z-index: 180;
+      transform: translateY(-100%); opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .toast-icon { flex-shrink: 0; width: 18px; height: 18px; }
+    .toast-icon svg { width: 100%; height: 100%; stroke: #fbbf24; fill: none; stroke-width: 2; }
+    .toast-body { flex: 1; font-size: 0.8rem; min-width: 0; }
+    .toast-title { font-weight: 700; color: #fde68a; margin-right: 0.4rem; }
+    .toast-msg { color: #fde68a; }
+    .toast-close {
+      background: none; border: none; color: #78350f;
+      cursor: pointer; font-size: 1rem; line-height: 1;
+      padding: 2px 4px; flex-shrink: 0;
+    }
+    .toast-close:hover { color: #fbbf24; }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 7rem) 5% 5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      color: var(--muted); font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      max-width: 520px; font-weight: 400;
+    }
+    }
+    .btn-primary {
+      background: var(--text); color: var(--bg);
+      padding: 0.65rem 1.4rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 700; text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost {
+      background: transparent; color: var(--muted);
+      padding: 0.65rem 1.4rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 500; text-decoration: none;
+      border: 1px solid var(--border-md);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+
+    .divider {
+      max-width: var(--max); margin: 0 auto; padding: 0 5%;
+      border: none; border-top: 1px solid var(--border);
+    }
+
+
+    main { max-width: var(--max); margin: 0 auto; padding: 0 5% 8rem; }
+
+    .section { padding-top: 6rem; }
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 0.5rem; color: var(--blue)
+    }
+    .caution-section-title {
+      font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 0.5rem; color: var(--red)
+    }
+
+
+    .req-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .req-col { padding: 1.75rem; }
+    .req-col + .req-col { border-left: 1px solid var(--border); }
+    .req-col-label {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 1.1rem;
+    }
+    .req-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .req-col li {
+      font-size: 0.87rem; color: var(--muted);
+      display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .req-col li::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--dim); margin-top: 0.5rem;
+    }
+
+    .caution-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--red);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .caution-col { padding: 1.75rem; }
+    .caution-col + .caution-col { border-left: 1px solid var(--red); }
+    .caution-col-label {
+font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 0.5rem; color: var(--red)
+    }
+   .caution-col li {
+    font-size: 0.87rem;
+    color: var(--red-dim);
+
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+
+    list-style: none;
+    margin-bottom: 0.65rem;
+}
+    .caution-col li::before {
+      content: ''; display: block; flex-shrink: 0;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--red-dim); margin-top: 0.5rem;
+    }
+
+    .steps { display: flex; flex-direction: column; }
+    .step {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 0 1.5rem; padding-bottom: 2.5rem;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-left { display: flex; flex-direction: column; align-items: center; }
+    .step-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border-md); background: var(--bg-card);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 700; color: var(--blue);
+    }
+    .step-line { flex: 1; width: 1px; background: var(--border); margin-top: 8px; }
+    .step:last-child .step-line { display: none; }
+    .step-body { padding-top: 0.4rem; }
+    .step-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .step-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+
+    .guide-block { padding-top: 5rem; }
+    .guide-block + .guide-block {
+      padding-top: 5rem; margin-top: 5rem;
+      border-top: 1px solid var(--border);
+    }
+    .guide-inner {
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      gap: 4rem; align-items: start;
+    }
+    .guide-text { position: sticky; top: calc(var(--nav-h) + 24px); }
+    .guide-title {
+      font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 700;
+      letter-spacing: -0.02em; margin-bottom: 1.25rem;
+    }
+    .guide-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .guide-list li {
+      font-size: 0.875rem; color: var(--muted);
+      padding-left: 1rem; border-left: 2px solid var(--border-md); line-height: 1.6;
+    }
+    .guide-list li strong { color: var(--text); font-weight: 600; }
+    .guide-list code {
+      font-family: var(--mono); font-size: 0.8em;
+      background: rgba(255,255,255,0.07); color: var(--blue);
+      padding: 0.1em 0.4em; border-radius: 3px;
+    }
+    .guide-note {
+      margin-top: 1.5rem; padding: 1rem 1.1rem;
+      border-radius: 7px; font-size: 0.83rem; line-height: 1.6;
+    }
+    .guide-note.info { background: var(--blue-dim); border-left: 2px solid var(--blue); color: #93c5fd; }
+    .guide-note.warn { background: var(--red-dim); border-left: 2px solid var(--red); color: #000000; }
+    .guide-note strong { font-weight: 700; }
+    .guide-note code {
+      font-family: var(--mono); font-size: 0.8em;
+      background: rgba(255,255,255,0.07);
+      padding: 0.1em 0.35em; border-radius: 3px;
+    }
+    .guide-images { display: flex; flex-direction: column; gap: 1rem; }
+    .guide-img-wrap { position: relative; }
+    .guide-img {
+      width: 100%; display: block; border-radius: 8px;
+      border: 1px solid var(--border-md);
+      filter: brightness(0.92) saturate(0.85);
+      transition: filter 0.3s, border-color 0.3s;
+    }
+    .guide-img:hover { filter: brightness(1) saturate(1); border-color: rgba(255,255,255,0.18); }
+    .img-caption { margin-top: 0.4rem; font-size: 0.73rem; color: var(--dim); padding-left: 0.1rem; }
+
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8); z-index: 300;
+      justify-content: center; align-items: center;
+      padding: 1rem; backdrop-filter: blur(6px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #141417; border: 1px solid var(--border-md);
+      border-radius: 12px; max-width: 440px; width: 100%;
+      padding: 2rem; position: relative;
+    }
+    .modal h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.06); border: none; color: var(--muted);
+      width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+    .modal p { color: var(--muted); font-size: 0.86rem; margin: 0.75rem 0 1rem; }
+    .modal-list {
+      list-style: none; margin-bottom: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.55rem;
+    }
+    .modal-list li {
+      font-size: 0.84rem; color: var(--muted);
+      padding-left: 1rem; position: relative;
+    }
+    .modal-list li::before {
+      content: ''; position: absolute; left: 0; top: 0.52rem;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--blue);
+    }
+    .modal-list code {
+      font-family: var(--mono); font-size: 0.8em;
+      background: rgba(255,255,255,0.07); color: var(--blue);
+      padding: 0.1em 0.35em; border-radius: 3px;
+    }
+    .modal-footer { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    
+
+    .faq-banner{
+        width:100%;
+        padding:3rem 1.5rem;
+        border-bottom:1px solid rgba(255,255,255,.08);
+        box-sizing:border-box;
+    }
+
+
+    .faq-cta-inner{
+        max-width:900px;
+        margin:0 auto;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        gap:1rem;
+        padding-bottom:1.5rem;
+    }
+
+    .faq-cta-inner h2{
+        margin:0;
+    }
+
+    .faq-cta-inner p{
+        margin:0;
+        max-width:700px;
+    }
+
+
+    .help-btn {
+      position: fixed; bottom: 24px; right: 24px; z-index: 150;
+      background: var(--text); color: var(--bg);
+      border: none; border-radius: 50px;
+      padding: 0.6rem 1.25rem;
+      font-family: var(--sans); font-size: 0.8rem; font-weight: 700;
+      cursor: pointer; box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      transition: opacity 0.15s;
+    }
+    .help-btn:hover { opacity: 0.85; }
+
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      text-align: center; color: var(--dim); font-size: 0.77rem;
+    }
+
+
+
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding-top: calc(var(--nav-h) + 4rem); }
+
+      .req-grid {
+        grid-template-columns: 1fr;
+      }
+      .req-col + .req-col {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+        .caution-grid {
+        grid-template-columns: 1fr;
+      }
+      .caution-col + .caution-col {
+        border-left: none;
+        border-top: 1px solid var(--red);
+      }
+      .guide-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .guide-text { position: static; }
+    }
+
+   /* Mobile */
+    @media (max-width: 480px) {
+      .navbar { padding: 0 4%; }
+      .hero { padding: calc(var(--nav-h) + 3rem) 4% 3.5rem; }
+      main { padding: 0 4% 6rem; }
+      footer { padding: 2rem 4%; }
+
+      .btn-primary, .btn-ghost { text-align: center; }
+
+      .step { grid-template-columns: 36px 1fr; gap: 0 1rem; }
+      .step-circle { width: 30px; height: 30px; font-size: 0.6rem; }
+
+      .guide-block + .guide-block { margin-top: 3rem; padding-top: 3rem; }
+      .section { padding-top: 4rem; }
+
+      .modal { padding: 1.5rem; }
+      .modal-footer { flex-direction: column; }
+      .modal-footer a { text-align: center; }
+
+      .help-btn { bottom: 16px; right: 16px; padding: 0.55rem 1rem; }
+
+      .toast-body { display: flex; flex-direction: column; gap: 0.1rem; }
+    }
+
+
+    @media (max-width: 360px) {
+      .nav-brand span:not(.nav-brand-dot) { font-size: 0.82rem; }
+      .nav-cta { padding: 0.38rem 0.75rem; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar">
+  <a class="nav-logo" href="https://webinvictusos.neocities.org/">
+    <img src="invicn.svg" alt="InvictusOS logo" onerror="this.style.display='none'">
+    <span>InvictusOS</span>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="https://webinvictusos.neocities.org/">Home</a></li>
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#steps">Steps</a></li>
+      <li><a href="#cautions">Cautions</a></li>
+    </ul>
+    <a href="/download" class="nav-cta">Download ISO</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg viewBox="0 0 24 24" overflow="visible">
+        <line class="bar bar-top" x1="4" y1="7"  x2="20" y2="7"/>
+        <line class="bar bar-mid" x1="4" y1="12" x2="20" y2="12"/>
+        <line class="bar bar-bot" x1="4" y1="17" x2="20" y2="17"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <ul>
+    <li><a href="https://webinvictusos.neocities.org/">Home</a></li>
+    <li><a href="#requirements" class="mobile-link">Requirements</a></li>
+    <li><a href="#steps"        class="mobile-link">Steps</a></li>
+    <li><a href="#cautions" class="mobile-link">Cautions</a></li>
+    
+  </ul>
+  <a href="#" class="mobile-cta">Download ISO</a>
+</div>
+
+
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <div class="toast-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div class="toast-body">
+    <span class="toast-title">Notice</span>
+    <span class="toast-msg">Our installer is under development. Please use the Google Drive ISO downloads for now.</span>
+  </div>
+  <button class="toast-close" id="toastClose" aria-label="Dismiss">✕</button>
+</div>
+
+
+<header class="hero">
+  <h1>Installation guide for InvictusOS Sagaris</h1>
+  <p class="hero-sub">A step by step guide to install InvictusOS on your system.</p>
+</header>
+
+<hr class="divider">
+
+<main>
+
+
+  <section id="requirements" class="section">
+    <h2 class="section-title">System Requirements</h2>
+    <div class="req-grid">
+      <div class="req-col">
+        <div class="req-col-label">Minimum</div>
+        <ul>
+          <li>990 MHz CPU (Pentium III / Atom-class)</li>
+          <li>512 MB RAM</li>
+          <li>5 GB free disk space</li>
+          <li>BIOS / Legacy boot support</li>
+          <li>512 x 300 display
+        </ul>
+      </div>
+      <div class="req-col">
+        <div class="req-col-label">Recommended</div>
+        <ul>
+          <li>1 GHz+ CPU</li>
+          <li>1 GB+ RAM</li>
+          <li>5.8 GB+ free disk space</li>
+          <li>1024 x 600 display or higher</li>
+        </ul>
+      </div>
+      <div class="req-col">
+        <div class="req-col-label">Installation Media (REQUIRED)</div>
+        <ul>
+          <li>4 GB or larger USB drive</li>
+          <li>InvictusOS Sagaris ISO image</li>
+          <li>ISO writer: balenaEtcher, dd, Rufus or similar</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+    <section id="cautions" class="section">
+    <h2 class="caution-section-title">Cautions</h2>
+    <p class = "hero-sub"> Keep these in mind before you commit any changes: </p>
+    <div class="caution-grid">
+      <div class="caution-col">
+        <div class="caution-col-label">Data Loss</div>
+        <ul>
+          <li> Writing the ISO to a USB drive erases all data on that drive </li>
+          <li>Installing to disk can erase existing operating systems and files. </li>
+          <li> Always back up important data before formatting or partitioning </li>
+        </ul>
+      </div>
+      <div class="caution-col">
+        <div class="caution-col-label">Device Selection</div>
+        <ul>
+          <li>Double-check the target device in your ISO writer (e.g:/dev/sdX)</li>
+          <li>Confirm the correct disk in the installer before proceeding</li>
+          <li>If unsure, stop and verify device names from another system</li>
+        </ul>
+      </div>
+      <div class="caution-col">
+        <div class="caution-col-label">Legacy Hardware</div>
+        <ul>
+          <li>Some very old BIOS implementations may not boot from USB reliably</li>
+          <li>Boot keys differ between vendors, check the on-screen hints</li>
+          <li>If the system fails to boot, test the USB on a second machine</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps" class="section">
+    <h2 class="section-title">Installation Overview</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-left">
+          <div class="step-circle">01</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Prepare the USB</div>
+          <p class="step-desc">Download the Sagaris ISO and insert your USB drive. Open your ISO writer and select the ISO. Pick the correct USB device as the target and start the write process and wait for it to finish</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-circle">02</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Boot from USB</div>
+          <p class="step-desc">Plug the USB into the target device. Enter the boot menu or BIOS (by pressing F2/F10/F12/Del, etc. while the machine is booting up. The exact key depends on your PC manufacturer). Choose the USB device as the boot source. Select the InvictusOS live option in the boot menu.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-circle">03</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Install to disk</div>
+          <p class="step-desc">From the live session, launch the InvictusOS installer. Pick language, keyboard layout and time zone. Select the target disk and partition scheme. Confirm and start the installation. Wait untill the installer reports completion</p>
+        </div>
+      </div>
+
+          <div class="step">
+        <div class="step-left">
+          <div class="step-circle">04</div>
+          <div class="step-line"></div>
+        </div>
+    <div class="step-body">
+          <div class="step-title">First boot</div>
+          <p class="step-desc">Shut down the live session and remove the USB drive. Power on and boot from the internal disk. Create your user and finish setup.</p>
+        </div>
+      </div>
+    </div>
+ </div>
+  </section>
+
+
+  <section id="visual-guide" class="section">
+    <h2 class="section-title">Step-by-Step Walkthrough</h2>
+
+
+  <div class="guide-block">
+      <div class="guide-inner">
+        <div class="guide-text">
+          <span class="eyebrow">Booting</span>
+          <h3 class="guide-title">Enter BIOS</h3>
+          <ul class="guide-list">
+            <li>Turn on the computer and tap the BIOS key. Usually<strong>F2</strong>, <strong>F10</strong>, <strong>F12</strong>, or <strong>Del</strong> depending on the manufacturer.</li>
+            <li>Navigate to the boot settings or boot order menu</li>
+            <li>Select <strong>InvictusOS/USB Manufacturer</strong> name in BIOS</li>
+            <li>Then you should boot to your live USB</li>
+          </ul>
+        </div>
+        <div class="guide-images">
+          <div class="guide-img-wrap">
+            <img src="1.jpg" class="guide-img" alt="BIOS boot menu">
+            <div class="img-caption">BIOS Boot Menu: Select InvictusOS/USB Manufacturer</div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="guide-block">
+      <div class="guide-inner">
+        <div class="guide-text">
+          <span class="eyebrow">GRUB menu</span>
+          <h3 class="guide-title">InvictusOS in GRUB</h3>
+          <ul class="guide-list">
+            <li>Select <strong>Live Boot/Start</strong> in the menu.</li>
+            <li>The boot animation will appear.</li>
+            <li>Then you will boot to the desktop.</li>
+          </ul>
+        </div>
+        <div class="guide-images">
+          <div class="guide-img-wrap">
+            <img src="3.jpg" class="guide-img" alt="GRUB Menu">
+            <div class="img-caption">GRUB Menu: Select Live boot/Start</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="4.jpg" class="guide-img" alt="Boot Animation">
+            <div class="img-caption">Boot Animation Screen</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="desktopscreenshot.png" class="guide-img" alt="Desktop Screen">
+            <div class="img-caption">Desktop Screen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="guide-block">
+      <div class="guide-inner">
+        <div class="guide-text">
+          <span class="eyebrow">Installation</span>
+          <h3 class="guide-title">Installing InvictusOS</h3>
+          <ul class="guide-list">
+            <li>Find and open the <strong>"Install InvictusOS"</strong>icon on the desktop</li>
+            <li>Select <strong>"Execute"</strong>when prompted</li>
+            <li>Then the installer will appear</li>
+            <div class="guide-note info">
+            <strong>Default credentials</strong><br>
+            Username: <code>invictus</code> &nbsp;·&nbsp; Password: <code>Invictus</code>
+            </ul>
+          </div>
+
+        <div class="guide-images">
+          <div class="guide-img-wrap">
+            <img src="7.jpg" class="guide-img" alt="Install InvictusOS icon">
+            <div class="img-caption">Install InvictusOS icon : Open this</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="8.jpg" class="guide-img" alt="Pop-up">
+            <div class="img-caption">Pop - up after opening the installer : Click Execute</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="9.jpg" class="guide-img" alt="Password Screen">
+            <div class="img-caption">Enter the given password here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-inner">
+        <div class="guide-text">
+          <span class="eyebrow">Installer</span>
+          <h3 class="guide-title">InvictusOS Installer</h3>
+          <ul class="guide-list">
+            <li>Select your continent</li>
+            <li>Select your Timezone.</li>
+            <li>Select your Locales (basically the framework for your language)</li>
+            <li>Select the type of keyboard you use</li>
+            <li>Select the type of keyboard layout you use(Refer to the respective image)</li>
+            <li>If you have a compose key, select it in the menu</li>
+            <li>In the next page(selection of Ctrl+Alt+Backspace combination), select <strong>NO for desktops/laptops</strong> and <strong>YES for a commercial server</strong></li>
+            <li>In the next page, select <strong>"2"</strong>
+            <li>In the following page, select the partition software if you want to partition the drives</li>
+            <li>Then, for GRUB enter your whole disk <code>/dev/sda</code> and for <code>/boot</code>, leave it blank</li>
+            <li>Then, select ext4 as partition type.</li>
+            <li>Then, for <code>/</code> select <code>/dev/sda1</code> and for swap select <code>/dev/sda2</code></li>
+            <li> A bunch of text will start scrolling</li>
+            <li>Change username or password if desired.</li>
+          <div class="guide-note warn">
+            <strong>Warning:</strong> Skipping or misconfiguring the bootloader target will result in a non-bootable system. Double-check before proceeding.
+            </div>
+            <li> After it is finished, close the window and restart your computer</li>
+            <li> When the computer turns off, remove the USB. Then, you should see the installed system loading</li>
+           </ul>
+        </div>
+        <div class="guide-images">
+          <div class="guide-img-wrap">
+            <img src="10.jpg" class="guide-img" alt="Continent selection">
+            <div class="img-caption">Continent Selection : Select your continent here</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="12.jpg" class="guide-img" alt="Timezone selection">
+            <div class="img-caption">Timezone selection menu : Select your timezone here</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="14.jpg" class="guide-img" alt="Locales selection">
+            <div class="img-caption">Locales selection menu : Select your locales here</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="15.jpg" class="guide-img" alt="Keyboard selection">
+            <div class="img-caption">Keyboard selection menu : Select your keyboard type here</div>
+          </div>
+          <div class="guide-img-wrap">
+            <img src="16.jpg" class="guide-img" alt="Keyboard layout selection">
+            <div class="img-caption">Keyboard layout selection menu : Select your keyboard layout here</div>
+            <div class="guide-img-wrap">
+            <img src="18.jpg" class="guide-img" alt="Keyboard layout selection - AltGr selection">
+            <div class="img-caption">Keyboard layout selection menu : Select your layout here</div>
+          </div>
+            <div class="guide-img-wrap">
+            <img src="19.jpg" class="guide-img" alt="compose key selection">
+            <div class="img-caption">Keyboard layout selection menu : If you have a compose key, select it here</div>
+          </div>
+           <div class="guide-img-wrap">
+            <img src="20.jpg" class="guide-img" alt="selecting function of ctrl+alt+bksp">
+            <div class="img-caption">Keyboard layout selection menu : Select NO for desktops/laptops and YES for a commercial server</div>
+          </div>   
+           <div class="guide-img-wrap">
+            <img src="21.jpg" class="guide-img" alt="menu-1">
+            <div class="img-caption">Menu: Select 2</div>
+          </div>
+            <div class="guide-img-wrap">
+            <img src="22.jpg" class="guide-img" alt="partition selection">
+            <div class="img-caption">Partition software selection menu</div>
+          </div>
+            <div class="guide-img-wrap">
+            <img src="23.jpg" class="guide-img" alt="bootloader installation choice">
+            <div class="img-caption">Select where you would like the GRUB Bootloader to be installed : For GRUB enter your whole disk <code>/dev/sda</code> and for <code>/boot</code> leave it blank</div>
+          </div>
+            <div class="guide-img-wrap">
+            <img src="24.jpg" class="guide-img" alt="filesystem selection">
+            <div class="img-caption">Filesystem selection menu: Select ext4</div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+ 
+<section="faq-banner">
+<div class="faq-cta-inner" align="center">
+      <h2>Have any questions?</h2>
+      <p>Find answers to questions about installation, compatibility, and more.</p>
+      <a href="/faq" class="btn-ghost" align="center">
+        Browse the FAQ
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </section>
+<footer class="footer">
+  <p>© <span id="copyright-year"></span> InvictusOS. The minimal and lightweight OS</p>
+</footer>
+
+
+<button class="help-btn" id="helpBtn">Help &amp; Support</button>
+
+
+<div class="modal-overlay" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="closeModal" aria-label="Close">✕</button>
+    <h2 id="modalTitle">Need Help?</h2>
+    <p>Common solutions for installation issues on legacy hardware:</p>
+    <ul class="modal-list">
+      <li>Verify your hardware meets the minimum specifications.</li>
+      <li>Switch BIOS to Legacy (CSM) mode if UEFI is causing issues.</li>
+      <li>If the USB won't boot, rewrite the ISO using DD image mode in Rufus.</li>
+      <li>Confirm you selected ext4 and a valid mount point during partitioning.</li>
+      <li>Ensure the bootloader target is the disk (<code>/dev/sda</code>), not a partition.</li>
+    </ul>
+    <div class="modal-footer">
+      <a href="/faq" class="btn-ghost" style="font-size:0.82rem; padding:0.5rem 1.1rem;">Visit FAQ page</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("copyright-year").textContent =
+  new Date().getFullYear();
+
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobileMenu');
+  const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-cta');
+
+  function toggleMenu(force) {
+    const open = force !== undefined ? force : !hamburger.classList.contains('open');
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    mobileMenu.setAttribute('aria-hidden', !open);
+
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => toggleMenu());
+
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+
+
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('open') &&
+        !mobileMenu.contains(e.target) &&
+        !hamburger.contains(e.target)) {
+      toggleMenu(false);
+    }
+  });
+
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) toggleMenu(false);
+  });
+
+
+  const toast     = document.getElementById('toast');
+  const toastClose = document.getElementById('toastClose');
+  toastClose.addEventListener('click', () => toast.classList.remove('show'));
+  window.addEventListener('load', () => setTimeout(() => toast.classList.add('show'), 1200));
+
+
+  const helpBtn   = document.getElementById('helpBtn');
+  const helpModal = document.getElementById('helpModal');
+  const closeModal = document.getElementById('closeModal');
+
+  helpBtn.addEventListener('click', () => helpModal.classList.add('open'));
+  closeModal.addEventListener('click', () => helpModal.classList.remove('open'));
+  helpModal.addEventListener('click', (e) => {
+    if (e.target === helpModal) helpModal.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') helpModal.classList.remove('open');
+  });
+</script>
+</body>
+</html>
