@@ -1,166 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found // InvictusOS</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#070b14" />
+    <title>Page not found — invictusOS</title>
     <style>
-        :root {
-            --brand-blue: #0d6efd;
-            --brand-blue-hover: #0b5ed7;
-            --bg-dark: #060911;
-            --card-bg: #0b0f19;
-            --border-color: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 580px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 48px 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Prominent Brand Title */
-        .brand-title {
-            color: var(--brand-blue);
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            margin-bottom: 28px;
-        }
-
-        /* Large 404 Banner */
-        .banner-404 {
-            background-color: #111827;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px 0;
-            font-size: 5rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--text-main);
-            letter-spacing: -0.04em;
-            margin-bottom: 28px;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-        }
-
-        p {
-            color: var(--text-muted);
-            font-size: 0.975rem;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-
-        /* Action Button */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background-color: var(--brand-blue);
-            color: #ffffff;
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 12px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-        }
-
-        .btn:hover {
-            background-color: var(--brand-blue-hover);
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 32px 24px;
-            }
-            .banner-404 {
-                font-size: 4rem;
-                padding: 18px 0;
-            }
-            h1 {
-                font-size: 1.25rem;
-            }
-            p {
-                font-size: 0.9rem;
-            }
-        }
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        background: #070b14;
+        color: #f6f8fc;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .error-page {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 24px;
+        background: radial-gradient(circle at 50% 38%, rgba(30, 105, 242, .09), transparent 32rem), #070b14;
+      }
+      .error-card {
+        width: min(100%, 620px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .brand {
+        margin: 0 0 clamp(64px, 12vh, 104px);
+        color: #fff;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -.05em;
+      }
+      .error-code {
+        color: #2d7df6;
+        font-size: clamp(8.5rem, 25vw, 13.5rem);
+        font-weight: 800;
+        letter-spacing: -.11em;
+        line-height: .72;
+        text-indent: -.08em;
+        text-shadow: 0 0 56px rgba(45, 125, 246, .12);
+      }
+      .message { margin-top: 52px; }
+      .eyebrow { margin: 0 0 12px; color: #f6f8fc; font-size: 15px; font-weight: 700; }
+      h1 { margin: 0; color: #f6f8fc; font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; letter-spacing: -.045em; }
+      .description { margin: 12px 0 0; color: #8793a8; font-size: 14px; line-height: 1.6; }
+      .home-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 30px;
+        padding: 12px 17px;
+        border: 1px solid #2d7df6;
+        border-radius: 7px;
+        color: #fff;
+        background: #2d7df6;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .home-button:focus-visible { outline: 3px solid rgba(100, 162, 255, .55); outline-offset: 4px; }
+      .home-button svg { width: 16px; height: 16px; }
+      @media (max-width: 520px) {
+        .error-page { padding: 24px 20px; }
+        .brand { margin-bottom: 78px; }
+        .message { margin-top: 44px; }
+      }
     </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- Prominent InvictusOS Title -->
-        <div class="brand-title">InvictusOS</div>
-
-        <!-- Big 404 Banner -->
-        <div class="banner-404">404</div>
-
-        <!-- Main Heading & Text -->
-        <h1>Page Not Found</h1>
-        <p>The page you are looking for doesn't exist or has been moved.</p>
-
-        <!-- Homepage Action Button -->
-        <a href="/" class="btn">
-            <svg viewBox="0 0 24 24">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            Return to Homepage
+  </head>
+  <body>
+    <main class="error-page">
+      <section class="error-card" aria-labelledby="error-title">
+        <p class="brand" aria-label="invictusOS home">invictusOS</p>
+        <div class="error-code" aria-hidden="true">404</div>
+        <div class="message">
+          <p class="eyebrow">Page not found</p>
+          <h1 id="error-title">This page doesn’t exist.</h1>
+          <p class="description">The link may be outdated, or the page may have moved.</p>
+        </div>
+        <a class="home-button" href="/" aria-label="Return to the invictusOS home page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          <span>Return home</span>
         </a>
-    </div>
-
-</body>
+      </section>
+    </main>
+  </body>
 </html>
