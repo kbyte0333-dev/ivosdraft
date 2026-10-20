@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found // InvictusOS</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-blue: #0d6efd;
+            --brand-blue-hover: #0b5ed7;
+            --bg-dark: #060911;
+            --card-bg: #0b0f19;
+            --border-color: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 580px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Prominent Brand Title */
+        .brand-title {
+            color: var(--brand-blue);
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        /* Large 404 Banner */
+        .banner-404 {
+            background-color: #111827;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px 0;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--text-main);
+            letter-spacing: -0.04em;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 0.975rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        /* Action Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--brand-blue);
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--brand-blue-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 32px 24px;
+            }
+            .banner-404 {
+                font-size: 4rem;
+                padding: 18px 0;
+            }
+            h1 {
+                font-size: 1.25rem;
+            }
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Prominent InvictusOS Title -->
+        <div class="brand-title">InvictusOS</div>
+
+        <!-- Big 404 Banner -->
+        <div class="banner-404">404</div>
+
+        <!-- Main Heading & Text -->
+        <h1>Page Not Found</h1>
+        <p>The page you are looking for doesn't exist or has been moved.</p>
+
+        <!-- Homepage Action Button -->
+        <a href="/" class="btn">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            Return to Homepage
+        </a>
+    </div>
+
+</body>
+</html>
