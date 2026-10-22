@@ -1,12 +1,40 @@
 <!DOCTYPE html>
+<!--
+  ===========================================================================
+   InvictusOS website - EDITING GUIDE  (everything lives in this one file)
+  ===========================================================================
+   CHANGING TEXT      : scroll to the page content (search for  ======== HERO
+                        ========  or any other section banner). Text sits in
+                        plain tags like <h2>...</h2> and <p>...</p>. Edit the
+                        words between the tags; leave the tags alone.
+   CHANGING LINKS     : edit the  href="..."  in the same place.
+   CHANGING IMAGES    : edit  src="assets/..."  and the alt="..." description.
+   CHANGING COLOURS   : style block, part "1. COLOUR TOKENS" (R G B numbers).
+   CHANGING LOOKS     : style block, part "3. COMPONENTS". Every element has a
+                        short class such as  about-h2  or  hero-a1  and its
+                        look is written in ordinary CSS under that name.
+
+   LINKS TO CHECK (file names I guessed):
+     download.html  installation.html  faq.html  simple.html  privacy.html
+     terms.html  support.html  InvictusOS-Guide.pdf  + the 5 social links.
+     Tip: Ctrl+F for   .html"   and   https://   to jump to them.
+
+   SECURITY: scripts are locked by a hash in the Content-Security-Policy tag.
+   Text, link, image and CSS edits are fine. If you ever edit the script
+   block, open the page, look at the browser console: it prints the new
+   'sha256-...' value to paste into script-src.
+  ===========================================================================
+-->
 <html lang="en" class="bg-indigo bg-page bg-fixed text-white">
 <head>
+<!-- Basics -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>InvictusOS – Lightweight, Fast, Reliable OS for Old Computers</title>
 <meta name="description" content="InvictusOS is a minimal, lightweight operating system that keeps old machines alive. Runs on 512 MB RAM, a 900 MHz processor and 5 GB of disk space, with no GPU required.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#0a0a1c">
+<!-- Search engines & social sharing -->
 <link rel="canonical" href="https://webinvictusos.neocities.org/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="InvictusOS">
@@ -16,254 +44,1367 @@
 <meta property="og:image" content="https://webinvictusos.neocities.org/assets/desktop.png">
 <meta property="og:image:alt" content="The InvictusOS desktop with a cloudy sky wallpaper, a top panel and an app dock">
 <meta name="twitter:card" content="summary_large_image">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-4GO9dnSh52JQp5iUWWfLEgZ3uDZ+kqhHka95jBFRTkQ='; style-src 'sha256-+k1QjmP9VAEQUP92FucaCOUEYJBh8CYKAwihSxBCtMM=' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<!-- Security: only this page, Google Fonts and data: images are allowed -->
+<meta http-equiv="Content-Security-Policy" content="
+    default-src 'none';
+    script-src 'sha256-fACaD+1F9yqurLPRn0W8jPP06sxYCgEobKadPry4Sqg=';
+    style-src 'unsafe-inline' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' data:;
+    connect-src 'none';
+    base-uri 'none';
+    form-action 'none';
+  ">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a1c'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='700' font-size='34' text-anchor='middle' fill='%231a5cff'%3Eiv%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Sora:wght@500;700;800&display=swap">
+<!-- Structured data for search / AI engines -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"WebSite","@id":"https://webinvictusos.neocities.org/#website","url":"https://webinvictusos.neocities.org/","name":"InvictusOS","description":"A minimal operating system that keeps old machines alive.","inLanguage":"en","publisher":{"@id":"https://webinvictusos.neocities.org/#org"}},
-{"@type":"WebPage","@id":"https://webinvictusos.neocities.org/#webpage","url":"https://webinvictusos.neocities.org/","name":"InvictusOS – Lightweight, Fast, Reliable","isPartOf":{"@id":"https://webinvictusos.neocities.org/#website"},"about":{"@id":"https://webinvictusos.neocities.org/#os"},"primaryImageOfPage":"https://webinvictusos.neocities.org/assets/desktop.png","inLanguage":"en"},
-{"@type":"Organization","@id":"https://webinvictusos.neocities.org/#org","name":"InvictusOS","url":"https://webinvictusos.neocities.org/","logo":"https://webinvictusos.neocities.org/assets/logo.png","member":[
-{"@type":"Person","name":"Sayansut Mohapatra","jobTitle":"Lead of Software & Firmware Engineering"},
-{"@type":"Person","name":"Shreyans Das","jobTitle":"Arts & Creative Commons creator"},
-{"@type":"Person","name":"Aarush Maharana","jobTitle":"Firmware Engineer"},
-{"@type":"Person","name":"Gaurav Mohapatra","jobTitle":"Head of Marketing"}]},
-{"@type":"SoftwareApplication","@id":"https://webinvictusos.neocities.org/#os","name":"InvictusOS","applicationCategory":"OperatingSystem","operatingSystem":"Linux 4.x based, 32-bit x86","description":"InvictusOS is a lightweight operating system designed to run on low-end and outdated laptops and desktops. It stays fast and responsive while keeping resource usage low.","image":"https://webinvictusos.neocities.org/assets/desktop.png","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"memoryRequirements":"512 MB RAM","storageRequirements":"5 GB","processorRequirements":"900 MHz Pentium III / Atom","softwareVersion":"Sagaris","publisher":{"@id":"https://webinvictusos.neocities.org/#org"}}]}
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://webinvictusos.neocities.org/#website",
+      "url": "https://webinvictusos.neocities.org/",
+      "name": "InvictusOS",
+      "description": "A minimal operating system that keeps old machines alive.",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://webinvictusos.neocities.org/#org"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://webinvictusos.neocities.org/#webpage",
+      "url": "https://webinvictusos.neocities.org/",
+      "name": "InvictusOS – Lightweight, Fast, Reliable",
+      "isPartOf": {
+        "@id": "https://webinvictusos.neocities.org/#website"
+      },
+      "about": {
+        "@id": "https://webinvictusos.neocities.org/#os"
+      },
+      "primaryImageOfPage": "https://webinvictusos.neocities.org/assets/desktop.png",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://webinvictusos.neocities.org/#org",
+      "name": "InvictusOS",
+      "url": "https://webinvictusos.neocities.org/",
+      "logo": "https://webinvictusos.neocities.org/assets/logo.png",
+      "member": [
+        {
+          "@type": "Person",
+          "name": "Sayansut Mohapatra",
+          "jobTitle": "Lead of Software & Firmware Engineering"
+        },
+        {
+          "@type": "Person",
+          "name": "Shreyans Das",
+          "jobTitle": "Arts & Creative Commons creator"
+        },
+        {
+          "@type": "Person",
+          "name": "Aarush Maharana",
+          "jobTitle": "Firmware Engineer"
+        },
+        {
+          "@type": "Person",
+          "name": "Gaurav Mohapatra",
+          "jobTitle": "Head of Marketing"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://webinvictusos.neocities.org/#os",
+      "name": "InvictusOS",
+      "applicationCategory": "OperatingSystem",
+      "operatingSystem": "Linux 4.x based, 32-bit x86",
+      "description": "InvictusOS is a lightweight operating system designed to run on low-end and outdated laptops and desktops. It stays fast and responsive while keeping resource usage low.",
+      "image": "https://webinvictusos.neocities.org/assets/desktop.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "memoryRequirements": "512 MB RAM",
+      "storageRequirements": "5 GB",
+      "processorRequirements": "900 MHz Pentium III / Atom",
+      "softwareVersion": "Sagaris",
+      "publisher": {
+        "@id": "https://webinvictusos.neocities.org/#org"
+      }
+    }
+  ]
+}
 </script>
-<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Manrope,system-ui,-apple-system,Segoe UI,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}html{scroll-behavior:smooth;scroll-padding-top:88px}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.-inset-5{inset:-1.25rem}.-inset-6{inset:-1.5rem}.inset-0{inset:0}.inset-x-0{left:0;right:0}.-bottom-3{bottom:-.75rem}.-left-3{left:-.75rem}.-left-32{left:-8rem}.-right-3{right:-.75rem}.-right-32{right:-8rem}.-right-4{right:-1rem}.-top-16{top:-4rem}.-top-3{top:-.75rem}.-top-8{top:-2rem}.-top-px{top:-1px}.bottom-0{bottom:0}.bottom-5{bottom:1.25rem}.bottom-\[88px\]{bottom:88px}.left-0{left:0}.left-0\.5{left:.125rem}.left-3{left:.75rem}.right-0{right:0}.right-3{right:.75rem}.right-5{right:1.25rem}.top-0{top:0}.top-0\.5{top:.125rem}.top-16{top:4rem}.top-4{top:1rem}.top-full{top:100%}.-z-10{z-index:-10}.-z-20{z-index:-20}.z-40{z-index:40}.z-50{z-index:50}.z-\[100\]{z-index:100}.z-\[55\]{z-index:55}.z-\[56\]{z-index:56}.z-\[60\]{z-index:60}.m-auto{margin:auto}.mx-auto{margin-left:auto;margin-right:auto}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-6{margin-bottom:1.5rem}.ml-auto{margin-left:auto}.mr-3{margin-right:.75rem}.mt-1\.5{margin-top:.375rem}.mt-10{margin-top:2.5rem}.mt-16{margin-top:4rem}.mt-2{margin-top:.5rem}.mt-20{margin-top:5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.mt-9{margin-top:2.25rem}.mt-auto{margin-top:auto}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-0{height:0}.h-0\.5{height:.125rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-24{height:6rem}.h-3{height:.75rem}.h-44{height:11rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-\[102px\]{height:102px}.h-\[17rem\]{height:17rem}.h-\[18px\]{height:18px}.h-\[20rem\]{height:20rem}.h-\[21rem\]{height:21rem}.h-\[22rem\]{height:22rem}.h-auto{height:auto}.h-full{height:100%}.h-px{height:1px}.min-h-\[22rem\]{min-height:22rem}.min-h-\[48px\]{min-height:48px}.min-h-\[56px\]{min-height:56px}.min-h-\[68px\]{min-height:68px}.min-h-\[96px\]{min-height:96px}.min-h-screen{min-height:100vh}.w-0{width:0}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-24{width:6rem}.w-3{width:.75rem}.w-44{width:11rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-\[102px\]{width:102px}.w-\[17rem\]{width:17rem}.w-\[18px\]{width:18px}.w-\[20rem\]{width:20rem}.w-\[21rem\]{width:21rem}.w-\[22rem\]{width:22rem}.w-auto{width:auto}.w-fit{width:-moz-fit-content;width:fit-content}.w-full{width:100%}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.max-w-7xl{max-width:80rem}.max-w-\[1500px\]{max-width:1500px}.max-w-\[26ch\]{max-width:26ch}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.origin-left{transform-origin:left}.-rotate-45{--tw-rotate:-45deg}.-rotate-45,.-rotate-90{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-rotate-90{--tw-rotate:-90deg}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.select-none{-webkit-user-select:none;-moz-user-select:none;user-select:none}.resize{resize:both}.flex-col{flex-direction:column}.flex-col-reverse{flex-direction:column-reverse}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-10{gap:2.5rem}.gap-12{gap:3rem}.gap-14{gap:3.5rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-3\.5{gap:.875rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-px{gap:1px}.divide-y>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px*(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px*var(--tw-divide-y-reverse))}.divide-white\/15>:not([hidden])~:not([hidden]){border-color:hsla(0,0%,100%,.15)}.divide-white\/25>:not([hidden])~:not([hidden]){border-color:hsla(0,0%,100%,.25)}.self-start{align-self:flex-start}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-x-hidden{overflow-x:hidden}.overflow-x-clip{overflow-x:clip}.whitespace-nowrap{white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[2\.5rem\]{border-radius:2.5rem}.rounded-\[2rem\]{border-radius:2rem}.rounded-\[3rem\]{border-radius:3rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-r-2xl{border-top-right-radius:1rem;border-bottom-right-radius:1rem}.rounded-bl-xl{border-bottom-left-radius:.75rem}.rounded-br-xl{border-bottom-right-radius:.75rem}.rounded-tl-xl{border-top-left-radius:.75rem}.rounded-tr-xl{border-top-right-radius:.75rem}.border{border-width:1px}.border-y{border-top-width:1px}.border-b,.border-y{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-l{border-left-width:1px}.border-l-2{border-left-width:2px}.border-r-2{border-right-width:2px}.border-t{border-top-width:1px}.border-t-2{border-top-width:2px}.border-dashed{border-style:dashed}.border-link{--tw-border-opacity:1;border-color:rgb(77 163 255/var(--tw-border-opacity,1))}.border-link\/50{border-color:rgba(77,163,255,.5)}.border-link\/60{border-color:rgba(77,163,255,.6)}.border-ok{--tw-border-opacity:1;border-color:rgb(34 197 94/var(--tw-border-opacity,1))}.border-ok\/60{border-color:rgba(34,197,94,.6)}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.border-white\/15{border-color:hsla(0,0%,100%,.15)}.border-white\/20{border-color:hsla(0,0%,100%,.2)}.border-white\/25{border-color:hsla(0,0%,100%,.25)}.border-white\/30{border-color:hsla(0,0%,100%,.3)}.border-white\/50{border-color:hsla(0,0%,100%,.5)}.bg-\[\#2d7bff\]{--tw-bg-opacity:1;background-color:rgb(45 123 255/var(--tw-bg-opacity,1))}.bg-black\/95{background-color:rgba(0,0,0,.95)}.bg-brand{--tw-bg-opacity:1;background-color:rgb(26 92 255/var(--tw-bg-opacity,1))}.bg-brand\/35{background-color:rgba(26,92,255,.35)}.bg-card{--tw-bg-opacity:1;background-color:rgb(20 20 20/var(--tw-bg-opacity,1))}.bg-indigo{--tw-bg-opacity:1;background-color:rgb(26 26 166/var(--tw-bg-opacity,1))}.bg-ink{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.bg-ink\/90{background-color:rgba(0,0,0,.9)}.bg-link{--tw-bg-opacity:1;background-color:rgb(77 163 255/var(--tw-bg-opacity,1))}.bg-link\/15{background-color:rgba(77,163,255,.15)}.bg-navy{--tw-bg-opacity:1;background-color:rgb(10 10 28/var(--tw-bg-opacity,1))}.bg-navy\/85{background-color:rgba(10,10,28,.85)}.bg-ok{--tw-bg-opacity:1;background-color:rgb(34 197 94/var(--tw-bg-opacity,1))}.bg-ok\/15{background-color:rgba(34,197,94,.15)}.bg-teal\/60{background-color:rgba(29,91,134,.6)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/20{background-color:hsla(0,0%,100%,.2)}.bg-white\/60{background-color:hsla(0,0%,100%,.6)}.bg-\[conic-gradient\(from_180deg\2c \#1a5cff\2c \#4da3ff\2c \#1d5b86\2c \#1a5cff\)\]{background-image:conic-gradient(from 180deg,#1a5cff,#4da3ff,#1d5b86,#1a5cff)}.bg-\[linear-gradient\(\#fff\2c \#fff\)\]{background-image:linear-gradient(#fff,#fff)}.bg-\[linear-gradient\(160deg\2c rgba\(34\2c 197\2c 94\2c \.1\)\2c transparent_50\%\)\]{background-image:linear-gradient(160deg,rgba(34,197,94,.1),transparent 50%)}.bg-\[radial-gradient\(50rem_30rem_at_90\%_50\%\2c rgba\(255\2c 255\2c 255\2c \.18\)\2c transparent\)\]{background-image:radial-gradient(50rem 30rem at 90% 50%,hsla(0,0%,100%,.18),transparent)}.bg-\[radial-gradient\(60rem_26rem_at_0\%_0\%\2c rgba\(26\2c 92\2c 255\2c \.22\)\2c transparent\)\]{background-image:radial-gradient(60rem 26rem at 0 0,rgba(26,92,255,.22),transparent)}.bg-\[radial-gradient\(rgba\(255\2c 255\2c 255\2c \.09\)_1px\2c transparent_1px\)\]{background-image:radial-gradient(hsla(0,0%,100%,.09) 1px,transparent 0)}.bg-gradient-to-b{background-image:linear-gradient(to bottom,var(--tw-gradient-stops))}.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}.bg-grain{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='a'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='2' stitchTiles='stitch' type='fractalNoise'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)'/%3E%3C/svg%3E")}.bg-grid{background-image:linear-gradient(rgba(0,0,0,.34) 1px,transparent 0),linear-gradient(90deg,rgba(0,0,0,.34) 1px,transparent 0)}.bg-page{background-image:linear-gradient(135deg,#1a1aa6,#1c2296 45%,#1d5b86)}.from-brand\/50{--tw-gradient-from:rgba(26,92,255,.5) var(--tw-gradient-from-position);--tw-gradient-to:rgba(26,92,255,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-white\/30{--tw-gradient-from:hsla(0,0%,100%,.3) var(--tw-gradient-from-position);--tw-gradient-to:hsla(0,0%,100%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-white\/\[\.12\]{--tw-gradient-to:hsla(0,0%,100%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),hsla(0,0%,100%,.12) var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-teal\/40{--tw-gradient-to:rgba(29,91,134,.4) var(--tw-gradient-to-position)}.to-white\/\[\.04\]{--tw-gradient-to:hsla(0,0%,100%,.04) var(--tw-gradient-to-position)}.bg-\[length\:100\%_0\%\]{background-size:100% 0}.bg-\[length\:20px_20px\]{background-size:20px 20px}.bg-\[length\:48px_48px\]{background-size:48px 48px}.bg-fixed{background-attachment:fixed}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.bg-bottom{background-position:bottom}.bg-no-repeat{background-repeat:no-repeat}.fill-none{fill:none}.stroke-current{stroke:currentColor}.stroke-link{stroke:#4da3ff}.stroke-ok{stroke:#22c55e}.stroke-white\/20{stroke:hsla(0,0%,100%,.2)}.stroke-2{stroke-width:2}.stroke-\[3\]{stroke-width:3}.object-cover{-o-object-fit:cover;object-fit:cover}.p-14{padding:3.5rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-7{padding:1.75rem}.p-8{padding:2rem}.p-\[3px\]{padding:3px}.px-2{padding-left:.5rem;padding-right:.5rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-24{padding-top:6rem;padding-bottom:6rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-10{padding-bottom:2.5rem}.pb-24{padding-bottom:6rem}.pb-4{padding-bottom:1rem}.pt-14{padding-top:3.5rem}.pt-2{padding-top:.5rem}.pt-6{padding-top:1.5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.align-middle{vertical-align:middle}.font-display{font-family:Sora,system-ui,sans-serif}.font-mono{font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace}.font-sans{font-family:Manrope,system-ui,-apple-system,Segoe UI,sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-\[11px\]{font-size:11px}.text-\[11rem\]{font-size:11rem}.text-\[13px\]{font-size:13px}.text-\[15px\]{font-size:15px}.text-\[22rem\]{font-size:22rem}.text-\[length\:min\(12\.5vw\2c 13rem\)\]{font-size:min(12.5vw,13rem)}.text-\[length\:min\(13vw\2c 13rem\)\]{font-size:min(13vw,13rem)}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.uppercase{text-transform:uppercase}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-\[\.95\]{line-height:.95}.leading-\[1\],.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-\[-\.025em\]{letter-spacing:-.025em}.tracking-\[\.12em\]{letter-spacing:.12em}.tracking-\[\.14em\]{letter-spacing:.14em}.tracking-tight{letter-spacing:-.025em}.tracking-tighter{letter-spacing:-.05em}.tracking-wide{letter-spacing:.025em}.tracking-widest{letter-spacing:.1em}.text-brand{--tw-text-opacity:1;color:rgb(26 92 255/var(--tw-text-opacity,1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128/var(--tw-text-opacity,1))}.text-link{--tw-text-opacity:1;color:rgb(77 163 255/var(--tw-text-opacity,1))}.text-navy{--tw-text-opacity:1;color:rgb(10 10 28/var(--tw-text-opacity,1))}.text-sky-300{--tw-text-opacity:1;color:rgb(125 211 252/var(--tw-text-opacity,1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/50{color:hsla(0,0%,100%,.5)}.text-white\/70{color:hsla(0,0%,100%,.7)}.text-white\/75{color:hsla(0,0%,100%,.75)}.text-white\/80{color:hsla(0,0%,100%,.8)}.text-white\/85{color:hsla(0,0%,100%,.85)}.text-white\/\[\.06\]{color:hsla(0,0%,100%,.06)}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-50{opacity:.5}.opacity-\[\.07\]{opacity:.07}.mix-blend-overlay{mix-blend-mode:overlay}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-\[0_0_90px_-20px_rgba\(26\2c 92\2c 255\2c \.55\)\]{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_0_90px_-20px_rgba\(26\2c 92\2c 255\2c \.55\)\]{--tw-shadow:0 0 90px -20px rgba(26,92,255,.55);--tw-shadow-colored:0 0 90px -20px var(--tw-shadow-color)}.shadow-\[0_40px_120px_-30px_rgba\(26\2c 92\2c 255\2c \.9\)\]{--tw-shadow:0 40px 120px -30px rgba(26,92,255,.9);--tw-shadow-colored:0 40px 120px -30px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.ring-4{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-\[\#2d7bff\]\/30{--tw-ring-color:rgba(45,123,255,.3)}.ring-ok\/30{--tw-ring-color:rgba(34,197,94,.3)}.blur-3xl{--tw-blur:blur(64px)}.blur-3xl,.blur-\[100px\]{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.blur-\[100px\]{--tw-blur:blur(100px)}.backdrop-blur{--tw-backdrop-blur:blur(8px)}.backdrop-blur,.backdrop-blur-md{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-\[background-size\2c color\2c padding\]{transition-property:background-size,color,padding;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.duration-500{transition-duration:.5s}.will-change-transform{will-change:transform}.\[-webkit-text-stroke\:1\.5px_rgba\(77\2c 163\2c 255\2c \.3\)\]{-webkit-text-stroke:1.5px rgba(77,163,255,.3)}.\[animation-delay\:-8s\]{animation-delay:-8s}.\[animation-delay\:135ms\2c 1585ms\]{animation-delay:135ms,1585ms}.\[animation-delay\:190ms\2c 1670ms\]{animation-delay:.19s,1.67s}.\[animation-delay\:245ms\2c 1755ms\]{animation-delay:245ms,1755ms}.\[animation-delay\:300ms\2c 1840ms\]{animation-delay:.3s,1.84s}.\[animation-delay\:355ms\2c 1925ms\]{animation-delay:355ms,1925ms}.\[animation-delay\:410ms\2c 2010ms\]{animation-delay:.41s,2.01s}.\[animation-delay\:465ms\2c 2095ms\]{animation-delay:465ms,2095ms}.\[animation-delay\:520ms\2c 2180ms\]{animation-delay:.52s,2.18s}.\[animation-delay\:575ms\2c 2265ms\]{animation-delay:575ms,2265ms}.\[animation-delay\:80ms\2c 1500ms\]{animation-delay:80ms,1.5s}.\[stroke-linecap\:round\]{stroke-linecap:round}.\[stroke-linejoin\:round\]{stroke-linejoin:round}html[data-motion=off] *,html[data-motion=off] :after,html[data-motion=off] :before{animation:none!important;transition:none!important;scroll-behavior:auto!important}.ltr{background-image:linear-gradient(105deg,transparent 38%,#4da3ff 50%,transparent 62%),linear-gradient(#fff,#fff);background-size:300% 100%,100% 100%;background-position:150% 0,0 0}@keyframes ltr-in{0%{opacity:0;transform:translateY(.35em)}to{opacity:1;transform:none}}@keyframes sheen{0%{background-position:150% 0,0 0}to{background-position:-50% 0,0 0}}@media (prefers-reduced-motion:no-preference){.ltr{animation:ltr-in .9s cubic-bezier(.2,.8,.2,1) both,sheen .95s ease-out both}}.arm .rq{opacity:.4;transition:opacity .45s ease var(--d,0ms)}.arm .rq.on{opacity:1}.arm .rq svg{stroke-dasharray:24;stroke-dashoffset:24;transition:stroke-dashoffset .5s ease var(--d,0ms)}.arm .rq.on svg{stroke-dashoffset:0}.before\:absolute:before{content:var(--tw-content);position:absolute}.before\:inset-x-5:before{content:var(--tw-content);left:1.25rem;right:1.25rem}.before\:top-0:before{content:var(--tw-content);top:0}.before\:h-px:before{content:var(--tw-content);height:1px}.before\:bg-gradient-to-r:before{content:var(--tw-content);background-image:linear-gradient(to right,var(--tw-gradient-stops))}.before\:from-transparent:before{content:var(--tw-content);--tw-gradient-from:transparent var(--tw-gradient-from-position);--tw-gradient-to:transparent var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.before\:via-white\/30:before{content:var(--tw-content);--tw-gradient-to:hsla(0,0%,100%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),hsla(0,0%,100%,.3) var(--tw-gradient-via-position),var(--tw-gradient-to)}.before\:to-transparent:before{content:var(--tw-content);--tw-gradient-to:transparent var(--tw-gradient-to-position)}.before\:content-\[\'\'\]:before{--tw-content:"";content:var(--tw-content)}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-white:hover{--tw-border-opacity:1;border-color:rgb(255 255 255/var(--tw-border-opacity,1))}.hover\:border-white\/50:hover{border-color:hsla(0,0%,100%,.5)}.hover\:bg-blue-50:hover{--tw-bg-opacity:1;background-color:rgb(239 246 255/var(--tw-bg-opacity,1))}.hover\:bg-brand:hover{--tw-bg-opacity:1;background-color:rgb(26 92 255/var(--tw-bg-opacity,1))}.hover\:bg-ink:hover{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.hover\:bg-white\/10:hover{background-color:hsla(0,0%,100%,.1)}.hover\:bg-\[length\:100\%_100\%\]:hover{background-size:100% 100%}.hover\:px-6:hover{padding-left:1.5rem;padding-right:1.5rem}.hover\:text-navy:hover{--tw-text-opacity:1;color:rgb(10 10 28/var(--tw-text-opacity,1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.hover\:underline:hover{text-decoration-line:underline}.focus\:top-3:focus{top:.75rem}.group:hover .group-hover\:rotate-0{--tw-rotate:0deg;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:text-brand\/40{color:rgba(26,92,255,.4)}.group:hover .group-hover\:text-navy\/70{color:rgba(10,10,28,.7)}.group[aria-checked=true] .group-aria-\[checked\=true\]\:translate-x-5{--tw-translate-x:1.25rem;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group[aria-checked=true] .group-aria-\[checked\=true\]\:bg-brand{--tw-bg-opacity:1;background-color:rgb(26 92 255/var(--tw-bg-opacity,1))}@media (prefers-reduced-motion:no-preference){@keyframes drift{0%,to{transform:translateZ(0) scale(1)}50%{transform:translate3d(40px,-30px,0) scale(1.12)}}.motion-safe\:animate-drift{animation:drift 16s ease-in-out infinite}@keyframes ring{0%{transform:scale(.92);opacity:.7}to{transform:scale(1.1);opacity:0}}.motion-safe\:animate-ring{animation:ring 5s ease-out infinite}}@media (max-width:420px){.max-\[420px\]\:hidden{display:none}}@media (min-width:640px){.sm\:not-sr-only{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal}.sm\:bottom-\[88px\]{bottom:88px}.sm\:left-auto{left:auto}.sm\:right-5{right:1.25rem}.sm\:max-w-\[520px\]{max-width:520px}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-\[9rem_1fr\]{grid-template-columns:9rem 1fr}.sm\:gap-6{gap:1.5rem}.sm\:p-5{padding:1.25rem}}@media (min-width:768px){.md\:static{position:static}.md\:col-span-5{grid-column:span 5/span 5}.md\:col-span-7{grid-column:span 7/span 7}.md\:ml-2{margin-left:.5rem}.md\:ml-auto{margin-left:auto}.md\:flex{display:flex}.md\:hidden{display:none}.md\:h-14{height:3.5rem}.md\:h-56{height:14rem}.md\:h-\[22rem\]{height:22rem}.md\:h-\[28rem\]{height:28rem}.md\:h-\[30rem\]{height:30rem}.md\:h-\[34rem\]{height:34rem}.md\:w-14{width:3.5rem}.md\:w-56{width:14rem}.md\:w-\[22rem\]{width:22rem}.md\:w-\[28rem\]{width:28rem}.md\:w-\[30rem\]{width:30rem}.md\:w-\[34rem\]{width:34rem}.md\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:gap-1{gap:.25rem}.md\:gap-8{gap:2rem}.md\:border-0{border-width:0}.md\:bg-transparent{background-color:transparent}.md\:p-0{padding:0}.md\:p-12{padding:3rem}.md\:p-24{padding:6rem}.md\:py-28{padding-top:7rem;padding-bottom:7rem}.md\:py-36{padding-top:9rem}.md\:pb-36,.md\:py-36{padding-bottom:9rem}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-7xl{font-size:4.5rem;line-height:1}.md\:text-8xl{font-size:6rem;line-height:1}.md\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width:1024px){.lg\:col-span-5{grid-column:span 5/span 5}.lg\:col-span-6{grid-column:span 6/span 6}.lg\:col-span-7{grid-column:span 7/span 7}.lg\:block{display:block}.lg\:min-h-\[calc\(100svh-68px-72px\)\]{min-height:calc(100svh - 140px)}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:grid-cols-\[1\.5fr_1fr_1fr_1fr\]{grid-template-columns:1.5fr 1fr 1fr 1fr}.lg\:flex-row{flex-direction:row}.lg\:items-center{align-items:center}}@media (min-width:1280px){.xl\:text-6xl{font-size:3.75rem;line-height:1}}.\[\&\[hidden\]\]\:hidden[hidden]{display:none}</style>
+<!-- Styles: see source/styles.css for the editable version -->
+<style>
+/* =========================================================================
+   InvictusOS - styles (this is the EDITABLE source; build.py turns it into
+   the \3c style> block inside index.html).
+
+   1. COLOUR TOKENS     - change the palette here (numbers are "R G B")
+   2. BASE              - page-wide defaults
+   3. COMPONENTS        - named classes for things that repeat (edit freely)
+   4. UTILITIES         - generated by Tailwind from the classes in the HTML
+   5. EXTRAS            - hand-written effects (wordmark sweep, tick marks)
+   ========================================================================= */
+
+/* ---------- 1. COLOUR TOKENS (edit these) ---------- */
+
+:root {
+  --c-navy:   10 10 28;
+  /* header, deep panels */
+  --c-ink:    0 0 0;
+  /* black bands + footer */
+  --c-card:   20 20 20;
+  /* dark cards */
+  --c-brand:  26 92 255;
+  /* bright blue (buttons, FAQ band) */
+  --c-link:   77 163 255;
+  /* light blue links */
+  --c-ok:     34 197 94;
+  /* green ("Available", ticks) */
+  --c-indigo: 26 26 166;
+  /* gradient start (top-left) */
+  --c-mid:    28 34 150;
+  /* gradient middle */
+  --c-teal:   29 91 134;
+  /* gradient end (bottom-right) */
+}
+
+/* ---------- 2. BASE (browser reset + page defaults) ---------- */
+
+/* ---------- 2. BASE (browser reset + page defaults; generated) ---------- */
+*, ::before, ::after { --tw-border-spacing-x:   0; --tw-border-spacing-y:   0; --tw-translate-x:   0; --tw-translate-y:   0; --tw-rotate:   0; --tw-skew-x:   0; --tw-skew-y:   0; --tw-scale-x:   1; --tw-scale-y:   1; --tw-pan-x:    ; --tw-pan-y:    ; --tw-pinch-zoom:    ; --tw-scroll-snap-strictness:   proximity; --tw-gradient-from-position:    ; --tw-gradient-via-position:    ; --tw-gradient-to-position:    ; --tw-ordinal:    ; --tw-slashed-zero:    ; --tw-numeric-figure:    ; --tw-numeric-spacing:    ; --tw-numeric-fraction:    ; --tw-ring-inset:    ; --tw-ring-offset-width:   0px; --tw-ring-offset-color:   #fff; --tw-ring-color:   rgb(59 130 246 / 0.5); --tw-ring-offset-shadow:   0 0 #0000; --tw-ring-shadow:   0 0 #0000; --tw-shadow:   0 0 #0000; --tw-shadow-colored:   0 0 #0000; --tw-blur:    ; --tw-brightness:    ; --tw-contrast:    ; --tw-grayscale:    ; --tw-hue-rotate:    ; --tw-invert:    ; --tw-saturate:    ; --tw-sepia:    ; --tw-drop-shadow:    ; --tw-backdrop-blur:    ; --tw-backdrop-brightness:    ; --tw-backdrop-contrast:    ; --tw-backdrop-grayscale:    ; --tw-backdrop-hue-rotate:    ; --tw-backdrop-invert:    ; --tw-backdrop-opacity:    ; --tw-backdrop-saturate:    ; --tw-backdrop-sepia:    ; --tw-contain-size:    ; --tw-contain-layout:    ; --tw-contain-paint:    ; --tw-contain-style:    ; }
+::backdrop { --tw-border-spacing-x:   0; --tw-border-spacing-y:   0; --tw-translate-x:   0; --tw-translate-y:   0; --tw-rotate:   0; --tw-skew-x:   0; --tw-skew-y:   0; --tw-scale-x:   1; --tw-scale-y:   1; --tw-pan-x:    ; --tw-pan-y:    ; --tw-pinch-zoom:    ; --tw-scroll-snap-strictness:   proximity; --tw-gradient-from-position:    ; --tw-gradient-via-position:    ; --tw-gradient-to-position:    ; --tw-ordinal:    ; --tw-slashed-zero:    ; --tw-numeric-figure:    ; --tw-numeric-spacing:    ; --tw-numeric-fraction:    ; --tw-ring-inset:    ; --tw-ring-offset-width:   0px; --tw-ring-offset-color:   #fff; --tw-ring-color:   rgb(59 130 246 / 0.5); --tw-ring-offset-shadow:   0 0 #0000; --tw-ring-shadow:   0 0 #0000; --tw-shadow:   0 0 #0000; --tw-shadow-colored:   0 0 #0000; --tw-blur:    ; --tw-brightness:    ; --tw-contrast:    ; --tw-grayscale:    ; --tw-hue-rotate:    ; --tw-invert:    ; --tw-saturate:    ; --tw-sepia:    ; --tw-drop-shadow:    ; --tw-backdrop-blur:    ; --tw-backdrop-brightness:    ; --tw-backdrop-contrast:    ; --tw-backdrop-grayscale:    ; --tw-backdrop-hue-rotate:    ; --tw-backdrop-invert:    ; --tw-backdrop-opacity:    ; --tw-backdrop-saturate:    ; --tw-backdrop-sepia:    ; --tw-contain-size:    ; --tw-contain-layout:    ; --tw-contain-paint:    ; --tw-contain-style:    ; }
+/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */ /* 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4) 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116) */ *, ::before, ::after { box-sizing: border-box; /* 1 */ border-width: 0; /* 2 */ border-style: solid; /* 2 */ border-color: #e5e7eb; /* 2 */ }
+::before, ::after { --tw-content: ''; }
+/* 1. Use a consistent sensible line-height in all browsers. 2. Prevent adjustments of font size after orientation changes in iOS. 3. Use a more readable tab size. 4. Use the user's configured `sans` font-family by default. 5. Use the user's configured `sans` font-feature-settings by default. 6. Use the user's configured `sans` font-variation-settings by default. 7. Disable tap highlights on iOS */ html, :host { line-height: 1.5; /* 1 */ -webkit-text-size-adjust: 100%; /* 2 */ -moz-tab-size: 4; /* 3 */ -o-tab-size: 4; tab-size: 4; /* 3 */ font-family: Manrope, system-ui, -apple-system, Segoe UI, sans-serif; /* 4 */ font-feature-settings: normal; /* 5 */ font-variation-settings: normal; /* 6 */ -webkit-tap-highlight-color: transparent; /* 7 */ }
+/* 1. Remove the margin in all browsers. 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element. */ body { margin: 0; /* 1 */ line-height: inherit; /* 2 */ }
+/* 1. Add the correct height in Firefox. 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655) 3. Ensure horizontal rules are visible by default. */ hr { height: 0; /* 1 */ color: inherit; /* 2 */ border-top-width: 1px; /* 3 */ }
+/* Add the correct text decoration in Chrome, Edge, and Safari. */ abbr:where([title]) { -webkit-text-decoration: underline dotted; text-decoration: underline dotted; }
+/* Remove the default font size and weight for headings. */ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+/* Reset links to optimize for opt-in styling instead of opt-out. */ a { color: inherit; text-decoration: inherit; }
+/* Add the correct font weight in Edge and Safari. */ b, strong { font-weight: bolder; }
+/* 1. Use the user's configured `mono` font-family by default. 2. Use the user's configured `mono` font-feature-settings by default. 3. Use the user's configured `mono` font-variation-settings by default. 4. Correct the odd `em` font sizing in all browsers. */ code, kbd, samp, pre { font-family: JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; /* 1 */ font-feature-settings: normal; /* 2 */ font-variation-settings: normal; /* 3 */ font-size: 1em; /* 4 */ }
+/* Add the correct font size in all browsers. */ small { font-size: 80%; }
+/* Prevent `sub` and `sup` elements from affecting the line height in all browsers. */ sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+/* 1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297) 2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016) 3. Remove gaps between table borders by default. */ table { text-indent: 0; /* 1 */ border-color: inherit; /* 2 */ border-collapse: collapse; /* 3 */ }
+/* 1. Change the font styles in all browsers. 2. Remove the margin in Firefox and Safari. 3. Remove default padding in all browsers. */ button, input, optgroup, select, textarea { font-family: inherit; /* 1 */ font-feature-settings: inherit; /* 1 */ font-variation-settings: inherit; /* 1 */ font-size: 100%; /* 1 */ font-weight: inherit; /* 1 */ line-height: inherit; /* 1 */ letter-spacing: inherit; /* 1 */ color: inherit; /* 1 */ margin: 0; /* 2 */ padding: 0; /* 3 */ }
+/* Remove the inheritance of text transform in Edge and Firefox. */ button, select { text-transform: none; }
+/* 1. Correct the inability to style clickable types in iOS and Safari. 2. Remove default button styles. */ button, input:where([type='button']), input:where([type='reset']), input:where([type='submit']) { -webkit-appearance: button; /* 1 */ background-color: transparent; /* 2 */ background-image: none; /* 2 */ }
+/* Use the modern Firefox focus style for all focusable elements. */ :-moz-focusring { outline: auto; }
+/* Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737) */ :-moz-ui-invalid { box-shadow: none; }
+/* Add the correct vertical alignment in Chrome and Firefox. */ progress { vertical-align: baseline; }
+/* Correct the cursor style of increment and decrement buttons in Safari. */ ::-webkit-inner-spin-button, ::-webkit-outer-spin-button { height: auto; }
+/* 1. Correct the odd appearance in Chrome and Safari. 2. Correct the outline style in Safari. */ [type='search'] { -webkit-appearance: textfield; /* 1 */ outline-offset: -2px; /* 2 */ }
+/* Remove the inner padding in Chrome and Safari on macOS. */ ::-webkit-search-decoration { -webkit-appearance: none; }
+/* 1. Correct the inability to style clickable types in iOS and Safari. 2. Change font properties to `inherit` in Safari. */ ::-webkit-file-upload-button { -webkit-appearance: button; /* 1 */ font: inherit; /* 2 */ }
+/* Add the correct display in Chrome and Safari. */ summary { display: list-item; }
+/* Removes the default spacing and border for appropriate elements. */ blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre { margin: 0; }
+fieldset { margin: 0; padding: 0; }
+legend { padding: 0; }
+ol, ul, menu { list-style: none; margin: 0; padding: 0; }
+/* Reset default styling for dialogs. */ dialog { padding: 0; }
+/* Prevent resizing textareas horizontally by default. */ textarea { resize: vertical; }
+/* 1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300) 2. Set the default placeholder color to the user's configured gray 400 color. */ input::-moz-placeholder, textarea::-moz-placeholder { opacity: 1; /* 1 */ color: #9ca3af; /* 2 */ }
+input::placeholder, textarea::placeholder { opacity: 1; /* 1 */ color: #9ca3af; /* 2 */ }
+/* Set the default cursor for buttons. */ button, [role="button"] { cursor: pointer; }
+/* Make sure disabled buttons don't get the pointer cursor. */ :disabled { cursor: default; }
+/* 1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14) 2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210) This can trigger a poorly considered lint error in some tools but is included by design. */ img, svg, video, canvas, audio, iframe, embed, object { display: block; /* 1 */ vertical-align: middle; /* 2 */ }
+/* Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14) */ img, video { max-width: 100%; height: auto; }
+/* Make elements with the HTML hidden attribute stay hidden by default */ [hidden]:where(:not([hidden="until-found"])) { display: none; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; }
+}
+
+/* ---------- 3. COMPONENTS (one class per element: section-tag[-number]; edit freely) ---------- */
+.section-title { font-family:   Sora, system-ui, sans-serif; font-size:   3.75rem; font-weight:   800; line-height:   .95; letter-spacing:   -0.05em; }
+@media (min-width: 768px) { .section-title { font-size:   6rem; line-height:   1; }
+}
+.feature-title { font-family:   Sora, system-ui, sans-serif; font-size:   1.875rem; line-height:   2.25rem; font-weight:   700; letter-spacing:   -0.025em; }
+.history-title { display:   flex; align-items:   flex-start; gap:   1rem; font-family:   Sora, system-ui, sans-serif; font-size:   1.875rem; line-height:   2.25rem; font-weight:   700; line-height:   1.25; letter-spacing:   -0.025em; }
+@media (min-width: 768px) { .history-title { grid-column:   span 5 / span 5; font-size:   2.25rem; line-height:   2.5rem; }
+}
+.team-name { font-family:   Sora, system-ui, sans-serif; font-size:   1.5rem; line-height:   2rem; font-weight:   700; line-height:   1.25; letter-spacing:   -0.025em; }
+.team-role { margin-top:   0.5rem; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   0.75rem; line-height:   1rem; color:   rgb(255 255 255 / 0.7); }
+.group:hover .team-role { color:   rgb(var(--c-navy) / 0.7); }
+.foot-heading { margin-bottom:   0.5rem; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   0.75rem; line-height:   1rem; font-weight:   700; text-transform:   uppercase; letter-spacing:   .12em; }
+/* Layout */ .section-wrap { position:   relative; margin-left:   auto; margin-right:   auto; max-width:   80rem; padding-left:   1.25rem; padding-right:   1.25rem; padding-top:   6rem; padding-bottom:   6rem; }
+.section-wrap::before { position:   absolute; left:   1.25rem; right:   1.25rem; top:   0px; height:   1px; background-image:   linear-gradient(to right, var(--tw-gradient-stops)); --tw-gradient-from:   transparent var(--tw-gradient-from-position); --tw-gradient-to:   rgb(0 0 0 / 0) var(--tw-gradient-to-position); --tw-gradient-stops:   var(--tw-gradient-from), var(--tw-gradient-to); --tw-gradient-to:   rgb(255 255 255 / 0)  var(--tw-gradient-to-position); --tw-gradient-stops:   var(--tw-gradient-from), rgb(255 255 255 / 0.3) var(--tw-gradient-via-position), var(--tw-gradient-to); --tw-gradient-to:   transparent var(--tw-gradient-to-position); --tw-content:   ''; content:   var(--tw-content); }
+@media (min-width: 768px) { .section-wrap { padding-top:   9rem; padding-bottom:   9rem; }
+}
+/* Navigation & links */ .nav-link { display:   flex; min-height:   48px; align-items:   center; border-radius:   0.5rem; padding-left:   0.75rem; padding-right:   0.75rem; font-weight:   500; --tw-text-opacity:   1; color:   rgb(var(--c-link) / var(--tw-text-opacity, 1)); }
+.nav-link:hover { --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); }
+.quick-chip { display:   flex; min-height:   48px; align-items:   center; white-space:   nowrap; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); padding-left:   1.25rem; padding-right:   1.25rem; font-size:   0.875rem; line-height:   1.25rem; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.quick-chip:hover { --tw-border-opacity:   1; border-color:   rgb(255 255 255 / var(--tw-border-opacity, 1)); --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
+.brand-link { display:   flex; min-height:   48px; align-items:   center; gap:   0.625rem; font-family:   Sora, system-ui, sans-serif; font-size:   1.125rem; line-height:   1.75rem; font-weight:   700; }
+.foot-link { display:   flex; min-height:   48px; align-items:   center; --tw-text-opacity:   1; color:   rgb(var(--c-link) / var(--tw-text-opacity, 1)); }
+.foot-link:hover { --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); text-decoration-line:   underline; }
+.legal-link { display:   flex; min-height:   48px; align-items:   center; padding-left:   0.5rem; padding-right:   0.5rem; }
+.legal-link:hover { --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); }
+.link-row { display:   flex; min-height:   96px; align-items:   center; justify-content:   space-between; gap:   1rem; background-image:   linear-gradient(#fff,#fff); background-size:   100% 0%; background-position:   bottom; background-repeat:   no-repeat; padding-left:   0.5rem; padding-right:   0.5rem; font-family:   Sora, system-ui, sans-serif; font-size:   3rem; line-height:   1; font-weight:   800; letter-spacing:   -0.05em; transition-property:   background-size,color,padding; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   500ms; }
+.link-row:hover { background-size:   100% 100%; padding-left:   1.5rem; padding-right:   1.5rem; --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
+@media (min-width: 768px) { .link-row { font-size:   4.5rem; line-height:   1; }
+}
+.link-row-arrow { height:   2.5rem; width:   2.5rem; flex-shrink:   0; --tw-rotate:   -45deg; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); fill:   none; stroke:   currentColor; stroke-width:   2; transition-property:   transform; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   500ms; stroke-linecap:   round; stroke-linejoin:   round; }
+.group:hover .link-row-arrow { --tw-rotate:   0deg; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+@media (min-width: 768px) { .link-row-arrow { height:   3.5rem; width:   3.5rem; }
+}
+/* Icons */ .icon-sm { height:   1.25rem; width:   1.25rem; fill:   none; stroke:   currentColor; stroke-width:   2; stroke-linecap:   round; stroke-linejoin:   round; }
+.icon-md { height:   1.5rem; width:   1.5rem; flex-shrink:   0; fill:   none; stroke:   currentColor; stroke-width:   2; stroke-linecap:   round; stroke-linejoin:   round; }
+.icon-tick { height:   1.5rem; width:   1.5rem; flex-shrink:   0; fill:   none; stroke:   rgb(var(--c-ok) / 1); stroke-width:   3; stroke-linecap:   round; stroke-linejoin:   round; }
+/* About / stats */ .stat-cell { display:   flex; flex-direction:   column-reverse; justify-content:   flex-end; gap:   0.75rem; --tw-bg-opacity:   1; background-color:   rgb(var(--c-card) / var(--tw-bg-opacity, 1)); padding:   2rem; }
+.stat-value { font-family:   Sora, system-ui, sans-serif; font-size:   3rem; line-height:   1; font-weight:   800; --tw-numeric-spacing:   tabular-nums; font-variant-numeric:   var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction); letter-spacing:   -0.05em; --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); }
+@media (min-width: 1280px) { .stat-value { font-size:   3.75rem; line-height:   1; }
+}
+/* System requirements */ .req-row { display:   flex; align-items:   center; gap:   1rem; padding-top:   1rem; padding-bottom:   1rem; font-size:   1.25rem; line-height:   1.75rem; font-weight:   500; }
+@media (min-width: 768px) { .req-row { font-size:   1.5rem; line-height:   2rem; }
+}
+/* Features */ .feature-card { position:   relative; display:   flex; height:   100%; min-height:   22rem; flex-direction:   column; justify-content:   flex-end; gap:   0.75rem; overflow:   hidden; border-radius:   1.5rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.15); --tw-bg-opacity:   1; background-color:   rgb(var(--c-card) / var(--tw-bg-opacity, 1)); background-image:   linear-gradient(160deg,rgba(34,197,94,.1),transparent 50%); padding:   2rem; }
+.feature-glyph { position:   absolute; right:   -1rem; top:   -2rem; font-family:   Sora, system-ui, sans-serif; font-size:   11rem; font-weight:   800; line-height:   1; letter-spacing:   -0.05em; color:   rgb(255 255 255 / .06); transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   300ms; }
+.group:hover .feature-glyph { color:   rgb(var(--c-brand) / 0.4); }
+.pill-ok { width:   -moz-fit-content; width:   fit-content; border-radius:   9999px; border-width:   1px; border-color:   rgb(var(--c-ok) / 0.6); background-color:   rgb(var(--c-ok) / 0.15); padding-left:   0.75rem; padding-right:   0.75rem; padding-top:   0.25rem; padding-bottom:   0.25rem; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   11px; text-transform:   uppercase; letter-spacing:   0.1em; --tw-text-opacity:   1; color:   rgb(74 222 128 / var(--tw-text-opacity, 1)); }
+/* History timeline */ .history-row { position:   relative; display:   grid; gap:   1rem; border-top-width:   1px; border-color:   rgb(255 255 255 / 0.3); padding-top:   2.5rem; padding-bottom:   2.5rem; }
+@media (min-width: 768px) { .history-row { grid-template-columns:   repeat(12, minmax(0, 1fr)); gap:   2rem; }
+}
+.history-bar { position:   absolute; left:   0px; right:   0px; top:   -1px; height:   0.125rem; transform-origin:   left; --tw-bg-opacity:   1; background-color:   rgb(var(--c-link) / var(--tw-bg-opacity, 1)); }
+.history-dot { margin-top:   0.75rem; height:   0.75rem; width:   0.75rem; flex-shrink:   0; border-radius:   9999px; --tw-bg-opacity:   1; background-color:   rgb(45 123 255 / var(--tw-bg-opacity, 1)); --tw-ring-offset-shadow:   var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow:   var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow:   var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); --tw-ring-color:   rgb(45 123 255 / 0.3); }
+/* Creators */ .team-card { display:   flex; height:   100%; flex-direction:   column; gap:   1.5rem; border-radius:   1.5rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.15); --tw-bg-opacity:   1; background-color:   rgb(var(--c-card) / var(--tw-bg-opacity, 1)); padding:   1.5rem; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   300ms; }
+.team-card:hover { --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
+.avatar-ring { display:   block; height:   102px; width:   102px; border-radius:   9999px; background-image:   conic-gradient(from 180deg,rgb(var(--c-brand)),rgb(var(--c-link)),rgb(var(--c-teal)),rgb(var(--c-brand))); padding:   3px; }
+/* Developer table */ .spec-row { display:   grid; gap:   0.25rem; padding:   1.75rem; }
+@media (min-width: 640px) { .spec-row { grid-template-columns:   9rem 1fr; gap:   1.5rem; }
+}
+/* ===== Per-element styles (one class per element, named  section-tag[-number]) ===== */ /* page: container */ .page-body { min-height:   100vh; overflow-x:   hidden; font-family:   Manrope, system-ui, -apple-system, Segoe UI, sans-serif; font-size:   1rem; line-height:   1.5rem; line-height:   1.625; -webkit-font-smoothing:   antialiased; -moz-osx-font-smoothing:   grayscale; }
+/* layer: "Skip to content" */ .layer-div { pointer-events:   none; position:   fixed; inset:   0px; z-index:   -20; opacity:   0.5; }
+/* layer: "Skip to content" */ .layer-div2 { pointer-events:   none; position:   fixed; inset:   0px; z-index:   -10; background-image:   linear-gradient(rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.34) 1px, transparent 1px); background-size:   48px 48px; }
+/* layer: "Skip to content" */ .layer-div3 { pointer-events:   none; position:   fixed; inset:   0px; z-index:   55; background-image:   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity:   .07; mix-blend-mode:   overlay; }
+/* layer: container */ .layer-a { position:   absolute; left:   0.75rem; top:   -4rem; z-index:   100; border-radius:   0.5rem; --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); padding-left:   1.25rem; padding-right:   1.25rem; padding-top:   0.75rem; padding-bottom:   0.75rem; font-weight:   700; --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
+.layer-a:focus { top:   0.75rem; }
+/* layer: container */ .layer-svg { position:   absolute; height:   0px; width:   0px; }
+/* head: "InvictusOS" */ .head-header { position:   sticky; top:   0px; z-index:   50; border-bottom-width:   1px; border-color:   rgb(255 255 255 / 0.1); background-color:   rgb(var(--c-navy) / 0.85); --tw-backdrop-blur:   blur(12px); -webkit-backdrop-filter:   var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia); backdrop-filter:   var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia); }
+/* head: "InvictusOS" */ .head-div { position:   relative; margin-left:   auto; margin-right:   auto; display:   flex; min-height:   68px; max-width:   80rem; align-items:   center; gap:   1rem; padding-left:   1.25rem; padding-right:   1.25rem; }
+/* head: "Requirements" */ .head-img { height:   2rem; width:   auto; }
+/* head: "Animations" */ .head-button { display:   none; min-height:   48px; align-items:   center; gap:   0.625rem; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); padding-left:   0.75rem; padding-right:   0.75rem; font-size:   0.875rem; line-height:   1.25rem; font-weight:   500; color:   rgb(255 255 255 / 0.85); }
+.head-button:hover { border-color:   rgb(255 255 255 / 0.5); }
+@media (min-width: 768px) { .head-button { margin-left:   0.5rem; display:   inline-flex; }
+}
+/* head: container */ .head-span { position:   absolute; width:   1px; height:   1px; padding:   0; margin:   -1px; overflow:   hidden; clip:   rect(0, 0, 0, 0); white-space:   nowrap; border-width:   0; }
+@media (min-width: 640px) { .head-span { position:   static; width:   auto; height:   auto; padding:   0; margin:   0; overflow:   visible; clip:   auto; white-space:   normal; }
+}
+/* head: "Download" */ .head-span2 { position:   relative; height:   1.5rem; width:   2.75rem; border-radius:   9999px; background-color:   rgb(255 255 255 / 0.2); transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.group[aria-checked="true"] .head-span2 { --tw-bg-opacity:   1; background-color:   rgb(var(--c-brand) / var(--tw-bg-opacity, 1)); }
+/* head: "Download" */ .head-span3 { position:   absolute; left:   0.125rem; top:   0.125rem; height:   1.25rem; width:   1.25rem; border-radius:   9999px; --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); transition-property:   transform; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.group[aria-checked="true"] .head-span3 { --tw-translate-x:   1.25rem; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+/* head: container */ .head-a { display:   none; min-height:   48px; align-items:   center; border-radius:   0.75rem; --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); padding-left:   1.25rem; padding-right:   1.25rem; font-weight:   700; --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.head-a:hover { --tw-bg-opacity:   1; background-color:   rgb(239 246 255 / var(--tw-bg-opacity, 1)); }
+@media (min-width: 768px) { .head-a { margin-left:   0.5rem; display:   inline-flex; }
+}
+/* Header: desktop links + phone menu */ .head-nav { display:   none; }
+@media (min-width: 768px) { .head-nav { margin-left:   auto; display:   flex; align-items:   center; gap:   0.25rem; }
+}
+.burger { position:   relative; margin-left:   auto; display:   inline-flex; height:   3rem; width:   3rem; align-items:   center; justify-content:   center; border-radius:   0.75rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); }
+@media (min-width: 768px) { .burger { display:   none; }
+}
+.mnav { position:   absolute; left:   0px; right:   0px; top:   100%; border-bottom-width:   1px; border-color:   rgb(255 255 255 / 0.1); --tw-bg-opacity:   1; background-color:   rgb(var(--c-navy) / var(--tw-bg-opacity, 1)); padding-left:   1.25rem; padding-right:   1.25rem; padding-bottom:   1.5rem; padding-top:   0.5rem; --tw-shadow:   0 25px 50px -12px rgb(0 0 0 / 0.25); --tw-shadow-colored:   0 25px 50px -12px var(--tw-shadow-color); box-shadow:   var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+@media (min-width: 768px) { .mnav { display:   none; }
+}
+.mnav-links { display:   flex; flex-direction:   column; }
+.mnav-link { display:   flex; min-height:   60px; align-items:   center; justify-content:   space-between; border-bottom-width:   1px; border-color:   rgb(255 255 255 / 0.1); font-family:   Sora, system-ui, sans-serif; font-size:   1.25rem; line-height:   1.75rem; font-weight:   600; }
+.mnav-link:hover { --tw-text-opacity:   1; color:   rgb(var(--c-link) / var(--tw-text-opacity, 1)); }
+.mnav-actions { margin-top:   1.25rem; display:   flex; flex-direction:   column; gap:   0.75rem; }
+.mnav-download { display:   flex; min-height:   56px; align-items:   center; justify-content:   center; border-radius:   9999px; --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); font-weight:   700; --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
+.mnav-download:hover { --tw-bg-opacity:   1; background-color:   rgb(239 246 255 / var(--tw-bg-opacity, 1)); }
+.mnav-switch { display:   flex; min-height:   56px; align-items:   center; justify-content:   space-between; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.15); padding-left:   1.25rem; padding-right:   1.25rem; font-size:   0.875rem; line-height:   1.25rem; font-weight:   500; color:   rgb(255 255 255 / 0.85); }
+/* hero: container */ .hero-section { position:   relative; margin-left:   auto; margin-right:   auto; display:   flex; max-width:   1500px; flex-direction:   column; justify-content:   center; padding-left:   1.25rem; padding-right:   1.25rem; padding-bottom:   2.5rem; padding-top:   2rem; }
+@media (min-width: 1024px) { .hero-section { min-height:   calc(100svh - 68px - 72px); }
+}
+/* hero: container */ .hero-span { pointer-events:   none; position:   absolute; right:   -8rem; top:   1rem; z-index:   -10; height:   22rem; width:   22rem; border-radius:   9999px; background-color:   rgb(var(--c-brand) / 0.35); --tw-blur:   blur(100px); filter:   var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); }
+@media (prefers-reduced-motion: no-preference) { @keyframes drift { }
+.hero-span { animation:   drift 16s ease-in-out infinite; }
+}
+@media (min-width: 768px) { .hero-span { height:   34rem; width:   34rem; }
+}
+/* hero: "InvictusOS" */ .hero-span2 { pointer-events:   none; position:   absolute; left:   -8rem; bottom:   0px; z-index:   -10; height:   20rem; width:   20rem; border-radius:   9999px; background-color:   rgb(var(--c-teal) / 0.6); --tw-blur:   blur(100px); filter:   var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); }
+@media (prefers-reduced-motion: no-preference) { @keyframes drift { }
+.hero-span2 { animation:   drift 16s ease-in-out infinite; }
+}
+@media (min-width: 768px) { .hero-span2 { height:   30rem; width:   30rem; }
+}
+/* hero: "InvictusOS" */ .hero-h1 { margin-top:   0.75rem; white-space:   nowrap; font-family:   Sora, system-ui, sans-serif; font-size:   min(12.5vw,13rem); font-weight:   800; line-height:   1; letter-spacing:   -.025em; will-change:   transform; }
+/* hero: "n" */ .hero-span3 { display:   inline-block; -webkit-background-clip:   text; background-clip:   text; color:   transparent; }
+/* hero: "Lightweight | Fast | Reliable" */ .hero-div { margin-top:   2rem; display:   grid; align-items:   center; gap:   2.5rem; }
+@media (min-width: 1024px) { .hero-div { grid-template-columns:   repeat(12, minmax(0, 1fr)); }
+}
+/* hero: "Lightweight | Fast | Reliable" */ .hero-img { height:   4rem; width:   auto; }
+/* hero: "A minimal operating system that ke" */ .hero-p { margin-top:   1.25rem; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   0.875rem; line-height:   1.25rem; letter-spacing:   0.025em; }
+/* hero: "Download" */ .hero-p2 { margin-top:   1rem; max-width:   28rem; font-family:   Sora, system-ui, sans-serif; font-size:   1.875rem; line-height:   2.25rem; font-weight:   500; line-height:   1.25; letter-spacing:   -0.025em; }
+/* hero: "Download" */ .hero-div2 { margin-top:   2rem; display:   flex; flex-wrap:   wrap; gap:   0.875rem; }
+/* hero: "Download" */ .hero-a { display:   inline-flex; min-height:   56px; align-items:   center; gap:   0.75rem; border-radius:   9999px; --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); padding-left:   2rem; padding-right:   2rem; font-weight:   700; --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.hero-a:hover { --tw-bg-opacity:   1; background-color:   rgb(var(--c-brand) / var(--tw-bg-opacity, 1)); --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); }
+/* hero: container */ .hero-a2 { display:   inline-flex; min-height:   56px; align-items:   center; gap:   0.75rem; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.5); padding-left:   2rem; padding-right:   2rem; font-weight:   500; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.hero-a2:hover { --tw-border-opacity:   1; border-color:   rgb(255 255 255 / var(--tw-border-opacity, 1)); background-color:   rgb(255 255 255 / 0.1); }
+/* hero: container */ .hero-figure { position:   relative; }
+@media (min-width: 1024px) { .hero-figure { grid-column:   span 6 / span 6; }
+}
+/* hero: container */ .hero-span4 { position:   absolute; inset:   -1.5rem; z-index:   -10; border-radius:   3rem; background-image:   linear-gradient(to bottom right, var(--tw-gradient-stops)); --tw-gradient-from:   rgb(var(--c-brand) / 0.5) var(--tw-gradient-from-position); --tw-gradient-to:   rgb(var(--c-brand) / 0) var(--tw-gradient-to-position); --tw-gradient-stops:   var(--tw-gradient-from), var(--tw-gradient-to); --tw-gradient-to:   rgb(var(--c-teal) / 0.4) var(--tw-gradient-to-position); --tw-blur:   blur(64px); filter:   var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow); }
+/* hero: container */ .hero-span5 { position:   absolute; inset:   -1.25rem; border-radius:   2.5rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.15); }
+/* hero: container */ .hero-span6 { position:   absolute; left:   -0.75rem; top:   -0.75rem; height:   1.75rem; width:   1.75rem; border-top-left-radius:   0.75rem; border-left-width:   2px; border-top-width:   2px; --tw-border-opacity:   1; border-color:   rgb(var(--c-link) / var(--tw-border-opacity, 1)); }
+/* hero: container */ .hero-span7 { position:   absolute; right:   -0.75rem; top:   -0.75rem; height:   1.75rem; width:   1.75rem; border-top-right-radius:   0.75rem; border-right-width:   2px; border-top-width:   2px; --tw-border-opacity:   1; border-color:   rgb(var(--c-link) / var(--tw-border-opacity, 1)); }
+/* hero: container */ .hero-span8 { position:   absolute; bottom:   -0.75rem; left:   -0.75rem; height:   1.75rem; width:   1.75rem; border-bottom-left-radius:   0.75rem; border-bottom-width:   2px; border-left-width:   2px; --tw-border-opacity:   1; border-color:   rgb(var(--c-link) / var(--tw-border-opacity, 1)); }
+/* hero: container */ .hero-span9 { position:   absolute; bottom:   -0.75rem; right:   -0.75rem; height:   1.75rem; width:   1.75rem; border-bottom-right-radius:   0.75rem; border-bottom-width:   2px; border-right-width:   2px; --tw-border-opacity:   1; border-color:   rgb(var(--c-link) / var(--tw-border-opacity, 1)); }
+/* hero: "Quick links" */ .hero-img2 { display:   block; height:   auto; width:   100%; border-radius:   1.5rem; }
+/* quick: "Quick links" */ .quick-nav { position:   sticky; bottom:   0px; z-index:   40; display:   flex; align-items:   center; gap:   0.75rem; overflow-x:   auto; border-top-width:   1px; border-bottom-width:   1px; border-color:   rgb(255 255 255 / 0.1); --tw-bg-opacity:   1; background-color:   rgb(var(--c-ink) / var(--tw-bg-opacity, 1)); padding-left:   1.25rem; padding-right:   1.25rem; padding-top:   0.75rem; padding-bottom:   0.75rem; }
+/* quick: "About" */ .quick-span { white-space:   nowrap; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   11px; text-transform:   uppercase; letter-spacing:   .14em; color:   rgb(255 255 255 / 0.5); }
+/* about: container */ .about-p { margin-top:   2.5rem; max-width:   64rem; font-family:   Sora, system-ui, sans-serif; font-size:   1.5rem; line-height:   2rem; font-weight:   500; line-height:   1.375; letter-spacing:   -0.025em; }
+@media (min-width: 768px) { .about-p { font-size:   2.25rem; line-height:   2.5rem; }
+}
+/* about: "Minimum RAM required" */ .about-dl { margin-top:   5rem; display:   grid; gap:   1px; overflow:   hidden; border-radius:   1.5rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); background-color:   rgb(255 255 255 / 0.2); --tw-shadow:   0 0 90px -20px rgba(26,92,255,.55); --tw-shadow-colored:   0 0 90px -20px var(--tw-shadow-color); box-shadow:   var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+@media (min-width: 640px) { .about-dl { grid-template-columns:   repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) { .about-dl { grid-template-columns:   repeat(4, minmax(0, 1fr)); }
+}
+/* about: "512" */ .about-dt { font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   0.75rem; line-height:   1rem; color:   rgb(255 255 255 / 0.75); }
+/* about: "System Requirements" */ .about-dd { font-family:   Sora, system-ui, sans-serif; font-size:   3rem; line-height:   1; font-weight:   800; --tw-numeric-spacing:   tabular-nums; font-variant-numeric:   var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction); letter-spacing:   -0.05em; --tw-text-opacity:   1; color:   rgb(var(--c-brand) / var(--tw-text-opacity, 1)); }
+@media (min-width: 1280px) { .about-dd { font-size:   3.75rem; line-height:   1; }
+}
+/* req: "System Requirements" */ .req-section { border-top-width:   1px; border-color:   rgb(255 255 255 / 0.1); padding-top:   6rem; padding-bottom:   6rem; }
+@media (min-width: 768px) { .req-section { padding-top:   9rem; padding-bottom:   9rem; }
+}
+/* req: "System Requirements" */ .req-div { margin-left:   auto; margin-right:   auto; max-width:   80rem; padding-left:   1.25rem; padding-right:   1.25rem; }
+/* req: "Minimum" */ .req-div2 { margin-top:   4rem; display:   grid; gap:   1.25rem; }
+@media (min-width: 1024px) { .req-div2 { grid-template-columns:   repeat(2, minmax(0, 1fr)); }
+}
+/* req: "Minimum" */ .req-section2 { border-radius:   2rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.15); --tw-bg-opacity:   1; background-color:   rgb(var(--c-ink) / var(--tw-bg-opacity, 1)); background-image:   radial-gradient(rgba(255,255,255,.09) 1px,transparent 1px); background-size:   20px 20px; padding:   2rem; --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); }
+@media (min-width: 768px) { .req-section2 { padding:   3rem; }
+}
+/* req: "900 MHz Processor (Pentium III / A" */ .req-h3 { font-family:   Sora, system-ui, sans-serif; font-size:   1.875rem; line-height:   2.25rem; font-weight:   700; }
+/* req: "900 MHz Processor (Pentium III / A" */ .req-ul { margin-top:   1.5rem; }
+.req-ul > :not([hidden]) ~ :not([hidden]) { --tw-divide-y-reverse:   0; border-top-width:   calc(1px * calc(1 - var(--tw-divide-y-reverse))); border-bottom-width:   calc(1px * var(--tw-divide-y-reverse)); border-color:   rgb(255 255 255 / 0.15); }
+/* req: "Recommended" */ .req-section3 { border-radius:   2rem; --tw-bg-opacity:   1; background-color:   rgb(var(--c-brand) / var(--tw-bg-opacity, 1)); padding:   2rem; --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); --tw-shadow:   0 40px 120px -30px rgba(26,92,255,.9); --tw-shadow-colored:   0 40px 120px -30px var(--tw-shadow-color); box-shadow:   var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+@media (min-width: 768px) { .req-section3 { padding:   3rem; }
+}
+/* req: "1 GHz Processor" */ .req-ul2 { margin-top:   1.5rem; }
+.req-ul2 > :not([hidden]) ~ :not([hidden]) { --tw-divide-y-reverse:   0; border-top-width:   calc(1px * calc(1 - var(--tw-divide-y-reverse))); border-bottom-width:   calc(1px * var(--tw-divide-y-reverse)); border-color:   rgb(255 255 255 / 0.25); }
+/* feat: "iv" */ .feat-p { margin-top:   1.5rem; max-width:   36rem; font-size:   1.125rem; line-height:   1.75rem; color:   rgb(255 255 255 / 0.75); }
+/* feat: "iv" */ .feat-ul { margin-top:   4rem; display:   grid; gap:   1.25rem; }
+@media (min-width: 768px) { .feat-ul { grid-template-columns:   repeat(3, minmax(0, 1fr)); }
+}
+/* feat: "64" */ .feat-article { position:   relative; display:   flex; height:   100%; min-height:   22rem; flex-direction:   column; justify-content:   flex-end; gap:   0.75rem; overflow:   hidden; border-radius:   1.5rem; border-width:   1px; border-style:   dashed; border-color:   rgb(var(--c-link) / 0.5); --tw-bg-opacity:   1; background-color:   rgb(var(--c-ink) / var(--tw-bg-opacity, 1)); padding:   2rem; }
+/* feat: "64-bit Build" */ .feat-span { width:   -moz-fit-content; width:   fit-content; border-radius:   9999px; border-width:   1px; border-color:   rgb(var(--c-link) / 0.6); background-color:   rgb(var(--c-link) / 0.15); padding-left:   0.75rem; padding-right:   0.75rem; padding-top:   0.25rem; padding-bottom:   0.25rem; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   11px; text-transform:   uppercase; letter-spacing:   0.1em; --tw-text-opacity:   1; color:   rgb(125 211 252 / var(--tw-text-opacity, 1)); }
+/* faq: "Have any questions?" */ .faq-aside { overflow:   hidden; --tw-bg-opacity:   1; background-color:   rgb(var(--c-brand) / var(--tw-bg-opacity, 1)); background-image:   radial-gradient(50rem 30rem at 90% 50%,rgba(255,255,255,.18),transparent); padding-top:   5rem; padding-bottom:   5rem; }
+@media (min-width: 768px) { .faq-aside { padding-top:   7rem; padding-bottom:   7rem; }
+}
+/* faq: "Have any questions?" */ .faq-div { margin-left:   auto; margin-right:   auto; display:   flex; max-width:   80rem; flex-direction:   column; align-items:   flex-start; justify-content:   space-between; gap:   3rem; padding-left:   1.25rem; padding-right:   1.25rem; }
+@media (min-width: 1024px) { .faq-div { flex-direction:   row; align-items:   center; }
+}
+/* faq: "Find answers to questions about in" */ .faq-h2 { font-family:   Sora, system-ui, sans-serif; font-size:   3.75rem; font-weight:   800; line-height:   .95; letter-spacing:   -0.05em; }
+@media (min-width: 768px) { .faq-h2 { font-size:   6rem; line-height:   1; }
+}
+/* faq: container */ .faq-p { margin-top:   1.5rem; max-width:   28rem; font-size:   1.125rem; line-height:   1.75rem; color:   rgb(255 255 255 / 0.85); }
+/* faq: container */ .faq-div2 { position:   relative; flex-shrink:   0; padding:   3.5rem; }
+@media (min-width: 768px) { .faq-div2 { padding:   6rem; }
+}
+/* faq: container */ .faq-span { position:   absolute; inset:   0px; margin:   auto; height:   17rem; width:   17rem; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.3); }
+@media (min-width: 768px) { .faq-span { height:   22rem; width:   22rem; }
+}
+/* faq: "Browse the FAQ" */ .faq-span2 { position:   absolute; inset:   0px; margin:   auto; height:   21rem; width:   21rem; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); }
+@media (prefers-reduced-motion: no-preference) { @keyframes ring { }
+.faq-span2 { animation:   ring 5s ease-out infinite; }
+}
+@media (min-width: 768px) { .faq-span2 { height:   28rem; width:   28rem; }
+}
+/* faq: container */ .faq-a { position:   relative; display:   flex; height:   11rem; width:   11rem; flex-shrink:   0; flex-direction:   column; align-items:   center; justify-content:   center; gap:   0.5rem; border-radius:   9999px; --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); text-align:   center; font-weight:   700; --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   300ms; }
+.faq-a:hover { --tw-scale-x:   1.05; --tw-scale-y:   1.05; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); --tw-bg-opacity:   1; background-color:   rgb(var(--c-ink) / var(--tw-bg-opacity, 1)); --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); }
+@media (min-width: 768px) { .faq-a { height:   14rem; width:   14rem; font-size:   1.125rem; line-height:   1.75rem; }
+}
+/* faq: "History" */ .faq-svg { height:   2rem; width:   2rem; --tw-rotate:   -45deg; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); fill:   none; stroke:   currentColor; stroke-width:   2; transition-property:   transform; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   300ms; stroke-linecap:   round; stroke-linejoin:   round; }
+.group:hover .faq-svg { --tw-rotate:   0deg; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+/* hist: "Origins" */ .hist-p { margin-top:   1.5rem; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   0.875rem; line-height:   1.25rem; color:   rgb(255 255 255 / 0.75); }
+/* hist: "Continuous development" */ .hist-p2 { font-size:   1.125rem; line-height:   1.75rem; color:   rgb(255 255 255 / 0.75); }
+@media (min-width: 768px) { .hist-p2 { grid-column:   span 7 / span 7; }
+}
+/* hist: "InvictusOS Sagaris release" */ .hist-li { position:   relative; display:   grid; gap:   1rem; border-top-width:   1px; --tw-border-opacity:   1; border-color:   rgb(var(--c-ok) / var(--tw-border-opacity, 1)); padding-top:   2.5rem; padding-bottom:   2.5rem; }
+@media (min-width: 768px) { .hist-li { grid-template-columns:   repeat(12, minmax(0, 1fr)); gap:   2rem; }
+}
+/* hist: "InvictusOS Sagaris release" */ .hist-span { position:   absolute; left:   0px; right:   0px; top:   -1px; height:   0.125rem; transform-origin:   left; --tw-bg-opacity:   1; background-color:   rgb(var(--c-ok) / var(--tw-bg-opacity, 1)); }
+/* hist: "InvictusOS Sagaris release" */ .hist-span2 { margin-top:   0.75rem; height:   0.75rem; width:   0.75rem; flex-shrink:   0; border-radius:   9999px; --tw-bg-opacity:   1; background-color:   rgb(var(--c-ok) / var(--tw-bg-opacity, 1)); --tw-ring-offset-shadow:   var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow:   var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow:   var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); --tw-ring-color:   rgb(var(--c-ok) / 0.3); }
+/* team: "Creators" */ .team-section { margin-left:   auto; margin-right:   auto; max-width:   80rem; padding-left:   1.25rem; padding-right:   1.25rem; padding-bottom:   6rem; }
+@media (min-width: 768px) { .team-section { padding-bottom:   9rem; }
+}
+/* team: container */ .team-p { margin-top:   1.5rem; font-size:   1.125rem; line-height:   1.75rem; color:   rgb(255 255 255 / 0.75); }
+/* team: "Sayansut Mohapatra" */ .team-ul { margin-top:   4rem; display:   grid; gap:   1rem; }
+@media (min-width: 640px) { .team-ul { grid-template-columns:   repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) { .team-ul { grid-template-columns:   repeat(4, minmax(0, 1fr)); }
+}
+/* team: "Sayansut Mohapatra" */ .team-img { height:   6rem; width:   6rem; border-radius:   9999px; -o-object-fit:   cover; object-fit:   cover; }
+/* dev: "Technical Details" */ .dev-section { --tw-bg-opacity:   1; background-color:   rgb(var(--c-ink) / var(--tw-bg-opacity, 1)); background-image:   radial-gradient(60rem 26rem at 0% 0%,rgba(26,92,255,.22),transparent); padding-top:   6rem; padding-bottom:   6rem; }
+@media (min-width: 768px) { .dev-section { padding-top:   9rem; padding-bottom:   9rem; }
+}
+/* dev: "Technical Details" */ .dev-div { margin-left:   auto; margin-right:   auto; display:   grid; max-width:   80rem; gap:   3.5rem; padding-left:   1.25rem; padding-right:   1.25rem; }
+@media (min-width: 1024px) { .dev-div { grid-template-columns:   repeat(12, minmax(0, 1fr)); }
+}
+/* dev: "InvictusOS is engineered for predi" */ .dev-h2 { font-family:   Sora, system-ui, sans-serif; font-size:   3.75rem; font-weight:   800; line-height:   .95; letter-spacing:   -0.05em; }
+@media (min-width: 768px) { .dev-h2 { font-size:   4.5rem; line-height:   1; }
+}
+/* dev: "Kernel" */ .dev-a { margin-top:   2.25rem; display:   inline-flex; min-height:   56px; align-items:   center; gap:   0.75rem; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.5); padding-left:   2rem; padding-right:   2rem; font-weight:   500; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.dev-a:hover { --tw-border-opacity:   1; border-color:   rgb(255 255 255 / var(--tw-border-opacity, 1)); --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
+/* dev: "Kernel" */ .dev-div2 { align-self:   flex-start; overflow:   hidden; border-radius:   1.5rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); --tw-bg-opacity:   1; background-color:   rgb(var(--c-card) / var(--tw-bg-opacity, 1)); }
+@media (min-width: 1024px) { .dev-div2 { grid-column:   span 7 / span 7; }
+}
+/* dev: "Kernel" */ .dev-dl > :not([hidden]) ~ :not([hidden]) { --tw-divide-y-reverse:   0; border-top-width:   calc(1px * calc(1 - var(--tw-divide-y-reverse))); border-bottom-width:   calc(1px * var(--tw-divide-y-reverse)); border-color:   rgb(255 255 255 / 0.15); }
+/* dev: "Linux 4.x with a lean configuratio" */ .dev-dt { font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   0.875rem; line-height:   1.25rem; font-weight:   500; --tw-text-opacity:   1; color:   rgb(var(--c-link) / var(--tw-text-opacity, 1)); }
+/* comm: "GitHub" */ .comm-ul { margin-top:   4rem; }
+.comm-ul > :not([hidden]) ~ :not([hidden]) { --tw-divide-y-reverse:   0; border-top-width:   calc(1px * calc(1 - var(--tw-divide-y-reverse))); border-bottom-width:   calc(1px * var(--tw-divide-y-reverse)); border-color:   rgb(255 255 255 / 0.25); }
+.comm-ul { border-top-width:   1px; border-bottom-width:   1px; border-color:   rgb(255 255 255 / 0.25); }
+/* foot: "InvictusOS" */ .foot-footer { overflow:   hidden; border-top-width:   1px; border-color:   rgb(255 255 255 / 0.1); --tw-bg-opacity:   1; background-color:   rgb(var(--c-ink) / var(--tw-bg-opacity, 1)); padding-top:   3.5rem; font-size:   0.875rem; line-height:   1.25rem; }
+/* foot: "InvictusOS" */ .foot-div { margin-left:   auto; margin-right:   auto; max-width:   72rem; padding-left:   1.25rem; padding-right:   1.25rem; }
+/* foot: "InvictusOS" */ .foot-div2 { display:   grid; gap:   2.5rem; }
+@media (min-width: 640px) { .foot-div2 { grid-template-columns:   repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) { .foot-div2 { grid-template-columns:   1.5fr 1fr 1fr 1fr; }
+}
+/* foot: "Switch to Simple Site" */ .foot-p { margin-bottom:   1.5rem; margin-top:   0.5rem; max-width:   26ch; color:   rgb(255 255 255 / 0.75); }
+/* foot: "About" */ .foot-a { display:   inline-flex; min-height:   48px; align-items:   center; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.5); padding-left:   1.5rem; padding-right:   1.5rem; font-weight:   500; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
+.foot-a:hover { --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
+/* foot: "© 2026 InvictusOS - The minimal, l" */ .foot-div3 { margin-top:   2.5rem; display:   flex; flex-wrap:   wrap; align-items:   center; justify-content:   space-between; gap:   0.75rem; border-top-width:   1px; border-color:   rgb(255 255 255 / 0.15); padding-top:   1.5rem; font-family:   JetBrains Mono, ui-monospace, Menlo, Consolas, monospace; font-size:   0.75rem; line-height:   1rem; color:   rgb(255 255 255 / 0.75); }
+/* foot: "Privacy" */ .foot-nav { display:   flex; gap:   0.25rem; }
+/* foot: container */ .foot-p2 { margin-top:   2.5rem; -webkit-user-select:   none; -moz-user-select:   none; user-select:   none; white-space:   nowrap; background-image:   linear-gradient(to bottom, var(--tw-gradient-stops)); --tw-gradient-from:   rgb(255 255 255 / 0.3) var(--tw-gradient-from-position); --tw-gradient-to:   rgb(255 255 255 / 0) var(--tw-gradient-to-position); --tw-gradient-stops:   var(--tw-gradient-from), var(--tw-gradient-to); --tw-gradient-to:   rgb(255 255 255 / 0)  var(--tw-gradient-to-position); --tw-gradient-stops:   var(--tw-gradient-from), rgb(255 255 255 / .12) var(--tw-gradient-via-position), var(--tw-gradient-to); --tw-gradient-to:   rgb(255 255 255 / .04) var(--tw-gradient-to-position); -webkit-background-clip:   text; background-clip:   text; padding-bottom:   1rem; text-align:   center; font-family:   Sora, system-ui, sans-serif; font-size:   min(13vw,13rem); font-weight:   800; line-height:   1; letter-spacing:   -.025em; color:   transparent; }
+/* totop: container */ .totop-svg { position:   absolute; inset:   0px; height:   100%; width:   100%; --tw-rotate:   -90deg; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+/* totop: container */ .totop-svg2 { position:   relative; height:   1.25rem; width:   1.25rem; --tw-rotate:   -90deg; transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); fill:   none; stroke:   currentColor; stroke-width:   2; stroke-linecap:   round; stroke-linejoin:   round; }
+/* note: "Simple Site Available" */ .note-div { flex:   1 1 0%; padding:   1rem; }
+@media (min-width: 640px) { .note-div { padding:   1.25rem; }
+}
+/* note: "The faster, simpler site is availa" */ .note-h2 { font-size:   15px; font-weight:   700; }
+/* note: "Go to Simple Site" */ .note-p { margin-bottom:   0.75rem; margin-top:   0.375rem; font-size:   13px; line-height:   1.375; color:   rgb(255 255 255 / 0.75); }
+/* note: container */ .note-a { display:   inline-flex; min-height:   48px; align-items:   center; border-radius:   0.75rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.3); padding-left:   1rem; padding-right:   1rem; font-size:   0.875rem; line-height:   1.25rem; font-weight:   500; }
+.note-a:hover { background-color:   rgb(255 255 255 / 0.1); }
+/* note */ .note-button { display:   flex; width:   3rem; align-items:   center; justify-content:   center; border-top-right-radius:   1rem; border-bottom-right-radius:   1rem; border-left-width:   1px; border-color:   rgb(255 255 255 / 0.2); }
+.note-button:hover { background-color:   rgb(255 255 255 / 0.1); }
+/* note */ .note-svg { height:   18px; width:   18px; fill:   none; stroke:   currentColor; stroke-width:   2; stroke-linecap:   round; stroke-linejoin:   round; }
+
+/* ---------- 4. UTILITIES (generated - do not edit by hand) ---------- */
+.sr-only { position:   absolute; width:   1px; height:   1px; padding:   0; margin:   -1px; overflow:   hidden; clip:   rect(0, 0, 0, 0); white-space:   nowrap; border-width:   0; }
+.fixed { position:   fixed; }
+.bottom-5 { bottom:   1.25rem; }
+.bottom-\[88px\] { bottom:   88px; }
+.left-3 { left:   0.75rem; }
+.right-3 { right:   0.75rem; }
+.right-5 { right:   1.25rem; }
+.z-\[56\] { z-index:   56; }
+.z-\[60\] { z-index:   60; }
+.mt-16 { margin-top:   4rem; }
+.mt-auto { margin-top:   auto; }
+.block { display:   block; }
+.flex { display:   flex; }
+.hidden { display:   none; }
+.h-14 { height:   3.5rem; }
+.w-14 { width:   3.5rem; }
+.transform { transform:   translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+.resize { resize:   both; }
+.items-center { align-items:   center; }
+.justify-center { justify-content:   center; }
+.overflow-x-clip { overflow-x:   clip; }
+.rounded-2xl { border-radius:   1rem; }
+.rounded-full { border-radius:   9999px; }
+.border { border-width:   1px; }
+.border-white\/20 { border-color:   rgb(255 255 255 / 0.2); }
+.bg-black\/95 { background-color:   rgb(0 0 0 / 0.95); }
+.bg-indigo { --tw-bg-opacity:   1; background-color:   rgb(var(--c-indigo) / var(--tw-bg-opacity, 1)); }
+.bg-ink\/90 { background-color:   rgb(var(--c-ink) / 0.9); }
+.bg-page { background-image:   linear-gradient(135deg, rgb(var(--c-indigo)) 0%, rgb(var(--c-mid)) 45%, rgb(var(--c-teal)) 100%); }
+.bg-fixed { background-attachment:   fixed; }
+.stroke-link { stroke:   rgb(var(--c-link) / 1); }
+.stroke-white\/20 { stroke:   rgb(255 255 255 / 0.2); }
+.text-white { --tw-text-opacity:   1; color:   rgb(255 255 255 / var(--tw-text-opacity, 1)); }
+.text-white\/75 { color:   rgb(255 255 255 / 0.75); }
+.text-white\/80 { color:   rgb(255 255 255 / 0.8); }
+.shadow-2xl { --tw-shadow:   0 25px 50px -12px rgb(0 0 0 / 0.25); --tw-shadow-colored:   0 25px 50px -12px var(--tw-shadow-color); box-shadow:   var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+.ring { --tw-ring-offset-shadow:   var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow:   var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow:   var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000); }
+.backdrop-blur { --tw-backdrop-blur:   blur(8px); -webkit-backdrop-filter:   var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia); backdrop-filter:   var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia); }
+.\[animation-delay\:-8s\] { animation-delay:   -8s; }
+.\[animation-delay\:135ms\2c 1585ms\] { animation-delay:   135ms,1585ms; }
+.\[animation-delay\:190ms\2c 1670ms\] { animation-delay:   190ms,1670ms; }
+.\[animation-delay\:245ms\2c 1755ms\] { animation-delay:   245ms,1755ms; }
+.\[animation-delay\:300ms\2c 1840ms\] { animation-delay:   300ms,1840ms; }
+.\[animation-delay\:355ms\2c 1925ms\] { animation-delay:   355ms,1925ms; }
+.\[animation-delay\:410ms\2c 2010ms\] { animation-delay:   410ms,2010ms; }
+.\[animation-delay\:465ms\2c 2095ms\] { animation-delay:   465ms,2095ms; }
+.\[animation-delay\:520ms\2c 2180ms\] { animation-delay:   520ms,2180ms; }
+.\[animation-delay\:575ms\2c 2265ms\] { animation-delay:   575ms,2265ms; }
+.\[animation-delay\:80ms\2c 1500ms\] { animation-delay:   80ms,1500ms; }
+
+/* ---------- 5. EXTRAS ---------- */
+
+/* "Animations" switch OFF: stop every animation and transition */
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* Hero wordmark: white letters, rise in, then one blue light sweep.
+   Each letter has its own delay (set in the HTML). */
+
+.ltr {
+  background-image:
+    linear-gradient(105deg, transparent 38%, rgb(var(--c-link)) 50%, transparent 62%),
+    linear-gradient(#fff, #fff);
+  background-size: 300% 100%, 100% 100%;
+  background-position: 150% 0, 0 0;
+}
+
+@keyframes ltr-in {
+  from {
+    opacity: 0;
+    transform: translateY(.35em);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sheen  {
+  from {
+    background-position: 150% 0, 0 0;
+  }
+
+  to {
+    background-position: -50% 0, 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ltr {
+    animation: ltr-in .9s cubic-bezier(.2,.8,.2,1) both, sheen .95s ease-out both;
+  }
+}
+
+/* System requirements: ticks draw in one after another (JS adds .arm / .on) */
+
+.arm .rq {
+  opacity: .4;
+  transition: opacity .45s ease var(--d, 0ms);
+}
+
+.arm .rq.on {
+  opacity: 1;
+}
+
+.arm .rq svg {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  transition: stroke-dashoffset .5s ease var(--d, 0ms);
+}
+
+.arm .rq.on svg {
+  stroke-dashoffset: 0;
+}
+
+/* Thin themed scrollbar + brand-blue text selection */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--c-brand)) rgb(var(--c-navy));
+}
+
+::-moz-selection {
+  background: rgb(var(--c-brand));
+  color: #fff;
+}
+
+::selection {
+  background: rgb(var(--c-brand));
+  color: #fff;
+}
+
+/* Phone menu: the burger's bars morph into an X, the panel eases in */
+
+.burger-bar {
+  position: absolute;
+  left: 50%;
+  width: 20px;
+  height: 2px;
+  margin-left: -10px;
+  border-radius: 2px;
+  background: #fff;
+  transition: transform .25s ease, opacity .2s ease;
+}
+
+.burger-bar:nth-child(1) {
+  top: 15px;
+}
+
+.burger-bar:nth-child(2) {
+  top: 22px;
+}
+
+.burger-bar:nth-child(3) {
+  top: 29px;
+}
+
+.burger[aria-expanded="true"] .burger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burger[aria-expanded="true"] .burger-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.burger[aria-expanded="true"] .burger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.mnav[hidden] {
+  display: none;
+}
+
+@keyframes mnav-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mnav:not([hidden]) {
+    animation: mnav-in .25s ease-out;
+  }
+}
+
+.hover\:bg-brand:hover {
+  --tw-bg-opacity:   1;
+  background-color:   rgb(var(--c-brand) / var(--tw-bg-opacity, 1));
+}
+
+@media (min-width: 640px) {
+  .sm\:bottom-\[88px\] {
+    bottom:   88px;
+  }
+
+  .sm\:left-auto {
+    left:   auto;
+  }
+
+  .sm\:right-5 {
+    right:   1.25rem;
+  }
+
+  .sm\:max-w-\[520px\] {
+    max-width:   520px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:col-span-5 {
+    grid-column:   span 5 / span 5;
+  }
+
+  .lg\:col-span-6 {
+    grid-column:   span 6 / span 6;
+  }
+}
+
+.\[\&\[hidden\]\]\:hidden[hidden] {
+  display:   none;
+}
+
+</style>
 </head>
-<body class="min-h-screen overflow-x-hidden font-sans text-base leading-relaxed antialiased">
-<div id="tint" class="pointer-events-none fixed inset-0 -z-20 opacity-50" aria-hidden="true"></div>
-<div class="pointer-events-none fixed inset-0 -z-10 bg-grid bg-[length:48px_48px]" aria-hidden="true"></div>
-<div class="pointer-events-none fixed inset-0 z-[55] bg-grain opacity-[.07] mix-blend-overlay" aria-hidden="true"></div>
-<a href="#main" class="absolute left-3 -top-16 z-[100] rounded-lg bg-white px-5 py-3 font-bold text-navy focus:top-3">Skip to content</a>
-
-<svg class="absolute h-0 w-0" width="0" height="0" aria-hidden="true" focusable="false"><defs>
-<symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></symbol>
-<symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14m-6-6l6 6-6 6"/></symbol>
-<symbol id="i-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
-<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
-<symbol id="i-m" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol></defs></svg>
-
-<header class="sticky top-0 z-50 border-b border-white/10 bg-navy/85 backdrop-blur-md">
- <div class="relative mx-auto flex min-h-[68px] max-w-7xl items-center gap-4 px-5">
-  <a href="#top" class="flex min-h-[48px] items-center gap-2.5 font-display text-lg font-bold" aria-label="InvictusOS home">
-   <img src="assets/logo.png" alt="" width="38" height="32" class="h-8 w-auto">InvictusOS</a>
-  <nav id="menu" aria-label="Primary" class="absolute left-0 right-0 top-full hidden flex-col border-b border-white/10 bg-navy px-5 pb-4 pt-2 md:static md:ml-auto md:flex md:flex-row md:items-center md:gap-1 md:border-0 md:bg-transparent md:p-0">
-   <a href="#requirements" class="flex min-h-[48px] items-center rounded-lg px-3 font-medium text-link hover:text-white">Requirements</a>
-   <a href="#features" class="flex min-h-[48px] items-center rounded-lg px-3 font-medium text-link hover:text-white">Features</a>
-   <a href="installation.html" class="flex min-h-[48px] items-center rounded-lg px-3 font-medium text-link hover:text-white">Installation</a>
-   <a href="#faq" class="flex min-h-[48px] items-center rounded-lg px-3 font-medium text-link hover:text-white">FAQ</a>
-  </nav>
-  <button id="motion" type="button" role="switch" aria-checked="true" class="group ml-auto inline-flex min-h-[48px] items-center gap-2.5 rounded-full border border-white/20 px-3 text-sm font-medium text-white/85 hover:border-white/50 md:ml-2"><span class="sr-only sm:not-sr-only">Animations</span><span aria-hidden="true" class="relative h-6 w-11 rounded-full bg-white/20 transition-colors group-aria-[checked=true]:bg-brand"><span class="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform group-aria-[checked=true]:translate-x-5"></span></span></button><a href="download.html" class="inline-flex min-h-[48px] items-center rounded-xl bg-white px-5 font-bold text-navy transition hover:bg-blue-50 md:ml-2 max-[420px]:hidden">Download</a>
-  <button id="burger" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="menu" class="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/20 md:hidden">
-   <svg class="h-5 w-5 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-m"/></svg></button>
- </div>
-</header>
-<main id="main" class="overflow-x-clip">
-
-<section id="top" aria-labelledby="hero-h" class="relative mx-auto flex max-w-[1500px] flex-col justify-center px-5 pb-10 pt-8 lg:min-h-[calc(100svh-68px-72px)]">
- <span aria-hidden="true" class="pointer-events-none absolute -right-32 top-4 -z-10 h-[22rem] w-[22rem] rounded-full bg-brand/35 blur-[100px] motion-safe:animate-drift md:h-[34rem] md:w-[34rem]"></span>
- <span aria-hidden="true" class="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[20rem] w-[20rem] rounded-full bg-teal/60 blur-[100px] motion-safe:animate-drift [animation-delay:-8s] md:h-[30rem] md:w-[30rem]"></span>
- <h1 id="hero-h" class="mt-3 will-change-transform whitespace-nowrap font-display text-[length:min(12.5vw,13rem)] font-extrabold leading-[1] tracking-[-.025em]"><span class="sr-only">InvictusOS</span><span aria-hidden="true"><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:80ms,1500ms]">I</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:135ms,1585ms]">n</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:190ms,1670ms]">v</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:245ms,1755ms]">i</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:300ms,1840ms]">c</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:355ms,1925ms]">t</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:410ms,2010ms]">u</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:465ms,2095ms]">s</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:520ms,2180ms]">O</span><span class="ltr inline-block bg-clip-text text-transparent [animation-delay:575ms,2265ms]">S</span></span></h1>
- <div class="mt-8 grid items-center gap-10 lg:grid-cols-12">
-  <div class="lg:col-span-6">
-   <img src="assets/logo.png" alt="" width="77" height="64" class="h-16 w-auto">
-   <p class="mt-5 font-mono text-sm tracking-wide">Lightweight | Fast | Reliable</p>
-   <p class="mt-4 max-w-md font-display text-3xl font-medium leading-tight tracking-tight">A minimal operating system that keeps old machines alive.</p>
-   <div class="mt-8 flex flex-wrap gap-3.5">
-    <a href="download.html" class="inline-flex min-h-[56px] items-center gap-3 rounded-full bg-white px-8 font-bold text-navy transition hover:bg-brand hover:text-white"><svg class="h-5 w-5 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-dl"/></svg>Download</a>
-    <a href="#about" class="inline-flex min-h-[56px] items-center gap-3 rounded-full border border-white/50 px-8 font-medium transition hover:border-white hover:bg-white/10">Learn more <svg class="h-6 w-6 shrink-0 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ar"/></svg></a>
-   </div>
+<body class="page-body">
+  <!-- ======== BACKGROUND LAYERS (hue shift, graph, film grain) ======== -->
+  <div id="tint" class="layer-div" aria-hidden="true">
   </div>
-  <figure id="hfig" class="relative lg:col-span-6"><span aria-hidden="true" class="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-brand/50 to-teal/40 blur-3xl"></span><span aria-hidden="true" class="absolute -inset-5 rounded-[2.5rem] border border-white/15"></span><span aria-hidden="true" class="absolute h-7 w-7 border-link -left-3 -top-3 rounded-tl-xl border-l-2 border-t-2"></span><span aria-hidden="true" class="absolute h-7 w-7 border-link -right-3 -top-3 rounded-tr-xl border-r-2 border-t-2"></span><span aria-hidden="true" class="absolute h-7 w-7 border-link -bottom-3 -left-3 rounded-bl-xl border-b-2 border-l-2"></span><span aria-hidden="true" class="absolute h-7 w-7 border-link -bottom-3 -right-3 rounded-br-xl border-b-2 border-r-2"></span><img src="assets/hero-placeholder.svg" width="1200" height="675" fetchpriority="high" alt="Hero image placeholder" class="block h-auto w-full rounded-3xl"></figure>
- </div>
-</section>
-
-<nav aria-label="Quick links" class="sticky bottom-0 z-40 flex items-center border-y border-white/10 gap-3 overflow-x-auto bg-ink px-5 py-3"><span class="whitespace-nowrap font-mono text-[11px] uppercase tracking-[.14em] text-white/50">Quick links</span><a href="#about" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">About</a><a href="#requirements" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">System Requirements</a><a href="#features" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">Features</a><a href="#history" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">History</a><a href="#creators" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">Creators</a><a href="#community" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">Community &amp; Support</a><a href="installation.html" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">Installation Guide</a><a href="#faq" class="flex min-h-[48px] items-center whitespace-nowrap rounded-full border border-white/20 px-5 text-sm transition hover:border-white hover:bg-white hover:text-navy">FAQ</a></nav>
-
-<section id="about" aria-labelledby="about-h" class="relative mx-auto max-w-7xl px-5 py-24 before:absolute before:inset-x-5 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:content-[''] md:py-36">
- <span aria-hidden="true" class="pointer-events-none absolute right-5 top-16 -z-10 hidden select-none font-display text-[22rem] font-extrabold leading-none tracking-tighter text-transparent [-webkit-text-stroke:1.5px_rgba(77,163,255,.3)] lg:block">iv</span>
- <p class="font-mono text-xs uppercase tracking-[.14em] text-white/70">About the OS</p>
- <h2 id="about-h" class="mt-4 font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-8xl">What is InvictusOS</h2>
- <p id="scrub" class="mt-10 max-w-5xl font-display text-2xl font-medium leading-snug tracking-tight md:text-4xl">InvictusOS is a lightweight operating system designed to run on low-end and outdated laptops and desktops. It is designed to deliver a fast, efficient and reliable experience. The goal is to stay fast and responsive while keeping resource usage low, so that you can still keep using those machines for basic tasks.</p>
- <dl class="mt-20 grid gap-px overflow-hidden rounded-3xl border border-white/20 bg-white/20 shadow-[0_0_90px_-20px_rgba(26,92,255,.55)] sm:grid-cols-2 lg:grid-cols-4"><div class="flex flex-col-reverse justify-end gap-3 bg-card p-8"><dt class="font-mono text-xs text-white/75">Minimum RAM required</dt><dd class="font-display text-5xl font-extrabold tracking-tighter text-white tabular-nums xl:text-6xl"><span data-count="512">512</span>MB</dd></div><div class="flex flex-col-reverse justify-end gap-3 bg-card p-8"><dt class="font-mono text-xs text-white/75">Min. Disk Space required</dt><dd class="font-display text-5xl font-extrabold tracking-tighter text-white tabular-nums xl:text-6xl"><span data-count="5">5</span>GB</dd></div><div class="flex flex-col-reverse justify-end gap-3 bg-card p-8"><dt class="font-mono text-xs text-white/75">Min. Processor required</dt><dd class="font-display text-5xl font-extrabold tracking-tighter text-white tabular-nums xl:text-6xl"><span data-count="900">900</span>MHz</dd></div><div class="flex flex-col-reverse justify-end gap-3 bg-card p-8"><dt class="font-mono text-xs text-white/75">GPU Required</dt><dd class="font-display text-5xl font-extrabold tracking-tighter text-brand tabular-nums xl:text-6xl">NO</dd></div></dl>
-</section>
-
-<section id="requirements" aria-labelledby="req-h" class="border-t border-white/10 py-24 md:py-36">
- <div class="mx-auto max-w-7xl px-5">
-  <p class="font-mono text-xs uppercase tracking-[.14em] text-white/70">System Requirements</p>
-  <h2 id="req-h" class="mt-4 font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-8xl">Runs on nearly anything.</h2>
-  <div class="mt-16 grid gap-5 lg:grid-cols-2">
-   <section aria-labelledby="min-h" class="rounded-[2rem] border border-white/15 bg-ink bg-[radial-gradient(rgba(255,255,255,.09)_1px,transparent_1px)] bg-[length:20px_20px] p-8 text-white md:p-12"><h3 id="min-h" class="font-display text-3xl font-bold">Minimum</h3><ul class="mt-6 divide-y divide-white/15"><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>900 MHz Processor (Pentium III / Atom)</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>512 MB RAM</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>5 GB Free Disk Space</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>No GPU required</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>512×300 Display</li></ul></section>
-   <section data-speed="70" aria-labelledby="rec-h" class="rounded-[2rem] bg-brand p-8 text-white shadow-[0_40px_120px_-30px_rgba(26,92,255,.9)] md:p-12"><h3 id="rec-h" class="font-display text-3xl font-bold">Recommended</h3><ul class="mt-6 divide-y divide-white/25"><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>1 GHz Processor</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>1 GB RAM</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>15 GB Disk Space</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>No GPU required</li><li class="rq flex items-center gap-4 py-4 text-xl font-medium md:text-2xl"><svg class="h-6 w-6 shrink-0 fill-none stroke-ok stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ck"/></svg>1024×600 Display</li></ul></section>
+  <div class="layer-div2" aria-hidden="true">
   </div>
- </div>
-</section>
+  <div class="layer-div3" aria-hidden="true">
+  </div> <a href="#main" class="layer-a">Skip to content</a> <svg class="layer-svg" width="0" height="0" aria-hidden="true" focusable="false"><defs> <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></symbol> <symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14m-6-6l6 6-6 6"/></symbol> <symbol id="i-ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol> <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol> <symbol id="i-m" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol></defs></svg>
+  <!-- ======== HEADER / NAVIGATION ======== -->
+  <header class="head-header">
+    <div class="head-div">
+      <a href="#top" class="brand-link" aria-label="InvictusOS home"><img src="assets/logo.png" alt="" width="38" height="32" class="head-img">InvictusOS</a>
 
-<section id="features" aria-labelledby="feat-h" class="relative mx-auto max-w-7xl px-5 py-24 before:absolute before:inset-x-5 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:content-[''] md:py-36">
- <p class="font-mono text-xs uppercase tracking-[.14em] text-white/70">Current &amp; Upcoming Features</p>
- <h2 id="feat-h" class="mt-4 font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-8xl">What's in &amp; what's coming.</h2>
- <p class="mt-6 max-w-xl text-lg text-white/75">InvictusOS is currently being actively developed and it keeps getting better and better.</p>
- <ul class="mt-16 grid gap-5 md:grid-cols-3"><li><article data-speed="30" class="group relative flex h-full min-h-[22rem] flex-col justify-end gap-3 overflow-hidden rounded-3xl border border-white/15 bg-card bg-[linear-gradient(160deg,rgba(34,197,94,.1),transparent_50%)] p-8"><span aria-hidden="true" class="absolute -right-4 -top-8 font-display text-[11rem] font-extrabold leading-none tracking-tighter text-white/[.06] transition-colors duration-300 group-hover:text-brand/40">iv</span><span class="w-fit rounded-full border border-ok/60 bg-ok/15 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-green-400">Available</span><h3 class="font-display text-3xl font-bold tracking-tight">Lightweight Desktop</h3><p class="text-white/75">A minimal desktop environment with low background CPU and memory usage, tuned for older hardware.</p></article></li><li><article data-speed="70" class="group relative flex h-full min-h-[22rem] flex-col justify-end gap-3 overflow-hidden rounded-3xl border border-white/15 bg-card bg-[linear-gradient(160deg,rgba(34,197,94,.1),transparent_50%)] p-8"><span aria-hidden="true" class="absolute -right-4 -top-8 font-display text-[11rem] font-extrabold leading-none tracking-tighter text-white/[.06] transition-colors duration-300 group-hover:text-brand/40">32</span><span class="w-fit rounded-full border border-ok/60 bg-ok/15 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-green-400">Available</span><h3 class="font-display text-3xl font-bold tracking-tight">32-bit x86 Support</h3><p class="text-white/75">Full support for legacy 32-bit machines.</p></article></li><li><article data-speed="110" class="group relative flex h-full min-h-[22rem] flex-col justify-end gap-3 overflow-hidden rounded-3xl border border-dashed border-link/50 bg-ink p-8"><span aria-hidden="true" class="absolute -right-4 -top-8 font-display text-[11rem] font-extrabold leading-none tracking-tighter text-white/[.06] transition-colors duration-300 group-hover:text-brand/40">64</span><span class="w-fit rounded-full border border-link/60 bg-link/15 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-sky-300">Upcoming</span><h3 class="font-display text-3xl font-bold tracking-tight">64-bit Build</h3><p class="text-white/75">A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></article></li></ul>
-</section>
+      <!-- Desktop navigation (hidden on phones) -->
+      <nav aria-label="Primary" class="head-nav">
+        <a href="#requirements" class="nav-link">Requirements</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Installation</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+      <button type="button" role="switch" aria-checked="true" data-motion-switch class="group head-button"><span class="head-span">Animations</span><span aria-hidden="true" class="head-span2"><span class="head-span3"></span></span></button>
+      <a href="download.html" class="head-a">Download</a>
 
-<aside id="faq" aria-labelledby="faq-h" class="overflow-hidden bg-brand bg-[radial-gradient(50rem_30rem_at_90%_50%,rgba(255,255,255,.18),transparent)] py-20 md:py-28"><div class="mx-auto flex max-w-7xl flex-col items-start justify-between gap-12 px-5 lg:flex-row lg:items-center">
- <div><h2 id="faq-h" class="font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-8xl">Have any questions?</h2><p class="mt-6 max-w-md text-lg text-white/85">Find answers to questions about installation, compatibility, and more.</p></div>
- <div class="relative shrink-0 p-14 md:p-24"><span aria-hidden="true" class="absolute inset-0 m-auto h-[17rem] w-[17rem] rounded-full border border-white/30 md:h-[22rem] md:w-[22rem]"></span><span aria-hidden="true" class="absolute inset-0 m-auto h-[21rem] w-[21rem] rounded-full border border-white/20 motion-safe:animate-ring md:h-[28rem] md:w-[28rem]"></span>
- <a href="faq.html" class="group relative flex h-44 w-44 shrink-0 flex-col items-center justify-center gap-2 rounded-full bg-white text-center font-bold text-navy transition duration-300 hover:scale-105 hover:bg-ink hover:text-white md:h-56 md:w-56 md:text-lg">Browse the FAQ<svg class="h-8 w-8 -rotate-45 fill-none stroke-current stroke-2 transition-transform duration-300 [stroke-linecap:round] [stroke-linejoin:round] group-hover:rotate-0" aria-hidden="true"><use href="#i-ar"/></svg></a></div>
-</div></aside>
+      <!-- Phone menu button (the three bars turn into an X when open) -->
+      <button id="burger" type="button" class="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span></button>
+    </div>
 
-<section id="history" aria-labelledby="hist-h" class="relative mx-auto max-w-7xl px-5 py-24 before:absolute before:inset-x-5 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:content-[''] md:py-36">
- <p class="font-mono text-xs uppercase tracking-[.14em] text-white/70">History</p>
- <h2 id="hist-h" class="mt-4 font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-8xl">From experiment to daily driver</h2>
- <p class="mt-6 font-mono text-sm text-white/75">IDEA ---&gt; EXECUTION</p>
- <ol class="mt-16"><li class="relative grid gap-4 border-t border-white/30 py-10 md:grid-cols-12 md:gap-8"><span data-bar class="absolute inset-x-0 -top-px h-0.5 origin-left bg-link" aria-hidden="true"></span><h3 class="flex items-start gap-4 font-display text-3xl font-bold leading-tight tracking-tight md:col-span-5 md:text-4xl"><span aria-hidden="true" class="mt-3 h-3 w-3 shrink-0 rounded-full bg-[#2d7bff] ring-4 ring-[#2d7bff]/30"></span>Origins</h3><p class="text-lg text-white/75 md:col-span-7">InvictusOS began as an experimental build meant to revive old netbooks and compact desktops.</p></li><li class="relative grid gap-4 border-t border-white/30 py-10 md:grid-cols-12 md:gap-8"><span data-bar class="absolute inset-x-0 -top-px h-0.5 origin-left bg-link" aria-hidden="true"></span><h3 class="flex items-start gap-4 font-display text-3xl font-bold leading-tight tracking-tight md:col-span-5 md:text-4xl"><span aria-hidden="true" class="mt-3 h-3 w-3 shrink-0 rounded-full bg-[#2d7bff] ring-4 ring-[#2d7bff]/30"></span>Continuous development</h3><p class="text-lg text-white/75 md:col-span-7">Over time, feedback from testers shaped InvictusOS into a system focused on efficiency, compatibility and unobtrusive design.</p></li><li class="relative grid gap-4 border-t border-ok py-10 md:grid-cols-12 md:gap-8"><span data-bar class="absolute inset-x-0 -top-px h-0.5 origin-left bg-ok" aria-hidden="true"></span><h3 class="flex items-start gap-4 font-display text-3xl font-bold leading-tight tracking-tight md:col-span-5 md:text-4xl"><span aria-hidden="true" class="mt-3 h-3 w-3 shrink-0 rounded-full bg-ok ring-4 ring-ok/30"></span>InvictusOS Sagaris release</h3><p class="text-lg text-white/75 md:col-span-7">The current Sagaris release represents the first version of all the combined work of the team. It marks the first step in the development of InvictusOS.</p></li></ol>
-</section>
+    <!-- Phone menu panel -->
+    <div id="mnav" class="mnav" hidden>
+      <nav aria-label="Mobile" class="mnav-links">
+        <a href="#requirements" class="mnav-link">Requirements<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a href="#features" class="mnav-link">Features<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a href="installation.html" class="mnav-link">Installation<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a href="#faq" class="mnav-link">FAQ<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+      </nav>
+      <div class="mnav-actions">
+        <a href="download.html" class="mnav-download">Download</a>
+        <button type="button" role="switch" aria-checked="true" data-motion-switch class="group mnav-switch"><span>Animations</span><span aria-hidden="true" class="head-span2"><span class="head-span3"></span></span></button>
+      </div>
+    </div>
+  </header>
+  <main id="main" class="overflow-x-clip">
+  <!-- ======== HERO ======== -->
+  <section id="top" aria-labelledby="hero-h" class="hero-section"> <span aria-hidden="true" class="hero-span"></span> <span aria-hidden="true" class="[animation-delay:-8s] hero-span2"></span>
+      <h1 id="hero-h" class="hero-h1"><span class="sr-only">InvictusOS</span><span aria-hidden="true"><span class="ltr [animation-delay:80ms,1500ms] hero-span3">I</span><span class="ltr [animation-delay:135ms,1585ms] hero-span3">n</span><span class="ltr [animation-delay:190ms,1670ms] hero-span3">v</span><span class="ltr [animation-delay:245ms,1755ms] hero-span3">i</span><span class="ltr [animation-delay:300ms,1840ms] hero-span3">c</span><span class="ltr [animation-delay:355ms,1925ms] hero-span3">t</span><span class="ltr [animation-delay:410ms,2010ms] hero-span3">u</span><span class="ltr [animation-delay:465ms,2095ms] hero-span3">s</span><span class="ltr [animation-delay:520ms,2180ms] hero-span3">O</span><span class="ltr [animation-delay:575ms,2265ms] hero-span3">S</span></span>
+      </h1>
+      <div class="hero-div">
+        <div class="lg:col-span-6"> <img src="assets/logo.png" alt="" width="77" height="64" class="hero-img">
+          <p class="hero-p">Lightweight | Fast | Reliable</p>
+          <p class="hero-p2">A minimal operating system that keeps old machines alive.</p>
+          <div class="hero-div2"> <a href="download.html" class="hero-a"><svg class="icon-sm" aria-hidden="true"><use href="#i-dl"/></svg>Download</a> <a href="#about" class="hero-a2">Learn more <svg class="icon-md" aria-hidden="true"><use href="#i-ar"/></svg></a>
+          </div>
+        </div>
+        <figure id="hfig" class="hero-figure"><span aria-hidden="true" class="hero-span4"></span><span aria-hidden="true" class="hero-span5"></span><span aria-hidden="true" class="hero-span6"></span><span aria-hidden="true" class="hero-span7"></span><span aria-hidden="true" class="hero-span8"></span><span aria-hidden="true" class="hero-span9"></span><img src="assets/hero-placeholder.svg" width="1200" height="675" fetchpriority="high" alt="Hero image placeholder" class="hero-img2">
+        </figure>
+      </div>
+    </section>
+  <!-- ======== QUICK LINKS BAR (sticks to the bottom of the first screen) ======== -->
+  <nav aria-label="Quick links" class="quick-nav"><span class="quick-span">Quick links</span><a href="#about" class="quick-chip">About</a><a href="#requirements" class="quick-chip">System Requirements</a><a href="#features" class="quick-chip">Features</a><a href="#history" class="quick-chip">History</a><a href="#creators" class="quick-chip">Creators</a><a href="#community" class="quick-chip">Community &amp; Support</a><a href="installation.html" class="quick-chip">Installation Guide</a><a href="#faq" class="quick-chip">FAQ</a>
+    </nav>
+  <!-- ======== ABOUT ======== -->
+  <section id="about" aria-labelledby="about-h" class="section-wrap"> 
+      <h2 id="about-h" class="section-title">What is InvictusOS</h2>
+      <p id="scrub" class="about-p">InvictusOS is a lightweight operating system designed to run on low-end and outdated laptops and desktops. It is designed to deliver a fast, efficient and reliable experience. The goal is to stay fast and responsive while keeping resource usage low, so that you can still keep using those machines for basic tasks.</p>
+      <dl class="about-dl">
+        <div class="stat-cell">
+          <dt class="about-dt">Minimum RAM required</dt>
+          <dd class="stat-value"><span data-count="512">512</span>MB</dd>
+        </div>
+        <div class="stat-cell">
+          <dt class="about-dt">Min. Disk Space required</dt>
+          <dd class="stat-value"><span data-count="5">5</span>GB</dd>
+        </div>
+        <div class="stat-cell">
+          <dt class="about-dt">Min. Processor required</dt>
+          <dd class="stat-value"><span data-count="900">900</span>MHz</dd>
+        </div>
+        <div class="stat-cell">
+          <dt class="about-dt">GPU Required</dt>
+          <dd class="about-dd">NO</dd>
+        </div>
+      </dl>
+    </section>
+  <!-- ======== SYSTEM REQUIREMENTS ======== -->
+  <section id="requirements" aria-labelledby="req-h" class="req-section">
+      <div class="req-div">
+        <h2 id="req-h" class="section-title">Runs on nearly anything.</h2>
+        <div class="req-div2">
+          <section aria-labelledby="min-h" class="req-section2">
+            <h3 id="min-h" class="req-h3">Minimum</h3>
+            <ul class="req-ul">
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>900 MHz Processor (Pentium III / Atom)</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>512 MB RAM</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>5 GB Free Disk Space</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>No GPU required</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>512×300 Display</li>
+            </ul>
+          </section>
+          <section aria-labelledby="rec-h" class="req-section3">
+            <h3 id="rec-h" class="req-h3">Recommended</h3>
+            <ul class="req-ul2">
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>1 GHz Processor</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>1 GB RAM</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>15 GB Disk Space</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>No GPU required</li>
+              <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>1024×600 Display</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </section>
+  <!-- ======== FEATURES ======== -->
+  <section id="features" aria-labelledby="feat-h" class="section-wrap">
+      <h2 id="feat-h" class="section-title">What's in &amp; what's coming.</h2>
+      <p class="feat-p">InvictusOS is currently being actively developed and it keeps getting better and better.</p>
+      <ul class="feat-ul">
+        <li>
+          <article data-speed="30" class="group feature-card"><span aria-hidden="true" class="feature-glyph">iv</span><span class="pill-ok">Available</span>
+            <h3 class="feature-title">Lightweight Desktop</h3>
+            <p class="text-white/75">A minimal desktop environment with low background CPU and memory usage, tuned for older hardware.</p>
+          </article>
+        </li>
+        <li>
+          <article data-speed="70" class="group feature-card"><span aria-hidden="true" class="feature-glyph">32</span><span class="pill-ok">Available</span>
+            <h3 class="feature-title">32-bit x86 Support</h3>
+            <p class="text-white/75">Full support for legacy 32-bit machines.</p>
+          </article>
+        </li>
+        <li>
+          <article data-speed="110" class="group feat-article"><span aria-hidden="true" class="feature-glyph">64</span><span class="feat-span">Upcoming</span>
+            <h3 class="feature-title">64-bit Build</h3>
+            <p class="text-white/75">A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+  <!-- ======== FAQ BAND ======== -->
+  <aside id="faq" aria-labelledby="faq-h" class="faq-aside">
+      <div class="faq-div">
+        <div>
+          <h2 id="faq-h" class="faq-h2">Have any questions?</h2>
+          <p class="faq-p">Find answers to questions about installation, compatibility, and more.</p>
+        </div>
+        <div class="faq-div2"><span aria-hidden="true" class="faq-span"></span><span aria-hidden="true" class="faq-span2"></span> <a href="faq.html" class="group faq-a">Browse the FAQ<svg class="faq-svg" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        </div>
+      </div>
+    </aside>
+  <!-- ======== HISTORY ======== -->
+  <section id="history" aria-labelledby="hist-h" class="section-wrap">
+      <h2 id="hist-h" class="section-title">From experiment to daily driver</h2>
+      <p class="hist-p">IDEA ---&gt; EXECUTION</p>
+      <ol class="mt-16">
+        <li class="history-row"><span data-bar class="history-bar" aria-hidden="true"></span>
+          <h3 class="history-title"><span aria-hidden="true" class="history-dot"></span>Origins</h3>
+          <p class="hist-p2">InvictusOS began as an experimental build meant to revive old netbooks and compact desktops.</p>
+        </li>
+        <li class="history-row"><span data-bar class="history-bar" aria-hidden="true"></span>
+          <h3 class="history-title"><span aria-hidden="true" class="history-dot"></span>Continuous development</h3>
+          <p class="hist-p2">Over time, feedback from testers shaped InvictusOS into a system focused on efficiency, compatibility and unobtrusive design.</p>
+        </li>
+        <li class="hist-li"><span data-bar class="hist-span" aria-hidden="true"></span>
+          <h3 class="history-title"><span aria-hidden="true" class="hist-span2"></span>InvictusOS Sagaris release</h3>
+          <p class="hist-p2">The current Sagaris release represents the first version of all the combined work of the team. It marks the first step in the development of InvictusOS.</p>
+        </li>
+      </ol>
+    </section>
+  <!-- ======== CREATORS ======== -->
+  <section id="creators" aria-labelledby="cre-h" class="team-section">
+      <h2 id="cre-h" class="section-title">The Creators</h2>
+      <p class="team-p">The team behind InvictusOS.</p>
+      <ul class="team-ul">
+        <li>
+          <article class="group team-card"><span class="avatar-ring"><img src="assets/sayansut.png" width="96" height="96" loading="lazy" alt="Portrait of Sayansut Mohapatra" class="team-img"></span>
+            <div class="mt-auto">
+              <h3 class="team-name">Sayansut Mohapatra</h3>
+              <p class="team-role">Lead of Software &amp; Firmware Engineering</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="group team-card"><span class="avatar-ring"><img src="assets/shreyans.png" width="96" height="96" loading="lazy" alt="Portrait of Shreyans Das" class="team-img"></span>
+            <div class="mt-auto">
+              <h3 class="team-name">Shreyans Das</h3>
+              <p class="team-role">Arts &amp; Creative Commons creator</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="group team-card"><span class="avatar-ring"><img src="assets/aarush.png" width="96" height="96" loading="lazy" alt="Portrait of Aarush Maharana" class="team-img"></span>
+            <div class="mt-auto">
+              <h3 class="team-name">Aarush Maharana</h3>
+              <p class="team-role">Firmware Engineer</p>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="group team-card"><span class="avatar-ring"><img src="assets/gaurav.png" width="96" height="96" loading="lazy" alt="Portrait of Gaurav Mohapatra" class="team-img"></span>
+            <div class="mt-auto">
+              <h3 class="team-name">Gaurav Mohapatra</h3>
+              <p class="team-role">Head of Marketing</p>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </section>
+  <!-- ======== FOR DEVELOPERS ======== -->
+  <section id="developers" aria-labelledby="dev-h" class="dev-section">
+      <div class="dev-div">
+        <header class="lg:col-span-5">
+          <h2 id="dev-h" class="dev-h2">For Developers</h2>
+          <p class="team-p">InvictusOS is engineered for predictability and low overhead. It favours simple tooling and clear defaults over heavy abstractions.</p> <a href="InvictusOS-Guide.pdf" download class="dev-a">Download InvictusOS Guide <svg class="icon-md" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        </header>
+        <div class="dev-div2">
+          <dl class="dev-dl">
+            <div class="spec-row">
+              <dt class="dev-dt">Kernel</dt>
+              <dd class="text-white/80">Linux 4.x with a lean configuration tuned for low-memory systems</dd>
+            </div>
+            <div class="spec-row">
+              <dt class="dev-dt">Architecture</dt>
+              <dd class="text-white/80">32-bit x86 builds, legacy-friendly boot options</dd>
+            </div>
+            <div class="spec-row">
+              <dt class="dev-dt">Desktop</dt>
+              <dd class="text-white/80">Lightweight environment with minimal background services</dd>
+            </div>
+            <div class="spec-row">
+              <dt class="dev-dt">Updates</dt>
+              <dd class="text-white/80">Image-based release model with predictable point updates</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  <!-- ======== COMMUNITY ======== -->
+  <section id="community" aria-labelledby="com-h" class="section-wrap">
+      <h2 id="com-h" class="section-title">Join the community</h2>
+      <p class="team-p">Stay connected with the project.</p>
+      <ul class="comm-ul">
+        <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="link-row">GitHub<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        </li>
+        <li><a href="https://discord.com/" target="_blank" rel="noopener noreferrer" class="link-row">Discord<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        </li>
+        <li><a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="link-row">Twitter / X<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        </li>
+        <li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="link-row">YouTube<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        </li>
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="link-row">Instagram<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <!-- ======== FOOTER ======== -->
+  <footer class="foot-footer">
+    <div class="foot-div">
+      <div class="foot-div2">
+        <div><a href="#top" class="brand-link"><img src="assets/logo.png" alt="" width="38" height="32" class="head-img">InvictusOS</a>
+          <p class="foot-p">A minimal operating system built to keep old machines alive.</p> <a href="simple.html" class="foot-a">Switch to Simple Site</a>
+        </div>
+        <nav aria-label="About">
+          <p class="foot-heading">About</p>
+          <ul>
+            <li><a href="#about"  class="foot-link">About</a>
+            </li>
+            <li><a href="#features"  class="foot-link">Features</a>
+            </li>
+            <li><a href="#requirements"  class="foot-link">Requirements</a>
+            </li>
+            <li><a href="download.html"  class="foot-link">Download</a>
+            </li>
+            <li><a href="#history"  class="foot-link">History</a>
+            </li>
+          </ul>
+        </nav>
+        <nav aria-label="Resources">
+          <p class="foot-heading">Resources</p>
+          <ul>
+            <li><a href="installation.html"  class="foot-link">Installation</a>
+            </li>
+            <li><a href="faq.html"  class="foot-link">FAQ</a>
+            </li>
+            <li><a href="InvictusOS-Guide.pdf" download class="foot-link">User Guide (Click to Download)</a>
+            </li>
+          </ul>
+        </nav>
+        <nav aria-label="Community">
+          <p class="foot-heading">Community</p>
+          <ul>
+            <li><a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="foot-link">GitHub</a>
+            </li>
+            <li><a href="https://discord.com/" target="_blank" rel="noopener noreferrer" class="foot-link">Discord</a>
+            </li>
+            <li><a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="foot-link">Twitter / X</a>
+            </li>
+            <li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="foot-link">YouTube</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="foot-div3">
+        <p>© 2026 InvictusOS - The minimal, lightweight OS</p>
+        <nav aria-label="Legal" class="foot-nav"><a href="privacy.html" class="legal-link">Privacy</a><a href="terms.html" class="legal-link">Terms</a><a href="support.html" class="legal-link">Support</a>
+        </nav>
+      </div>
+    </div>
+    <p id="fwm" aria-hidden="true" class="foot-p2">InvictusOS</p>
+  </footer>
+  <!-- ======== BACK-TO-TOP BUTTON ======== -->
+  <button id="top-btn" type="button" aria-label="Back to top" class="fixed bottom-5 right-5 z-[56] hidden h-14 w-14 items-center justify-center rounded-full bg-ink/90 text-white backdrop-blur hover:bg-brand"><svg viewBox="0 0 56 56" class="totop-svg" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke-width="2" class="stroke-white/20"/><circle id="top-ring" cx="28" cy="28" r="22" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2" class="stroke-link"/></svg><svg class="totop-svg2" aria-hidden="true"><use href="#i-ar"/></svg></button>
+  <!-- ======== "SIMPLE SITE" NOTICE ======== -->
+  <aside id="note" role="region" aria-labelledby="note-h" class="[&[hidden]]:hidden fixed bottom-[88px] left-3 right-3 z-[60] flex rounded-2xl border border-white/20 bg-black/95 shadow-2xl backdrop-blur sm:bottom-[88px] sm:left-auto sm:right-5 sm:max-w-[520px]">
+    <div class="note-div">
+      <h2 id="note-h" class="note-h2">Simple Site Available</h2>
+      <p class="note-p">The faster, simpler site is available for low-spec or older PCs. No animations or visual experience, just the essentials.</p> <a href="simple.html" class="note-a">Go to Simple Site</a>
+    </div> <button id="note-x" type="button" aria-label="Dismiss simple site notice" class="note-button"> <svg class="note-svg" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </aside> <script>
+/*
+ * InvictusOS - page behaviour (editable source; build.py inlines it into index.html).
+ * Everything here is progressive enhancement: with JavaScript off the page
+ * simply shows its final, plain state.
+ * The "Animations" switch in the header turns every effect below off.
+ */
+(function() {
+  /* Quick legend: d=<html>  n=notice box  b=burger  mn=phone menu  mts=Animations switches
+     h1=hero wordmark  fig=hero image  sc=About paragraph  fw=footer wordmark  ft=footer
+     ST=colour stops for the background hue shift (R,G,B) */
+  var d = document.documentElement,
+    $ = function(i) {
+      return document.getElementById(i)
+    },
+    n = $("note"),
+    b = $("burger"),
+    mn = $("mnav"),
+    mts = [].slice.call(document.querySelectorAll("[data-motion-switch]"));
+  var h1 = $("hero-h"),
+    fig = $("hfig"),
+    fw = $("fwm"),
+    sc = $("scrub"),
+    ft = document.querySelector("footer");
+  var bars = [].slice.call(document.querySelectorAll("[data-bar]")),
+    cnt = [].slice.call(document.querySelectorAll("[data-count]"));
+  var spd = [].slice.call(document.querySelectorAll("[data-speed]")),
+    drift = [].slice.call(document.querySelectorAll("main h2"));
+  var tint = $("tint"),
+    ST = [
+      [26, 26, 166],
+      [29, 91, 134],
+      [20, 20, 122],
+      [26, 60, 150],
+      [29, 91, 134],
+      [20, 20, 122]
+    ];
+  var rqs = $("requirements"),
+    lists = [].slice.call(rqs.querySelectorAll("ul")),
+    rows = [].slice.call(rqs.querySelectorAll(".rq"));
+  lists.forEach(function(u, k) {
+    [].forEach.call(u.querySelectorAll(".rq"), function(r, i) {
+      r.style.setProperty("--d", (i * 170 + k * 90) + "ms")
+    })
+  });
 
-<section id="creators" aria-labelledby="cre-h" class="mx-auto max-w-7xl px-5 pb-24 md:pb-36">
- <p class="font-mono text-xs uppercase tracking-[.14em] text-white/70">Creators</p>
- <h2 id="cre-h" class="mt-4 font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-8xl">The Creators</h2>
- <p class="mt-6 text-lg text-white/75">The team behind InvictusOS.</p>
- <ul class="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"><li><article class="group flex h-full flex-col gap-6 rounded-3xl border border-white/15 bg-card p-6 transition duration-300 hover:bg-white hover:text-navy"><span class="block h-[102px] w-[102px] rounded-full bg-[conic-gradient(from_180deg,#1a5cff,#4da3ff,#1d5b86,#1a5cff)] p-[3px]"><img src="assets/sayansut.png" width="96" height="96" loading="lazy" alt="Portrait of Sayansut Mohapatra" class="h-24 w-24 rounded-full object-cover"></span><div class="mt-auto"><h3 class="font-display text-2xl font-bold leading-tight tracking-tight">Sayansut Mohapatra</h3><p class="mt-2 font-mono text-xs text-white/70 group-hover:text-navy/70">Lead of Software &amp; Firmware Engineering</p></div></article></li><li><article class="group flex h-full flex-col gap-6 rounded-3xl border border-white/15 bg-card p-6 transition duration-300 hover:bg-white hover:text-navy"><span class="block h-[102px] w-[102px] rounded-full bg-[conic-gradient(from_180deg,#1a5cff,#4da3ff,#1d5b86,#1a5cff)] p-[3px]"><img src="assets/shreyans.png" width="96" height="96" loading="lazy" alt="Portrait of Shreyans Das" class="h-24 w-24 rounded-full object-cover"></span><div class="mt-auto"><h3 class="font-display text-2xl font-bold leading-tight tracking-tight">Shreyans Das</h3><p class="mt-2 font-mono text-xs text-white/70 group-hover:text-navy/70">Arts &amp; Creative Commons creator</p></div></article></li><li><article class="group flex h-full flex-col gap-6 rounded-3xl border border-white/15 bg-card p-6 transition duration-300 hover:bg-white hover:text-navy"><span class="block h-[102px] w-[102px] rounded-full bg-[conic-gradient(from_180deg,#1a5cff,#4da3ff,#1d5b86,#1a5cff)] p-[3px]"><img src="assets/aarush.png" width="96" height="96" loading="lazy" alt="Portrait of Aarush Maharana" class="h-24 w-24 rounded-full object-cover"></span><div class="mt-auto"><h3 class="font-display text-2xl font-bold leading-tight tracking-tight">Aarush Maharana</h3><p class="mt-2 font-mono text-xs text-white/70 group-hover:text-navy/70">Firmware Engineer</p></div></article></li><li><article class="group flex h-full flex-col gap-6 rounded-3xl border border-white/15 bg-card p-6 transition duration-300 hover:bg-white hover:text-navy"><span class="block h-[102px] w-[102px] rounded-full bg-[conic-gradient(from_180deg,#1a5cff,#4da3ff,#1d5b86,#1a5cff)] p-[3px]"><img src="assets/gaurav.png" width="96" height="96" loading="lazy" alt="Portrait of Gaurav Mohapatra" class="h-24 w-24 rounded-full object-cover"></span><div class="mt-auto"><h3 class="font-display text-2xl font-bold leading-tight tracking-tight">Gaurav Mohapatra</h3><p class="mt-2 font-mono text-xs text-white/70 group-hover:text-navy/70">Head of Marketing</p></div></article></li></ul>
-</section>
+  function rowsCheck() {
+    lists.forEach(function(u) {
+      var o = u.getBoundingClientRect().top < innerHeight * .82;
+      [].forEach.call(u.querySelectorAll(".rq"), function(r) {
+        r.classList.toggle("on", o)
+      })
+    })
+  }
 
-<section id="developers" aria-labelledby="dev-h" class="bg-ink bg-[radial-gradient(60rem_26rem_at_0%_0%,rgba(26,92,255,.22),transparent)] py-24 md:py-36"><div class="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-12">
- <header class="lg:col-span-5"><p class="font-mono text-xs uppercase tracking-[.14em] text-white/70">Technical Details</p>
-  <h2 id="dev-h" class="mt-4 font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-7xl">For Developers</h2>
-  <p class="mt-6 text-lg text-white/75">InvictusOS is engineered for predictability and low overhead. It favours simple tooling and clear defaults over heavy abstractions.</p>
-  <a href="InvictusOS-Guide.pdf" download class="mt-9 inline-flex min-h-[56px] items-center gap-3 rounded-full border border-white/50 px-8 font-medium transition hover:border-white hover:bg-white hover:text-navy">Download InvictusOS Guide <svg class="h-6 w-6 shrink-0 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ar"/></svg></a></header>
- <div class="self-start overflow-hidden rounded-3xl border border-white/20 bg-card lg:col-span-7"><dl class="divide-y divide-white/15">
-  <div class="grid gap-1 p-7 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-mono text-sm font-medium text-link">Kernel</dt><dd class="text-white/80">Linux 4.x with a lean configuration tuned for low-memory systems</dd></div>
-  <div class="grid gap-1 p-7 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-mono text-sm font-medium text-link">Architecture</dt><dd class="text-white/80">32-bit x86 builds, legacy-friendly boot options</dd></div>
-  <div class="grid gap-1 p-7 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-mono text-sm font-medium text-link">Desktop</dt><dd class="text-white/80">Lightweight environment with minimal background services</dd></div>
-  <div class="grid gap-1 p-7 sm:grid-cols-[9rem_1fr] sm:gap-6"><dt class="font-mono text-sm font-medium text-link">Updates</dt><dd class="text-white/80">Image-based release model with predictable point updates</dd></div>
- </dl></div></div></section>
+  function arm(v) {
+    rqs.classList.toggle("arm", v);
+    rows.forEach(function(r) {
+      r.classList.toggle("on", !v)
+    });
+    if (v) rowsCheck()
+  }
 
-<section id="community" aria-labelledby="com-h" class="relative mx-auto max-w-7xl px-5 py-24 before:absolute before:inset-x-5 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:content-[''] md:py-36">
- <p class="font-mono text-xs uppercase tracking-[.14em] text-white/70">Community &amp; Support</p>
- <h2 id="com-h" class="mt-4 font-display font-extrabold leading-[.95] tracking-tighter text-6xl md:text-8xl">Join the community</h2>
- <p class="mt-6 text-lg text-white/75">Stay connected with the project.</p>
- <ul class="mt-16 divide-y divide-white/25 border-y border-white/25"><li><a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="group flex min-h-[96px] items-center justify-between gap-4 bg-[linear-gradient(#fff,#fff)] bg-[length:100%_0%] bg-bottom bg-no-repeat px-2 font-display text-5xl font-extrabold tracking-tighter transition-[background-size,color,padding] duration-500 hover:bg-[length:100%_100%] hover:px-6 hover:text-navy md:text-7xl">GitHub<span class="sr-only"> (opens in a new tab)</span><svg class="h-10 w-10 shrink-0 -rotate-45 fill-none stroke-current stroke-2 transition-transform duration-500 [stroke-linecap:round] [stroke-linejoin:round] group-hover:rotate-0 md:h-14 md:w-14" aria-hidden="true"><use href="#i-ar"/></svg></a></li><li><a href="https://discord.com/" target="_blank" rel="noopener noreferrer" class="group flex min-h-[96px] items-center justify-between gap-4 bg-[linear-gradient(#fff,#fff)] bg-[length:100%_0%] bg-bottom bg-no-repeat px-2 font-display text-5xl font-extrabold tracking-tighter transition-[background-size,color,padding] duration-500 hover:bg-[length:100%_100%] hover:px-6 hover:text-navy md:text-7xl">Discord<span class="sr-only"> (opens in a new tab)</span><svg class="h-10 w-10 shrink-0 -rotate-45 fill-none stroke-current stroke-2 transition-transform duration-500 [stroke-linecap:round] [stroke-linejoin:round] group-hover:rotate-0 md:h-14 md:w-14" aria-hidden="true"><use href="#i-ar"/></svg></a></li><li><a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="group flex min-h-[96px] items-center justify-between gap-4 bg-[linear-gradient(#fff,#fff)] bg-[length:100%_0%] bg-bottom bg-no-repeat px-2 font-display text-5xl font-extrabold tracking-tighter transition-[background-size,color,padding] duration-500 hover:bg-[length:100%_100%] hover:px-6 hover:text-navy md:text-7xl">Twitter / X<span class="sr-only"> (opens in a new tab)</span><svg class="h-10 w-10 shrink-0 -rotate-45 fill-none stroke-current stroke-2 transition-transform duration-500 [stroke-linecap:round] [stroke-linejoin:round] group-hover:rotate-0 md:h-14 md:w-14" aria-hidden="true"><use href="#i-ar"/></svg></a></li><li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="group flex min-h-[96px] items-center justify-between gap-4 bg-[linear-gradient(#fff,#fff)] bg-[length:100%_0%] bg-bottom bg-no-repeat px-2 font-display text-5xl font-extrabold tracking-tighter transition-[background-size,color,padding] duration-500 hover:bg-[length:100%_100%] hover:px-6 hover:text-navy md:text-7xl">YouTube<span class="sr-only"> (opens in a new tab)</span><svg class="h-10 w-10 shrink-0 -rotate-45 fill-none stroke-current stroke-2 transition-transform duration-500 [stroke-linecap:round] [stroke-linejoin:round] group-hover:rotate-0 md:h-14 md:w-14" aria-hidden="true"><use href="#i-ar"/></svg></a></li><li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="group flex min-h-[96px] items-center justify-between gap-4 bg-[linear-gradient(#fff,#fff)] bg-[length:100%_0%] bg-bottom bg-no-repeat px-2 font-display text-5xl font-extrabold tracking-tighter transition-[background-size,color,padding] duration-500 hover:bg-[length:100%_100%] hover:px-6 hover:text-navy md:text-7xl">Instagram<span class="sr-only"> (opens in a new tab)</span><svg class="h-10 w-10 shrink-0 -rotate-45 fill-none stroke-current stroke-2 transition-transform duration-500 [stroke-linecap:round] [stroke-linejoin:round] group-hover:rotate-0 md:h-14 md:w-14" aria-hidden="true"><use href="#i-ar"/></svg></a></li></ul>
-</section>
-</main>
+  function tintc() {
+    var mx = d.scrollHeight - innerHeight,
+      p = mx > 0 ? cl(scrollY / mx) : 0,
+      f = p * (ST.length - 1),
+      i = Math.min(Math.floor(f), ST.length - 2),
+      t = f - i,
+      a = ST[i],
+      b = ST[i + 1];
+    tint.style.backgroundColor = "rgb(" + [0, 1, 2].map(function(k) {
+      return Math.round(a[k] + (b[k] - a[k]) * t)
+    }).join(",") + ")"
+  }
+  var words = [],
+    counted = false,
+    ticking = false,
+    calm = false,
+    tp = 0,
+    sp = 0,
+    wr = false;
 
-<footer class="overflow-hidden border-t border-white/10 bg-ink pt-14 text-sm"><div class="mx-auto max-w-6xl px-5">
- <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-  <div><a href="#top" class="flex min-h-[48px] items-center gap-2.5 font-display text-lg font-bold"><img src="assets/logo.png" alt="" width="38" height="32" class="h-8 w-auto">InvictusOS</a>
-   <p class="mb-6 mt-2 max-w-[26ch] text-white/75">A minimal operating system built to keep old machines alive.</p>
-   <a href="simple.html" class="inline-flex min-h-[48px] items-center rounded-full border border-white/50 px-6 font-medium transition hover:bg-white hover:text-navy">Switch to Simple Site</a></div>
-  <nav aria-label="About"><p class="mb-2 font-mono text-xs font-bold uppercase tracking-[.12em]">About</p><ul><li><a href="#about"  class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">About</a></li><li><a href="#features"  class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">Features</a></li><li><a href="#requirements"  class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">Requirements</a></li><li><a href="download.html"  class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">Download</a></li><li><a href="#history"  class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">History</a></li></ul></nav>
-  <nav aria-label="Resources"><p class="mb-2 font-mono text-xs font-bold uppercase tracking-[.12em]">Resources</p><ul><li><a href="installation.html"  class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">Installation</a></li><li><a href="faq.html"  class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">FAQ</a></li><li><a href="InvictusOS-Guide.pdf" download class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">User Guide (Click to Download)</a></li></ul></nav>
-  <nav aria-label="Community"><p class="mb-2 font-mono text-xs font-bold uppercase tracking-[.12em]">Community</p><ul><li><a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">GitHub</a></li><li><a href="https://discord.com/" target="_blank" rel="noopener noreferrer" class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">Discord</a></li><li><a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">Twitter / X</a></li><li><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="flex min-h-[48px] items-center text-link hover:text-white hover:underline">YouTube</a></li></ul></nav>
- </div>
- <div class="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-6 font-mono text-xs text-white/75"><p>© 2026 InvictusOS - The minimal, lightweight OS</p>
-  <nav aria-label="Legal" class="flex gap-1"><a href="privacy.html" class="flex min-h-[48px] items-center px-2 hover:text-white">Privacy</a><a href="terms.html" class="flex min-h-[48px] items-center px-2 hover:text-white">Terms</a><a href="support.html" class="flex min-h-[48px] items-center px-2 hover:text-white">Support</a></nav></div>
-</div>
-<p id="fwm" aria-hidden="true" class="mt-10 select-none whitespace-nowrap pb-4 text-center font-display text-[length:min(13vw,13rem)] font-extrabold leading-none tracking-[-.025em] bg-gradient-to-b from-white/30 via-white/[.12] to-white/[.04] bg-clip-text text-transparent">InvictusOS</p></footer>
+  // ---- small helpers -------------------------------------------------------
+  function cl(v) {
+    return v < 0 ? 0 : v > 1 ? 1 : v
+  }
 
-<button id="top-btn" type="button" aria-label="Back to top" class="fixed bottom-5 right-5 z-[56] hidden h-14 w-14 items-center justify-center rounded-full bg-ink/90 text-white backdrop-blur hover:bg-brand"><svg viewBox="0 0 56 56" class="absolute inset-0 h-full w-full -rotate-90" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke-width="2" class="stroke-white/20"/><circle id="top-ring" cx="28" cy="28" r="22" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2" class="stroke-link"/></svg><svg class="relative h-5 w-5 -rotate-90 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-ar"/></svg></button>
-<aside id="note" role="region" aria-labelledby="note-h" class="[&[hidden]]:hidden fixed bottom-[88px] left-3 right-3 z-[60] flex rounded-2xl border border-white/20 bg-black/95 shadow-2xl backdrop-blur sm:bottom-[88px] sm:left-auto sm:right-5 sm:max-w-[520px]">
- <div class="flex-1 p-4 sm:p-5">
-  <h2 id="note-h" class="text-[15px] font-bold">Simple Site Available</h2>
-  <p class="mb-3 mt-1.5 text-[13px] leading-snug text-white/75">The faster, simpler site is available for low-spec or older PCs. No animations or visual experience, just the essentials.</p>
-  <a href="simple.html" class="inline-flex min-h-[48px] items-center rounded-xl border border-white/30 px-4 text-sm font-medium hover:bg-white/10">Go to Simple Site</a>
- </div>
- <button id="note-x" type="button" aria-label="Dismiss simple site notice" class="flex w-12 items-center justify-center rounded-r-2xl border-l border-white/20 hover:bg-white/10">
-  <svg class="h-[18px] w-[18px] fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden="true"><use href="#i-x"/></svg></button>
-</aside>
+  function st(k, v) {
+    try {
+      if (v === undefined) return localStorage.getItem(k);
+      localStorage.setItem(k, v)
+    } catch (e) {}
+    return null
+  }
 
-<script>
-(function(){
-var d=document.documentElement,$=function(i){return document.getElementById(i)},n=$("note"),b=$("burger"),m=$("menu"),mt=$("motion");
-var h1=$("hero-h"),fig=$("hfig"),fw=$("fwm"),sc=$("scrub"),ft=document.querySelector("footer");
-var bars=[].slice.call(document.querySelectorAll("[data-bar]")),cnt=[].slice.call(document.querySelectorAll("[data-count]"));
-var spd=[].slice.call(document.querySelectorAll("[data-speed]")),drift=[].slice.call(document.querySelectorAll("main h2"));
-var tint=$("tint"),ST=[[26,26,166],[29,91,134],[20,20,122],[26,60,150],[29,91,134],[20,20,122]];
-var rqs=$("requirements"),lists=[].slice.call(rqs.querySelectorAll("ul")),rows=[].slice.call(rqs.querySelectorAll(".rq"));
-lists.forEach(function(u,k){[].forEach.call(u.querySelectorAll(".rq"),function(r,i){r.style.setProperty("--d",(i*170+k*90)+"ms")})});
-function rowsCheck(){lists.forEach(function(u){var o=u.getBoundingClientRect().top<innerHeight*.82;[].forEach.call(u.querySelectorAll(".rq"),function(r){r.classList.toggle("on",o)})})}
-function arm(v){rqs.classList.toggle("arm",v);rows.forEach(function(r){r.classList.toggle("on",!v)});if(v)rowsCheck()}
-function tintc(){var mx=d.scrollHeight-innerHeight,p=mx>0?cl(scrollY/mx):0,f=p*(ST.length-1),i=Math.min(Math.floor(f),ST.length-2),t=f-i,a=ST[i],b=ST[i+1];tint.style.backgroundColor="rgb("+[0,1,2].map(function(k){return Math.round(a[k]+(b[k]-a[k])*t)}).join(",")+")"}
-var words=[],counted=false,ticking=false,calm=false,tp=0,sp=0,wr=false;
-function cl(v){return v<0?0:v>1?1:v}
-function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){}return null}
-function pr(e){var r=e.getBoundingClientRect();return cl((innerHeight-r.top)/(innerHeight+r.height))}
-try{if(sessionStorage.getItem("iv-note")==="1")n.hidden=true}catch(e){}
-$("note-x").addEventListener("click",function(){n.hidden=true;try{sessionStorage.setItem("iv-note","1")}catch(e){}});
-function set(o){m.classList.toggle("hidden",!o);m.classList.toggle("flex",o);b.setAttribute("aria-expanded",String(o))}
-b.addEventListener("click",function(){set(b.getAttribute("aria-expanded")!=="true")});
-m.addEventListener("click",function(e){if(e.target.tagName==="A")set(false)});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")set(false)});
-/* About statement: one span per word so the brightness can follow the scroll */
-(function(){var t=sc.textContent.trim().split(/\s+/);sc.textContent="";t.forEach(function(w,i){var s=document.createElement("span");s.textContent=w;sc.appendChild(s);words.push(s);if(i<t.length-1)sc.appendChild(document.createTextNode(" "))})})();
-/* eyebrow rules that draw in */
-var lines=[].slice.call(document.querySelectorAll("main p.uppercase")).map(function(p){var s=document.createElement("span");s.setAttribute("aria-hidden","true");s.className="mr-3 inline-block h-px w-10 origin-left bg-white/60 align-middle";p.insertBefore(s,p.firstChild);return s});
-function on(){return d.getAttribute("data-motion")!=="off"}
-function paint(){wr=false;if(!on())return;sp+=(tp-sp)*.16;if(Math.abs(tp-sp)<.0008)sp=tp;
-var k=words.length,soft=8;for(var i=0;i<k;i++)words[i].style.opacity=(.25+.75*cl((sp*(k+soft)-i)/soft)).toFixed(3);
-if(sp!==tp){wr=true;requestAnimationFrame(paint)}}
-var tb=$("top-btn"),tr=$("top-ring");
-function topbtn(){var y=scrollY,mx=d.scrollHeight-innerHeight,sh=y>innerHeight*.8;tb.classList.toggle("hidden",!sh);tb.classList.toggle("flex",sh);tr.setAttribute("stroke-dashoffset",(138.2*(1-(mx>0?cl(y/mx):0))).toFixed(1))}
-tb.addEventListener("click",function(){scrollTo({top:0,behavior:on()?"smooth":"auto"})});
-function update(){
-topbtn();
-if(!on())return;
-var vh=innerHeight,y=scrollY,max=d.scrollHeight-vh;
-var r=sc.getBoundingClientRect();tp=cl((vh*.9-r.top)/(r.height+vh*.35));if(!wr){wr=true;requestAnimationFrame(paint)}
-tintc();rowsCheck();
-var ctop=cd.getBoundingClientRect().top;if(ctop<vh*.8)ct=1;else if(ctop>vh*.98)ct=0;if(!cr&&cp!==ct){cr=true;cl0=0;requestAnimationFrame(cstep)}
-bars.forEach(function(e){e.style.transform="scaleX("+cl((vh*.85-e.parentNode.getBoundingClientRect().top)/(vh*.4))+")"});
-if(calm)return;
-var hp=cl(y/vh);
-h1.style.transform="translate3d("+(-hp*7)+"vw,0,0)";fig.style.translate="0 "+(hp*60)+"px";
-if(innerWidth>=768)spd.forEach(function(e){e.style.translate="0 "+((.5-pr(e.parentNode))*e.getAttribute("data-speed")).toFixed(1)+"px"});
-drift.forEach(function(h,i){h.style.translate=((pr(h.parentNode)-.5)*(i%2?-5:5)).toFixed(2)+"vw 0"});
-var f=ft.getBoundingClientRect();fw.style.transform="translate3d(0,"+((1-cl((vh-f.top)/(f.height*.8)))*70)+"px,0)";
-}
-function reset(){
-tint.style.backgroundColor="";
-h1.style.transform=fw.style.transform="";fig.style.translate="";
-spd.concat(drift).forEach(function(e){e.style.translate=""});
-words.forEach(function(w){w.style.opacity=""});bars.forEach(function(e){e.style.transform=""});
-cnt.forEach(function(e){e.textContent=e.getAttribute("data-count")});
-}
-function req(){if(!ticking){ticking=true;requestAnimationFrame(function(){ticking=false;update()})}}
-addEventListener("scroll",req,{passive:true});addEventListener("resize",req);
-var cd=cnt[0].closest("dl"),cp=0,ct=0,cr=false,cl0=0;
-function dc(){var e=1-Math.pow(1-cp,3);cnt.forEach(function(c){c.textContent=Math.round(c.getAttribute("data-count")*e)})}
-/* stat numbers: count up once the panel is on screen, count back down only after it has left the screen */
-function cstep(t){var dt=cl0?Math.min(t-cl0,100):16;cl0=t;
-if(!on()){cr=false;return}
-cp=ct>cp?Math.min(ct,cp+dt/1100):Math.max(ct,cp-dt/450);dc();
-if(cp!==ct)requestAnimationFrame(cstep);else cr=false}
+  function pr(e) {
+    var r = e.getBoundingClientRect();
+    return cl((innerHeight - r.top) / (innerHeight + r.height))
+  }
+  try {
+    if (sessionStorage.getItem("iv-note") === "1") n.hidden = true
+  } catch (e) {}
+  $("note-x").addEventListener("click", function() {
+    n.hidden = true;
+    try {
+      sessionStorage.setItem("iv-note", "1")
+    } catch (e) {}
+  });
 
-function motion(v,save){
-d.setAttribute("data-motion",v?"on":"off");mt.setAttribute("aria-checked",String(v));
-if(save){st("iv-motion",v?"on":"off");calm=false}
-arm(v);
-if(v){sp=tp;dc();update()}else{reset()}
-}
-var pref=st("iv-motion"),rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
-calm=rm&&!pref; /* reduced-motion visitors keep the colour effects but no movement until they switch animations on */
-motion(pref?pref==="on":true,false);
-mt.addEventListener("click",function(){motion(!on(),true)});
-/* eased wheel scrolling (mouse wheels only; touch and keyboard stay native) */
-var tgt=0,cur=0,anim=false,fine=matchMedia("(pointer:fine)").matches;
-var lt=0;
-function lerp(t){var dt=lt?Math.min(t-lt,100):16;lt=t;var df=tgt-cur;cur+=df*(1-Math.exp(-dt/90));if(Math.abs(df)<.4){cur=tgt;anim=false;lt=0}scrollTo({top:cur,behavior:"instant"});if(anim)requestAnimationFrame(lerp)}
-addEventListener("wheel",function(e){
-if(!fine||!on()||calm||e.ctrlKey||e.defaultPrevented||Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
-for(var el=e.target;el&&el!==document.body&&el.nodeType===1;el=el.parentNode){if(el.scrollHeight>el.clientHeight&&/(auto|scroll)/.test(getComputedStyle(el).overflowY))return}
-e.preventDefault();if(!anim){cur=tgt=scrollY}
-var dy=e.deltaMode===1?e.deltaY*32:e.deltaMode===2?e.deltaY*innerHeight:e.deltaY;
-tgt=Math.max(0,Math.min(d.scrollHeight-innerHeight,tgt+dy));if(!anim){anim=true;requestAnimationFrame(lerp)}
-},{passive:false});
-addEventListener("scroll",function(){if(!anim)cur=tgt=scrollY},{passive:true});
+  // ---- mobile menu + "Simple Site" notice ----------------------------------
+  function set(o) {
+    mn.hidden = !o;
+    b.setAttribute("aria-expanded", String(o));
+    b.setAttribute("aria-label", o ? "Close menu" : "Open menu")
+  }
+  b.addEventListener("click", function() {
+    set(b.getAttribute("aria-expanded") !== "true")
+  });
+  mn.addEventListener("click", function(e) {
+    if (e.target.closest("a")) set(false)
+  });
+  document.addEventListener("click", function(e) {
+    if (!mn.hidden && !mn.contains(e.target) && !b.contains(e.target)) set(false)
+  });
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && !mn.hidden) {
+      set(false);
+      b.focus()
+    }
+  });
+  addEventListener("resize", function() {
+    if (innerWidth >= 768) set(false)
+  });
+  /* About statement: one span per word so the brightness can follow the scroll */
+  (function() {
+    var t = sc.textContent.trim().split(/\s+/);
+    sc.textContent = "";
+    t.forEach(function(w, i) {
+      var s = document.createElement("span");
+      s.textContent = w;
+      sc.appendChild(s);
+      words.push(s);
+      if (i < t.length - 1) sc.appendChild(document.createTextNode(" "))
+    })
+  })();
+  // ---- animations switch state ---------------------------------------------
+  function on() {
+    return d.getAttribute("data-motion") !== "off"
+  }
+
+  // ---- About paragraph: words brighten as you scroll -----------------------
+  function paint() {
+    wr = false;
+    if (!on()) return;
+    sp += (tp - sp) * .16;
+    if (Math.abs(tp - sp) < .0008) sp = tp;
+    var k = words.length,
+      soft = 8;
+    for (var i = 0; i < k; i++) words[i].style.opacity = (.25 + .75 * cl((sp * (k + soft) - i) / soft)).toFixed(3);
+    if (sp !== tp) {
+      wr = true;
+      requestAnimationFrame(paint)
+    }
+  }
+  var tb = $("top-btn"),
+    tr = $("top-ring");
+
+  // ---- back-to-top button with progress ring -------------------------------
+  function topbtn() {
+    var y = scrollY,
+      mx = d.scrollHeight - innerHeight,
+      sh = y > innerHeight * .8;
+    tb.classList.toggle("hidden", !sh);
+    tb.classList.toggle("flex", sh);
+    tr.setAttribute("stroke-dashoffset", (138.2 * (1 - (mx > 0 ? cl(y / mx) : 0))).toFixed(1))
+  }
+  tb.addEventListener("click", function() {
+    scrollTo({
+      top: 0,
+      behavior: on() ? "smooth" : "auto"
+    })
+  });
+
+  // ---- scroll effects: runs (throttled) on every scroll -----------------------
+  function update() {
+    topbtn();
+    if (!on()) return;
+    var vh = innerHeight,
+      y = scrollY,
+      max = d.scrollHeight - vh;
+    var r = sc.getBoundingClientRect();
+    tp = cl((vh * .9 - r.top) / (r.height + vh * .35));
+    if (!wr) {
+      wr = true;
+      requestAnimationFrame(paint)
+    }
+    tintc();
+    rowsCheck();
+    var ctop = cd.getBoundingClientRect().top;
+    if (ctop < vh * .8) ct = 1;
+    else if (ctop > vh * .98) ct = 0;
+    if (!cr && cp !== ct) {
+      cr = true;
+      cl0 = 0;
+      requestAnimationFrame(cstep)
+    }
+    bars.forEach(function(e) {
+      e.style.transform = "scaleX(" + cl((vh * .85 - e.parentNode.getBoundingClientRect().top) / (vh * .4)) + ")"
+    });
+    if (calm) return;
+    var hp = cl(y / vh);
+    h1.style.transform = "translate3d(" + (-hp * 7) + "vw,0,0)";
+    fig.style.translate = "0 " + (hp * 60) + "px";
+    if (innerWidth >= 768) spd.forEach(function(e) {
+      e.style.translate = "0 " + ((.5 - pr(e.parentNode)) * e.getAttribute("data-speed")).toFixed(1) + "px"
+    });
+    drift.forEach(function(h, i) {
+      h.style.translate = ((pr(h.parentNode) - .5) * (i % 2 ? -5 : 5)).toFixed(2) + "vw 0"
+    });
+    var f = ft.getBoundingClientRect();
+    fw.style.transform = "translate3d(0," + ((1 - cl((vh - f.top) / (f.height * .8))) * 70) + "px,0)";
+  }
+
+  // ---- animations switched OFF: put everything back to its plain state ----
+  function reset() {
+    tint.style.backgroundColor = "";
+    h1.style.transform = fw.style.transform = "";
+    fig.style.translate = "";
+    spd.concat(drift).forEach(function(e) {
+      e.style.translate = ""
+    });
+    words.forEach(function(w) {
+      w.style.opacity = ""
+    });
+    bars.forEach(function(e) {
+      e.style.transform = ""
+    });
+    cnt.forEach(function(e) {
+      e.textContent = e.getAttribute("data-count")
+    });
+  }
+
+  function req() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(function() {
+        ticking = false;
+        update()
+      })
+    }
+  }
+  addEventListener("scroll", req, {
+    passive: true
+  });
+  addEventListener("resize", req);
+  var cd = cnt[0].closest("dl"),
+    cp = 0,
+    ct = 0,
+    cr = false,
+    cl0 = 0;
+
+  // ---- stat numbers: count up when on screen, back to 0 once off screen ----
+  function dc() {
+    var e = 1 - Math.pow(1 - cp, 3);
+    cnt.forEach(function(c) {
+      c.textContent = Math.round(c.getAttribute("data-count") * e)
+    })
+  }
+  /* stat numbers: count up once the panel is on screen, count back down only after it has left the screen */
+  function cstep(t) {
+    var dt = cl0 ? Math.min(t - cl0, 100) : 16;
+    cl0 = t;
+    if (!on()) {
+      cr = false;
+      return
+    }
+    cp = ct > cp ? Math.min(ct, cp + dt / 1100) : Math.max(ct, cp - dt / 450);
+    dc();
+    if (cp !== ct) requestAnimationFrame(cstep);
+    else cr = false
+  }
+
+  // ---- the "Animations" switch (remembers your choice) ---------------------
+  function motion(v, save) {
+    d.setAttribute("data-motion", v ? "on" : "off");
+    mts.forEach(function(s) {
+      s.setAttribute("aria-checked", String(v))
+    });
+    if (save) {
+      st("iv-motion", v ? "on" : "off");
+      calm = false
+    }
+    arm(v);
+    if (v) {
+      sp = tp;
+      dc();
+      update()
+    } else {
+      reset()
+    }
+  }
+  var pref = st("iv-motion"),
+    rm = matchMedia("(prefers-reduced-motion:reduce)").matches;
+  calm = rm && !pref; /* reduced-motion visitors keep the colour effects but no movement until they switch animations on */
+  motion(pref ? pref === "on" : true, false);
+  mts.forEach(function(s) {
+    s.addEventListener("click", function() {
+      motion(!on(), true)
+    })
+  });
+  /* eased wheel scrolling (mouse wheels only; touch and keyboard stay native) */
+  var tgt = 0,
+    cur = 0,
+    anim = false,
+    fine = matchMedia("(pointer:fine)").matches;
+  var lt = 0;
+
+  // ---- eased mouse-wheel scrolling (touch + keyboard stay native) ----------
+  function lerp(t) {
+    var dt = lt ? Math.min(t - lt, 100) : 16;
+    lt = t;
+    var df = tgt - cur;
+    cur += df * (1 - Math.exp(-dt / 90));
+    if (Math.abs(df) < .4) {
+      cur = tgt;
+      anim = false;
+      lt = 0
+    }
+    scrollTo({
+      top: cur,
+      behavior: "instant"
+    });
+    if (anim) requestAnimationFrame(lerp)
+  }
+  addEventListener("wheel", function(e) {
+    if (!fine || !on() || calm || e.ctrlKey || e.defaultPrevented || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    for (var el = e.target; el && el !== document.body && el.nodeType === 1; el = el.parentNode) {
+      if (el.scrollHeight > el.clientHeight && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) return
+    }
+    e.preventDefault();
+    if (!anim) {
+      cur = tgt = scrollY
+    }
+    var dy = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * innerHeight : e.deltaY;
+    tgt = Math.max(0, Math.min(d.scrollHeight - innerHeight, tgt + dy));
+    if (!anim) {
+      anim = true;
+      requestAnimationFrame(lerp)
+    }
+  }, {
+    passive: false
+  });
+  addEventListener("scroll", function() {
+    if (!anim) cur = tgt = scrollY
+  }, {
+    passive: true
+  });
 })();
 </script>
-</body>
-</html>
+</body> </html>
