@@ -148,11 +148,10 @@
   ]
 }
 </script>
-<!-- Styles: see source/styles.css for the editable version -->
+<!-- Styles: edit the labelled parts below -->
 <style>
-/* =========================================================================
-   InvictusOS - styles (this is the EDITABLE source; build.py turns it into
-   the \3c style> block inside index.html).
+/* ===========================================================================
+   InvictusOS - styles
 
    1. COLOUR TOKENS     - change the palette here (numbers are "R G B")
    2. BASE              - page-wide defaults
@@ -463,9 +462,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 /* dev: "InvictusOS is engineered for predi" */ .dev-h2 { font-family:   Sora, system-ui, sans-serif; font-size:   3.75rem; font-weight:   800; line-height:   .95; letter-spacing:   -0.05em; }
 @media (min-width: 768px) { .dev-h2 { font-size:   4.5rem; line-height:   1; }
 }
-/* dev: "Kernel" */ .dev-a { margin-top:   2.25rem; display:   inline-flex; min-height:   56px; align-items:   center; gap:   0.75rem; border-radius:   9999px; border-width:   1px; border-color:   rgb(255 255 255 / 0.5); padding-left:   2rem; padding-right:   2rem; font-weight:   500; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-property:   color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter; transition-timing-function:   cubic-bezier(0.4, 0, 0.2, 1); transition-duration:   150ms; }
-.dev-a:hover { --tw-border-opacity:   1; border-color:   rgb(255 255 255 / var(--tw-border-opacity, 1)); --tw-bg-opacity:   1; background-color:   rgb(255 255 255 / var(--tw-bg-opacity, 1)); --tw-text-opacity:   1; color:   rgb(var(--c-navy) / var(--tw-text-opacity, 1)); }
-/* dev: "Kernel" */ .dev-div2 { align-self:   flex-start; overflow:   hidden; border-radius:   1.5rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); --tw-bg-opacity:   1; background-color:   rgb(var(--c-card) / var(--tw-bg-opacity, 1)); }
+/* dev: "Kernel" */ /* dev: "Kernel" */ .dev-div2 { align-self:   flex-start; overflow:   hidden; border-radius:   1.5rem; border-width:   1px; border-color:   rgb(255 255 255 / 0.2); --tw-bg-opacity:   1; background-color:   rgb(var(--c-card) / var(--tw-bg-opacity, 1)); }
 @media (min-width: 1024px) { .dev-div2 { grid-column:   span 7 / span 7; }
 }
 /* dev: "Kernel" */ .dev-dl > :not([hidden]) ~ :not([hidden]) { --tw-divide-y-reverse:   0; border-top-width:   calc(1px * calc(1 - var(--tw-divide-y-reverse))); border-bottom-width:   calc(1px * var(--tw-divide-y-reverse)); border-color:   rgb(255 255 255 / 0.15); }
@@ -597,7 +594,11 @@ html[data-motion="off"] *::after {
 
 @media (prefers-reduced-motion: no-preference) {
   .ltr {
-    animation: ltr-in .9s cubic-bezier(.2,.8,.2,1) both, sheen .95s ease-out both;
+    /* longhands only, so each letter keeps its own start time from the HTML */
+    animation-name: ltr-in, sheen;
+    animation-duration: .9s, .95s;
+    animation-timing-function: cubic-bezier(.2,.8,.2,1), ease-out;
+    animation-fill-mode: both, both;
   }
 }
 
@@ -622,11 +623,36 @@ html[data-motion="off"] *::after {
   stroke-dashoffset: 0;
 }
 
-/* Thin themed scrollbar + brand-blue text selection */
+/* Brand-blue text selection */
 
-html {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(var(--c-brand)) rgb(var(--c-navy));
+/* Very thin, minimal scrollbar (2px line, no track) */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.28);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,.55);
+  background-clip: padding-box;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.3) transparent;
+  }
 }
 
 ::-moz-selection {
@@ -695,6 +721,36 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   .mnav:not([hidden]) {
     animation: mnav-in .25s ease-out;
+  }
+}
+
+/* Social-link rows: the arrow turns straight when the row is hovered */
+
+.link-row:hover .link-row-arrow {
+  --tw-rotate: 0deg;
+}
+
+/* Glow drift (hero) + pulsing ring (FAQ button) */
+
+@keyframes drift {
+  0%, 100% {
+    transform: translate3d(0,0,0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(40px,-30px,0) scale(1.12);
+  }
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(.92);
+    opacity: .7;
+  }
+
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
   }
 }
 
@@ -1078,7 +1134,9 @@ html {
       <h2 id="note-h" class="note-h2">Simple Site Available</h2>
       <p class="note-p">The faster, simpler site is available for low-spec or older PCs. No animations or visual experience, just the essentials.</p> <a href="/simple" class="note-a">Go to Simple Site</a>
     </div> <button id="note-x" type="button" aria-label="Dismiss simple site notice" class="note-button"> <svg class="note-svg" aria-hidden="true"><use href="#i-x"/></svg></button>
-  </aside> <script>
+  </aside>
+
+<script>
 /*
  * InvictusOS - page behaviour (editable source; build.py inlines it into index.html).
  * Everything here is progressive enhancement: with JavaScript off the page
@@ -1438,4 +1496,5 @@ html {
   });
 })();
 </script>
-</body> </html>
+</body>
+</html>
