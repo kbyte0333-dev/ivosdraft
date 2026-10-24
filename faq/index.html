@@ -195,10 +195,10 @@ ul { list-style: none; }
 .glow-blue { right: -8rem; top: 0; width: 30rem; height: 30rem; background: rgb(var(--c-brand) / .35); }
 .glow-teal { left: -8rem; bottom: -4rem; width: 26rem; height: 26rem; background: rgb(var(--c-teal) / .6); }
 .hero-title { font: 800 clamp(2.6rem, 9vw, 8.5rem)/.98 var(--font-display); letter-spacing: -.04em; }
-.hw { display: inline-block; padding-bottom: .14em; margin-bottom: -.14em; }   /* one span per word: rises in, then a blue light sweep */
+.hw { display: inline-block; padding: 0 .06em .14em; margin: 0 -.06em -.14em; }   /* room for descenders and the last letter's edge */   /* one span per word: rises in, then a blue light sweep */
 
 /* ---------- 5. QUESTIONS ---------- */
-.questions { max-width: 1000px; margin-inline: auto; padding: 56px 20px 0; }
+.questions { max-width: 1000px; margin-inline: auto; padding: 56px 20px 128px; }   /* the bottom padding is the gap above the footer */
 .label { font: 500 .75rem var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
 .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 .chip { min-height: 48px; padding: 0 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: transparent; color: #fff; font: 500 .9375rem var(--font-body); cursor: pointer; transition: background-color .2s, color .2s, border-color .2s; }
