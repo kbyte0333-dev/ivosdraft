@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+   InvictusOS FAQ PAGE - EDITING GUIDE  (everything lives in this file)
+  ===========================================================================
+   ADD A QUESTION     : search for  ======== QUESTIONS , copy one whole
+                        <div class="faq" ...> ... </div> block, paste it in the
+                        list, and change the question, the answer and the
+                        data-category word (installation / performance / support).
+   REMOVE A QUESTION  : delete its whole <div class="faq"> block.
+   NEW CATEGORY       : add a  <button class="chip" data-filter="word">  next
+                        to the others, then use the same word in data-category.
+   SUPPORT EMAIL      : search for  SUPPORT_EMAIL  (bottom of the file) and
+                        change the address. It is also shown in the
+                        no-JavaScript note under "Still need help?".
+   COLOURS / LOOKS    : style block, part "1. COLOUR TOKENS" and the labelled parts.
+
+   Search engines get the questions automatically: the script builds their
+   data from the questions on the page, so there is nothing else to update.
+
+   SECURITY           : scripts are locked by a hash in the Content-Security-Policy
+   tag. Text, link and CSS edits are fine. If you edit the script block, open
+   the page and read the browser console: it prints the new 'sha256-...' value
+   to paste into script-src.
+  ===========================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InvictusOS | FAQ</title>
+
+<!-- Search engines & social sharing -->
+<meta name="description" content="Frequently asked questions about InvictusOS: hardware support, installation, dual-booting, virtual machines, updates and how to contact support.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0a0a1c">
+<link rel="canonical" href="https://webinvictusos.neocities.org/faq.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="InvictusOS">
+<meta property="og:title" content="InvictusOS | FAQ">
+<meta property="og:description" content="Answers to common questions about installing and running InvictusOS.">
+<meta property="og:url" content="https://webinvictusos.neocities.org/faq.html">
+<meta property="og:image" content="https://webinvictusos.neocities.org/assets/desktop.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Security: only this page, Google Fonts and data: images are allowed -->
+<meta http-equiv="Content-Security-Policy" content="
+    default-src 'none';
+    script-src 'sha256-pEsLnBZFO/YHii4yMo/n/8KRc/2eWDP6xmOgUOxK16I=';
+    style-src 'unsafe-inline' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' data:;
+    connect-src 'none';
+    base-uri 'none';
+    form-action 'none'
+  ">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<link rel="icon" href="/invicn.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Sora:wght@500;700;800&display=swap">
+
+<!-- Structured data for search / AI engines (the FAQ questions are added by the script) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://webinvictusos.neocities.org/faq.html#webpage",
+  "url": "https://webinvictusos.neocities.org/faq.html",
+  "name": "InvictusOS | FAQ",
+  "description": "Frequently asked questions about InvictusOS.",
+  "isPartOf": { "@type": "WebSite", "name": "InvictusOS", "url": "https://webinvictusos.neocities.org/" },
+  "inLanguage": "en"
+}
+</script>
+
+<style>
+/* ---------- 1. COLOUR TOKENS (edit these; numbers are "R G B") ---------- */
+:root {
+  --c-navy:   10 10 28;     /* header, deep panels */
+  --c-ink:    0 0 0;        /* black bands + footer */
+  --c-card:   20 20 20;     /* dark cards */
+  --c-brand:  26 92 255;    /* bright blue */
+  --c-link:   77 163 255;   /* light blue links */
+  --c-ok:     34 197 94;    /* green */
+  --c-indigo: 26 26 166;    /* page gradient start */
+  --c-mid:    28 34 150;    /* page gradient middle */
+  --c-teal:   29 91 134;    /* page gradient end */
+
+  --font-display: "Sora", system-ui, sans-serif;
+  --font-body:    "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* ---------- 2. BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  background: linear-gradient(135deg, rgb(var(--c-indigo)) 0%, rgb(var(--c-mid)) 45%, rgb(var(--c-teal)) 100%) fixed;
+  color: #fff;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+body { font: 400 1rem/1.625 var(--font-body); min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+img, svg { display: block; max-width: 100%; }
+main { overflow-x: clip; }   /* keeps decorative glows from creating sideways scroll */
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+/* very thin, minimal scrollbar (page + the terms list) */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.28); border: 2px solid transparent; background-clip: padding-box; border-radius: 999px; }   /* 2px wide line */
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.55); background-clip: padding-box; }
+@supports not selector(::-webkit-scrollbar) {   /* Firefox */
+  html, .terms-body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.3) transparent; }
+}
+::selection { background: rgb(var(--c-brand)); color: #fff; }
+:focus-visible { outline: 3px solid #fff; outline-offset: 3px; border-radius: 6px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -64px; z-index: 100; padding: 12px 20px; border-radius: 8px; background: #fff; color: rgb(var(--c-navy)); font-weight: 700; }
+.skip:focus { top: 12px; }
+.sprite { position: absolute; }
+
+/* page background layers: dark graph lines + film grain */
+.bg-grid {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.34) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.bg-grain {
+  position: fixed; inset: 0; z-index: 55; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* buttons used all over the page */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  min-height: 56px; padding: 0 32px; border-radius: 999px;
+  font: 500 1rem var(--font-body); border: 1px solid transparent; background: transparent; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s;
+}
+.btn-primary { background: #fff; color: rgb(var(--c-navy)); font-weight: 700; }
+.btn-primary:hover { background: rgb(var(--c-brand)); color: #fff; }
+.btn-ghost { border-color: rgba(255,255,255,.5); color: #fff; }
+.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.btn:disabled, .btn:disabled:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.4); border: 1px dashed rgba(255,255,255,.25); cursor: not-allowed; }   /* switched off */
+.icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- 3. HEADER + PHONE MENU ---------- */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgb(var(--c-navy) / .85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.1); }
+.header-row { position: relative; display: flex; align-items: center; gap: 16px; min-height: 68px; max-width: 1280px; margin-inline: auto; padding-inline: 20px; }
+.brand { display: flex; align-items: center; gap: 10px; min-height: 48px; font: 700 1.125rem var(--font-display); }
+.brand img { height: 32px; width: auto; }
+.nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.nav a { display: flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 8px; font-weight: 500; color: rgb(var(--c-link)); }
+.nav a:hover { color: #fff; }
+
+/* the "Animations" on/off switch (used in header + phone menu) */
+.motion-switch {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px;
+  border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: none; color: rgba(255,255,255,.85);
+  font: 500 .875rem var(--font-body); cursor: pointer;
+}
+.motion-switch:hover { border-color: rgba(255,255,255,.5); }
+.switch-track { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(255,255,255,.2); transition: background-color .2s; }
+.switch-knob { position: absolute; left: 2px; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.motion-switch[aria-checked="true"] .switch-track { background: rgb(var(--c-brand)); }
+.motion-switch[aria-checked="true"] .switch-knob { transform: translateX(20px); }
+.header-row .motion-switch { margin-left: 8px; }
+
+/* burger button (phones only) */
+.burger { display: none; position: relative; width: 48px; height: 48px; margin-left: auto; border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: none; cursor: pointer; }
+.burger-bar { position: absolute; left: 50%; width: 20px; height: 2px; margin-left: -10px; border-radius: 2px; background: #fff; transition: transform .25s ease, opacity .2s ease; }
+.burger-bar:nth-child(1) { top: 15px; }
+.burger-bar:nth-child(2) { top: 22px; }
+.burger-bar:nth-child(3) { top: 29px; }
+.burger[aria-expanded="true"] .burger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] .burger-bar:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] .burger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* phone menu panel */
+.mnav { display: none; position: absolute; left: 0; right: 0; top: 100%; padding: 8px 20px 24px; background: rgb(var(--c-navy)); border-bottom: 1px solid rgba(255,255,255,.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); }
+.mnav-link { display: flex; align-items: center; justify-content: space-between; min-height: 60px; border-bottom: 1px solid rgba(255,255,255,.1); font: 600 1.25rem var(--font-display); }
+.mnav-link:hover { color: rgb(var(--c-link)); }
+.mnav-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.mnav .motion-switch { justify-content: space-between; min-height: 56px; padding: 0 20px; border-color: rgba(255,255,255,.15); }
+.nav .nav-cta { margin-left: 8px; padding: 0 20px; border-radius: 12px; background: #fff; color: rgb(var(--c-navy)); font-weight: 700; }
+.nav .nav-cta:hover { background: rgb(239 246 255); color: rgb(var(--c-navy)); }
+.mnav-download { display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 999px; background: #fff; color: rgb(var(--c-navy)); font-weight: 700; }
+.mnav-download:hover { background: rgb(239 246 255); }
+
+/* ---------- 4. HERO ---------- */
+.hero { position: relative; display: flex; flex-direction: column; justify-content: center; max-width: 1280px; min-height: calc(62svh - 68px); margin-inline: auto; padding: 72px 20px 24px; }
+.glow { position: absolute; z-index: -1; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+.glow-blue { right: -8rem; top: 0; width: 30rem; height: 30rem; background: rgb(var(--c-brand) / .35); }
+.glow-teal { left: -8rem; bottom: -4rem; width: 26rem; height: 26rem; background: rgb(var(--c-teal) / .6); }
+.hero-title { font: 800 clamp(2.6rem, 9vw, 8.5rem)/.98 var(--font-display); letter-spacing: -.04em; }
+.hw { display: inline-block; padding-bottom: .14em; margin-bottom: -.14em; }   /* one span per word: rises in, then a blue light sweep */
+
+/* ---------- 5. QUESTIONS ---------- */
+.questions { max-width: 1000px; margin-inline: auto; padding: 56px 20px 0; }
+.label { font: 500 .75rem var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.chip { min-height: 48px; padding: 0 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: transparent; color: #fff; font: 500 .9375rem var(--font-body); cursor: pointer; transition: background-color .2s, color .2s, border-color .2s; }
+.chip:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.chip[aria-pressed="true"] { border-color: #fff; background: #fff; color: rgb(var(--c-navy)); }
+
+.faq-list { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+.faq { overflow: hidden; border: 1px solid rgba(255,255,255,.15); border-radius: 24px; background: rgb(var(--c-card)); transition: border-color .2s; }
+.faq:hover { border-color: rgba(255,255,255,.3); }
+.faq[hidden] { display: none; }
+.faq-q { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 68px; padding: 18px 24px; border: 0; background: none; color: #fff; text-align: left; font: 700 1.0625rem/1.4 var(--font-display); letter-spacing: -.01em; cursor: pointer; }
+.plus { position: relative; flex: none; width: 24px; height: 24px; color: rgb(var(--c-link)); transition: transform .3s ease; }
+.plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; border-radius: 2px; background: currentColor; }
+.plus::before { width: 16px; height: 2px; margin: -1px 0 0 -8px; }
+.plus::after { width: 2px; height: 16px; margin: -8px 0 0 -1px; }
+.faq.open .plus { transform: rotate(45deg); }
+.faq-a { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows .35s ease, visibility 0s .35s; }
+.faq.open .faq-a { grid-template-rows: 1fr; visibility: visible; transition-delay: 0s; }
+.faq-a > div { overflow: hidden; }
+.faq-a p { padding: 0 24px 24px; color: rgba(255,255,255,.75); }
+
+/* ---------- 6. SUPPORT FORM ---------- */
+.support { margin-top: 80px; padding: 40px; border: 1px solid rgba(255,255,255,.15); border-radius: 32px; background: rgb(var(--c-card)); }
+.support-title { font: 800 clamp(1.8rem, 3.5vw, 2.6rem)/1.05 var(--font-display); letter-spacing: -.03em; }
+.support-text { max-width: 34rem; margin-top: 12px; color: rgba(255,255,255,.75); }
+.form { display: grid; gap: 22px; margin-top: 32px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font: 500 .75rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.control { position: relative; }
+.input { width: 100%; min-height: 52px; padding: 12px 44px 12px 16px; border: 1px solid rgba(255,255,255,.2); border-radius: 14px; background: rgb(13 13 17); color: #fff; font: 400 1rem var(--font-body); outline: none; transition: border-color .18s, box-shadow .18s; }
+textarea.input { min-height: 160px; resize: vertical; line-height: 1.6; }
+.input::placeholder { color: rgba(255,255,255,.35); }
+.input:focus { border-color: rgb(var(--c-link)); box-shadow: 0 0 0 3px rgb(var(--c-link) / .18); }
+.control.is-error .input { border-color: #ff6b6b; box-shadow: 0 0 0 3px rgba(255,107,107,.12); }
+.control.is-ok .input { border-color: rgb(var(--c-ok) / .5); box-shadow: 0 0 0 3px rgb(var(--c-ok) / .08); }
+.mark { position: absolute; right: 16px; top: 17px; font-size: 14px; line-height: 1.2; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.mark-ok { color: rgb(var(--c-ok)); }
+.mark-err { color: #ff6b6b; }
+.control.is-ok .mark-ok, .control.is-error .mark-err { opacity: 1; }
+select.input { appearance: none; -webkit-appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234da3ff' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+select.input option { background: #0d0d11; }
+.control-select .mark { right: 40px; }
+.msg-row { display: flex; justify-content: space-between; gap: 12px; }
+.msg { min-height: 1.25rem; font: 400 .75rem var(--font-mono); }
+.msg.err { color: #ff6b6b; }
+.msg.ok { color: rgb(var(--c-ok)); }
+.count { margin-left: auto; font: 400 .75rem var(--font-mono); color: rgba(255,255,255,.7); }
+.count.warn { color: #f0a500; }
+.count.over { color: #ff6b6b; }
+.form-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.submit { min-width: 180px; }
+.spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(0,0,0,.15); border-top-color: #000; border-radius: 50%; animation: spin .6s linear infinite; }
+.submit.loading .btn-text { display: none; }
+.submit.loading .spinner { display: block; }
+.notes { display: flex; flex-direction: column; gap: 2px; }
+.required-note { font: 500 .75rem var(--font-mono); color: rgba(255,255,255,.9); }
+.form-hint { font: 400 .75rem var(--font-mono); color: rgba(255,255,255,.7); }
+.form-hint.err { color: #ff9090; }
+.form-hint.ok { color: rgb(var(--c-ok)); }
+.btn[aria-disabled="true"], .btn[aria-disabled="true"]:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.4); border: 1px dashed rgba(255,255,255,.25); cursor: not-allowed; }   /* switched off */
+.form-status { display: none; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; font: 400 .83rem var(--font-mono); }
+.form-status.visible { display: flex; }
+.form-status.success { background: rgb(var(--c-ok) / .08); border: 1px solid rgb(var(--c-ok) / .25); color: rgb(var(--c-ok)); }
+.form-status.error { background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.25); color: #ff9090; }
+.fallback a { color: rgb(var(--c-link)); text-decoration: underline; text-underline-offset: 3px; }
+
+.toast { position: fixed; right: 24px; bottom: 24px; z-index: 70; display: flex; align-items: flex-start; gap: 10px; max-width: 320px; padding: 14px 18px; border: 1px solid rgb(var(--c-ok) / .3); border-radius: 14px; background: #0a1a10; color: rgb(var(--c-ok)); font: 400 .82rem var(--font-mono); transform: translateY(20px); opacity: 0; pointer-events: none; transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .25s ease; }
+.toast.show { transform: none; opacity: 1; pointer-events: auto; }
+.toast strong { display: block; margin-bottom: 2px; }
+.toast span { color: rgba(255,255,255,.7); font-size: .77rem; }
+
+/* ---------- 5. FOOTER ---------- */
+.site-footer { overflow: hidden; border-top: 1px solid rgba(255,255,255,.1); background: rgb(var(--c-ink)); padding-top: 40px; text-align: center; }
+.copyright { padding-inline: 20px; font: 400 .8125rem var(--font-mono); color: rgba(255,255,255,.75); }
+.wordmark { margin-top: 24px; padding-bottom: 16px; white-space: nowrap; user-select: none; font: 800 min(12.5vw, 13rem)/1 var(--font-display); letter-spacing: -.025em; background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,.12), rgba(255,255,255,.04)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- 7. ANIMATIONS ---------- */
+@keyframes rise  { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
+@keyframes sheen { from { background-position: 150% 0, 0 0; } to { background-position: -50% 0, 0 0; } }
+@keyframes drift { 0%, 100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(40px,-30px,0) scale(1.12); } }
+@keyframes spin  { to { transform: rotate(360deg); } }
+@keyframes panel { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+.hw { background-image: linear-gradient(105deg, transparent 38%, rgb(var(--c-link)) 50%, transparent 62%), linear-gradient(#fff, #fff); background-size: 300% 100%, 100% 100%; background-position: 150% 0, 0 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (prefers-reduced-motion: no-preference) {
+  .hw { animation: rise .9s cubic-bezier(.2,.8,.2,1) both, sheen .95s ease-out both; }
+  .hw:nth-child(1) { animation-delay: 80ms, 1100ms; }
+  .hw:nth-child(2) { animation-delay: 180ms, 1250ms; }
+  .hw:nth-child(3) { animation-delay: 280ms, 1400ms; }
+  .glow { animation: drift 16s ease-in-out infinite; }
+  .glow-teal { animation-delay: -8s; }
+  .mnav:not([hidden]) { animation: panel .25s ease-out; }
+}
+/* "Animations" switch OFF: stop every animation and transition */
+html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+
+/* ---------- 8. PHONE / TABLET ---------- */
+@media (max-width: 900px) {
+  .nav, .header-row > .motion-switch { display: none; }
+  .burger { display: block; }
+  .mnav:not([hidden]) { display: block; }
+  .hero { min-height: 0; padding-top: 48px; }
+}
+@media (max-width: 700px) {
+  .row { grid-template-columns: 1fr; }
+  .support { padding: 28px 20px; }
+  .form-footer { flex-direction: column; align-items: flex-start; }
+  .toast { left: 16px; right: 16px; bottom: 16px; max-width: none; }
+}
+
+</style>
+<!-- Without JavaScript: show every answer, hide the controls that need it, point to the email address -->
+<noscript><style>.faq-a { grid-template-rows: 1fr !important; visibility: visible !important; } .plus, .motion-switch, .burger, .chips, .form { display: none; }</style></noscript>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ======== BACKGROUND LAYERS (graph, film grain) ======== -->
+<div class="bg-grid" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<!-- icon sprite -->
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14m-6-6l6 6-6 6"/></symbol>
+</defs></svg>
+
+<!-- ======== HEADER / NAVIGATION ======== -->
+<header class="site-header">
+  <div class="header-row">
+    <a href="index.html" class="brand" aria-label="InvictusOS home"><img src="assets/logo.png" alt="" width="38" height="32">InvictusOS</a>
+
+    <!-- Desktop navigation (hidden on phones) -->
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="/download" class="nav-cta">Download</a>
+    </nav>
+    <button type="button" class="motion-switch" role="switch" aria-checked="true" data-motion-switch><span>Animations</span><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
+
+    <!-- Phone menu button -->
+    <button id="burger" type="button" class="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span></button>
+  </div>
+
+  <!-- Phone menu panel -->
+  <div id="mnav" class="mnav" hidden>
+    <nav aria-label="Mobile">
+      <a href="index.html" class="mnav-link">Home<svg class="icon" aria-hidden="true"><use href="#i-ar"/></svg></a>
+    </nav>
+    <div class="mnav-actions">
+      <a href="/download" class="mnav-download">Download</a>
+      <button type="button" class="motion-switch" role="switch" aria-checked="true" data-motion-switch><span>Animations</span><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ======== HERO ======== -->
+<section class="hero" aria-labelledby="hero-h">
+  <span class="glow glow-blue" aria-hidden="true"></span>
+  <span class="glow glow-teal" aria-hidden="true"></span>
+  <h1 id="hero-h" class="hero-title"><span class="hw">Frequently</span> <span class="hw">Asked</span> <span class="hw">Questions</span></h1>
+</section>
+
+<!-- ======== QUESTIONS ======== -->
+<section class="questions" aria-label="Common questions">
+  <p class="label">Common questions</p>
+
+  <div class="chips" role="group" aria-label="Filter questions by category">
+    <button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>
+    <button type="button" class="chip" data-filter="installation" aria-pressed="false">Installation</button>
+    <button type="button" class="chip" data-filter="performance" aria-pressed="false">Performance</button>
+    <button type="button" class="chip" data-filter="support" aria-pressed="false">Support</button>
+  </div>
+
+  <!-- THE LIST OF QUESTIONS. To add one: copy a whole <div class="faq"> block below and edit it. -->
+  <div class="faq-list" id="faqList">
+      <div class="faq" data-category="performance">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>What kind of hardware does InvictusOS support?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>Sagaris is tuned for low-end legacy x86 machines. It runs comfortably on CPUs around the 1 GHz mark with limited RAM. It requires a minimum 990 MHZ CPU, 512 MB RAM and around 5GB free disk. For the best performance, better specifications are recommended.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="installation">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>Can I dual-boot InvictusOS with another operating system?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>Yes, but you should be careful when choosing partitions during installation. Make a backup of existing systems before shrinking or changing partitions. Use a dedicated partition or disk for InvictusOS. Let the installer update the bootloader, then verify entries after reboot.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="installation">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>The USB doesn't show up in the boot menu.</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>This is common on older BIOS versions and some USB controllers. Try a different USB port (preferably USB 2.0), recreate the USB with a different writer tool, check that USB Boot or Legacy USB is enabled in BIOS, or test the USB stick on another machine to confirm it boots there.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="installation">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>Will InvictusOS erase my files during install?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>It can, depending upon the options you choose in the installer. Automatic 'use entire disk' modes remove existing partitions and data. Manual partitioning lets you preserve other partitions, but mistakes might occur. ALWAYS BACK UP IMPORTANT DATA BEFORE ANY INSTALL.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="performance">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>How much RAM does InvictusOS use when idle?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>Idle usage is intentionally kept low so that 512MB systems remain usable. Exact numbers may vary by hardware and services enabled, but the desktop footprint is closer to older lightweight Linux setups than to modern, heavy environments.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="installation">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>Does InvictusOS require an internet connection to install?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>Internet connection is required to install the ISO. But a basic installation can be performed without an internet connection after installing the ISO. An internet connection is only needed later for updates and additional software, not for the core installation process itself.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="installation">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>What file systems are supported for installation?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>The installer targets common Linux file systems suitable for legacy hardware. For most users, the default suggestion is fine.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="support">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>Can I run InvictusOS in a virtual machine?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>Yes, InvictusOS can be installed in most common virtual machine tools (VirtualBox, QEMU, etc.). For a smooth experience, allocate at least 1GB of RAM, 6GB of virtual disk space, and use legacy/BIOS boot mode if you want to mirror real-hardware behaviour.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="support">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>How do I update InvictusOS after installation?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>Updates are delivered as regular package and image updates, depending on how the system is configured. The recommended path is to follow the project's release notes and apply updates from the built-in tools or documented commands.</p></div></div>
+      </div>
+
+      <div class="faq" data-category="support">
+        <h3 class="faq-h"><button type="button" class="faq-q"><span>Where can I report bugs or request features?</span><span class="plus" aria-hidden="true"></span></button></h3>
+        <div class="faq-a"><div><p>Use the project's official channels linked from the InvictusOS main page. Include hardware details, logs and clear information — this will make it much easier to fix your problems.</p></div></div>
+      </div>
+  </div>
+
+  <!-- ======== SUPPORT FORM ======== -->
+  <section class="support" aria-labelledby="support-h">
+    <h2 id="support-h" class="support-title">Still need help?</h2>
+    <p class="support-text">Describe your issue below and send it directly to the InvictusOS support team.</p>
+
+    <noscript><p class="support-text fallback">JavaScript is turned off, so the form cannot send. Please email us at <a href="mailto:osinvictus121@gmail.com">osinvictus121@gmail.com</a>.</p></noscript>
+
+    <form id="supportForm" class="form" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="f-name">Name</label>
+          <div class="control" data-field="name">
+            <input id="f-name" class="input" type="text" placeholder="Your name" maxlength="80" autocomplete="name" required aria-describedby="msg-name">
+            <span class="mark mark-ok" aria-hidden="true">✓</span><span class="mark mark-err" aria-hidden="true">✕</span>
+          </div>
+          <p class="msg" id="msg-name" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <div class="control" data-field="email">
+            <input id="f-email" class="input" type="email" placeholder="you@example.com" maxlength="120" autocomplete="email" required aria-describedby="msg-email">
+            <span class="mark mark-ok" aria-hidden="true">✓</span><span class="mark mark-err" aria-hidden="true">✕</span>
+          </div>
+          <p class="msg" id="msg-email" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-category">Issue Category</label>
+        <div class="control control-select" data-field="category">
+          <select id="f-category" class="input" required aria-describedby="msg-category">
+            <option value="" disabled selected>Select a category…</option>
+            <option value="Installation">Installation</option>
+            <option value="Performance">Performance</option>
+            <option value="Hardware Compatibility">Hardware Compatibility</option>
+            <option value="Update / Package Manager">Update / Package Manager</option>
+            <option value="Virtual Machine">Virtual Machine</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="mark mark-ok" aria-hidden="true">✓</span><span class="mark mark-err" aria-hidden="true">✕</span>
+        </div>
+        <p class="msg" id="msg-category" aria-live="polite"></p>
+      </div>
+
+      <div class="field">
+        <label for="f-subject">Subject</label>
+        <div class="control" data-field="subject">
+          <input id="f-subject" class="input" type="text" placeholder="Brief summary of your problem" maxlength="120" required aria-describedby="msg-subject">
+          <span class="mark mark-ok" aria-hidden="true">✓</span><span class="mark mark-err" aria-hidden="true">✕</span>
+        </div>
+        <p class="msg" id="msg-subject" aria-live="polite"></p>
+      </div>
+
+      <div class="field">
+        <label for="f-message">Describe your problem</label>
+        <div class="control" data-field="message">
+          <textarea id="f-message" class="input" rows="6" maxlength="2000" placeholder="Include hardware details, what you tried, and any error messages you saw…" required aria-describedby="msg-message"></textarea>
+          <span class="mark mark-ok" aria-hidden="true">✓</span><span class="mark mark-err" aria-hidden="true">✕</span>
+        </div>
+        <div class="msg-row">
+          <p class="msg" id="msg-message" aria-live="polite"></p>
+          <span class="count" id="charCount">0 / 2000</span>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <!-- Stays switched off until every field is filled in correctly -->
+        <button class="btn btn-primary submit" id="submitBtn" type="submit" aria-disabled="true" aria-describedby="formHint"><span class="btn-text">Send Report</span><span class="spinner" aria-hidden="true"></span></button>
+        <div class="notes">
+          <span class="required-note">All fields are required</span>
+          <span class="form-hint" id="formHint" aria-live="polite">Complete every field correctly to enable Send Report.</span>
+        </div>
+      </div>
+
+      <div class="form-status" id="formStatus" role="alert"></div>
+    </form>
+  </section>
+</section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <div><strong id="toastTitle"></strong><span id="toastMsg"></span></div>
+</div>
+
+<!-- ======== FOOTER ======== -->
+<footer class="site-footer">
+  <p class="copyright">© <span id="copyright-year">2026</span> InvictusOS. The minimal and lightweight OS</p>
+  <p class="wordmark" id="fwm" aria-hidden="true">InvictusOS</p>
+</footer>
+
+<!-- ======== BEHAVIOUR (commented, plain JavaScript) ======== -->
+<script>
+(function () {
+  // ======= SETTINGS =======
+  var SUPPORT_EMAIL = "osinvictus121@gmail.com";   // where the "Send Report" email goes (also in the no-JavaScript note)
+
+  var d = document.documentElement;
+  var burger = document.getElementById("burger");
+  var panel = document.getElementById("mnav");
+  var switches = [].slice.call(document.querySelectorAll("[data-motion-switch]"));
+  var mark = document.getElementById("fwm");
+  var foot = document.querySelector("footer");
+  var calm = false, ticking = false;
+
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
+  function animating() { return d.getAttribute("data-motion") !== "off"; }
+
+  // copyright year
+  document.getElementById("copyright-year").textContent = new Date().getFullYear();
+
+  // ---- phone menu ----------------------------------------------------------
+  function setMenu(open) {
+    panel.hidden = !open;
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  burger.addEventListener("click", function () { setMenu(burger.getAttribute("aria-expanded") !== "true"); });
+  panel.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("click", function (e) { if (!panel.hidden && !panel.contains(e.target) && !burger.contains(e.target)) setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { setMenu(false); burger.focus(); } });
+  addEventListener("resize", function () { if (innerWidth > 900) setMenu(false); });
+
+  // ---- questions: open / close ---------------------------------------------
+  var list = document.getElementById("faqList");
+  var faqs = [].slice.call(list.querySelectorAll(".faq"));
+  faqs.forEach(function (f, i) {                       // wire up the accessibility attributes automatically
+    var q = f.querySelector(".faq-q"), a = f.querySelector(".faq-a");
+    a.id = "faq-answer-" + (i + 1);
+    q.setAttribute("aria-controls", a.id);
+    q.setAttribute("aria-expanded", "false");
+  });
+  list.addEventListener("click", function (e) {
+    var q = e.target.closest(".faq-q");
+    if (!q) return;
+    var f = q.closest(".faq"), open = !f.classList.contains("open");
+    f.classList.toggle("open", open);
+    q.setAttribute("aria-expanded", String(open));
+  });
+
+  // ---- questions: category filter ------------------------------------------
+  var chips = [].slice.call(document.querySelectorAll(".chip"));
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var cat = chip.getAttribute("data-filter");
+      chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
+      faqs.forEach(function (f) { f.hidden = !(cat === "all" || f.getAttribute("data-category") === cat); });
+    });
+  });
+
+  // ---- search-engine data, built from the questions on the page ------------
+  (function () {
+    var ld = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(function (f) {
+        return {
+          "@type": "Question",
+          "name": f.querySelector(".faq-q span").textContent.trim(),
+          "acceptedAnswer": { "@type": "Answer", "text": f.querySelector(".faq-a p").textContent.trim() }
+        };
+      })
+    };
+    var s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.textContent = JSON.stringify(ld);
+    document.head.appendChild(s);
+  })();
+
+  // ---- support form ---------------------------------------------------------
+  var form = document.getElementById("supportForm");
+  var fields = {
+    name: document.getElementById("f-name"),
+    email: document.getElementById("f-email"),
+    category: document.getElementById("f-category"),
+    subject: document.getElementById("f-subject"),
+    message: document.getElementById("f-message")
+  };
+  var touched = {};
+
+  // The rules and messages for every field (edit the wording here)
+  var RULES = {
+    name: function (v) {
+      if (!v) return { ok: false, msg: "Name is required." };
+      if (v.length < 2) return { ok: false, msg: "Name must be at least 2 characters." };
+      return { ok: true, msg: "Perfect!" };
+    },
+    email: function (v) {
+      if (!v) return { ok: false, msg: "Email is required." };
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return { ok: false, msg: "Please enter a valid email address." };
+      return { ok: true, msg: "Valid email!" };
+    },
+    category: function (v) {
+      if (!v) return { ok: false, msg: "Please select a category." };
+      return { ok: true, msg: "Category selected." };
+    },
+    subject: function (v) {
+      if (!v) return { ok: false, msg: "Subject is required." };
+      if (v.length < 3) return { ok: false, msg: "Subject is too short." };
+      return { ok: true, msg: "Subject selected!" };
+    },
+    message: function (v) {
+      if (!v) return { ok: false, msg: "Please describe your problem." };
+      if (v.length < 20) { var n = 20 - v.length; return { ok: false, msg: "Too short \u2014 " + n + " more character" + (n === 1 ? "" : "s") + " needed." }; }
+      return { ok: true, msg: "Thanks!" };
+    }
+  };
+
+  function paint(key, state, msg) {                    // state: "ok", "err" or "idle"
+    var control = document.querySelector('[data-field="' + key + '"]');
+    var out = document.getElementById("msg-" + key);
+    control.classList.toggle("is-ok", state === "ok");
+    control.classList.toggle("is-error", state === "err");
+    out.className = "msg" + (state === "ok" ? " ok" : state === "err" ? " err" : "");
+    out.textContent = state === "idle" ? "" : msg;
+    fields[key].setAttribute("aria-invalid", state === "err" ? "true" : "false");
+  }
+  function check(key) {
+    var r = RULES[key](fields[key].value.trim());
+    paint(key, r.ok ? "ok" : "err", r.msg);
+    return r.ok;
+  }
+  Object.keys(fields).forEach(function (key) {
+    touched[key] = false;
+    fields[key].addEventListener("blur", function () { touched[key] = true; check(key); refresh(); });
+    ["input", "change"].forEach(function (ev) { fields[key].addEventListener(ev, function () { if (touched[key]) check(key); refresh(); }); });
+  });
+
+  var counter = document.getElementById("charCount");
+  fields.message.addEventListener("input", function () {
+    var n = fields.message.value.length;
+    counter.textContent = n + " / 2000";
+    counter.className = "count" + (n >= 2000 ? " over" : n > 1800 ? " warn" : "");
+  });
+
+  var submit = document.getElementById("submitBtn");
+  var status = document.getElementById("formStatus");
+  var toastEl = document.getElementById("toast"), toastTimer;
+  function showStatus(ok, text) { status.className = "form-status visible " + (ok ? "success" : "error"); status.textContent = (ok ? "\u2713  " : "\u2715  ") + text; }
+  function showToast(title, text) {
+    document.getElementById("toastTitle").textContent = title;
+    document.getElementById("toastMsg").textContent = text;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 5500);
+  }
+  function loading(on) { submit.disabled = on; submit.classList.toggle("loading", on); }
+
+  // The send button stays switched off (aria-disabled) until every field is valid, and a hint says why.
+  var hint = document.getElementById("formHint");
+  function valid(key) { return RULES[key](fields[key].value.trim()).ok; }
+  function refresh() {
+    var all = Object.keys(fields).every(valid);
+    var showing = Object.keys(fields).some(function (k) { return touched[k] && !valid(k); });
+    submit.setAttribute("aria-disabled", String(!all));
+    hint.className = "form-hint" + (all ? " ok" : showing ? " err" : "");
+    hint.textContent = all ? "Everything looks good. You can send your report."
+      : showing ? "Please fix the highlighted fields to enable Send Report."
+      : "Complete every field correctly to enable Send Report.";
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    status.className = "form-status"; status.textContent = "";
+    var allOk = true;
+    Object.keys(fields).forEach(function (key) { touched[key] = true; if (!check(key)) allOk = false; });
+    refresh();
+    if (!allOk) {                                       // the button looks switched off: show why instead of sending
+      var bad = form.querySelector(".is-error .input");
+      if (bad) bad.scrollIntoView({ behavior: animating() ? "smooth" : "auto", block: "center" });
+      showStatus(false, "Please fix the highlighted fields before sending.");
+      return;
+    }
+    var v = function (k) { return fields[k].value.trim(); };
+    var body = encodeURIComponent("Name: " + v("name") + "\nEmail: " + v("email") + "\nCategory: " + v("category") + "\n\n" + v("message"));
+    var subject = encodeURIComponent("[InvictusOS Support] " + v("category") + ": " + v("subject"));
+    loading(true);
+    setTimeout(function () {
+      loading(false);
+      window.location.href = "mailto:" + SUPPORT_EMAIL + "?subject=" + subject + "&body=" + body;
+      showStatus(true, "Your mail client should open \u2014 send the pre-filled email to complete your report.");
+      showToast("Mail client opened!", "Complete sending in your email app.");
+      setTimeout(function () {                          // clear the form
+        form.reset();
+        Object.keys(fields).forEach(function (k) { touched[k] = false; paint(k, "idle"); });
+        counter.textContent = "0 / 2000"; counter.className = "count";
+        refresh();
+      }, 1400);
+    }, 600);
+  });
+
+  refresh();
+
+  // ---- scroll effect (footer wordmark rises) --------------------------------
+  function update() {
+    if (!animating() || calm) return;
+    var f = foot.getBoundingClientRect();
+    mark.style.transform = "translate3d(0," + ((1 - clamp((innerHeight - f.top) / (f.height * .8))) * 70).toFixed(1) + "px,0)";
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); } }
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll);
+
+  // ---- the "Animations" switch (same setting as the other pages) -----------
+  function setMotion(on, save) {
+    d.setAttribute("data-motion", on ? "on" : "off");
+    switches.forEach(function (s) { s.setAttribute("aria-checked", String(on)); });
+    if (save) { store("iv-motion", on ? "on" : "off"); calm = false; }
+    if (on) update(); else mark.style.transform = "";
+  }
+  var saved = store("iv-motion");
+  calm = matchMedia("(prefers-reduced-motion:reduce)").matches && !saved;   // reduced-motion visitors start with movement off
+  setMotion(saved ? saved === "on" : true, false);
+  switches.forEach(function (s) { s.addEventListener("click", function () { setMotion(!animating(), true); }); });
+
+  // ---- eased mouse-wheel scrolling (touch + keyboard stay native) -----------
+  var target = 0, current = 0, gliding = false, last = 0, mouse = matchMedia("(pointer:fine)").matches;
+  function glide(t) {
+    var dt = last ? Math.min(t - last, 100) : 16; last = t;
+    var diff = target - current;
+    current += diff * (1 - Math.exp(-dt / 90));
+    if (Math.abs(diff) < .4) { current = target; gliding = false; last = 0; }
+    scrollTo({ top: current, behavior: "instant" });
+    if (gliding) requestAnimationFrame(glide);
+  }
+  addEventListener("wheel", function (e) {
+    if (!mouse || !animating() || calm || e.ctrlKey || e.defaultPrevented || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    for (var el = e.target; el && el !== document.body && el.nodeType === 1; el = el.parentNode) {
+      if (el.scrollHeight > el.clientHeight && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) return;
+    }
+    e.preventDefault();
+    if (!gliding) { current = target = scrollY; }
+    var dy = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * innerHeight : e.deltaY;
+    target = Math.max(0, Math.min(d.scrollHeight - innerHeight, target + dy));
+    if (!gliding) { gliding = true; requestAnimationFrame(glide); }
+  }, { passive: false });
+  addEventListener("scroll", function () { if (!gliding) current = target = scrollY; }, { passive: true });
+})();
+</script>
+</body>
+</html>
