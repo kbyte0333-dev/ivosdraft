@@ -36,7 +36,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta http-equiv="Content-Security-Policy" content="
     default-src 'none';
-    script-src 'sha256-tNp3gg83y72EaJM8HuD/V0ODnFwH1pOxOUe8xPomvw0=';
+    script-src 'sha256-+jSW3cGfYpLEpiPRgkPzkZjIDgt4RHgsR48PuIBv0BY=';
     style-src 'unsafe-inline' https://fonts.googleapis.com;
     font-src https://fonts.gstatic.com;
     img-src 'self' data:;
@@ -278,36 +278,30 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
 .fx-back{margin-top:2rem}
 /* feature cards (identical look to index.html) */
 .feat-ul{margin-top:2.5rem;display:grid;gap:1.25rem}
+#feature-list{padding-top:0}
+#feature-list::before{display:none}
+#feature-list .feat-ul{margin-top:0}
+.suggest-row{margin-top:4rem;display:flex;flex-direction:column;align-items:center;gap:1.25rem;text-align:center}
+.suggest-row p{max-width:28rem;color:rgb(255 255 255/.75)}
 @media (min-width:768px){.feat-ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .feature-card,.feat-article{position:relative;display:flex;height:100%;min-height:22rem;flex-direction:column;justify-content:flex-end;gap:.75rem;overflow:hidden;border-radius:1.5rem;padding:2rem}
-.feature-card{border:1px solid rgb(255 255 255/.15);background-color:rgb(var(--c-card));background-image:linear-gradient(160deg,rgba(34,197,94,.1),transparent 50%)}
+.feature-card{border:1px solid rgb(255 255 255/.15);background-color:rgb(var(--c-card));background-image:linear-gradient(160deg,rgba(21,128,61,.14),transparent 50%)}
 .feat-article{border:1px dashed rgb(var(--c-link)/.5);background-color:rgb(var(--c-ink))}
 .feature-glyph{position:absolute;right:-1rem;top:-2rem;font-family:Sora,system-ui,sans-serif;font-size:11rem;font-weight:800;line-height:1;letter-spacing:-.05em;color:rgb(255 255 255/.06);transition:color .3s}
-.group:hover .feature-glyph{color:rgb(var(--c-brand)/.4)}
-.feature-card .feature-glyph{color:rgb(var(--c-ok)/.2)}
-.group:hover.feature-card .feature-glyph{color:rgb(var(--c-ok)/.45)}
+html:not([data-motion="off"]) .group:hover .feature-glyph{color:rgb(var(--c-brand)/.4)}
 .feature-title{font-family:Sora,system-ui,sans-serif;font-size:1.875rem;line-height:2.25rem;font-weight:700;letter-spacing:-.025em;overflow-wrap:anywhere}
 .pill-ok,.feat-span{width:fit-content;border-radius:9999px;padding:.25rem .75rem;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
 .pill-ok{border:1px solid rgb(var(--c-ok)/.6);background:rgb(var(--c-ok)/.15);color:rgb(74 222 128)}
 .feat-span{border:1px solid rgb(var(--c-link)/.6);background:rgb(var(--c-link)/.15);color:rgb(125 211 252)}
 .req-h3{font-family:Sora,system-ui,sans-serif;font-size:1.875rem;line-height:2.25rem;font-weight:700}
 /* footer */
-.foot-footer{overflow:hidden;border-top:1px solid rgb(255 255 255/.1);background:rgb(var(--c-ink));padding-top:3.5rem;font-size:.875rem;line-height:1.25rem}
+.foot-footer{overflow:hidden;border-top:1px solid rgb(255 255 255/.1);background:rgb(var(--c-ink));padding-top:1.75rem;font-size:.875rem;line-height:1.25rem}
 .foot-div{margin:0 auto;max-width:72rem;padding:0 1.25rem}
-.foot-div2{display:grid;gap:2.5rem}
-@media (min-width:640px){.foot-div2{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1024px){.foot-div2{grid-template-columns:1.5fr 1fr 1fr 1fr}}
-.foot-p{margin:.5rem 0 1.5rem;max-width:26ch;color:rgb(255 255 255/.75)}
-.foot-a{display:inline-flex;min-height:48px;align-items:center;border:1px solid rgb(255 255 255/.5);border-radius:9999px;padding:0 1.5rem;font-weight:500;transition:background-color .15s,color .15s}
-.foot-a:hover{background:#fff;color:rgb(var(--c-navy))}
-.foot-heading{margin-bottom:.5rem;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;line-height:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
-.foot-link{display:flex;min-height:48px;align-items:center;color:rgb(var(--c-link))}
-.foot-link:hover{color:#fff;text-decoration:underline}
-.foot-div3{margin-top:2.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem;border-top:1px solid rgb(255 255 255/.15);padding-top:1.5rem;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;line-height:1rem;color:rgb(255 255 255/.75)}
+.foot-div3{margin-top:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem;padding-top:0;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;line-height:1rem;color:rgb(255 255 255/.75)}
 .foot-nav{display:flex;gap:.25rem}
 .legal-link{display:flex;min-height:48px;align-items:center;padding:0 .5rem}
 .legal-link:hover{color:#fff}
-.foot-p2{margin-top:2.5rem;user-select:none;white-space:nowrap;background-image:linear-gradient(to bottom,rgb(255 255 255/.12),rgb(255 255 255/.04));-webkit-background-clip:text;background-clip:text;padding-bottom:1rem;text-align:center;font-family:Sora,system-ui,sans-serif;font-size:min(13vw,13rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:transparent}
+.foot-p2{margin-top:1.5rem;user-select:none;white-space:nowrap;background-image:linear-gradient(to bottom,rgb(255 255 255/.12),rgb(255 255 255/.04));-webkit-background-clip:text;background-clip:text;padding-bottom:1rem;text-align:center;font-family:Sora,system-ui,sans-serif;font-size:min(13vw,13rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:transparent}
 </style>
 </head>
 <body>
@@ -356,7 +350,7 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
 
     <!-- ======== FEATURE DATABASE ======== -->
     <section id="feature-list" aria-labelledby="list-h" class="section-wrap">
-      <h2 id="list-h" class="section-title">What's in &amp; what's coming.</h2>
+      <h2 id="list-h" class="sr-only">Feature list</h2>
       <ul id="flist" class="feat-ul">
         <!-- FEATURE CARDS START -->
         <li><article class="feature-card group"><span class="feature-glyph" aria-hidden="true">iv</span><span class="pill-ok">Available</span><h3 class="feature-title">Lightweight Desktop</h3><p class="text-white/75">A minimal desktop environment with low background CPU and memory usage, tuned for older hardware.</p></article></li>
@@ -370,44 +364,20 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
         <li><article class="feat-article group"><span class="feature-glyph" aria-hidden="true">⚙</span><span class="feat-span">Upcoming</span><h3 class="feature-title">Custom Linux Kernel</h3><p class="text-white/75">A settings and factory reset menu for InvictusOS XIPHOS</p></article></li>
         <!-- FEATURE CARDS END -->
       </ul>
+
+      <!-- SUGGEST A FEATURE button.
+           To send suggestions somewhere else, change the href below, for example
+           to a GitHub issues page or to a mailto: link with your own address. -->
+      <div class="suggest-row">
+        <p>Have an idea for InvictusOS? Tell us what you would like to see next.</p>
+        <a href="https://discord.gg/uG72zNaagW" target="_blank" rel="noopener noreferrer" class="hero-a">Suggest a feature on Discord<span class="sr-only"> (opens in a new tab)</span><svg class="icon-md" aria-hidden="true"><use href="#i-ar"/></svg></a>
+      </div>
     </section>
   </main>
 
   <!-- ======== FOOTER ======== -->
   <footer class="foot-footer">
     <div class="foot-div">
-      <div class="foot-div2">
-        <div><a href="index.html" class="brand-link"><img src="assets/logo.svg" alt="" width="38" height="32" class="head-img">InvictusOS</a>
-          <p class="foot-p">A minimal operating system built to keep old machines alive.</p> <a href="simple.html" class="foot-a">Switch to Simple Site</a>
-        </div>
-        <nav aria-label="About">
-          <p class="foot-heading">About</p>
-          <ul>
-            <li><a href="index.html#about" class="foot-link">About</a></li>
-            <li><a href="features.html" class="foot-link">Features</a></li>
-            <li><a href="index.html#requirements" class="foot-link">Requirements</a></li>
-            <li><a href="/download" class="foot-link">Download</a></li>
-            <li><a href="index.html#history" class="foot-link">History</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="Resources">
-          <p class="foot-heading">Resources</p>
-          <ul>
-            <li><a href="/installation" class="foot-link">Installation</a></li>
-            <li><a href="/faq" class="foot-link">FAQ</a></li>
-          </ul>
-        </nav>
-        <nav aria-label="Community">
-          <p class="foot-heading">Community</p>
-          <ul>
-            <li><a href="https://github.com/Invictus-Project" target="_blank" rel="noopener noreferrer" class="foot-link">GitHub</a></li>
-            <li><a href="http://discord.gg/uG72zNaagW" target="_blank" rel="noopener noreferrer" class="foot-link">Discord</a></li>
-            <li><a href="https://x.com/OsInvictus82350" target="_blank" rel="noopener noreferrer" class="foot-link">Twitter / X</a></li>
-            <li><a href="https://www.youtube.com/@InvictusOS" target="_blank" rel="noopener noreferrer" class="foot-link">YouTube</a></li>
-            <li><a href="https://www.instagram.com/invictusos_/?hl=en" target="_blank" rel="noopener noreferrer" class="foot-link">Instagram</a></li>
-          </ul>
-        </nav>
-      </div>
       <div class="foot-div3">
         <p>© 2026 InvictusOS - The minimal, lightweight OS</p>
         <nav aria-label="Legal" class="foot-nav"><a href="/privacy" class="legal-link">Privacy</a><a href="/terms" class="legal-link">Terms</a><a href="/support" class="legal-link">Support</a></nav>
@@ -436,6 +406,7 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
   mn.addEventListener("click", function (e) { if (e.target.closest("a")) menu(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !mn.hidden) { menu(false); b.focus(); } });
   addEventListener("resize", function () { if (innerWidth >= 768) menu(false); });
+  addEventListener("storage", function (e) { if (e.key === "iv-motion") motion(e.newValue !== "off", false); });
 })();
 </script>
 </body>
