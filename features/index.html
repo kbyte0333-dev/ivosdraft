@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!--
+  ===========================================================================
+   InvictusOS - FEATURES page (features.html)
+  ===========================================================================
+   CHANGING THE FEATURES (by hand)
+     Every feature is one <li>...</li> block between the  FEATURE CARDS START
+     and  FEATURE CARDS END  comments. To add one, copy a block and edit it.
+       Available card : <article class="feature-card group"> ... <span class="pill-ok">Available</span>
+       Upcoming card  : <article class="feat-article group"> ... <span class="feat-span">Upcoming</span>
+     Edit the glyph (big faint text), the title (h3) and the description (p).
+     Delete a block to remove a feature. Reorder by moving blocks.
+     Optional, for search engines: update the matching entries in the ItemList
+     in the structured data in the head.
+   Looks use the same colour tokens and class names as index.html.
+   SECURITY: if you edit the normal script at the bottom, paste the new
+   'sha256-...' (shown in the browser console) into script-src below.
+  ===========================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Features – InvictusOS | What's In &amp; What's Coming</title>
+<meta name="description" content="Every InvictusOS feature in one place: what ships today in Sagaris (lightweight desktop, 32-bit x86 support) and what is coming next, including the 64-bit XIPHOS release.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0a0a1c">
+<link rel="canonical" href="https://webinvictusos.neocities.org/features.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="InvictusOS">
+<meta property="og:title" content="InvictusOS Features – What's In &amp; What's Coming">
+<meta property="og:description" content="Explore every InvictusOS feature, available now and upcoming.">
+<meta property="og:url" content="https://webinvictusos.neocities.org/features.html">
+<meta property="og:image" content="/assets/desktop.png">
+<meta property="og:image:alt" content="The InvictusOS desktop with a cloudy sky wallpaper, a top panel and an app dock">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="Content-Security-Policy" content="
+    default-src 'none';
+    script-src 'sha256-tNp3gg83y72EaJM8HuD/V0ODnFwH1pOxOUe8xPomvw0=';
+    style-src 'unsafe-inline' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' data:;
+    connect-src 'none';
+    base-uri 'none';
+    form-action 'none';
+  ">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a1c'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='700' font-size='34' text-anchor='middle' fill='%231a5cff'%3Eiv%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Sora:wght@500;700;800&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://webinvictusos.neocities.org/features.html#webpage",
+      "url": "https://webinvictusos.neocities.org/features.html",
+      "name": "InvictusOS Features – What's In & What's Coming",
+      "isPartOf": {
+        "@id": "https://webinvictusos.neocities.org/#website"
+      },
+      "about": {
+        "@id": "https://webinvictusos.neocities.org/#os"
+      },
+      "inLanguage": "en",
+      "mainEntity": {
+        "@id": "https://webinvictusos.neocities.org/features.html#featurelist"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://webinvictusos.neocities.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://webinvictusos.neocities.org/features.html"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://webinvictusos.neocities.org/features.html#featurelist",
+      "name": "InvictusOS features",
+      "numberOfItems": 9,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Thing",
+            "name": "Lightweight Desktop",
+            "description": "A minimal desktop environment with low background CPU and memory usage, tuned for older hardware.",
+            "disambiguatingDescription": "Available"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Thing",
+            "name": "Sagaris 32-bit x86 Support",
+            "description": "Full support for legacy 32-bit machines.",
+            "disambiguatingDescription": "Available"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Thing",
+            "name": "No GPU Required",
+            "description": "Runs without a dedicated graphics card, so even the oldest machines are supported.",
+            "disambiguatingDescription": "Available"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Thing",
+            "name": "Low Memory Footprint",
+            "description": "Runs on as little as 512 MB of RAM with minimal background services.",
+            "disambiguatingDescription": "Available"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "Thing",
+            "name": "Image-Based Updates",
+            "description": "An image-based release model with predictable point updates.",
+            "disambiguatingDescription": "Available"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "Thing",
+            "name": "XIPHOS release",
+            "description": "A 64-bit edition for low-end machines that can still benefit from InvictusOS.",
+            "disambiguatingDescription": "Upcoming"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "item": {
+            "@type": "Thing",
+            "name": "Graphical Installer for XIPHOS",
+            "description": "A 64-bit edition for low-end machines that can still benefit from InvictusOS.",
+            "disambiguatingDescription": "Upcoming"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "item": {
+            "@type": "Thing",
+            "name": "Settings and Factory Reset",
+            "description": "A settings and factory reset menu for InvictusOS XIPHOS",
+            "disambiguatingDescription": "Upcoming"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "item": {
+            "@type": "Thing",
+            "name": "Custom Linux Kernel",
+            "description": "A settings and factory reset menu for InvictusOS XIPHOS",
+            "disambiguatingDescription": "Upcoming"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+/* ---------- 1. COLOUR TOKENS (same as index.html) ---------- */
+:root{--c-navy:10 10 28;--c-ink:0 0 0;--c-card:20 20 20;--c-brand:26 92 255;--c-link:77 163 255;--c-ok:34 197 94;--c-indigo:26 26 166;--c-mid:28 34 150;--c-teal:29 91 134}
+
+/* ---------- 2. BASE ---------- */
+*,::before,::after{box-sizing:border-box;border:0 solid #e5e7eb}
+html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:Manrope,system-ui,-apple-system,Segoe UI,sans-serif;scroll-behavior:smooth;scroll-padding-top:88px;color:#fff;background:linear-gradient(135deg,rgb(var(--c-indigo)) 0%,rgb(var(--c-mid)) 45%,rgb(var(--c-teal)) 100%) fixed rgb(var(--c-indigo))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;min-height:100vh;overflow-x:hidden;font-size:1rem;line-height:1.625;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3,h4{font-size:inherit;font-weight:inherit;margin:0}
+p,ul,dl,dd,figure{margin:0}
+ul{list-style:none;padding:0}
+a{color:inherit;text-decoration:inherit}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit;margin:0;letter-spacing:inherit}
+button{cursor:pointer;background:none;padding:0}
+button:disabled{cursor:default;opacity:.4}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.text-white\/75{color:rgb(255 255 255/.75)}
+.overflow-x-clip{overflow-x:clip}
+a:focus-visible,button:focus-visible{outline:2px solid rgb(var(--c-link));outline-offset:3px}
+::selection{background:rgb(var(--c-brand));color:#fff}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28);border:2px solid transparent;background-clip:padding-box;border-radius:999px}
+html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="off"] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(40px,-30px,0) scale(1.12)}}
+
+/* ---------- 3. COMPONENTS (same names as index.html) ---------- */
+.layer-div{pointer-events:none;position:fixed;inset:0;z-index:-20;opacity:.5;background-color:rgb(var(--c-indigo))}
+.layer-div2{pointer-events:none;position:fixed;inset:0;z-index:-10;background-image:linear-gradient(rgba(0,0,0,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.34) 1px,transparent 1px);background-size:48px 48px}
+.layer-div3{pointer-events:none;position:fixed;inset:0;z-index:55;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.07;mix-blend-mode:overlay}
+.layer-a{position:absolute;left:.75rem;top:-4rem;z-index:100;border-radius:.5rem;background:#fff;padding:.75rem 1.25rem;font-weight:700;color:rgb(var(--c-navy))}
+.layer-a:focus{top:.75rem}
+.layer-svg{position:absolute;height:0;width:0}
+.icon-sm{height:1.25rem;width:1.25rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon-md{height:1.5rem;width:1.5rem;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* header */
+.head-header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgb(255 255 255/.1);background:rgb(var(--c-navy)/.85);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.head-div{position:relative;margin:0 auto;display:flex;min-height:68px;max-width:80rem;align-items:center;gap:1rem;padding:0 1.25rem}
+.head-img{height:2rem;width:auto}
+.brand-link{display:flex;min-height:48px;align-items:center;gap:.625rem;font-family:Sora,system-ui,sans-serif;font-size:1.125rem;line-height:1.75rem;font-weight:700}
+.head-nav{display:none}
+.nav-link{display:flex;min-height:48px;align-items:center;border-radius:.5rem;padding:0 .75rem;font-weight:500;color:rgb(var(--c-link))}
+.nav-link:hover,.nav-link[aria-current]{color:#fff}
+.head-button{display:none;min-height:48px;align-items:center;gap:.625rem;border:1px solid rgb(255 255 255/.2);border-radius:9999px;padding:0 .75rem;font-size:.875rem;font-weight:500;color:rgb(255 255 255/.85)}
+.head-button:hover{border-color:rgb(255 255 255/.5)}
+.head-span{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.head-span2{position:relative;height:1.5rem;width:2.75rem;flex-shrink:0;border-radius:9999px;background:rgb(255 255 255/.2);transition:background-color .15s}
+.head-span3{position:absolute;left:.125rem;top:.125rem;height:1.25rem;width:1.25rem;border-radius:9999px;background:#fff;transition:transform .15s}
+.group[aria-checked="true"] .head-span2{background:rgb(var(--c-brand))}
+.group[aria-checked="true"] .head-span3{transform:translateX(1.25rem)}
+.head-a{display:none;min-height:48px;align-items:center;border-radius:.75rem;background:#fff;padding:0 1.25rem;font-weight:700;color:rgb(var(--c-navy));transition:background-color .15s}
+.head-a:hover{background:rgb(239 246 255)}
+.burger{position:relative;margin-left:auto;display:inline-flex;height:3rem;width:3rem;align-items:center;justify-content:center;border:1px solid rgb(255 255 255/.2);border-radius:.75rem}
+.burger-bar{position:absolute;left:50%;width:20px;height:2px;margin-left:-10px;border-radius:2px;background:#fff;transition:transform .25s ease,opacity .2s ease}
+.burger-bar:nth-child(1){top:15px}.burger-bar:nth-child(2){top:22px}.burger-bar:nth-child(3){top:29px}
+.burger[aria-expanded="true"] .burger-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] .burger-bar:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] .burger-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mnav{position:absolute;left:0;right:0;top:100%;border-bottom:1px solid rgb(255 255 255/.1);background:rgb(var(--c-navy));padding:.5rem 1.25rem 1.5rem;box-shadow:0 25px 50px -12px rgb(0 0 0/.25)}
+.mnav-links{display:flex;flex-direction:column}
+.mnav-link{display:flex;min-height:60px;align-items:center;justify-content:space-between;border-bottom:1px solid rgb(255 255 255/.1);font-family:Sora,system-ui,sans-serif;font-size:1.25rem;line-height:1.75rem;font-weight:600}
+.mnav-link:hover{color:rgb(var(--c-link))}
+.mnav-actions{margin-top:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+.mnav-download{display:flex;min-height:56px;align-items:center;justify-content:center;border-radius:9999px;background:#fff;font-weight:700;color:rgb(var(--c-navy))}
+.mnav-switch{display:flex;min-height:56px;align-items:center;justify-content:space-between;border:1px solid rgb(255 255 255/.15);border-radius:9999px;padding:0 1.25rem;font-size:.875rem;font-weight:500;color:rgb(255 255 255/.85)}
+@media (prefers-reduced-motion:no-preference){.mnav:not([hidden]){animation:mnav-in .25s ease-out}}
+@keyframes mnav-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (min-width:640px){.head-span{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}}
+@media (min-width:768px){.head-nav{margin-left:auto;display:flex;align-items:center;gap:.25rem}.head-button{margin-left:.5rem;display:inline-flex}.head-a{margin-left:.5rem;display:inline-flex}.burger,.mnav{display:none}}
+/* sections */
+.section-wrap{position:relative;margin:0 auto;max-width:80rem;padding:6rem 1.25rem}
+.section-wrap::before{content:'';position:absolute;left:1.25rem;right:1.25rem;top:0;height:1px;background-image:linear-gradient(to right,transparent,rgb(255 255 255/.3),transparent)}
+.fx-top{padding-top:4rem;padding-bottom:3rem}
+.section-title{font-family:Sora,system-ui,sans-serif;font-size:3.75rem;font-weight:800;line-height:.95;letter-spacing:-.05em}
+@media (min-width:768px){.section-wrap{padding-top:9rem;padding-bottom:9rem}.fx-top{padding-top:6rem;padding-bottom:4rem}.section-title{font-size:6rem;line-height:1}}
+.hero-p{margin-bottom:1.25rem;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:.875rem;line-height:1.25rem;letter-spacing:.025em}
+.feat-p{margin-top:1.5rem;max-width:36rem;font-size:1.125rem;line-height:1.75rem;color:rgb(255 255 255/.75)}
+.hero-span{pointer-events:none;position:absolute;right:-8rem;top:1rem;z-index:-10;height:22rem;width:22rem;border-radius:9999px;background:rgb(var(--c-brand)/.35);filter:blur(100px)}
+.hero-span2{pointer-events:none;position:absolute;left:-8rem;bottom:0;z-index:-10;height:20rem;width:20rem;border-radius:9999px;background:rgb(var(--c-teal)/.6);filter:blur(100px);animation-delay:-8s}
+@media (prefers-reduced-motion:no-preference){.hero-span,.hero-span2{animation:drift 16s ease-in-out infinite}.hero-span2{animation-delay:-8s}}
+@media (min-width:768px){.hero-span{height:34rem;width:34rem}.hero-span2{height:30rem;width:30rem}}
+.hero-a{display:inline-flex;min-height:56px;align-items:center;gap:.75rem;border-radius:9999px;background:#fff;padding:0 2rem;font-weight:700;color:rgb(var(--c-navy));transition:background-color .15s,color .15s}
+.hero-a:hover{background:rgb(var(--c-brand));color:#fff}
+.hero-a2{display:inline-flex;min-height:56px;align-items:center;gap:.75rem;border:1px solid rgb(255 255 255/.5);border-radius:9999px;padding:0 2rem;font-weight:500;transition:background-color .15s,border-color .15s}
+.hero-a2:hover{border-color:#fff;background:rgb(255 255 255/.1)}
+.fx-back{margin-top:2rem}
+/* feature cards (identical look to index.html) */
+.feat-ul{margin-top:2.5rem;display:grid;gap:1.25rem}
+@media (min-width:768px){.feat-ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.feature-card,.feat-article{position:relative;display:flex;height:100%;min-height:22rem;flex-direction:column;justify-content:flex-end;gap:.75rem;overflow:hidden;border-radius:1.5rem;padding:2rem}
+.feature-card{border:1px solid rgb(255 255 255/.15);background-color:rgb(var(--c-card));background-image:linear-gradient(160deg,rgba(34,197,94,.1),transparent 50%)}
+.feat-article{border:1px dashed rgb(var(--c-link)/.5);background-color:rgb(var(--c-ink))}
+.feature-glyph{position:absolute;right:-1rem;top:-2rem;font-family:Sora,system-ui,sans-serif;font-size:11rem;font-weight:800;line-height:1;letter-spacing:-.05em;color:rgb(255 255 255/.06);transition:color .3s}
+.group:hover .feature-glyph{color:rgb(var(--c-brand)/.4)}
+.feature-card .feature-glyph{color:rgb(var(--c-ok)/.2)}
+.group:hover.feature-card .feature-glyph{color:rgb(var(--c-ok)/.45)}
+.feature-title{font-family:Sora,system-ui,sans-serif;font-size:1.875rem;line-height:2.25rem;font-weight:700;letter-spacing:-.025em;overflow-wrap:anywhere}
+.pill-ok,.feat-span{width:fit-content;border-radius:9999px;padding:.25rem .75rem;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+.pill-ok{border:1px solid rgb(var(--c-ok)/.6);background:rgb(var(--c-ok)/.15);color:rgb(74 222 128)}
+.feat-span{border:1px solid rgb(var(--c-link)/.6);background:rgb(var(--c-link)/.15);color:rgb(125 211 252)}
+.req-h3{font-family:Sora,system-ui,sans-serif;font-size:1.875rem;line-height:2.25rem;font-weight:700}
+/* footer */
+.foot-footer{overflow:hidden;border-top:1px solid rgb(255 255 255/.1);background:rgb(var(--c-ink));padding-top:3.5rem;font-size:.875rem;line-height:1.25rem}
+.foot-div{margin:0 auto;max-width:72rem;padding:0 1.25rem}
+.foot-div2{display:grid;gap:2.5rem}
+@media (min-width:640px){.foot-div2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.foot-div2{grid-template-columns:1.5fr 1fr 1fr 1fr}}
+.foot-p{margin:.5rem 0 1.5rem;max-width:26ch;color:rgb(255 255 255/.75)}
+.foot-a{display:inline-flex;min-height:48px;align-items:center;border:1px solid rgb(255 255 255/.5);border-radius:9999px;padding:0 1.5rem;font-weight:500;transition:background-color .15s,color .15s}
+.foot-a:hover{background:#fff;color:rgb(var(--c-navy))}
+.foot-heading{margin-bottom:.5rem;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;line-height:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.foot-link{display:flex;min-height:48px;align-items:center;color:rgb(var(--c-link))}
+.foot-link:hover{color:#fff;text-decoration:underline}
+.foot-div3{margin-top:2.5rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem;border-top:1px solid rgb(255 255 255/.15);padding-top:1.5rem;font-family:JetBrains Mono,ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;line-height:1rem;color:rgb(255 255 255/.75)}
+.foot-nav{display:flex;gap:.25rem}
+.legal-link{display:flex;min-height:48px;align-items:center;padding:0 .5rem}
+.legal-link:hover{color:#fff}
+.foot-p2{margin-top:2.5rem;user-select:none;white-space:nowrap;background-image:linear-gradient(to bottom,rgb(255 255 255/.12),rgb(255 255 255/.04));-webkit-background-clip:text;background-clip:text;padding-bottom:1rem;text-align:center;font-family:Sora,system-ui,sans-serif;font-size:min(13vw,13rem);font-weight:800;line-height:1;letter-spacing:-.025em;color:transparent}
+</style>
+</head>
+<body>
+  <div id="tint" class="layer-div" aria-hidden="true"></div>
+  <div class="layer-div2" aria-hidden="true"></div>
+  <div class="layer-div3" aria-hidden="true"></div>
+  <a href="#main" class="layer-a">Skip to content</a>
+  <svg class="layer-svg" width="0" height="0" aria-hidden="true" focusable="false"><defs><symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></symbol><symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14m-6-6l6 6-6 6"/></symbol></defs></svg>
+
+  <!-- ======== HEADER / NAVIGATION ======== -->
+  <header class="head-header">
+    <div class="head-div">
+      <a href="index.html" class="brand-link" aria-label="InvictusOS home"><img src="assets/logo.svg" alt="" width="38" height="32" class="head-img">InvictusOS</a>
+      <nav aria-label="Primary" class="head-nav">
+        <a href="index.html#requirements" class="nav-link">Requirements</a>
+        <a href="features.html" class="nav-link" aria-current="page">Features</a>
+        <a href="/installation" class="nav-link">Installation</a>
+        <a href="/faq" class="nav-link">FAQ</a>
+      </nav>
+      <button type="button" role="switch" aria-checked="true" data-motion-switch class="group head-button"><span class="head-span">Animations</span><span aria-hidden="true" class="head-span2"><span class="head-span3"></span></span></button>
+      <a href="/download" class="head-a">Download</a>
+      <button id="burger" type="button" class="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span></button>
+    </div>
+    <div id="mnav" class="mnav" hidden>
+      <nav aria-label="Mobile" class="mnav-links">
+        <a href="index.html#requirements" class="mnav-link">Requirements<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a href="features.html" class="mnav-link" aria-current="page">Features<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a href="/installation" class="mnav-link">Installation<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a href="/faq" class="mnav-link">FAQ<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+      </nav>
+      <div class="mnav-actions">
+        <a href="/download" class="mnav-download">Download</a>
+        <button type="button" role="switch" aria-checked="true" data-motion-switch class="group mnav-switch"><span>Animations</span><span aria-hidden="true" class="head-span2"><span class="head-span3"></span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="overflow-x-clip">
+    <!-- ======== PAGE INTRO ======== -->
+    <section id="top" aria-labelledby="page-h" class="section-wrap fx-top">
+      <span aria-hidden="true" class="hero-span"></span><span aria-hidden="true" class="hero-span2"></span>
+      <h1 id="page-h" class="section-title">Every feature.</h1>
+      <p class="feat-p">Everything InvictusOS ships today in Sagaris, and everything we are building next, in one place.</p>
+      <p class="fx-back"><a href="index.html#features" class="hero-a2">Back to home <svg class="icon-md" aria-hidden="true"><use href="#i-ar"/></svg></a></p>
+    </section>
+
+    <!-- ======== FEATURE DATABASE ======== -->
+    <section id="feature-list" aria-labelledby="list-h" class="section-wrap">
+      <h2 id="list-h" class="section-title">What's in &amp; what's coming.</h2>
+      <ul id="flist" class="feat-ul">
+        <!-- FEATURE CARDS START -->
+        <li><article class="feature-card group"><span class="feature-glyph" aria-hidden="true">iv</span><span class="pill-ok">Available</span><h3 class="feature-title">Lightweight Desktop</h3><p class="text-white/75">A minimal desktop environment with low background CPU and memory usage, tuned for older hardware.</p></article></li>
+        <li><article class="feature-card group"><span class="feature-glyph" aria-hidden="true">32</span><span class="pill-ok">Available</span><h3 class="feature-title">Sagaris 32-bit x86 Support</h3><p class="text-white/75">Full support for legacy 32-bit machines.</p></article></li>
+        <li><article class="feature-card group"><span class="feature-glyph" aria-hidden="true">0</span><span class="pill-ok">Available</span><h3 class="feature-title">No GPU Required</h3><p class="text-white/75">Runs without a dedicated graphics card, so even the oldest machines are supported.</p></article></li>
+        <li><article class="feature-card group"><span class="feature-glyph" aria-hidden="true">MB</span><span class="pill-ok">Available</span><h3 class="feature-title">Low Memory Footprint</h3><p class="text-white/75">Runs on as little as 512 MB of RAM with minimal background services.</p></article></li>
+        <li><article class="feature-card group"><span class="feature-glyph" aria-hidden="true">↻</span><span class="pill-ok">Available</span><h3 class="feature-title">Image-Based Updates</h3><p class="text-white/75">An image-based release model with predictable point updates.</p></article></li>
+        <li><article class="feat-article group"><span class="feature-glyph" aria-hidden="true">x64</span><span class="feat-span">Upcoming</span><h3 class="feature-title">XIPHOS release</h3><p class="text-white/75">A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></article></li>
+        <li><article class="feat-article group"><span class="feature-glyph" aria-hidden="true">⇩</span><span class="feat-span">Upcoming</span><h3 class="feature-title">Graphical Installer for XIPHOS</h3><p class="text-white/75">A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></article></li>
+        <li><article class="feat-article group"><span class="feature-glyph" aria-hidden="true">⚙</span><span class="feat-span">Upcoming</span><h3 class="feature-title">Settings and Factory Reset</h3><p class="text-white/75">A settings and factory reset menu for InvictusOS XIPHOS</p></article></li>
+        <li><article class="feat-article group"><span class="feature-glyph" aria-hidden="true">⚙</span><span class="feat-span">Upcoming</span><h3 class="feature-title">Custom Linux Kernel</h3><p class="text-white/75">A settings and factory reset menu for InvictusOS XIPHOS</p></article></li>
+        <!-- FEATURE CARDS END -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="foot-footer">
+    <div class="foot-div">
+      <div class="foot-div2">
+        <div><a href="index.html" class="brand-link"><img src="assets/logo.svg" alt="" width="38" height="32" class="head-img">InvictusOS</a>
+          <p class="foot-p">A minimal operating system built to keep old machines alive.</p> <a href="simple.html" class="foot-a">Switch to Simple Site</a>
+        </div>
+        <nav aria-label="About">
+          <p class="foot-heading">About</p>
+          <ul>
+            <li><a href="index.html#about" class="foot-link">About</a></li>
+            <li><a href="features.html" class="foot-link">Features</a></li>
+            <li><a href="index.html#requirements" class="foot-link">Requirements</a></li>
+            <li><a href="/download" class="foot-link">Download</a></li>
+            <li><a href="index.html#history" class="foot-link">History</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Resources">
+          <p class="foot-heading">Resources</p>
+          <ul>
+            <li><a href="/installation" class="foot-link">Installation</a></li>
+            <li><a href="/faq" class="foot-link">FAQ</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Community">
+          <p class="foot-heading">Community</p>
+          <ul>
+            <li><a href="https://github.com/Invictus-Project" target="_blank" rel="noopener noreferrer" class="foot-link">GitHub</a></li>
+            <li><a href="http://discord.gg/uG72zNaagW" target="_blank" rel="noopener noreferrer" class="foot-link">Discord</a></li>
+            <li><a href="https://x.com/OsInvictus82350" target="_blank" rel="noopener noreferrer" class="foot-link">Twitter / X</a></li>
+            <li><a href="https://www.youtube.com/@InvictusOS" target="_blank" rel="noopener noreferrer" class="foot-link">YouTube</a></li>
+            <li><a href="https://www.instagram.com/invictusos_/?hl=en" target="_blank" rel="noopener noreferrer" class="foot-link">Instagram</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="foot-div3">
+        <p>© 2026 InvictusOS - The minimal, lightweight OS</p>
+        <nav aria-label="Legal" class="foot-nav"><a href="/privacy" class="legal-link">Privacy</a><a href="/terms" class="legal-link">Terms</a><a href="/support" class="legal-link">Support</a></nav>
+      </div>
+    </div>
+    <p aria-hidden="true" class="foot-p2">InvictusOS</p>
+  </footer>
+
+<script>
+(function () {
+  var d = document.documentElement, $ = function (i) { return document.getElementById(i); };
+  /* ---- header: animations switch + phone menu (same behaviour as index.html) ---- */
+  var mts = [].slice.call(document.querySelectorAll("[data-motion-switch]"));
+  function motion(v, keep) {
+    d.setAttribute("data-motion", v ? "on" : "off");
+    mts.forEach(function (s) { s.setAttribute("aria-checked", String(v)); });
+    if (keep) { try { localStorage.setItem("iv-motion", v ? "on" : "off"); } catch (e) {} }
+  }
+  var pref = null;
+  try { pref = localStorage.getItem("iv-motion"); } catch (e) {}
+  motion(pref ? pref === "on" : true, false);
+  mts.forEach(function (s) { s.addEventListener("click", function () { motion(d.getAttribute("data-motion") === "off", true); }); });
+  var b = $("burger"), mn = $("mnav");
+  function menu(o) { mn.hidden = !o; b.setAttribute("aria-expanded", String(o)); b.setAttribute("aria-label", o ? "Close menu" : "Open menu"); }
+  b.addEventListener("click", function () { menu(b.getAttribute("aria-expanded") !== "true"); });
+  mn.addEventListener("click", function (e) { if (e.target.closest("a")) menu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !mn.hidden) { menu(false); b.focus(); } });
+  addEventListener("resize", function () { if (innerWidth >= 768) menu(false); });
+})();
+</script>
+</body>
+</html>
