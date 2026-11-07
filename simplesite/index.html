@@ -1,80 +1,115 @@
 <!DOCTYPE html>
+<!--
+  InvictusOS SIMPLE SITE (simple.html)
+  Built for old, slow PCs: no JavaScript, no web fonts, no animations, no
+  images except one tiny logo. Content mirrors index.html.
+  EDITING: change text between the tags; change links in href="...".
+  Colours: background #06063F, text #fff, muted #B2B8E8, links #9AB7FF.
+-->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>InvictusOS | Sagaris – Lightweight Linux for old PCs</title>
-<meta name="description" content="InvictusOS is a minimal, fast and reliable operating system that keeps old netbooks and low-end PCs alive. Runs on 512 MB RAM with no GPU.">
+<title>InvictusOS Simple Site – Lightweight, Fast, Reliable OS for Old Computers</title>
+<meta name="description" content="InvictusOS is a minimal, lightweight operating system that keeps old machines alive. Runs on 512 MB RAM, a 900 MHz processor and 5 GB of disk space, with no GPU required.">
 <meta name="theme-color" content="#06063F">
-<meta property="og:title" content="InvictusOS | Sagaris">
-<meta property="og:description" content="A minimal operating system that keeps old machines alive.">
+<link rel="canonical" href="https://webinvictusos.neocities.org/">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="InvictusOS">
+<meta property="og:title" content="InvictusOS – Lightweight | Fast | Reliable">
+<meta property="og:description" content="A minimal operating system that keeps old machines alive.">
+<meta property="og:url" content="https://webinvictusos.neocities.org/">
+<meta property="og:image" content="https://webinvictusos.neocities.org/assets/desktop.png">
+<meta property="og:image:alt" content="The InvictusOS desktop with a cloudy sky wallpaper, a top panel and an app dock">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="invicn.svg" type="image/svg+xml">
 <style>
-:root{--bg:#06063F;--text:#fff;--muted:#B2B8E8;--soft:#8396E7;--line:transparent}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--bg);color:var(--text);font:400 18px/1.75 "Segoe UI",Arial,sans-serif}
+html{-webkit-text-size-adjust:100%}
+body{background:#06063F;color:#fff;font:400 18px/1.75 "Segoe UI",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid #9AB7FF;outline-offset:4px}
-.skip{position:absolute;left:-999px;top:8px;background:#fff;color:var(--bg);padding:12px 18px;z-index:9}
+a:focus{outline:2px solid #9AB7FF;outline-offset:4px}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:#06063F;padding:12px 18px;z-index:9}
 .skip:focus{left:8px}
-.wrap{max-width:1080px;margin:auto;padding:0 24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
 nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:8px 0}
-.logo{display:flex;align-items:center;gap:10px;min-height:48px;font-weight:600;font-size:18px}
-.logo img{width:34px;height:34px}
+.logo{display:flex;align-items:center;min-height:48px;font-weight:600;font-size:18px}
+.logo img{width:34px;height:34px;margin-right:10px}
 nav ul{display:flex;flex-wrap:wrap;list-style:none;margin:0 -10px}
-nav ul a{display:flex;align-items:center;min-height:48px;padding:0 10px;font-size:15px;color:var(--muted)}
+nav ul a{display:flex;align-items:center;min-height:48px;padding:0 10px;font-size:15px;color:#B2B8E8}
 nav ul a:hover{color:#fff}
 
-.hero{text-align:center;padding:10vh 0 4vh}
-.hero-logo{width:70px;height:70px;margin:0 auto 26px}
-h1{font-size:clamp(48px,15vw,86px);line-height:.95;font-weight:500;letter-spacing:-.035em;margin-bottom:18px}
-.tag{font-size:clamp(19px,4vw,24px);color:var(--muted);margin-bottom:22px}
-.desc{color:var(--muted);max-width:620px;margin:0 auto 42px}
-.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 30px;background:#fff;color:var(--bg);font-weight:600;font-size:16px;border-radius:8px}
+.hero{text-align:center;padding:8vh 0 3vh}
+.hero-logo{display:block;width:70px;height:70px;margin:0 auto 26px}
+h1{font-size:48px;font-size:clamp(48px,15vw,86px);line-height:.95;font-weight:500;letter-spacing:-.03em;margin-bottom:18px}
+.tag{font-size:19px;color:#B2B8E8;margin:0 auto 22px;max-width:none}
+.desc{margin:0 auto 38px}
+.btn,.btn2{display:inline-flex;align-items:center;min-height:52px;padding:0 30px;margin:6px;font-weight:600;font-size:16px;border-radius:8px}
+.btn{background:#fff;color:#06063F}
 .btn:hover{background:#DDE3FF}
+.btn2{border:2px solid #8396E7;color:#fff}
+.btn2:hover{border-color:#fff}
 
-section{padding:72px 0;content-visibility:auto;contain-intrinsic-size:auto 500px}
-.row{display:grid;gap:20px}
-h2{font-size:clamp(26px,5vw,36px);line-height:1.2;font-weight:500;letter-spacing:-.02em}
-p{color:var(--muted);max-width:34em}
+section{padding:56px 0}
+h2{font-size:28px;line-height:1.2;font-weight:500;letter-spacing:-.02em;margin-bottom:20px}
+h3{font-size:20px;line-height:1.3;font-weight:600}
+p{color:#B2B8E8;max-width:34em}
 p+p{margin-top:16px}
-strong{color:var(--text);font-weight:600}
+strong{color:#fff;font-weight:600}
+
+.stats{list-style:none;display:flex;flex-wrap:wrap;margin-top:22px}
+.stats li{margin:0 26px 6px 0;color:#B2B8E8}
 
 table{border-collapse:collapse;width:100%;font-size:17px}
 th,td{text-align:left;padding:10px 12px 10px 0;vertical-align:top}
-th{font-weight:400;color:var(--soft)}
+th{font-weight:400;color:#8396E7}
 thead th{font-size:15px}
-td{color:var(--text)}
+td{color:#fff}
 
 dl div{padding:0 0 22px}
 dl div:last-child{padding:0}
 dt{font-weight:600}
-dd{color:var(--muted)}
+dd{color:#B2B8E8}
+dt a{color:#9AB7FF}
+dt a:hover{color:#fff}
+
+.feat{list-style:none}
+.feat li{padding:0 0 24px}
+.feat li:last-child{padding:0}
+.st{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8396E7;max-width:none}
+.ok{color:#4ADE80}
+.more{margin-top:34px}
 
 .links{list-style:none}
 .links a{display:flex;align-items:center;min-height:48px;color:#9AB7FF}
 .links a:hover{color:#fff}
 
-footer{padding:40px 0 56px;font-size:14px;color:#8092D8}
+footer{padding:32px 0 48px;font-size:14px;color:#8092D8}
+footer p{color:#8092D8;max-width:none}
+footer ul{display:flex;flex-wrap:wrap;list-style:none;margin:4px -8px 12px}
+footer ul a{display:flex;align-items:center;min-height:48px;padding:0 8px}
+footer ul a:hover{color:#fff}
 
 @media(min-width:800px){
 body{font-size:20px}
-section{padding:100px 0}
-.row{grid-template-columns:1fr 2fr;gap:48px}
+.tag{font-size:24px}
+section{padding:96px 0}
+h2{font-size:36px;margin-bottom:0}
+.row{display:grid;grid-template-columns:1fr 2fr;grid-gap:48px}
 }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"InvictusOS","alternateName":"InvictusOS Sagaris","applicationCategory":"OperatingSystem","operatingSystem":"InvictusOS (Linux 4.x, 32-bit x86)","description":"A minimal, fast and reliable operating system designed to keep old netbooks and compact desktops alive. Runs with 512 MB RAM and no GPU.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"author":{"@id":"#org"},"sameAs":["https://github.com/Invictus-Project","https://x.com/OsInvictus82350","https://www.youtube.com/@InvictusOS","https://www.instagram.com/invictusos"]},
-{"@type":"Organization","@id":"#org","name":"InvictusOS Project","member":[
-{"@type":"Person","name":"Sayansut Mohapatra","jobTitle":"Software & Firmware Engineer"},
-{"@type":"Person","name":"Aarush Maharana","jobTitle":"Firmware Engineer"},
+{"@type":"SoftwareApplication","@id":"https://webinvictusos.neocities.org/#os","name":"InvictusOS","alternateName":"InvictusOS Sagaris","applicationCategory":"OperatingSystem","operatingSystem":"Linux 4.x based, 32-bit x86","description":"A minimal, lightweight operating system that keeps old machines alive. Runs with 512 MB RAM and no GPU.","softwareVersion":"Sagaris","memoryRequirements":"512 MB RAM","storageRequirements":"5 GB","processorRequirements":"900 MHz Pentium III / Atom","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://webinvictusos.neocities.org/#org"}},
+{"@type":"Organization","@id":"https://webinvictusos.neocities.org/#org","name":"InvictusOS","url":"https://webinvictusos.neocities.org/","sameAs":["https://github.com/Invictus-Project","https://x.com/OsInvictus82350","https://www.youtube.com/@InvictusOS","https://www.instagram.com/invictusos_/"],"member":[
+{"@type":"Person","name":"Sayansut Mohapatra","jobTitle":"Software Architect"},
+{"@type":"Person","name":"Shreyans Das","jobTitle":"Creative Director"},
+{"@type":"Person","name":"Aarush Maharana","jobTitle":"QA Architect"},
 {"@type":"Person","name":"Gaurav Mohapatra","jobTitle":"Head of Marketing"},
-{"@type":"Person","name":"Shreyans Das","jobTitle":"Arts & Creative Commons"}]}]}
+{"@type":"Person","name":"KM Karthikeyan","jobTitle":"Webmaster and Content QA (Part-Time)"}]}]}
 </script>
 </head>
 <body>
@@ -82,23 +117,22 @@ section{padding:100px 0}
 
 <header class="hero">
 <div class="wrap">
-<nav aria-label="Main navigation">
-<a class="logo" href="#top"><img src="invicn.svg" width="34" height="34" alt="InvictusOS logo">InvictusOS</a>
+<nav aria-label="Primary">
+<a class="logo" href="#top" aria-label="InvictusOS home"><img src="invicn.svg" width="34" height="34" alt="">InvictusOS</a>
 <ul>
-<li><a href="#about">About</a></li>
-<li><a href="#history">History</a></li>
-<li><a href="#creators">Creators</a></li>
 <li><a href="#requirements">Requirements</a></li>
-<li><a href="#fordevs">Installation</a></li>
-<li><a href="#support">Community</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="/installation">Installation</a></li>
+<li><a href="/faq">FAQ</a></li>
+<li><a href="/download">Download</a></li>
 </ul>
 </nav>
 <div id="top">
-<img class="hero-logo" src="invicn.svg" width="70" height="70" alt="InvictusOS emblem" fetchpriority="high">
+<img class="hero-logo" src="invicn.svg" width="70" height="70" alt="InvictusOS emblem">
 <h1>InvictusOS</h1>
 <p class="tag">Lightweight | Fast | Reliable</p>
 <p class="desc">A minimal operating system that keeps old machines alive.</p>
-<a class="btn" href="/simple/download" aria-label="Download InvictusOS Sagaris">Download</a>
+<a class="btn" href="/download">Download</a><a class="btn2" href="#about">Learn more</a>
 </div>
 </div>
 </header>
@@ -106,70 +140,124 @@ section{padding:100px 0}
 <main id="main">
 
 <section id="about" aria-labelledby="about-h"><div class="wrap row">
-<h2 id="about-h">Built to run where others won’t</h2>
+<h2 id="about-h">What is InvictusOS</h2>
 <div>
-<p>InvictusOS is designed to deliver a fast, efficient and reliable experience while remaining lightweight enough to run on extremely low-end hardware. The system prioritizes performance, simplicity and stability while keeping resource usage minimal.</p>
-<p>512 MB of RAM. No GPU.</p>
+<p>We built InvictusOS for a simple reason: modern operating systems are too bloated to run on old computers. We wanted to revive old computers so that they can perform at least basic tasks instead of ending up as e-waste. Our goal was to stay as fast and responsive as possible to deliver an efficient user experience.</p>
+<ul class="stats">
+<li><strong>512 MB</strong> RAM minimum</li>
+<li><strong>5 GB</strong> disk minimum</li>
+<li><strong>900 MHz</strong> processor minimum</li>
+<li><strong>No</strong> GPU required</li>
+</ul>
+</div>
+</div></section>
+
+<section id="requirements" aria-labelledby="req-h"><div class="wrap row">
+<h2 id="req-h">Runs on nearly anything.</h2>
+<table>
+<thead><tr><th scope="col"><span class="sr">Component</span></th><th scope="col">Minimum</th><th scope="col">Recommended</th></tr></thead>
+<tbody>
+<tr><th scope="row">Processor</th><td>900 MHz (Pentium III / Atom)</td><td>1 GHz</td></tr>
+<tr><th scope="row">Memory</th><td>512 MB</td><td>1 GB</td></tr>
+<tr><th scope="row">Disk space</th><td>5 GB</td><td>15 GB</td></tr>
+<tr><th scope="row">Graphics</th><td>No GPU required</td><td>No GPU required</td></tr>
+<tr><th scope="row">Display</th><td>512×300</td><td>1024×600</td></tr>
+</tbody>
+</table>
+</div></section>
+
+<section id="features" aria-labelledby="feat-h"><div class="wrap row">
+<h2 id="feat-h">What’s in &amp; what’s coming.</h2>
+<div>
+<p>InvictusOS is currently being actively developed and it keeps getting better and better.</p>
+<ul class="feat" style="margin-top:28px">
+<li><p class="st ok">Available</p><h3>Lightweight Desktop</h3><p>A minimal desktop environment with low background CPU and memory usage, tuned for older hardware.</p></li>
+<li><p class="st ok">Available</p><h3>Sagaris 32-bit x86 Support</h3><p>Full support for legacy 32-bit machines.</p></li>
+<li><p class="st">Upcoming</p><h3>XIPHOS release</h3><p>A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></li>
+<li><p class="st">Upcoming</p><h3>Graphical Installer for XIPHOS</h3><p>A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></li>
+<li><p class="st">Upcoming</p><h3>Settings and Factory Reset</h3><p>A settings and factory reset menu for InvictusOS XIPHOS</p></li>
+<li><p class="st">Upcoming</p><h3>Custom Linux Kernel</h3><p>A settings and factory reset menu for InvictusOS XIPHOS</p></li>
+</ul>
+<p class="more"><a class="btn" href="features.html">Explore more features</a></p>
+</div>
+</div></section>
+
+<section id="faq" aria-labelledby="faq-h"><div class="wrap row">
+<h2 id="faq-h">Have any questions?</h2>
+<div>
+<p>Find answers to questions about installation, compatibility, and more.</p>
+<p class="more"><a class="btn" href="/faq">Browse the FAQ</a></p>
 </div>
 </div></section>
 
 <section id="history" aria-labelledby="history-h"><div class="wrap row">
 <h2 id="history-h">From experiment to daily driver</h2>
 <dl>
-<div><dt>Origins</dt><dd>InvictusOS began as an experimental build meant to revive old netbooks and compact desktops.</dd></div>
-<div><dt>Continuous development</dt><dd>Over time, InvictusOS evolved into a refined system focused on efficiency, compatibility and unobtrusive design.</dd></div>
-<div><dt>InvictusOS Sagaris release</dt><dd>The current Sagaris release represents the first version of all the combined work of the team.</dd></div>
-<div><dt>InvictusOS Xiphos release</dt><dd>The upcoming InvictusOS release. Stay tuned.</dd></div>
+<div><dt>Origins</dt><dd>We, a group of teens, started building this OS as an experiment to try to revive an old laptop. This then turned into a project which we are actively working on.</dd></div>
+<div><dt>Continuous development</dt><dd>Over time, through trials, errors and testing, the first version focused on speed and compatibility was built.</dd></div>
+<div><dt>InvictusOS Sagaris release</dt><dd>The current Sagaris release marks the first version of InvictusOS. It brings together all our work into a single build, and this is just the first step for what we have planned.</dd></div>
 </dl>
 </div></section>
 
 <section id="creators" aria-labelledby="creators-h"><div class="wrap row">
 <h2 id="creators-h">The Creators</h2>
-<dl>
-<div><dt>Sayansut Mohapatra</dt><dd>Software &amp; Firmware Engineer</dd></div>
-<div><dt>Aarush Maharana</dt><dd>Firmware Engineer</dd></div>
-<div><dt>Gaurav Mohapatra</dt><dd>Head of Marketing</dd></div>
-<div><dt>Shreyans Das</dt><dd>Arts &amp; Creative Commons</dd></div>
-</dl>
-</div></section>
-
-<section id="requirements" aria-labelledby="req-h"><div class="wrap row">
-<h2 id="req-h">Runs on nearly anything</h2>
-<table>
-<thead><tr><th scope="col"><span style="position:absolute;left:-999px">Component</span></th><th scope="col">Minimum</th><th scope="col">Recommended</th></tr></thead>
-<tbody>
-<tr><th scope="row">Processor</th><td>990 MHz (Pentium III / Atom)</td><td>1 GHz</td></tr>
-<tr><th scope="row">Memory</th><td>512 MB</td><td>1 GB</td></tr>
-<tr><th scope="row">Disk</th><td>15 GB</td><td>20 GB</td></tr>
-<tr><th scope="row">Graphics</th><td>None</td><td>None</td></tr>
-<tr><th scope="row">Display</th><td>512×300</td><td>1024×600</td></tr>
-</tbody>
-</table>
-</div></section>
-
-<section id="fordevs" aria-labelledby="dev-h"><div class="wrap row">
-<h2 id="dev-h">For developers</h2>
 <div>
-<p>InvictusOS is engineered for predictability and low overhead. It favours simple tooling and clear defaults over heavy abstractions.</p>
-<p>Linux 4.x, 32-bit x86, a lightweight desktop and image-based updates.</p>
-<p style="margin-top:32px"><a class="btn" href="/" aria-label="Read the InvictusOS install guide">Install guide</a></p>
+<p>We are a group of students working on InvictusOS, an open-source operating system to keep older systems alive.</p>
+<dl style="margin-top:28px">
+<div><dt><a href="https://memphims.neocities.org" rel="noopener noreferrer">Sayansut Mohapatra</a></dt><dd>Software Architect</dd></div>
+<div><dt>Shreyans Das</dt><dd>Creative Director</dd></div>
+<div><dt><a href="https://my-project-nine-green.vercel.app/" rel="noopener noreferrer">Aarush Maharana</a></dt><dd>QA Architect</dd></div>
+<div><dt><a href="https://gauravmohapatra.neocities.org" rel="noopener noreferrer">Gaurav Mohapatra</a></dt><dd>Head of Marketing</dd></div>
+<div><dt>KM Karthikeyan</dt><dd>Webmaster and Content QA (Part-Time)</dd></div>
+</dl>
+<!-- VIEW ALL CONTRIBUTORS BUTTON (disabled). To enable: delete this line and the closing line below.
+<p class="more"><a class="btn2" href="contributors.html">View all contributors</a></p>
+-->
 </div>
 </div></section>
 
-<section id="support" aria-labelledby="community-h"><div class="wrap row">
+<section id="developers" aria-labelledby="dev-h"><div class="wrap row">
+<h2 id="dev-h">For Developers</h2>
+<div>
+<p>We have designed InvictusOS to be as light as possible, with minimal background processes. It just has the essentials to keep it usable, including some other apps that might be useful for our users.</p>
+<dl style="margin-top:28px">
+<div><dt>Kernel</dt><dd>Linux 4.x with a lean configuration tuned for low-memory systems</dd></div>
+<div><dt>Architecture</dt><dd>32-bit x86 builds, legacy-friendly boot options</dd></div>
+<div><dt>Desktop</dt><dd>Lightweight environment with minimal background services</dd></div>
+<div><dt>Updates</dt><dd>Image-based release model with predictable point updates</dd></div>
+</dl>
+<p class="more"><a class="btn" href="/installation">Installation guide</a></p>
+</div>
+</div></section>
+
+<section id="community" aria-labelledby="community-h"><div class="wrap row">
 <h2 id="community-h">Join the community</h2>
-<ul class="links">
-<li><a href="https://github.com/Invictus-Project" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-<li><a href="https://discord.com/invite/wXnFgeWt" target="_blank" rel="noopener noreferrer">Discord</a></li>
-<li><a href="https://x.com/OsInvictus82350" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
-<li><a href="https://www.youtube.com/@InvictusOS" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-<li><a href="https://www.instagram.com/invictusos" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-<li><a href="supportcenter.html">Support Center</a></li>
+<div>
+<p>Stay connected with the project.</p>
+<ul class="links" style="margin-top:20px">
+<li><a href="https://github.com/Invictus-Project" target="_blank" rel="noopener noreferrer">GitHub<span class="sr"> (opens in a new tab)</span></a></li>
+<li><a href="http://discord.gg/uG72zNaagW" target="_blank" rel="noopener noreferrer">Discord<span class="sr"> (opens in a new tab)</span></a></li>
+<li><a href="https://x.com/OsInvictus82350" target="_blank" rel="noopener noreferrer">Twitter / X<span class="sr"> (opens in a new tab)</span></a></li>
+<li><a href="https://www.youtube.com/@InvictusOS" target="_blank" rel="noopener noreferrer">YouTube<span class="sr"> (opens in a new tab)</span></a></li>
+<li><a href="https://www.instagram.com/invictusos_/?hl=en" target="_blank" rel="noopener noreferrer">Instagram<span class="sr"> (opens in a new tab)</span></a></li>
 </ul>
+</div>
 </div></section>
 
 </main>
 
-<footer><div class="wrap">© 2026 InvictusOS Project</div></footer>
+<footer>
+<div class="wrap">
+<p>© 2026 InvictusOS - The minimal, lightweight OS</p>
+<nav aria-label="Legal">
+<ul>
+<li><a href="/privacy">Privacy</a></li>
+<li><a href="/terms">Terms</a></li>
+<li><a href="/support">Support</a></li>
+</ul>
+</nav>
+<a class="btn2" href="/" style="margin-left:0">Switch to Main Site</a>
+</div>
+</footer>
 </body>
 </html>
