@@ -1,92 +1,188 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#070b14" />
-    <title>Page not found — invictusOS</title>
-    <style>
-      :root { color-scheme: dark; }
-      * { box-sizing: border-box; }
-      html, body { min-height: 100%; }
-      body {
-        margin: 0;
-        background: #070b14;
-        color: #f6f8fc;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      .error-page {
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 32px 24px;
-        background: radial-gradient(circle at 50% 38%, rgba(30, 105, 242, .09), transparent 32rem), #070b14;
-      }
-      .error-card {
-        width: min(100%, 620px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      .brand {
-        margin: 0 0 clamp(64px, 12vh, 104px);
-        color: #fff;
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: -.05em;
-      }
-      .error-code {
-        color: #2d7df6;
-        font-size: clamp(8.5rem, 25vw, 13.5rem);
-        font-weight: 800;
-        letter-spacing: -.11em;
-        line-height: .72;
-        text-indent: -.08em;
-        text-shadow: 0 0 56px rgba(45, 125, 246, .12);
-      }
-      .message { margin-top: 52px; }
-      .eyebrow { margin: 0 0 12px; color: #f6f8fc; font-size: 15px; font-weight: 700; }
-      h1 { margin: 0; color: #f6f8fc; font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; letter-spacing: -.045em; }
-      .description { margin: 12px 0 0; color: #8793a8; font-size: 14px; line-height: 1.6; }
-      .home-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        margin-top: 30px;
-        padding: 12px 17px;
-        border: 1px solid #2d7df6;
-        border-radius: 7px;
-        color: #fff;
-        background: #2d7df6;
-        font-size: 14px;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      .home-button:focus-visible { outline: 3px solid rgba(100, 162, 255, .55); outline-offset: 4px; }
-      .home-button svg { width: 16px; height: 16px; }
-      @media (max-width: 520px) {
-        .error-page { padding: 24px 20px; }
-        .brand { margin-bottom: 78px; }
-        .message { margin-top: 44px; }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="error-page">
-      <section class="error-card" aria-labelledby="error-title">
-        <p class="brand" aria-label="invictusOS home">invictusOS</p>
-        <div class="error-code" aria-hidden="true">404</div>
-        <div class="message">
-          <p class="eyebrow">Page not found</p>
-          <h1 id="error-title">This page doesn’t exist.</h1>
-          <p class="description">The link may be outdated, or the page may have moved.</p>
+<!DOCTYPE html>
+<html lang="en" data-motion="on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>404 – Not found | InvictusOS</title>
+<meta name="description" content="This page doesn’t exist or has moved. Head back to InvictusOS, the minimal operating system that keeps old machines alive.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0a0a1c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a1c'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='700' font-size='34' text-anchor='middle' fill='%231a5cff'%3Eiv%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Sora:wght@500;700;800&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"404 – Not found","description":"The requested page does not exist on the InvictusOS website.","isPartOf":{"@type":"WebSite","name":"InvictusOS","url":"https://webinvictusos.neocities.org/"},"about":{"@type":"SoftwareApplication","name":"InvictusOS Sagaris","applicationCategory":"OperatingSystem","description":"A minimal, lightweight operating system that runs on 512 MB RAM, a 900 MHz processor and 5 GB of disk space, with no GPU required."}}
+</script>
+<style>
+:root{--navy:10 10 28;--brand:26 92 255;--link:77 163 255;--indigo:26 26 166;--mid:28 34 150;--teal:29 91 134;
+  --sora:Sora,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:rgb(var(--navy))}
+body{margin:0;min-height:100vh;overflow-x:hidden;color:#fff;background:rgb(var(--navy));font-family:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.625;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid rgb(var(--link));outline-offset:3px;border-radius:6px}
+.bg1{position:fixed;inset:0;z-index:-20;opacity:.5;background:linear-gradient(160deg,rgb(var(--indigo)),rgb(var(--mid)) 50%,rgb(var(--teal)))}
+.bg2{position:fixed;inset:0;z-index:-10;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.34) 1px,transparent 1px);background-size:48px 48px}
+.blob{position:fixed;z-index:-15;pointer-events:none;border-radius:9999px;filter:blur(100px);animation:drift 16s ease-in-out infinite}
+.b1{right:-8rem;top:1rem;width:34rem;height:34rem;background:rgb(var(--brand)/.35)}
+.b2{left:-8rem;bottom:0;width:30rem;height:30rem;background:rgb(var(--teal)/.6);animation-delay:-8s}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,30px)}}
+html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="off"] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.skip{position:absolute;left:-9999px}.skip:focus{left:12px;top:12px;z-index:100;background:#fff;color:rgb(var(--navy));font-weight:700;padding:12px 20px;border-radius:8px}
+.wrap{max-width:1500px;margin:0 auto;padding:0 1.25rem}
+.mono{font-family:var(--mono);font-size:.78rem;color:rgb(255 255 255/.6)}
+
+header{position:sticky;top:0;z-index:50;border-bottom:1px solid rgb(255 255 255/.1);background:rgb(var(--navy)/.85);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);padding-top:env(safe-area-inset-top,0px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
+.brand{display:flex;align-items:center;gap:.625rem;min-height:48px;font-family:var(--sora);font-size:1.125rem;font-weight:700}
+.logo{height:2rem;width:auto}
+nav ul{display:flex;gap:.25rem;list-style:none;margin:0;padding:0}
+nav a.n{display:inline-flex;align-items:center;min-height:48px;padding:0 .9rem;font-size:.95rem;font-weight:500;color:rgb(255 255 255/.8);transition:color .2s}
+nav a.n:hover{color:#fff}
+.tools{display:flex;align-items:center;gap:.5rem}
+.sw{display:inline-flex;align-items:center;gap:.625rem;min-height:48px;padding:0 .75rem;border:1px solid rgb(255 255 255/.2);border-radius:9999px;font:500 .875rem/1.25rem Manrope,system-ui,sans-serif;color:rgb(255 255 255/.85);background:none;cursor:pointer}
+.sw:hover{border-color:rgb(255 255 255/.5)}
+.sw .tr{position:relative;width:2.75rem;height:1.5rem;border-radius:9999px;background:rgb(255 255 255/.2);transition:background-color .15s}
+.sw .th{position:absolute;left:.125rem;top:.125rem;width:1.25rem;height:1.25rem;border-radius:9999px;background:#fff;transition:transform .15s}
+.sw[aria-checked="true"] .tr{background:rgb(var(--brand))}
+.sw[aria-checked="true"] .th{transform:translateX(1.25rem)}
+@media(max-width:820px){nav{display:none}}
+
+.pill{display:inline-flex;align-items:center;gap:.75rem;min-height:56px;padding:0 2rem;border-radius:9999px;font:700 1rem Manrope,system-ui,sans-serif;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+.pill.w{background:#fff;color:rgb(var(--navy));border:0}
+.pill.w:hover{background:rgb(var(--brand));color:#fff}
+.pill.o{background:none;color:#fff;font-weight:500;border:1px solid rgb(255 255 255/.5)}
+.pill.o:hover{border-color:#fff;background:rgb(255 255 255/.08)}
+.dl{min-height:48px;padding:0 1.25rem;font-size:.9rem}
+
+canvas{display:block;width:100%;cursor:crosshair;margin-top:clamp(8px,3vh,32px)}
+.copy{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,5vw,80px);padding:clamp(28px,5vw,64px) 0 clamp(28px,4vw,48px);align-items:end}
+h1{margin:0;font-family:var(--sora);font-weight:800;font-size:clamp(2.2rem,5.4vw,4.6rem);line-height:.98;letter-spacing:-.05em;text-wrap:balance}
+h1 em{font-style:normal;color:rgb(var(--link))}
+.side p{margin:0 0 1.5rem;color:rgb(255 255 255/.75);font-size:1.1rem;max-width:36ch}
+.row{display:flex;flex-wrap:wrap;gap:.75rem}
+@media(max-width:820px){.copy{grid-template-columns:1fr}}
+
+h2.mono{margin:0 0 .9rem;font-weight:400}
+.rows{list-style:none;margin:0;padding:0;border-top:1px solid rgb(255 255 255/.15)}
+.lr{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:96px;padding:0 .5rem;border-bottom:1px solid rgb(255 255 255/.15);font-family:var(--sora);font-size:clamp(1.5rem,4.2vw,3rem);line-height:1;font-weight:800;letter-spacing:-.05em;background:linear-gradient(#fff,#fff) bottom/100% 0% no-repeat;transition:background-size .35s,color .35s,padding .35s}
+.lr:hover,.lr:focus-visible{background-size:100% 100%;padding:0 1.5rem;color:rgb(var(--navy))}
+.lr .mono{color:inherit;opacity:.7;text-align:right;letter-spacing:0;font-weight:400}
+@media(max-width:620px){.lr .mono{display:none}}
+
+footer{margin-top:clamp(40px,7vw,96px);background:#000}
+footer .wrap{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;justify-content:space-between;align-items:center;padding-top:1.25rem;padding-bottom:1.5rem}
+footer p{margin:0}
+footer ul{display:flex;flex-wrap:wrap;list-style:none;margin:0;padding:0}
+footer ul a{display:inline-flex;align-items:center;min-height:48px;padding:0 .7rem;font-size:.9rem;color:rgb(255 255 255/.7)}
+footer ul a:hover{color:#fff}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="bg1" aria-hidden="true"></div><div class="bg2" aria-hidden="true"></div>
+<span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="InvictusOS home"><svg class="logo" aria-hidden="true" focusable="false" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,180.81968,150.85746"><g transform="translate(-157.14253,-97.32981)"><g stroke="none" stroke-miterlimit="10"><path d="M157.78672,196.6507c0.00178,-14.15894 -0.07967,-28.17497 0.02782,-42.18955c0.11073,-14.43742 15.95715,-24.5275 29.08958,-16.95962c3.66699,2.11319 6.52802,4.94227 8.66156,8.55519c0.284,0.48094 0.51729,0.9918 0.79532,1.52992c-0.27473,0.16133 -0.42238,0.28414 -0.59218,0.34243c-4.16098,1.4288 -5.6469,3.43441 -5.72629,7.82137c-0.22575,12.47773 -0.45834,24.9554 -0.65132,37.43366c-0.17971,11.62022 -0.42607,23.24117 -0.42699,34.86181c-0.00067,8.43396 3.93947,14.67116 11.3887,18.66328c0.3704,0.19849 0.7439,0.39122 1.07913,0.94719c-1.44489,0 -2.88981,0.00745 -4.33464,-0.0013c-6.69641,-0.04051 -13.39372,-0.03052 -20.08899,-0.14153c-10.64727,-0.1765 -19.27753,-9.07176 -19.25251,-19.72277c0.02428,-10.33214 0.02147,-20.66435 0.03082,-31.14009z" fill="#055dfa"/><path d="M157.78715,106.9572c3.7633,-9.78964 15.25161,-12.72067 22.98288,-5.95949c5.63152,4.9249 5.97669,14.28643 0.73255,19.86788c-4.591,4.8863 -11.69594,6.03789 -17.30188,2.8044c-5.7168,-3.29745 -8.38549,-10.16546 -6.41355,-16.71279z" fill="#065bf8"/><path d="M285.07396,243.45202c-1.28526,0.87304 -2.50665,1.86545 -3.86896,2.59454c-2.93155,1.56894 -6.19436,2.07939 -9.43796,2.12548c-4.24218,0.06031 -8.51468,-0.04885 -12.72958,-0.50073c-6.17663,-0.66219 -11.27667,-3.62358 -15.51443,-8.1491c-2.88932,-3.08551 -4.80807,-6.71704 -6.42148,-10.5758c-2.28163,-5.45693 -4.68741,-10.86187 -7.01616,-16.29928c-1.53968,-3.595 -3.00664,-7.22133 -4.5636,-10.80869c-1.23511,-2.84583 -2.60702,-5.63253 -3.82951,-8.48353c-1.88073,-4.38609 -3.66127,-8.81507 -5.52816,-13.2072c-2.72683,-6.41531 -5.49437,-12.8133 -8.24094,-19.22022c-1.78776,-4.17032 -3.48965,-8.37962 -5.37335,-12.50603c-2.37174,-5.19557 -5.48669,-9.8346 -10.4798,-12.93737c-0.58237,-0.3619 -1.06756,-0.88022 -1.93586,-1.61024c0.95053,-0.14796 1.47551,-0.30023 2.00069,-0.3009c8.56421,-0.01078 17.13158,-0.13434 25.69114,0.06769c3.34633,0.07898 6.51351,1.37633 9.42722,3.11444c5.23741,3.12425 8.87254,7.54327 11.07019,13.24896c1.43914,3.73642 3.21722,7.34076 4.75223,11.04214c1.7667,4.26008 3.39306,8.57831 5.15194,12.84174c2.61928,6.34908 5.28053,12.68108 7.96298,19.00379c2.23476,5.26746 4.54275,10.50382 6.78564,15.76791c1.38223,3.24414 2.70129,6.51517 4.05683,9.77075c0.06828,0.16406 0.21358,0.29605 0.48552,0.66114c0.58096,-1.17969 1.13536,-2.19315 1.59092,-3.24925c2.34725,-5.44158 4.69547,-10.88305 6.98892,-16.34739c1.16194,-2.76841 2.14233,-5.61366 3.32586,-8.37223c1.31724,-3.07009 2.80971,-6.06456 4.15863,-9.12161c2.2356,-5.06647 4.41969,-10.15568 6.6212,-15.23714c2.54147,-5.86607 5.01457,-11.76275 7.63226,-17.59458c3.82047,-8.51152 10.23076,-13.84575 19.59949,-15.07326c3.77031,-0.49399 7.62041,-0.41238 11.43628,-0.51343c2.53365,-0.06708 5.07227,-0.03745 7.60627,0.03368c1.49889,0.04208 1.79554,0.55969 1.18845,1.91509c-2.30429,5.14448 -4.65293,10.26917 -6.94728,15.41804c-2.64303,5.93134 -5.23578,11.88505 -7.87092,17.81993c-1.35442,3.05038 -2.76833,6.07428 -4.12972,9.1216c-4.32283,9.6762 -8.64575,19.35241 -12.94452,29.03932c-2.63176,5.9305 -5.17624,11.90003 -7.84201,17.81504c-1.73898,3.85855 -3.40552,7.77848 -5.52612,11.42578c-1.31838,2.26755 -3.38891,4.10985 -5.1997,6.07111c-0.49517,0.53633 -1.27163,0.81295 -1.98483,1.11984c3.69184,-3.07437 6.84674,-6.58966 8.83975,-10.97969c3.1808,-7.00642 6.21514,-14.07927 9.31833,-21.12098c5.35863,-12.15978 10.68964,-24.33189 16.09336,-36.47165c5.75393,-12.92663 11.5808,-25.8208 17.36476,-38.7341c0.22009,-0.49138 0.32428,-1.03467 0.50639,-1.63228c-0.52491,-0.07717 -0.85096,-0.16684 -1.17701,-0.16681c-5.40515,0.00054 -10.82146,-0.20627 -16.21298,0.06945c-9.70454,0.49627 -16.91329,5.18988 -21.09121,13.97535c-3.46641,7.28928 -6.53883,14.7672 -9.73383,22.18394c-6.44743,14.9668 -12.86058,29.94838 -19.28481,44.92518c-0.70667,1.64744 -1.3932,3.30352 -2.23308,5.29755c-0.40625,-0.77455 -0.67337,-1.2051 -0.86799,-1.66626c-6.70837,-15.89587 -13.41825,-31.7911 -20.10859,-47.69458c-3.00211,-7.13628 -6.11029,-14.23285 -8.90611,-21.4498c-3.61527,-9.3323 -12.51521,-15.7824 -22.5092,-15.86847c-7.22234,-0.0622 -14.44551,-0.0313 -21.66832,-0.03008c-0.53982,0.00009 -1.07962,0.09552 -1.66424,0.15087c0.09452,0.28008 0.09789,0.39814 0.15822,0.4504c0.28789,0.24932 0.58304,0.49196 0.89032,0.71691c4.51048,3.30205 7.81977,7.58975 10.01534,12.68158c7.23054,16.76861 14.38059,33.57192 21.56559,50.36019c4.49502,10.50286 8.99871,21.00197 13.49601,31.50383c3.71746,8.6809 9.81097,14.80528 19.14298,17.07679c5.3839,1.31047 10.94708,0.84272 16.43181,0.55051c1.96631,-0.10476 3.96097,-0.67027 5.82966,-1.3406c1.95646,-0.70183 3.77711,-1.78227 5.6571,-2.69724z" fill="#011652"/><path d="M285.07286,243.44799c-1.87889,0.919 -3.69954,1.99944 -5.656,2.70127c-1.86869,0.67032 -3.86335,1.23583 -5.82966,1.3406c-5.48474,0.29222 -11.04792,0.75997 -16.43181,-0.55051c-9.33202,-2.27151 -15.42552,-8.39589 -19.14298,-17.07679c-4.4973,-10.50186 -9.00099,-21.00097 -13.49601,-31.50383c-7.18501,-16.78827 -14.33506,-33.59158 -21.56559,-50.36019c-2.19558,-5.09183 -5.50486,-9.37953 -10.01534,-12.68158c-0.30728,-0.22495 -0.60243,-0.46758 -0.89032,-0.71691c-0.06034,-0.05226 -0.0637,-0.17032 -0.15822,-0.4504c0.58462,-0.05535 1.12443,-0.15079 1.66424,-0.15087c7.2228,-0.00123 14.44597,-0.03213 21.66832,0.03008c9.99398,0.08607 18.89393,6.53617 22.5092,15.86847c2.79582,7.21695 5.904,14.31352 8.90611,21.4498c6.69034,15.90347 13.40022,31.79871 20.10859,47.69458c0.19462,0.46116 0.46174,0.89171 0.86799,1.66626c0.83989,-1.99403 1.52642,-3.65011 2.23308,-5.29755c6.42423,-14.9768 12.83738,-29.95838 19.28481,-44.92518c3.19501,-7.41673 6.26743,-14.89466 9.73383,-22.18394c4.17792,-8.78547 11.38667,-13.47908 21.09121,-13.97535c5.39152,-0.27572 10.80783,-0.06891 16.21298,-0.06945c0.32605,-0.00003 0.6521,0.08964 1.17701,0.16681c-0.18211,0.59762 -0.28629,1.1409 -0.50639,1.63228c-5.78396,12.9133 -11.61083,25.80746 -17.36476,38.7341c-5.40371,12.13975 -10.73473,24.31187 -16.09336,36.47165c-3.10319,7.04171 -6.13754,14.11456 -9.31833,21.12098c-1.99301,4.39003 -5.14791,7.90532 -8.9438,10.97834c-0.0382,0.08754 -0.04587,0.0833 -0.04479,0.08733z" fill="#055cfa"/></g></g></svg>
+InvictusOS</a>
+    <nav aria-label="Primary"><ul>
+      <li><a class="n" href="/#requirements">Requirements</a></li>
+      <li><a class="n" href="/#features">Features</a></li>
+      <li><a class="n" href="/installation">Installation</a></li>
+      <li><a class="n" href="/faq">FAQ</a></li>
+    </ul></nav>
+    <div class="tools">
+      <button type="button" role="switch" aria-checked="true" id="sw" class="sw"><span>Animations</span><span class="tr" aria-hidden="true"><span class="th"></span></span></button>
+      <a class="pill w dl" href="/download">Download</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <canvas id="cv" aria-hidden="true"></canvas>
+    <section class="copy" aria-labelledby="title">
+      <h1 id="title"><em>That page isn’t in here.</em></h1>
+      <div class="side">
+        <p>It was moved, renamed, or never existed. The rest of InvictusOS is still here and still fits on an old laptop.</p>
+        <div class="row">
+          <a class="pill w" href="/">Go to home page</a>
         </div>
-        <a class="home-button" href="https://www.webinvictusos.neocities.org" aria-label="Return to the invictusOS home page">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-          <span>Return home</span>
-        </a>
-      </section>
-    </main>
-  </body>
+      </div>
+    </section>
+    <h2 class="mono">Where to next</h2>
+    <ul class="rows">
+      <li><a class="lr" href="/#requirements"><span>Requirements</span></a></li>
+      <li><a class="lr" href="/#features"><span>Features</span></a></li>
+      <li><a class="lr" href="/installation"><span>Installation</span></a></li>
+      <li><a class="lr" href="/faq"><span>FAQ</span></a></li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="mono">© <span id="yr">2026</span> InvictusOS · <a href="/simple" style="text-decoration:underline">Switch to Simple Site</a></p>
+    <nav aria-label="Community"><ul>
+      <li><a href="https://github.com/Invictus-Project" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a href="http://discord.gg/uG72zNaagW" target="_blank" rel="noopener noreferrer">Discord</a></li>
+      <li><a href="https://x.com/OsInvictus82350" target="_blank" rel="noopener noreferrer">X</a></li>
+      <li><a href="https://www.youtube.com/@InvictusOS" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+      <li><a href="https://www.instagram.com/invictusos_/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+    </ul></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document.documentElement,cv=document.getElementById("cv"),ctx=cv.getContext("2d"),sw=document.getElementById("sw");
+  var cols,rows,cell,mask,start=0,raf=0,mx=-99,my=-99,DUR=3600,on=true;
+  function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+  var pref=st("iv-motion"),rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  on=pref?pref==="on":!rm;
+  document.getElementById("yr").textContent=new Date().getFullYear();
+  function apply(){d.setAttribute("data-motion",on?"on":"off");sw.setAttribute("aria-checked",String(on))}
+  function build(){
+    var dpr=Math.min(devicePixelRatio||1,2),W=cv.parentNode.clientWidth-40;
+    cell=W<600?9:14;cols=Math.floor(W/cell);rows=Math.max(16,Math.round(cols*(W<600?.4:.34)));
+    cv.width=cols*cell*dpr;cv.height=rows*cell*dpr;cv.style.width=cols*cell+"px";cv.style.height=rows*cell+"px";cv.style.margin="clamp(8px,3vh,32px) auto 0";ctx.setTransform(dpr,0,0,dpr,0,0);
+    var o=document.createElement("canvas");o.width=cols;o.height=rows;var c=o.getContext("2d");
+    var f='800 {s}px Sora,"Arial Black",Impact,sans-serif',sz=rows*.98;
+    c.font=f.replace("{s}",sz);if(c.letterSpacing!==undefined)c.letterSpacing="-"+(sz*.04)+"px";
+    var w=c.measureText("404").width,sx=cols*.94/w;
+    c.font=f.replace("{s}",sz);c.textAlign="center";c.fillStyle="#fff";
+    c.save();c.translate(cols/2,rows*.5+sz*.355);c.scale(sx,1);c.fillText("404",0,0);c.restore();
+    var a=c.getImageData(0,0,cols,rows).data;mask=new Uint8Array(cols*rows);
+    for(var i=0;i<mask.length;i++)mask[i]=a[i*4+3]>120?1:0;
+  }
+  function draw(t,prog){
+    ctx.clearRect(0,0,cols*cell,rows*cell);
+    var sx=prog*(cols+8)-4,done=prog>=1;
+    for(var y=0;y<rows;y++)for(var x=0;x<cols;x++){
+      var m=mask[y*cols+x],a=.12,r=cell*.15,l=70,h=215,px=x*cell+cell/2,py=y*cell+cell/2;
+      var dx=x-sx,tr=dx<0?Math.exp(dx/5):0;
+      if(m){
+        if(x<=sx){a=.95;r=cell*.4;h=223-(y/rows)*13;l=56+(y/rows)*12;if(Math.abs(dx)<4){l=90;a=1}}
+        if(done&&on)a=.82+.18*Math.sin(t/700+x*.25+y*.4);
+      }else if(!done||!on){a=.12+tr*.55;r=cell*(.15+tr*.1)}
+      var ddx=x-mx,ddy=y-my,dd=Math.sqrt(ddx*ddx+ddy*ddy);
+      if(on&&dd<7){var k=1-dd/7;r+=cell*.3*k;a=Math.min(1,a+.5*k);px+=ddx/(dd||1)*k*cell*.8;py+=ddy/(dd||1)*k*cell*.8;l=Math.max(l,66)}
+      ctx.fillStyle="hsla("+h+",100%,"+l+"%,"+a+")";ctx.beginPath();ctx.arc(px,py,r,0,6.2832);ctx.fill();
+    }
+  }
+  function loop(ts){if(!start)start=ts;draw(ts,Math.min(1,(ts-start)/DUR));raf=on?requestAnimationFrame(loop):0}
+  function run(){cancelAnimationFrame(raf);if(on){start=0;raf=requestAnimationFrame(loop)}else draw(0,1)}
+  cv.addEventListener("pointermove",function(e){var r=cv.getBoundingClientRect();mx=(e.clientX-r.left)/cell;my=(e.clientY-r.top)/cell});
+  cv.addEventListener("pointerleave",function(){mx=my=-99});
+  sw.onclick=function(){on=!on;st("iv-motion",on?"on":"off");apply();run()};
+  var rt;addEventListener("resize",function(){clearTimeout(rt);rt=setTimeout(function(){build();run()},150)});
+  apply();
+  (document.fonts&&document.fonts.load?Promise.race([document.fonts.load('800 100px Sora'),new Promise(function(r){setTimeout(r,1200)})]):Promise.resolve()).then(function(){build();run()});
+})();
+</script>
+</body>
 </html>
