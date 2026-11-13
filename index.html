@@ -279,6 +279,15 @@ main{overflow-x:clip}
 @media (min-width:768px){.hero-span{height:34rem;width:34rem}.hero-span2{height:30rem;width:30rem}}
 @media (min-width:1024px){.hero-section{min-height:calc(100svh - 68px - 72px)}.hero-div{grid-template-columns:repeat(12,minmax(0,1fr))}.hero-copy,.hero-figure{grid-column:span 6}}
 
+/* Laptop screens: size the hero by screen HEIGHT so the title, buttons and image fit above the Quick links bar */
+@media (min-width:1024px){
+.hero-section{padding-top:1rem;padding-bottom:1.5rem}
+.hero-h1{font-size:min(12.5vw,13rem,17svh);margin-top:.5rem}
+.hero-div{margin-top:1.25rem;gap:2rem}
+.hero-div2{margin-top:1.5rem}
+.hero-img2{width:auto;max-width:100%;max-height:46svh;margin-inline:auto}
+}
+
 /* Quick links bar */
 .quick-nav{position:sticky;bottom:0;z-index:40;display:flex;align-items:center;gap:.75rem;overflow-x:auto;border-top:1px solid rgb(255 255 255/.1);border-bottom:1px solid rgb(255 255 255/.1);background:rgb(var(--c-ink));padding:.75rem 1.25rem}
 .quick-span{white-space:nowrap;font:11px "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.14em;color:rgb(255 255 255/.5)}
@@ -477,7 +486,7 @@ html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="of
       <li><article data-speed="110" class="feat-article"><span aria-hidden="true" class="feature-glyph">x64</span><span class="feat-span">Upcoming</span><h3 class="feature-title">XIPHOS release</h3><p class="muted">A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></article></li>
       <li><article data-speed="110" class="feat-article"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-dl"/></svg></span><span class="feat-span">Upcoming</span><h3 class="feature-title">Graphical Installer for XIPHOS</h3><p class="muted">A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></article></li>
       <li><article data-speed="110" class="feat-article"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-gear"/></svg></span><span class="feat-span">Upcoming</span><h3 class="feature-title">Settings and Factory Reset</h3><p class="muted">A settings and factory reset menu for InvictusOS XIPHOS</p></article></li>
-      <li><article data-speed="110" class="feat-article"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-cpu"/></svg></span><span class="feat-span">Upcoming</span><h3 class="feature-title">Custom Linux Kernel</h3><p class="muted">A custom Linux kernel, for XIPHOS.</p></article></li>
+      <li><article data-speed="110" class="feat-article"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-cpu"/></svg></span><span class="feat-span">Upcoming</span><h3 class="feature-title">Custom Linux Kernel</h3><p class="muted">A settings and factory reset menu for InvictusOS XIPHOS</p></article></li>
     </ul>
     <div class="more-row"><a href="/features" class="hero-a">Explore more features<svg class="icon-md" aria-hidden="true"><use href="#i-ar"/></svg></a></div>
   </section>
