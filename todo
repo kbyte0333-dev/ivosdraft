@@ -1,9 +1,3 @@
-
-Here is the complete summary of every single flaw we uncovered across the site, followed by a prioritized, step-by-step roadmap to fix everything before presentation day.
-
-Complete Roast Summary: Every Flaw Exposed
-
-
 1. Technical & Product Credibility
 
 • The "Low-End PC" Hypocrisy: Your site promotes a lightweight OS for weak hardware, yet it is so bloated with animations that it requires three separate buttons begging visitors to switch to a "Simple Site" so their browser doesn't lag.
@@ -22,7 +16,7 @@ Complete Roast Summary: Every Flaw Exposed
 • Pointless "Animations" Nav Link: Having a primary navigation tab called Animations makes your OS site look like a high school CSS sandbox.
 • Screen-Reader Text Leaks: The hero heading renders as # InvictusOS I n v i c t u s O S, leaking hidden accessibility text into the visual layout.
 • Cheap ASCII Art & Broken Lists: Typing "IDEA ---> EXECUTION" with hyphens and placing timeline numbers (1., 2., 3.) on isolated empty lines wastes prime screen space.
-• Wall-of-Text Copy: Dense paragraphs in "What is InvictusOS" are unreadable on a projector where judges only skim bullet points.
+
 
 3. Copywriting, Team & Structural Blunders
 
@@ -43,12 +37,11 @@ Focus on eliminating the most obvious visual and copy errors that immediately em
 1. Fix Copy-Paste & Grammar Bugs: Replace the duplicated text on the Custom Linux Kernel and Graphical Installer cards. Fix "atleast" to "at least" and "a efficient" to "an efficient".
 2. Fix the Broken Hero Image & Title: Correct the case-sensitive image path so your screenshot actually renders, convert it to a fast .webp file, and strip the duplicate I n v i c t u s O S text from your <h1>.
 3. Standardize Units & Specs: Replace 512×300 with 640×480 (VGA). Put a space before every unit (512 MB, 5 GB, 900 MHz), use consistent Title Case on all labels, and end every full sentence with a period.
-4. Clean the URL: Move your production code out of /ivosdraft/ onto your root kbyte0333-dev.github.io page (or rename the repo to /invictus-os/).
 
 Phase 2: Layout & Navigation Cleanup (1 Hour)
 
 Make the site look like a clean, modern software project ready for a 10-foot projector screen.
-1. Consolidate Navigation: Delete the extra header link clusters, the "Quick links" bar, and the "Animations" tab. Keep one single top navbar (Features, Requirements, FAQ, GitHub, and one Download button).
+
 2. Eliminate the "Low-End PC" Apology: Strip heavy JS animation libraries and use lightweight GPU-accelerated CSS transitions (transform/opacity) plus @media (prefers-reduced-motion: reduce). Replace the three "Simple Site" popups with a single subtle "Low-Power Mode" toggle in the corner.
 3. Upgrade Visual Components: Replace "IDEA ---> EXECUTION" with a clean inline SVG arrow, align the timeline numbers (1., 2., 3.) horizontally beside their headings using Flexbox, and turn - iv Available / - 32 Available into clean pill-shaped status badges.
 4. Fix the Footer: Rename the About column to Project, remove dead Privacy and Terms links, and keep only social channels you actually update (e.g., GitHub and Discord).
