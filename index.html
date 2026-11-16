@@ -29,7 +29,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta http-equiv="Content-Security-Policy" content="
     default-src 'none';
-    script-src 'sha256-6oN9GJ/JnPD5SeVSgBraxOmIishB64ZFInFEvEXookg=';
+    script-src 'sha256-I2qwIyvoTl+TVebcM4xgqb5yFevNTrS2WcZ629pHY5Q=';
     style-src 'unsafe-inline' https://fonts.googleapis.com;
     font-src https://fonts.gstatic.com;
     img-src 'self' data:;
@@ -134,13 +134,6 @@ main:focus { outline: none; }
 .nav { display: none; }
 .nav-link { display: flex; align-items: center; min-height: 48px; padding: 0 .75rem; border-radius: .5rem; font-weight: 500; color: rgb(var(--c-link)); }
 .nav-link:hover { color: #fff; }
-.motion-switch { display: inline-flex; align-items: center; gap: .625rem; min-height: 48px; padding: 0 .75rem; border: 1px solid rgba(255,255,255,.2); border-radius: 9999px; font-size: .875rem; line-height: 1.25rem; font-weight: 500; color: rgba(255,255,255,.85); }
-.motion-switch:hover { border-color: rgba(255,255,255,.5); }
-.header-switch { display: none; }
-.switch-track { position: relative; width: 2.75rem; height: 1.5rem; border-radius: 9999px; background: rgba(255,255,255,.2); transition: background-color .15s; }
-.switch-track span { position: absolute; left: .125rem; top: .125rem; width: 1.25rem; height: 1.25rem; border-radius: 9999px; background: #fff; transition: transform .15s; }
-[aria-checked="true"] .switch-track { background: rgb(var(--c-brand)); }
-[aria-checked="true"] .switch-track span { transform: translateX(1.25rem); }
 .header-download { display: none; align-items: center; min-height: 48px; padding: 0 1.25rem; border-radius: .75rem; background: #fff; font-weight: 700; color: rgb(var(--c-navy)); transition: background-color .15s; }
 .header-download:hover { background: #eff6ff; }
 .burger { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; margin-left: auto; border: 1px solid rgba(255,255,255,.2); border-radius: .75rem; }
@@ -158,10 +151,9 @@ main:focus { outline: none; }
 .mnav-actions { display: flex; flex-direction: column; gap: .75rem; margin-top: 1.25rem; }
 .mnav-download { display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 9999px; background: #fff; font-weight: 700; color: rgb(var(--c-navy)); }
 .mnav-download:hover { background: #eff6ff; }
-.mnav-switch { display: flex; justify-content: space-between; min-height: 56px; padding: 0 1.25rem; border-color: rgba(255,255,255,.15); }
 @media (min-width: 960px) {
   .nav { display: flex; align-items: center; gap: .25rem; margin-left: auto; }
-  .header-switch, .header-download { display: inline-flex; margin-left: .5rem; }
+  .header-download { display: inline-flex; margin-left: .5rem; }
   .burger, .mnav { display: none; }
 }
 
@@ -363,14 +355,17 @@ main:focus { outline: none; }
 .note-svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 @media (min-width: 640px) { .note { left: auto; right: 1.25rem; max-width: 520px; } .note-div { padding: 1.25rem; } }
 
-/* ---------- 4. LITE MODE: switched on automatically for very slow PCs ---------- */
+/* ---------- 4. LITE MODE: switched on automatically for slow PCs, software rendering (no GPU) or low memory ---------- */
+/* It keeps the same layout, text and colours but drops everything that is costly without a graphics card. */
 html[data-lite] { background-attachment: scroll; }
-html[data-lite] .grain { display: none; }
+html[data-lite] body { background-image: linear-gradient(rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.34) 1px, transparent 1px); background-size: 48px 48px; }
+html[data-lite] .grid-lines, html[data-lite] .grain { display: none; }
 html[data-lite] .glow { filter: none; background: radial-gradient(closest-side, rgba(var(--c-brand),.35), transparent); }
 html[data-lite] .glow-teal { background: radial-gradient(closest-side, rgba(var(--c-teal),.6), transparent); }
 html[data-lite] .site-header { background: rgb(var(--c-navy)); }
 html[data-lite] .site-header, html[data-lite] .note, html[data-lite] .totop { -webkit-backdrop-filter: none; backdrop-filter: none; }
 html[data-lite] .stats, html[data-lite] .req-rec, html[data-lite] .mnav, html[data-lite] .note { box-shadow: none; }
+html[data-lite] #history, html[data-lite] #creators, html[data-lite] #community, html[data-lite] .site-footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }
 
 /* ---------- 5. EXTRAS ---------- */
 /* requirement ticks draw in one after another (script adds .arm / .on) */
@@ -378,8 +373,9 @@ html[data-lite] .stats, html[data-lite] .req-rec, html[data-lite] .mnav, html[da
 .arm .rq.on { opacity: 1; }
 .arm .rq svg { stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset .5s ease var(--d, 0ms); }
 .arm .rq.on svg { stroke-dashoffset: 0; }
-/* "Animations" switch OFF: stop every transition */
-html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="off"] ::after { transition: none !important; }
+/* no transitions in lite mode or for visitors who asked their system for reduced motion */
+html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transition: none !important; }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -413,7 +409,6 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
         <a href="/installation" class="nav-link">Installation</a>
         <a href="/faq" class="nav-link">FAQ</a>
       </nav>
-      <button type="button" role="switch" aria-checked="true" data-motion-switch class="motion-switch header-switch"><span>Animations</span><span aria-hidden="true" class="switch-track"><span></span></span></button>
       <a href="/download" class="header-download">Download</a>
       <button id="burger" type="button" class="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span></button>
     </div>
@@ -426,7 +421,6 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
       </nav>
       <div class="mnav-actions">
         <a href="/download" class="mnav-download">Download</a>
-        <button type="button" role="switch" aria-checked="true" data-motion-switch class="motion-switch mnav-switch"><span>Animations</span><span aria-hidden="true" class="switch-track"><span></span></span></button>
       </div>
     </div>
   </header>
@@ -596,16 +590,15 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
   var $ = function (id) { return document.getElementById(id); };
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
 
-  // localStorage / sessionStorage that never breaks the page if storage is blocked
-  function store(area, key, value) {
+  // sessionStorage that never breaks the page if storage is blocked (nothing is kept after the tab closes)
+  function session(key, value) {
     try {
-      if (value === undefined) return window[area].getItem(key);
-      window[area].setItem(key, value);
+      if (value === undefined) return sessionStorage.getItem(key);
+      sessionStorage.setItem(key, value);
     } catch (e) {}
     return null;
   }
 
-  var switches = [].slice.call(document.querySelectorAll("[data-motion-switch]"));
   var requirements = $("requirements");
   var tickLists = [].slice.call(requirements.querySelectorAll("ul"));
   var intro = $("scrub");
@@ -615,45 +608,54 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
   var menu = $("mnav");
   var burger = $("burger");
   var toast = $("note");
+  var banner = $("lowbar");
   var ticking = false;
+  var lite = false;
+  var reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-  // ---- "Animations" switch (remembers your choice) ----
-  function motionOn() { return d.getAttribute("data-motion") !== "off"; }
+  // ---- scroll effects (ticks draw in, About text brightens): only on PCs that can afford them ----
+  function effectsAllowed() { return !lite && !reduced; }
 
-  function setMotion(on, remember) {
-    d.setAttribute("data-motion", on ? "on" : "off");
-    switches.forEach(function (s) { s.setAttribute("aria-checked", String(on)); });
-    if (remember) store("localStorage", "iv-motion", on ? "on" : "off");
-    requirements.classList.toggle("arm", on);
-    if (on) update();
-    else words.forEach(function (w) { w.style.opacity = ""; });
+  function startEffects() {
+    if (!effectsAllowed() || words.length) return;
+    // About paragraph: one span per word so each word can brighten on its own
+    var parts = intro.textContent.trim().split(/\s+/);
+    intro.textContent = "";
+    parts.forEach(function (text, i) {
+      var span = document.createElement("span");
+      span.textContent = text;
+      intro.appendChild(span);
+      words.push(span);
+      if (i < parts.length - 1) intro.appendChild(document.createTextNode(" "));
+    });
+    tickLists.forEach(function (list, k) {
+      [].forEach.call(list.querySelectorAll(".rq"), function (row, i) {
+        row.style.setProperty("--d", (i * 170 + k * 90) + "ms");
+      });
+    });
+    requirements.classList.add("arm");
+    update();
   }
 
-  switches.forEach(function (s) {
-    s.addEventListener("click", function () { setMotion(!motionOn(), true); });
-  });
-
-  // ---- scroll effects: ticks draw in, About text brightens, back-to-top button ----
-  tickLists.forEach(function (list, k) {
-    [].forEach.call(list.querySelectorAll(".rq"), function (row, i) {
-      row.style.setProperty("--d", (i * 170 + k * 90) + "ms");
-    });
-  });
+  function stopEffects() {
+    requirements.classList.remove("arm");
+    words.forEach(function (w) { w.style.opacity = ""; });
+  }
 
   function update() {
     var vh = innerHeight;
     var max = d.scrollHeight - vh;
 
+    // back-to-top button with a progress ring
     topButton.classList.toggle("show", scrollY > vh * 0.8);
     topRing.setAttribute("stroke-dashoffset", (138.2 * (1 - (max > 0 ? clamp(scrollY / max) : 0))).toFixed(1));
-    if (!motionOn()) return;
+    if (!effectsAllowed() || !words.length) return;
 
     var box = intro.getBoundingClientRect();
     var p = clamp((vh * 0.9 - box.top) / (box.height + vh * 0.35));
     words.forEach(function (w, i) {
       w.style.opacity = (0.25 + 0.75 * clamp((p * (words.length + 8) - i) / 8)).toFixed(2);
     });
-
     tickLists.forEach(function (list) {
       var seen = list.getBoundingClientRect().top < vh * 0.82;
       [].forEach.call(list.querySelectorAll(".rq"), function (row) { row.classList.toggle("on", seen); });
@@ -668,17 +670,6 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
   addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", onScroll);
   topButton.addEventListener("click", function () { scrollTo(0, 0); });
-
-  // About paragraph: one span per word so each word can brighten on its own
-  var parts = intro.textContent.trim().split(/\s+/);
-  intro.textContent = "";
-  parts.forEach(function (text, i) {
-    var span = document.createElement("span");
-    span.textContent = text;
-    intro.appendChild(span);
-    words.push(span);
-    if (i < parts.length - 1) intro.appendChild(document.createTextNode(" "));
-  });
 
   // ---- phone menu ----
   function setMenu(open) {
@@ -698,8 +689,8 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
   addEventListener("resize", function () { if (innerWidth >= 960) setMenu(false); });
 
   // ---- "Simple Site" toast ----
-  function hideToast() { toast.hidden = true; store("sessionStorage", "iv-note", "1"); }
-  if (store("sessionStorage", "iv-note") === "1") toast.hidden = true;
+  function hideToast() { toast.hidden = true; session("iv-note", "1"); }
+  if (session("iv-note") === "1") toast.hidden = true;
   $("note-x").addEventListener("click", hideToast);
   toast.addEventListener("keydown", function (e) { if (e.key === "Escape") hideToast(); });
 
@@ -711,26 +702,41 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
     target.focus({ preventScroll: true });
   });
 
-  // ---- slow PC: lighter look (data-lite), animations off by default, banner suggesting the Simple Site ----
-  function detectSlowPc() {
-    var banner = $("lowbar");
-    var dismissed = store("sessionStorage", "iv-low") === "1";
+  // ---- slow PC: lighter look (data-lite), no scroll effects, banner suggesting the Simple Site ----
+  function slow() {
+    if (lite) return;
+    lite = true;
+    d.setAttribute("data-lite", "");
+    stopEffects();
+    if (session("iv-low") !== "1") banner.hidden = false;
+  }
+  $("lowbar-x").addEventListener("click", function () { banner.hidden = true; session("iv-low", "1"); });
 
-    $("lowbar-x").addEventListener("click", function () {
-      banner.hidden = true;
-      store("sessionStorage", "iv-low", "1");
-    });
+  // true when the browser has no real graphics acceleration (software rendering or no WebGL at all)
+  function noGpu() {
+    try {
+      var canvas = document.createElement("canvas");
+      var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      if (!gl) return true;
+      var info = gl.getExtension("WEBGL_debug_renderer_info");
+      var name = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
+      var lose = gl.getExtension("WEBGL_lose_context");
+      if (lose) lose.loseContext();
+      return /swiftshader|llvmpipe|softpipe|software|basic render/i.test(name);
+    } catch (e) { return false; }
+  }
 
-    function slow() {
-      d.setAttribute("data-lite", "");
-      if (!dismissed) banner.hidden = false;
-      if (!store("localStorage", "iv-motion")) setMotion(false, false);
-    }
+  function looksSlow() {
+    var conn = navigator.connection || {};
+    return /[?&]lite\b/.test(location.search)                                   // add ?lite to the address to test
+      || conn.saveData === true || /^(slow-)?2g$/.test(conn.effectiveType || "")  // data saver / very slow connection
+      || (navigator.deviceMemory && navigator.deviceMemory <= 2)                  // 2 GB of RAM or less
+      || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2)    // 2 CPU cores or fewer
+      || noGpu();
+  }
 
-    // few CPU cores or little memory
-    if ((navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2)) return slow();
-
-    // otherwise measure the frame rate for 1.5 seconds (ignored if the tab is in the background)
+  // otherwise measure the frame rate for 1.5 seconds (ignored if the tab is in the background)
+  function probeFrameRate() {
     var frames = 0, start = 0, hidden = false;
     function tick(t) {
       if (document.hidden) hidden = true;
@@ -743,10 +749,9 @@ html[data-motion="off"] *, html[data-motion="off"] ::before, html[data-motion="o
   }
 
   // ---- start ----
-  var saved = store("localStorage", "iv-motion");
-  var reducedMotion = matchMedia("(prefers-reduced-motion:reduce)").matches;
-  setMotion(saved ? saved === "on" : !reducedMotion, false);
-  detectSlowPc();
+  if (looksSlow()) slow();
+  else { startEffects(); probeFrameRate(); }
+  update();
 })();
 </script>
 </body>
