@@ -29,9 +29,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta http-equiv="Content-Security-Policy" content="
     default-src 'none';
-    script-src 'sha256-I2qwIyvoTl+TVebcM4xgqb5yFevNTrS2WcZ629pHY5Q=';
-    style-src 'unsafe-inline' https://fonts.googleapis.com;
-    font-src https://fonts.gstatic.com;
+    script-src 'sha256-xLgyr0ZhT9daU7yfncZdba3iknJ+tiSZzN0KW40f1Nw=';
+    style-src 'unsafe-inline';
+    font-src 'self';
     img-src 'self' data:;
     connect-src 'none';
     base-uri 'none';
@@ -39,9 +39,8 @@
   ">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a1c'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='700' font-size='34' text-anchor='middle' fill='%231a5cff'%3Eiv%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Sora:wght@500;700;800&display=swap">
+<link rel="preload" href="assets/fonts/sora-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"WebSite","@id":"https://webinvictusos.neocities.org/#website","url":"https://webinvictusos.neocities.org/","name":"InvictusOS","description":"A minimal operating system that keeps old machines alive.","inLanguage":"en","publisher":{"@id":"https://webinvictusos.neocities.org/#org"}},
@@ -60,6 +59,16 @@
    1. COLOUR TOKENS   2. BASE   3. COMPONENTS   4. LITE MODE (slow PCs)   5. EXTRAS
    =========================================================================== */
 
+/* ---------- 0. FONTS (self-hosted in assets/fonts; woff2 first, woff for older browsers) ---------- */
+@font-face { font-family: "Sora"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/sora-latin-500-normal.woff2") format("woff2"), url("assets/fonts/sora-latin-500-normal.woff") format("woff"); }
+@font-face { font-family: "Sora"; font-weight: 700; font-style: normal; font-display: swap; src: url("assets/fonts/sora-latin-700-normal.woff2") format("woff2"), url("assets/fonts/sora-latin-700-normal.woff") format("woff"); }
+@font-face { font-family: "Sora"; font-weight: 800; font-style: normal; font-display: swap; src: url("assets/fonts/sora-latin-800-normal.woff2") format("woff2"), url("assets/fonts/sora-latin-800-normal.woff") format("woff"); }
+@font-face { font-family: "Manrope"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/manrope-latin-400-normal.woff2") format("woff2"), url("assets/fonts/manrope-latin-400-normal.woff") format("woff"); }
+@font-face { font-family: "Manrope"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/manrope-latin-500-normal.woff2") format("woff2"), url("assets/fonts/manrope-latin-500-normal.woff") format("woff"); }
+@font-face { font-family: "Manrope"; font-weight: 700; font-style: normal; font-display: swap; src: url("assets/fonts/manrope-latin-700-normal.woff2") format("woff2"), url("assets/fonts/manrope-latin-700-normal.woff") format("woff"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/jetbrains-mono-latin-400-normal.woff2") format("woff2"), url("assets/fonts/jetbrains-mono-latin-400-normal.woff") format("woff"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"), url("assets/fonts/jetbrains-mono-latin-500-normal.woff") format("woff"); }
+
 /* ---------- 1. COLOUR TOKENS (edit these; numbers are R,G,B) ---------- */
 :root {
   --c-navy: 10,10,28;     /* header, deep panels */
@@ -71,9 +80,9 @@
   --c-indigo: 26,26,166;  /* page gradient start */
   --c-mid: 28,34,150;     /* page gradient middle */
   --c-teal: 29,91,134;    /* page gradient end */
-  --display: Sora, system-ui, sans-serif;
-  --body: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --display: Sora, system-ui, "Segoe UI", Tahoma, Arial, sans-serif;
+  --body: Manrope, system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace;
 }
 
 /* ---------- 2. BASE ---------- */
@@ -115,9 +124,11 @@ main:focus { outline: none; }
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; min-height: 56px; padding: .5rem 1.5rem; border-radius: 9999px; text-align: center; transition: color .15s, background-color .15s, border-color .15s; }
 .btn-primary { background: #fff; color: rgb(var(--c-navy)); font-weight: 700; }
-.btn-primary:hover, .btn-primary:focus-visible { background: rgb(var(--c-brand)); color: #fff; }
+.btn-primary:hover { background: rgb(var(--c-brand)); color: #fff; }
+.btn-primary:focus-visible { background: rgb(var(--c-brand)); color: #fff; }
 .btn-outline { border: 1px solid rgba(255,255,255,.5); font-weight: 500; }
-.btn-outline:hover, .btn-outline:focus-visible { border-color: #fff; background: rgba(255,255,255,.1); }
+.btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+.btn-outline:focus-visible { border-color: #fff; background: rgba(255,255,255,.1); }
 
 /* Low-end PC banner (hidden unless a slow PC is detected) */
 .lowbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .25rem 1rem; padding: 0 .5rem 0 1rem; border-bottom: 1px solid rgba(255,255,255,.1); background: rgb(var(--c-navy)); font-size: .8125rem; line-height: 1.25rem; color: rgba(255,255,255,.8); }
@@ -261,9 +272,11 @@ main:focus { outline: none; }
 .faq-ring { position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto; width: 17rem; height: 17rem; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; }
 .faq-ring-outer { width: 21rem; height: 21rem; border-color: rgba(255,255,255,.2); }
 .faq-button { position: relative; display: flex; flex: none; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; width: 11rem; height: 11rem; border-radius: 50%; background: #fff; text-align: center; font-weight: 700; color: rgb(var(--c-navy)); transition: transform .3s, background-color .3s, color .3s; }
-.faq-button:hover, .faq-button:focus-visible { transform: scale(1.05); background: #000; color: #fff; }
+.faq-button:hover { transform: scale(1.05); background: #000; color: #fff; }
+.faq-button:focus-visible { transform: scale(1.05); background: #000; color: #fff; }
 .faq-arrow { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transform: rotate(-45deg); transition: transform .3s; }
-.faq-button:hover .faq-arrow, .faq-button:focus-visible .faq-arrow { transform: none; }
+.faq-button:hover .faq-arrow { transform: none; }
+.faq-button:focus-visible .faq-arrow { transform: none; }
 @media (min-width: 768px) {
   .faq-band { padding: 7rem 0; }
   .faq-circle { padding: 6rem; }
@@ -295,12 +308,14 @@ main:focus { outline: none; }
 .team-ul { display: grid; gap: 1rem; margin-top: 4rem; }
 .team-ul a { display: block; height: 100%; border-radius: 1.5rem; }
 .team-card { display: flex; flex-direction: column; gap: 1.5rem; height: 100%; padding: 1.5rem; border: 1px solid rgba(255,255,255,.15); border-radius: 1.5rem; background: rgb(var(--c-card)); transition: color .35s ease, background-color .35s ease, border-color .35s ease; }
-.team-card:hover, a:focus-visible .team-card { background: #fff; color: rgb(var(--c-navy)); }
+.team-card:hover { background: #fff; color: rgb(var(--c-navy)); }
+a:focus-visible .team-card { background: #fff; color: rgb(var(--c-navy)); }
 .avatar-ring { display: block; width: 102px; height: 102px; padding: 3px; border-radius: 50%; background: conic-gradient(from 180deg, rgb(var(--c-brand)), rgb(var(--c-link)), rgb(var(--c-teal)), rgb(var(--c-brand))); }
 .team-img { width: 6rem; height: 6rem; border-radius: 50%; object-fit: cover; }
 .team-body { margin-top: auto; }
 .team-role { margin-top: .5rem; font: .75rem/1rem var(--mono); color: rgba(255,255,255,.7); transition: color .35s ease; }
-.team-card:hover .team-role, a:focus-visible .team-role { color: rgba(var(--c-navy),.7); }
+.team-card:hover .team-role { color: rgba(var(--c-navy),.7); }
+a:focus-visible .team-role { color: rgba(var(--c-navy),.7); }
 @media (min-width: 640px) { .team-ul { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 768px) { .team-section { padding-bottom: 9rem; } }
 @media (min-width: 1024px) { .team-ul { grid-template-columns: repeat(4, 1fr); } }
@@ -309,9 +324,11 @@ main:focus { outline: none; }
 .link-list { margin-top: 4rem; border-top: 1px solid rgba(255,255,255,.25); border-bottom: 1px solid rgba(255,255,255,.25); }
 .link-list li + li { border-top: 1px solid rgba(255,255,255,.25); }
 .link-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 96px; padding: 0 .5rem; background: linear-gradient(#fff, #fff) no-repeat bottom / 100% 0%; font: 800 1.75rem/1 var(--display); letter-spacing: -.05em; overflow-wrap: anywhere; transition: background-size .5s, color .5s, padding .5s; }
-.link-row:hover, .link-row:focus-visible { padding: 0 1.5rem; background-size: 100% 100%; color: rgb(var(--c-navy)); }
+.link-row:hover { padding: 0 1.5rem; background-size: 100% 100%; color: rgb(var(--c-navy)); }
+.link-row:focus-visible { padding: 0 1.5rem; background-size: 100% 100%; color: rgb(var(--c-navy)); }
 .link-row-arrow { flex: none; width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transform: rotate(-45deg); transition: transform .5s; }
-.link-row:hover .link-row-arrow, .link-row:focus-visible .link-row-arrow { transform: none; }
+.link-row:hover .link-row-arrow { transform: none; }
+.link-row:focus-visible .link-row-arrow { transform: none; }
 @media (min-width: 480px) { .link-row { font-size: 2.5rem; } }
 @media (min-width: 768px) { .link-row { font-size: 3.5rem; } .link-row-arrow { width: 3.5rem; height: 3.5rem; } }
 @media (min-width: 1024px) { .link-row { font-size: 4.5rem; } }
@@ -322,7 +339,8 @@ main:focus { outline: none; }
 .footer-grid { display: grid; gap: 2.5rem; }
 .footer-blurb { max-width: 26ch; margin: .5rem 0 1.5rem; color: rgba(255,255,255,.75); }
 .footer-simple { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.5rem; border: 1px solid rgba(255,255,255,.5); border-radius: 9999px; font-weight: 500; transition: color .15s, background-color .15s; }
-.footer-simple:hover, .footer-simple:focus-visible { background: #fff; color: rgb(var(--c-navy)); }
+.footer-simple:hover { background: #fff; color: rgb(var(--c-navy)); }
+.footer-simple:focus-visible { background: #fff; color: rgb(var(--c-navy)); }
 .foot-heading { margin-bottom: .5rem; font: 700 .75rem/1rem var(--mono); text-transform: uppercase; letter-spacing: .12em; }
 .foot-link { display: flex; align-items: center; min-height: 48px; color: rgb(var(--c-link)); }
 .foot-link:hover { color: #fff; text-decoration: underline; }
@@ -354,6 +372,23 @@ main:focus { outline: none; }
 .note-button { display: flex; align-items: center; justify-content: center; width: 3rem; border-left: 1px solid rgba(255,255,255,.2); border-radius: 0 1rem 1rem 0; }
 .note-svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 @media (min-width: 640px) { .note { left: auto; right: 1.25rem; max-width: 520px; } .note-div { padding: 1.25rem; } }
+
+/* Old browsers without flex "gap" (script adds .no-flex-gap): same spacing with margins */
+.no-flex-gap .btn > * + * { margin-left: .75rem; }
+.no-flex-gap .hero-actions > * { margin: 0 .875rem .875rem 0; }
+.no-flex-gap .header-row > * + * { margin-left: 1rem; }
+.no-flex-gap .brand-link > * + * { margin-left: .625rem; }
+.no-flex-gap .nav > * + * { margin-left: .25rem; }
+.no-flex-gap .lowbar > * { margin: 0 .5rem; }
+.no-flex-gap .req-row > * + *, .no-flex-gap .history-title > * + *, .no-flex-gap .link-row > * + * { margin-left: 1rem; }
+.no-flex-gap .footer-bottom > * { margin: 0 .375rem .375rem 0; }
+.no-flex-gap .legal-nav > * + * { margin-left: .25rem; }
+.no-flex-gap .feature-card > * + *, .no-flex-gap .mnav-actions > * + * { margin-top: .75rem; }
+.no-flex-gap .stat-cell > :first-child { margin-top: .75rem; }
+.no-flex-gap .team-card > * + * { margin-top: 1.5rem; }
+.no-flex-gap .faq-button > * + * { margin-top: .5rem; }
+.no-flex-gap .faq-inner > * + * { margin-top: 3rem; }
+@media (min-width: 1024px) { .no-flex-gap .faq-inner > * + * { margin-top: 0; margin-left: 3rem; } }
 
 /* ---------- 4. LITE MODE: switched on automatically for slow PCs, software rendering (no GPU) or low memory ---------- */
 /* It keeps the same layout, text and colours but drops everything that is costly without a graphics card. */
@@ -396,7 +431,7 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
   <div id="lowbar" class="lowbar" role="region" aria-label="Performance notice" hidden>
     <span>This PC looks low-end. The Simple Site runs smoother.</span>
     <a href="/simple">Switch to Simple Site</a>
-    <button id="lowbar-x" type="button" aria-label="Dismiss performance notice"><svg class="icon-sm" aria-hidden="true"><use href="#i-x"/></svg></button>
+    <button id="lowbar-x" type="button" aria-label="Dismiss performance notice"><svg class="icon-sm" aria-hidden="true"><use href="#i-x" xlink:href="#i-x"/></svg></button>
   </div>
 
   <!-- ======== HEADER / NAVIGATION ======== -->
@@ -414,10 +449,10 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
     </div>
     <div id="mnav" class="mnav" hidden>
       <nav aria-label="Mobile" class="mnav-links">
-        <a href="#requirements" class="mnav-link">Requirements<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
-        <a href="#features" class="mnav-link">Features<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
-        <a href="/installation" class="mnav-link">Installation<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
-        <a href="/faq" class="mnav-link">FAQ<svg class="icon-sm" aria-hidden="true"><use href="#i-ar"/></svg></a>
+        <a href="#requirements" class="mnav-link">Requirements<svg class="icon-sm" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
+        <a href="#features" class="mnav-link">Features<svg class="icon-sm" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
+        <a href="/installation" class="mnav-link">Installation<svg class="icon-sm" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
+        <a href="/faq" class="mnav-link">FAQ<svg class="icon-sm" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
       </nav>
       <div class="mnav-actions">
         <a href="/download" class="mnav-download">Download</a>
@@ -432,7 +467,7 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
       <div class="hero-copy"><img src="assets/logo.svg" alt="" width="77" height="64" class="hero-logo">
         <p class="hero-tag"><span aria-hidden="true">Lightweight | Fast | Reliable</span><span class="sr-only">Lightweight, fast, reliable</span></p>
         <p class="hero-lead">A minimal operating system that keeps old machines alive.</p>
-        <div class="hero-actions"><a href="download.html" class="btn btn-primary"><svg class="icon-sm" aria-hidden="true"><use href="#i-dl"/></svg>Download</a><a href="#about" class="btn btn-outline">Learn More <svg class="icon-md" aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+        <div class="hero-actions"><a href="download.html" class="btn btn-primary"><svg class="icon-sm" aria-hidden="true"><use href="#i-dl" xlink:href="#i-dl"/></svg>Download</a><a href="#about" class="btn btn-outline">Learn More <svg class="icon-md" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></div>
       </div>
       <figure class="hero-figure"><picture><source srcset="assets/desktop.webp" type="image/webp"><img src="assets/desktop.png" width="803" height="604" fetchpriority="high" decoding="async" alt="The InvictusOS desktop with a cloudy sky wallpaper, a top panel and an app dock" class="hero-image"></picture></figure>
     </div>
@@ -440,7 +475,7 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
   <!-- ======== ABOUT ======== -->
   <section id="about" aria-labelledby="about-h" class="section-wrap">
     <h2 id="about-h" class="section-title">What Is InvictusOS</h2>
-    <p id="scrub" class="about-p">We built InvictusOS for a simple reason: Modern operating systems are too bloated to run on old computers. We wanted to revive the old computers so that they can perform at least basic tasks instead of ending up as e-waste. Our goal was to stay as fast and responsive as possible to deliver an efficient user experience.</p>
+    <p class="about-p">We built InvictusOS for a simple reason: Modern operating systems are too bloated to run on old computers. We wanted to revive the old computers so that they can perform at least basic tasks instead of ending up as e-waste. Our goal was to stay as fast and responsive as possible to deliver an efficient user experience.</p>
     <dl class="stats">
       <div class="stat-cell"><dt class="stat-label">Minimum RAM Required</dt><dd class="stat-value">512<span class="unit">&nbsp;MB</span></dd></div>
       <div class="stat-cell"><dt class="stat-label">Min. Disk Space Required</dt><dd class="stat-value">5<span class="unit">&nbsp;GB</span></dd></div>
@@ -456,21 +491,21 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
         <section aria-labelledby="min-h" class="req-card req-min">
           <h3 id="min-h" class="req-title">Minimum</h3>
           <ul class="req-list">
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>900 MHz Processor (Pentium III / Atom)</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>512 MB RAM</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>5 GB Free Disk Space</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>No GPU Required</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>640×480 (VGA) Display</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>900 MHz Processor (Pentium III / Atom)</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>512 MB RAM</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>5 GB Free Disk Space</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>No GPU Required</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>640×480 (VGA) Display</li>
           </ul>
         </section>
         <section aria-labelledby="rec-h" class="req-card req-rec">
           <h3 id="rec-h" class="req-title">Recommended</h3>
           <ul class="req-list">
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>1 GHz Processor</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>1 GB RAM</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>15 GB Disk Space</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>No GPU Required</li>
-            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck"/></svg>1024×600 Display</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>1 GHz Processor</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>1 GB RAM</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>15 GB Disk Space</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>No GPU Required</li>
+            <li class="rq req-row"><svg class="icon-tick" aria-hidden="true"><use href="#i-ck" xlink:href="#i-ck"/></svg>1024×600 Display</li>
           </ul>
         </section>
       </div>
@@ -501,17 +536,17 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
       <li><article class="feature-card feature-available"><span aria-hidden="true" class="feature-glyph">iv</span><span class="pill pill-ok">Available</span><h3 class="feature-title">Lightweight Desktop</h3><p class="muted">A minimal desktop environment with low background CPU and memory usage, tuned for older hardware.</p></article></li>
       <li><article class="feature-card feature-available"><span aria-hidden="true" class="feature-glyph">32</span><span class="pill pill-ok">Available</span><h3 class="feature-title">Sagaris 32-bit x86 Support</h3><p class="muted">Full support for legacy 32-bit machines.</p></article></li>
       <li><article class="feature-card feature-upcoming"><span aria-hidden="true" class="feature-glyph">x64</span><span class="pill pill-upcoming">Upcoming</span><h3 class="feature-title">XIPHOS Release</h3><p class="muted">A 64-bit edition for low-end machines that can still benefit from InvictusOS.</p></article></li>
-      <li><article class="feature-card feature-upcoming"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-dl"/></svg></span><span class="pill pill-upcoming">Upcoming</span><h3 class="feature-title">Graphical Installer for XIPHOS</h3><p class="muted">A graphical installer that makes setting up InvictusOS XIPHOS simple.</p></article></li>
-      <li><article class="feature-card feature-upcoming"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-gear"/></svg></span><span class="pill pill-upcoming">Upcoming</span><h3 class="feature-title">Settings and Factory Reset</h3><p class="muted">A settings and factory reset menu for InvictusOS XIPHOS.</p></article></li>
-      <li><article class="feature-card feature-upcoming"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-cpu"/></svg></span><span class="pill pill-upcoming">Upcoming</span><h3 class="feature-title">Custom Linux Kernel</h3><p class="muted">A custom Linux kernel tuned for older hardware and low memory use.</p></article></li>
+      <li><article class="feature-card feature-upcoming"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-dl" xlink:href="#i-dl"/></svg></span><span class="pill pill-upcoming">Upcoming</span><h3 class="feature-title">Graphical Installer for XIPHOS</h3><p class="muted">A graphical installer that makes setting up InvictusOS XIPHOS simple.</p></article></li>
+      <li><article class="feature-card feature-upcoming"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-gear" xlink:href="#i-gear"/></svg></span><span class="pill pill-upcoming">Upcoming</span><h3 class="feature-title">Settings and Factory Reset</h3><p class="muted">A settings and factory reset menu for InvictusOS XIPHOS.</p></article></li>
+      <li><article class="feature-card feature-upcoming"><span aria-hidden="true" class="feature-glyph"><svg><use href="#i-cpu" xlink:href="#i-cpu"/></svg></span><span class="pill pill-upcoming">Upcoming</span><h3 class="feature-title">Custom Linux Kernel</h3><p class="muted">A custom Linux kernel tuned for older hardware and low memory use.</p></article></li>
     </ul>
-    <div class="more-row"><a href="/features" class="btn btn-primary">Explore More Features<svg class="icon-md" aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+    <div class="more-row"><a href="/features" class="btn btn-primary">Explore More Features<svg class="icon-md" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></div>
   </section>
   <!-- ======== FAQ BAND ======== -->
   <aside id="faq" aria-labelledby="faq-h" class="faq-band">
     <div class="faq-inner">
       <div><h2 id="faq-h" class="section-title">Have Any Questions?</h2><p class="faq-text">Find answers to questions about installation, compatibility, and more.</p></div>
-      <div class="faq-circle"><span aria-hidden="true" class="faq-ring"></span><span aria-hidden="true" class="faq-ring faq-ring-outer"></span><a href="/faq" class="faq-button">Browse the FAQ<svg class="faq-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a></div>
+      <div class="faq-circle"><span aria-hidden="true" class="faq-ring"></span><span aria-hidden="true" class="faq-ring faq-ring-outer"></span><a href="/faq" class="faq-button">Browse the FAQ<svg class="faq-arrow" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></div>
     </div>
   </aside>
   <!-- ======== HISTORY ======== -->
@@ -541,11 +576,11 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
     <h2 id="com-h" class="section-title">Join the Community</h2>
     <p class="team-p">Stay connected with the project.</p>
     <ul class="link-list">
-      <li><a href="https://github.com/Invictus-Project" target="_blank" rel="noopener noreferrer" class="link-row">GitHub<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a></li>
-      <li><a href="http://discord.gg/uG72zNaagW" target="_blank" rel="noopener noreferrer" class="link-row">Discord<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a></li>
-      <li><a href="https://x.com/OsInvictus82350" target="_blank" rel="noopener noreferrer" class="link-row">Twitter / X<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a></li>
-      <li><a href="https://www.youtube.com/@InvictusOS" target="_blank" rel="noopener noreferrer" class="link-row">YouTube<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a></li>
-      <li><a href="https://www.instagram.com/invictusos_/?hl=en" target="_blank" rel="noopener noreferrer" class="link-row">Instagram<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar"/></svg></a></li>
+      <li><a href="https://github.com/Invictus-Project" target="_blank" rel="noopener noreferrer" class="link-row">GitHub<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></li>
+      <li><a href="http://discord.gg/uG72zNaagW" target="_blank" rel="noopener noreferrer" class="link-row">Discord<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></li>
+      <li><a href="https://x.com/OsInvictus82350" target="_blank" rel="noopener noreferrer" class="link-row">Twitter / X<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></li>
+      <li><a href="https://www.youtube.com/@InvictusOS" target="_blank" rel="noopener noreferrer" class="link-row">YouTube<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></li>
+      <li><a href="https://www.instagram.com/invictusos_/?hl=en" target="_blank" rel="noopener noreferrer" class="link-row">Instagram<span class="sr-only"> (opens in a new tab)</span><svg class="link-row-arrow" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a></li>
     </ul>
   </section>
   </main>
@@ -574,13 +609,13 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
     <p aria-hidden="true" class="footer-wordmark">InvictusOS</p>
   </footer>
   <!-- ======== BACK-TO-TOP BUTTON ======== -->
-  <button id="top-btn" type="button" aria-label="Back to top" class="totop"><svg viewBox="0 0 56 56" class="totop-ring" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke-width="2" class="ring-bg"/><circle id="top-ring" cx="28" cy="28" r="22" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2" class="ring-fg"/></svg><svg class="totop-arrow" aria-hidden="true"><use href="#i-ar"/></svg></button>
+  <button id="top-btn" type="button" aria-label="Back to top" class="totop"><svg viewBox="0 0 56 56" class="totop-ring" aria-hidden="true"><circle cx="28" cy="28" r="22" fill="none" stroke-width="2" class="ring-bg"/><circle id="top-ring" cx="28" cy="28" r="22" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2" class="ring-fg"/></svg><svg class="totop-arrow" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></button>
   <!-- ======== "SIMPLE SITE" NOTICE ======== -->
   <aside id="note" role="region" aria-labelledby="note-h" class="note">
     <div class="note-div">
       <p id="note-h" class="note-title">Simple Site Available</p>
       <p class="note-p">This main site is built for modern displays, but if it feels heavy or sluggish, you can switch to our lighter simple site instantly. We stripped out the visuals and animations in the simple site so you can browse without lag on older PCs. </p><a href="/simple" class="note-a">Go to Simple Site</a>
-    </div><button id="note-x" type="button" aria-label="Dismiss simple site notice" class="note-button"><svg class="note-svg" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div><button id="note-x" type="button" aria-label="Dismiss simple site notice" class="note-button"><svg class="note-svg" aria-hidden="true"><use href="#i-x" xlink:href="#i-x"/></svg></button>
   </aside>
 
 <script>
@@ -601,8 +636,6 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
 
   var requirements = $("requirements");
   var tickLists = [].slice.call(requirements.querySelectorAll("ul"));
-  var intro = $("scrub");
-  var words = [];
   var topButton = $("top-btn");
   var topRing = $("top-ring");
   var menu = $("mnav");
@@ -613,21 +646,22 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
   var lite = false;
   var reduced = matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-  // ---- scroll effects (ticks draw in, About text brightens): only on PCs that can afford them ----
+  // old browsers without flex "gap": let the CSS use margins instead
+  (function () {
+    var box = document.createElement("div");
+    box.style.cssText = "display:flex;flex-direction:column;row-gap:1px";
+    box.appendChild(document.createElement("div"));
+    box.appendChild(document.createElement("div"));
+    d.appendChild(box);
+    if (box.scrollHeight !== 1) d.className += " no-flex-gap";
+    d.removeChild(box);
+  })();
+
+  // ---- scroll effect: requirement ticks draw in one after another (only on PCs that can afford it) ----
   function effectsAllowed() { return !lite && !reduced; }
 
   function startEffects() {
-    if (!effectsAllowed() || words.length) return;
-    // About paragraph: one span per word so each word can brighten on its own
-    var parts = intro.textContent.trim().split(/\s+/);
-    intro.textContent = "";
-    parts.forEach(function (text, i) {
-      var span = document.createElement("span");
-      span.textContent = text;
-      intro.appendChild(span);
-      words.push(span);
-      if (i < parts.length - 1) intro.appendChild(document.createTextNode(" "));
-    });
+    if (!effectsAllowed()) return;
     tickLists.forEach(function (list, k) {
       [].forEach.call(list.querySelectorAll(".rq"), function (row, i) {
         row.style.setProperty("--d", (i * 170 + k * 90) + "ms");
@@ -637,10 +671,7 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
     update();
   }
 
-  function stopEffects() {
-    requirements.classList.remove("arm");
-    words.forEach(function (w) { w.style.opacity = ""; });
-  }
+  function stopEffects() { requirements.classList.remove("arm"); }
 
   function update() {
     var vh = innerHeight;
@@ -649,13 +680,8 @@ html[data-lite] *, html[data-lite] ::before, html[data-lite] ::after { transitio
     // back-to-top button with a progress ring
     topButton.classList.toggle("show", scrollY > vh * 0.8);
     topRing.setAttribute("stroke-dashoffset", (138.2 * (1 - (max > 0 ? clamp(scrollY / max) : 0))).toFixed(1));
-    if (!effectsAllowed() || !words.length) return;
+    if (!effectsAllowed()) return;
 
-    var box = intro.getBoundingClientRect();
-    var p = clamp((vh * 0.9 - box.top) / (box.height + vh * 0.35));
-    words.forEach(function (w, i) {
-      w.style.opacity = (0.25 + 0.75 * clamp((p * (words.length + 8) - i) / 8)).toFixed(2);
-    });
     tickLists.forEach(function (list) {
       var seen = list.getBoundingClientRect().top < vh * 0.82;
       [].forEach.call(list.querySelectorAll(".rq"), function (row) { row.classList.toggle("on", seen); });
