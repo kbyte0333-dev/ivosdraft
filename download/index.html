@@ -10,24 +10,28 @@
    SHA-256       : search  SHA-256 CHECKSUM  (inside the "Check SHA-256"
                    pop-up) and replace the 64-character hash with the one for
                    your ISO (lowercase). Update it for every new build.
-   TERMS POP-UP  : search  ======== TERMS  - edit the terms text there. The
-                   "Agree and continue" button holds the Google Drive address
-                   in data-href (it appears twice: in the pop-up and in the
-                   no-JavaScript fallback under the Download ISO button).
+   DOWNLOAD LINK : the Google Drive address appears in 4 places: the
+                   "Download ISO" button (href), the "Agree and continue" button
+                   (data-href), the structured data (downloadUrl) near the top.
+                   Keep them the same. "Download ISO" opens the terms pop-up; if
+                   JavaScript is off it goes straight to Drive.
+   TERMS POP-UP  : search  ======== TERMS  - edit the terms text there.
    TERMS FLOW    : the checkbox stays locked until the terms text has been scrolled to the end.
    TERMS PAGE    : link guessed as  terms.html  (search for it to change).
-   COLOURS       : style block, part "1. COLOUR TOKENS" (R G B numbers).
-   LOOKS         : style block, parts 3-8 (each part is labelled).
+   COLOURS       : written straight into the style block (search for the numbers, e.g. 26,92,255).
+   LOOKS         : style block, parts 3-7 (each part is labelled).
 
    SECURITY      : scripts are locked by a hash in the Content-Security-Policy
    tag. Text, link and CSS edits are fine. If you edit the script block, open
    the page and read the browser console: it prints the new 'sha256-...' value
-   to paste into script-src.
+   to paste into script-src (keep 'unsafe-inline' next to it: browsers that
+   understand the hash ignore it, very old ones need it to run the script).
   ===========================================================================
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>InvictusOS | Downloads</title>
 
@@ -44,12 +48,12 @@
 <meta property="og:image" content="https://webinvictusos.neocities.org/assets/desktop.png">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- Security: only this page, Google Fonts and data: images are allowed -->
+<!-- Security: only this site's own files and data: images are allowed. Nothing is loaded from other websites. -->
 <meta http-equiv="Content-Security-Policy" content="
     default-src 'none';
-    script-src 'sha256-mTmm99V36kAi0C2O5L0pL6ERaOWOAtoaWaKWGIiA+zQ=';
-    style-src 'unsafe-inline' https://fonts.googleapis.com;
-    font-src https://fonts.gstatic.com;
+    script-src 'sha256-AJH9lP1XNJOuwjx3NClQ16aa7Rm7gYGeVCkKFV4iQMg=' 'unsafe-inline';
+    style-src 'unsafe-inline';
+    font-src 'self';
     img-src 'self' data:;
     connect-src 'none';
     base-uri 'none';
@@ -58,9 +62,6 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <link rel="icon" href="/invicn.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;700&family=Sora:wght@500;700;800&display=swap">
 
 <!-- Structured data for search / AI engines -->
 <script type="application/ld+json">
@@ -124,104 +125,83 @@
 }
 </script>
 
+<!--[if lt IE 9]><script>(function(){var t="abbr article aside dialog figure footer header main nav section".split(" "),i=t.length;while(i--){document.createElement(t[i]);}document.documentElement.className+=" no-flex-gap";})();</script><![endif]-->
+<!--[if lte IE 6]><style>.mnav{display:none}</style><![endif]-->
 <style>
 /* =========================================================================
    InvictusOS download page - styles
-   1. COLOUR TOKENS   2. BASE   3. HEADER + PHONE MENU   4. HERO
-   5. DOWNLOADS   6. TERMS POP-UP   7. FOOTER   8. ANIMATIONS   9. PHONE / TABLET
+   0. FONTS   1. COLOURS   2. BASE   3. HEADER + PHONE MENU   4. HERO
+   5. DOWNLOADS   6. POP-UPS   7. FOOTER   8. COLUMN FALLBACK   9. PHONE / TABLET
    ========================================================================= */
 
-/* ---------- 1. COLOUR TOKENS (edit these; numbers are "R G B") ---------- */
-:root {
-  --c-navy:   10 10 28;     /* header, deep panels */
-  --c-ink:    0 0 0;        /* black bands + footer */
-  --c-card:   20 20 20;     /* dark cards */
-  --c-brand:  26 92 255;    /* bright blue */
-  --c-link:   77 163 255;   /* light blue links */
-  --c-ok:     34 197 94;    /* green */
-  --c-indigo: 26 26 166;    /* page gradient start */
-  --c-mid:    28 34 150;    /* page gradient middle */
-  --c-teal:   29 91 134;    /* page gradient end */
+/* ---------- 0. FONTS (self-hosted in assets/fonts) ---------- */
+@font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/JetBrainsMono-Medium.woff2") format("woff2"), url("assets/fonts/JetBrainsMono-Medium.woff") format("woff"); }
+@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"), url("assets/fonts/JetBrainsMono-Regular.woff") format("woff"); }
+@font-face { font-family: "Manrope"; font-weight: 700; font-style: normal; font-display: swap; src: url("assets/fonts/Manrope-Bold.woff2") format("woff2"), url("assets/fonts/Manrope-Bold.woff") format("woff"); }
+@font-face { font-family: "Manrope"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/Manrope-Medium.woff2") format("woff2"), url("assets/fonts/Manrope-Medium.woff") format("woff"); }
+@font-face { font-family: "Manrope"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/Manrope-Regular.woff2") format("woff2"), url("assets/fonts/Manrope-Regular.woff") format("woff"); }
+@font-face { font-family: "Sora"; font-weight: 700; font-style: normal; font-display: swap; src: url("assets/fonts/Sora-Bold.woff2") format("woff2"), url("assets/fonts/Sora-Bold.woff") format("woff"); }
+@font-face { font-family: "Sora"; font-weight: 800; font-style: normal; font-display: swap; src: url("assets/fonts/Sora-ExtraBold.woff2") format("woff2"), url("assets/fonts/Sora-ExtraBold.woff") format("woff"); }
+@font-face { font-family: "Sora"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/Sora-Medium.woff2") format("woff2"), url("assets/fonts/Sora-Medium.woff") format("woff"); }
 
-  --font-display: "Sora", system-ui, sans-serif;
-  --font-body:    "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-}
+/* ---------- 1. COLOURS (written straight into the rules so every browser understands them; numbers are R,G,B) ----------
+   navy 10,10,28 (header, deep panels)   ink 0,0,0 (black bands, footer)   card 20,20,20 (dark cards)
+   brand 26,92,255 (bright blue)   link 77,163,255 (light blue links)   ok 34,197,94 (green)
+   page gradient: indigo 26,26,166  ->  mid 28,34,150  ->  teal 29,91,134 */
 
 /* ---------- 2. BASE ---------- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html {
-  background: linear-gradient(135deg, rgb(var(--c-indigo)) 0%, rgb(var(--c-mid)) 45%, rgb(var(--c-teal)) 100%) fixed;
-  color: #fff;
-  scroll-behavior: smooth;
-  scroll-padding-top: 88px;
-  -webkit-text-size-adjust: 100%;
-}
-body { font: 400 1rem/1.625 var(--font-body); min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+::before { box-sizing: border-box; margin: 0; padding: 0; }
+::after { box-sizing: border-box; margin: 0; padding: 0; }
+article, aside, figure, footer, header, main, nav, section { display: block; }
+html { background: #1a1aa6; color: #fff; font-family: Manrope, system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif; scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
+body { font-size: 16px; font-weight: 400; line-height: 1.625; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 img, svg { display: block; max-width: 100%; }
-main { overflow-x: clip; }   /* keeps decorative glows from creating sideways scroll */
+main { overflow-x: clip; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
+button, input { font-family: inherit; }
+[hidden] { display: none !important; }
+/* shared font families (each written once) */
+.brand, .mnav-link, .hero-title, .hero-text, .section-title, .release-title, .meta dd, .terms-title, .wordmark { font-family: Sora, system-ui, "Segoe UI", Tahoma, Arial, sans-serif; }
+.label, .meta dt, .sha-label, .sha-value, .sha-body pre, .pill, .sha-status, .terms-hint, .copyright { font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace; }
 /* very thin, minimal scrollbar (page + the terms list) */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,.28); border: 2px solid transparent; background-clip: padding-box; border-radius: 999px; }   /* 2px wide line */
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.28); border: 2px solid transparent; background-clip: padding-box; border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.55); background-clip: padding-box; }
-@supports not selector(::-webkit-scrollbar) {   /* Firefox */
-  html, .terms-body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.3) transparent; }
-}
-::selection { background: rgb(var(--c-brand)); color: #fff; }
+@supports not selector(::-webkit-scrollbar) { html, .terms-body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.3) transparent; } }
+::selection { background: rgb(26,92,255); color: #fff; }
 :focus-visible { outline: 3px solid #fff; outline-offset: 3px; border-radius: 6px; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: absolute; left: 12px; top: -64px; z-index: 100; padding: 12px 20px; border-radius: 8px; background: #fff; color: rgb(var(--c-navy)); font-weight: 700; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); clip: rect(1px 1px 1px 1px); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 12px; top: -64px; z-index: 100; padding: 12px 20px; border-radius: 8px; background: #fff; color: rgb(10,10,28); font-weight: 700; }
 .skip:focus { top: 12px; }
-.sprite { position: absolute; }
+.sprite { position: absolute; width: 0; height: 0; }
 
-/* page background layers: dark graph lines + film grain */
-.bg-grid {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background-image: linear-gradient(rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.34) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-.bg-grain {
-  position: fixed; inset: 0; z-index: 55; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+/* page background layers: dark graph lines over the page gradient + film grain (the gradient lives here, not on html, so scrolling stays cheap) */
+.bg-grid, .bg-grain { position: fixed; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.bg-grid { z-index: -1; background-image: linear-gradient(rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(135deg, #1a1aa6 0%, #1c2296 45%, #1d5b86 100%); background-size: 48px 48px, 48px 48px, 100% 100%; }
+.bg-grain { display: none; z-index: 55; opacity: .07; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+@supports (mix-blend-mode: overlay) { .bg-grain { display: block; } }
 
 /* buttons used all over the page */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-  min-height: 56px; padding: 0 32px; border-radius: 999px;
-  font: 500 1rem var(--font-body); border: 1px solid transparent; background: transparent; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s;
-}
-.btn-primary { background: #fff; color: rgb(var(--c-navy)); font-weight: 700; }
-.btn-primary:hover { background: rgb(var(--c-brand)); color: #fff; }
+.btn { display: inline-block; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 15px 32px; border-radius: 999px; font-size: 16px; font-weight: 500; line-height: 24px; text-align: center; border: 1px solid transparent; background: transparent; color: #fff; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s; }
+.btn-primary { background: #fff; color: rgb(10,10,28); font-weight: 700; }
+.btn-primary:hover { background: rgb(26,92,255); color: #fff; }
 .btn-ghost { border-color: rgba(255,255,255,.5); color: #fff; }
 .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.1); }
-.btn:disabled, .btn:disabled:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.4); border: 1px dashed rgba(255,255,255,.25); cursor: not-allowed; }   /* switched off */
+.btn:disabled, .btn:disabled:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.4); border: 1px dashed rgba(255,255,255,.25); cursor: not-allowed; }
 .icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.btn .icon, .download-link .icon, .sha-copy .icon { display: inline-block; vertical-align: middle; }
 
 /* ---------- 3. HEADER + PHONE MENU ---------- */
-.site-header { position: sticky; top: 0; z-index: 50; background: rgb(var(--c-navy) / .85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.1); }
-.header-row { position: relative; display: flex; align-items: center; gap: 16px; min-height: 68px; max-width: 1280px; margin-inline: auto; padding-inline: 20px; }
-.brand { display: flex; align-items: center; gap: 10px; min-height: 48px; font: 700 1.125rem var(--font-display); }
-.brand img { height: 32px; width: auto; }
-.nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-.nav a { display: flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 8px; font-weight: 500; color: rgb(var(--c-link)); }
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(10,10,28,.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.1); }
+.header-row { position: relative; display: block; display: flex; align-items: center; gap: 16px; min-height: 68px; max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+.brand { display: inline-block; display: flex; align-items: center; gap: 10px; min-height: 48px; font-size: 18px; font-weight: 700; line-height: 28px; white-space: nowrap; }
+.brand img { display: inline-block; vertical-align: middle; height: 32px; width: auto; }
+.nav { display: block; display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.nav a { display: inline-block; display: flex; align-items: center; min-height: 48px; padding: 12px; line-height: 24px; border-radius: 8px; font-weight: 500; color: rgb(77,163,255); }
 .nav a:hover { color: #fff; }
-
-/* the "Animations" on/off switch (used in header + phone menu) */
-.motion-switch {
-  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px;
-  border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: none; color: rgba(255,255,255,.85);
-  font: 500 .875rem var(--font-body); cursor: pointer;
-}
-.motion-switch:hover { border-color: rgba(255,255,255,.5); }
-.switch-track { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(255,255,255,.2); transition: background-color .2s; }
-.switch-knob { position: absolute; left: 2px; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
-.motion-switch[aria-checked="true"] .switch-track { background: rgb(var(--c-brand)); }
-.motion-switch[aria-checked="true"] .switch-knob { transform: translateX(20px); }
-.header-row .motion-switch { margin-left: 8px; }
 
 /* burger button (phones only) */
 .burger { display: none; position: relative; width: 48px; height: 48px; margin-left: auto; border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: none; cursor: pointer; }
@@ -234,140 +214,160 @@ ul { list-style: none; }
 .burger[aria-expanded="true"] .burger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* phone menu panel */
-.mnav { display: none; position: absolute; left: 0; right: 0; top: 100%; padding: 8px 20px 24px; background: rgb(var(--c-navy)); border-bottom: 1px solid rgba(255,255,255,.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); }
-.mnav-link { display: flex; align-items: center; justify-content: space-between; min-height: 60px; border-bottom: 1px solid rgba(255,255,255,.1); font: 600 1.25rem var(--font-display); }
-.mnav-link:hover { color: rgb(var(--c-link)); }
-.mnav-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-.mnav .motion-switch { justify-content: space-between; min-height: 56px; padding: 0 20px; border-color: rgba(255,255,255,.15); }
+.mnav { position: absolute; left: 0; right: 0; top: 100%; padding: 8px 20px 24px; background: rgb(10,10,28); border-bottom: 1px solid rgba(255,255,255,.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); }
+.mnav-link { display: block; display: flex; align-items: center; justify-content: space-between; min-height: 60px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.1); font-size: 20px; font-weight: 600; line-height: 28px; }
+.mnav-link:hover { color: rgb(77,163,255); }
+.mnav-link .icon { display: inline-block; vertical-align: middle; }
 
 /* ---------- 4. HERO ---------- */
-.hero { position: relative; display: flex; flex-direction: column; justify-content: center; max-width: 1280px; min-height: calc(100svh - 68px); margin-inline: auto; padding: 64px 20px 80px; }
-.glow { position: absolute; z-index: -1; border-radius: 50%; filter: blur(100px); pointer-events: none; }
-.glow-blue { right: -8rem; top: 2rem; width: 34rem; height: 34rem; background: rgb(var(--c-brand) / .35); }
-.glow-teal { left: -8rem; bottom: 0; width: 30rem; height: 30rem; background: rgb(var(--c-teal) / .6); }
-
-.hero-title { font: 800 clamp(2.75rem, 8.4vw, 8.25rem)/.98 var(--font-display); letter-spacing: -.04em; }
-.hw { display: inline-block; padding: 0 .06em .14em; margin: 0 -.06em -.14em; }   /* room for descenders (g, p, y) */   /* one span per word: rises in, then a blue light sweep */
-.hero-text { max-width: 28rem; margin-top: 28px; font: 500 1.75rem/1.2 var(--font-display); letter-spacing: -.01em; color: rgba(255,255,255,.9); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+.hero { position: relative; display: block; display: flex; flex-direction: column; justify-content: center; max-width: 1280px; min-height: calc(100vh - 68px); min-height: calc(100svh - 68px); margin-left: auto; margin-right: auto; padding: 64px 20px 80px; }
+.glow { position: absolute; z-index: -1; border-radius: 50%; -webkit-filter: blur(100px); filter: blur(100px); pointer-events: none; }
+.glow-blue { right: -128px; top: 32px; width: 544px; height: 544px; background: rgba(26,92,255,.35); }
+.glow-teal { left: -128px; bottom: 0; width: 480px; height: 480px; background: rgba(29,91,134,.6); }
+.hero-title { font-size: 44px; font-weight: 800; line-height: .98; letter-spacing: -.04em; }
+.hero-text { max-width: 448px; margin-top: 28px; font-size: 28px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; color: rgba(255,255,255,.9); }
+.hero-actions { display: block; display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
 
 /* ---------- 5. DOWNLOADS ---------- */
-.downloads { position: relative; max-width: 1180px; margin-inline: auto; padding: 144px 20px; }
-.label { font: 500 .75rem var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
-.section-title { margin-top: 16px; font: 800 clamp(2.6rem, 6vw, 5rem)/.95 var(--font-display); letter-spacing: -.035em; }
-.releases { display: grid; gap: 20px; margin-top: 56px; }
+.downloads { position: relative; max-width: 1180px; margin-left: auto; margin-right: auto; padding: 144px 20px; }
+.label { font-size: 12px; font-weight: 500; line-height: 1.5; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.section-title { margin-top: 16px; font-size: 42px; font-weight: 800; line-height: .95; letter-spacing: -.035em; }
+.releases { margin-top: 56px; }
+.release + .release { margin-top: 20px; }
 
-.release { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 40px; padding: 40px; border-radius: 32px; border: 1px solid rgba(255,255,255,.15); background: rgb(var(--c-card)); }
-.release-stable { background: linear-gradient(160deg, rgb(var(--c-ok) / .1), transparent 50%), rgb(var(--c-card)); }
-.release-upcoming { border: 1px dashed rgb(var(--c-link) / .5); background: rgb(var(--c-ink)); }
-.release-title { font: 700 clamp(1.6rem, 3vw, 2rem)/1.15 var(--font-display); letter-spacing: -.02em; }
-.release-text { margin-top: 12px; max-width: 34rem; color: rgba(255,255,255,.75); }
-.pill { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; font: 500 .6875rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; border: 1px solid rgb(var(--c-link) / .6); background: rgb(var(--c-link) / .15); color: #7dd3fc; }
+.release { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); grid-gap: 40px; gap: 40px; padding: 40px; border-radius: 32px; border: 1px solid rgba(255,255,255,.15); background: rgb(20,20,20); }
+.release-stable { background: linear-gradient(160deg, rgba(34,197,94,.1), transparent 50%), rgb(20,20,20); }
+.release-upcoming { border: 1px dashed #2f5272; border: 1px dashed rgba(77,163,255,.5); background: rgb(0,0,0); }
+.release-title { font-size: 26px; font-weight: 700; line-height: 1.15; letter-spacing: -.02em; }
+.release-text { margin-top: 12px; max-width: 544px; color: rgba(255,255,255,.75); }
+.pill { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 500; line-height: 1.5; letter-spacing: .1em; text-transform: uppercase; border: 1px solid rgba(77,163,255,.6); background: rgba(77,163,255,.15); color: #7dd3fc; }
 
 /* version / architecture / size / status panel */
-.meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin-top: 28px; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.2); }
-.meta div { display: flex; flex-direction: column; gap: 6px; padding: 20px; background: rgb(var(--c-card)); }
-.release-upcoming .meta div { background: rgb(8 8 8); }
-.meta dt { font: 400 .75rem var(--font-mono); color: rgba(255,255,255,.7); }
-.meta dd { font: 700 1.25rem var(--font-display); letter-spacing: -.01em; }
+.meta { display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 1px; gap: 1px; margin-top: 28px; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.2); }
+.meta div { display: block; display: flex; flex-direction: column; gap: 6px; padding: 20px; background: rgb(20,20,20); }
+.release-upcoming .meta div { background: rgb(8,8,8); }
+.meta dt { font-size: 12px; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,.7); }
+.meta dd { font-size: 20px; font-weight: 700; line-height: 1.625; letter-spacing: -.01em; }
 
 /* "Check SHA-256" link + its pop-up */
-.text-link { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 12px; border: 0; background: none; font: 500 .9375rem var(--font-body); color: rgb(var(--c-link)); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.text-link { display: inline-block; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px; border: 0; background: none; font-size: 15px; font-weight: 500; line-height: 24px; color: rgb(77,163,255); text-decoration: underline; cursor: pointer; }
 .text-link:hover { color: #fff; }
-.sha-label { margin-top: 16px; font: 400 .75rem var(--font-mono); color: rgba(255,255,255,.7); }
-.sha-value { display: block; margin-top: 8px; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgb(var(--c-ink)); font: 500 .875rem/1.5 var(--font-mono); color: rgb(var(--c-link)); overflow-wrap: anywhere; user-select: all; cursor: copy; }   /* one click selects the whole hash */
-.sha-copy { margin-top: 14px; min-height: 48px; gap: 8px; padding: 0 20px; border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.12); font-size: .875rem; font-weight: 500; color: rgba(255,255,255,.8); }
+.sha-label { margin-top: 16px; font-size: 12px; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,.7); }
+.sha-value { display: block; margin-top: 8px; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgb(0,0,0); font-size: 14px; font-weight: 500; line-height: 1.5; color: rgb(77,163,255); overflow-wrap: anywhere; word-wrap: break-word; -webkit-user-select: all; -moz-user-select: all; user-select: all; cursor: copy; }
+.sha-copy { margin-top: 14px; min-height: 48px; gap: 8px; padding: 11px 20px; border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.12); font-size: 14px; font-weight: 500; color: rgba(255,255,255,.8); }
 .sha-copy:hover { background: rgba(255,255,255,.2); color: #fff; }
 .sha-copy .icon { width: 16px; height: 16px; }
-.sha-body a { color: rgb(var(--c-link)); text-decoration: underline; text-underline-offset: 3px; }
+.sha-body a { color: rgb(77,163,255); text-decoration: underline; }
 .sha-body a:hover { color: #fff; }
-.sha-status { min-height: 1.5em; margin-top: 8px; text-align: center; font: 400 .8125rem var(--font-mono); color: rgb(var(--c-ok)); }
-.sha-body pre { margin-top: 8px; padding: 14px; overflow-x: auto; border-radius: 12px; background: rgb(var(--c-ink)); font: 400 .8125rem/1.6 var(--font-mono); color: rgba(255,255,255,.85); }
+.sha-status { min-height: 1.5em; margin-top: 8px; text-align: center; font-size: 13px; font-weight: 400; color: rgb(34,197,94); }
+.sha-body pre { margin-top: 8px; padding: 14px; overflow-x: auto; border-radius: 12px; background: rgb(0,0,0); font-size: 13px; font-weight: 400; line-height: 1.6; color: rgba(255,255,255,.85); }
 .sha-body p + p { margin-top: 12px; }
 
-.download-box { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-.download-link { width: 100%; border: 0; font: 700 1rem var(--font-body); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 60px; border-radius: 999px; background: #fff; color: rgb(var(--c-navy)); font-weight: 700; transition: background-color .2s, color .2s; }
-.download-link:hover { background: rgb(var(--c-brand)); color: #fff; }
-.download-note { text-align: center; font-size: .875rem; color: rgba(255,255,255,.75); }
-.download-note a { color: rgb(var(--c-link)); text-decoration: underline; text-underline-offset: 3px; }
-.download-disabled { display: flex; align-items: center; justify-content: center; min-height: 60px; border-radius: 999px; border: 1px dashed rgba(255,255,255,.25); color: rgba(255,255,255,.4); font-weight: 700; cursor: not-allowed; user-select: none; }
+.download-box { display: block; display: flex; flex-direction: column; justify-content: center; gap: 14px; text-align: center; }
+.download-link { display: block; display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 60px; padding: 17px 20px; border: 0; border-radius: 999px; background: #fff; color: rgb(10,10,28); font-size: 16px; font-weight: 700; line-height: 26px; cursor: pointer; transition: background-color .2s, color .2s; }
+.download-link:hover { background: rgb(26,92,255); color: #fff; }
+.download-note { text-align: center; font-size: 14px; color: rgba(255,255,255,.75); }
+.download-note a { color: rgb(77,163,255); text-decoration: underline; }
+.download-disabled { display: block; display: flex; align-items: center; justify-content: center; min-height: 60px; padding: 16px 0; border-radius: 999px; border: 1px dashed rgba(255,255,255,.25); color: rgba(255,255,255,.4); font-weight: 700; line-height: 26px; cursor: not-allowed; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 
-/* ---------- 6. TERMS POP-UP ---------- */
-.terms { width: min(92vw, 36rem); max-height: 90vh; margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 28px; background: rgb(var(--c-card)); color: #fff; box-shadow: 0 40px 120px -20px rgba(0,0,12,.8); }
-.terms[open] { display: flex; flex-direction: column; }
-.terms::backdrop { background: rgb(var(--c-ink) / .7); backdrop-filter: blur(6px); }
-.terms-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 24px 0 32px; }
-.terms-title { font: 800 1.75rem/1.1 var(--font-display); letter-spacing: -.02em; }
-.terms-close { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: none; color: #fff; cursor: pointer; }
+/* ---------- 6. POP-UPS (terms + SHA-256) ---------- */
+dialog { display: none; }
+.terms { width: 92vw; max-width: 576px; max-height: 90vh; margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 28px; background: rgb(20,20,20); color: #fff; box-shadow: 0 40px 120px -20px rgba(0,0,12,.8); }
+.terms[open] { display: block; display: flex; flex-direction: column; }
+.terms::backdrop { background: rgba(0,0,0,.7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+/* browsers without a built-in <dialog>: the script opens it as a fixed box with a dark surround */
+.dlg-fallback { position: fixed; top: 5vh; left: 0; right: 0; z-index: 90; box-shadow: 0 0 0 9999px rgba(0,0,12,.7), 0 40px 120px -20px rgba(0,0,12,.8); }
+.dlg-open { overflow: hidden; }
+.terms-head { display: block; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 24px 0 32px; }
+.terms-title { font-size: 28px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }
+.terms-close { display: block; width: 48px; height: 48px; padding: 13px; flex: none; border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: none; color: #fff; cursor: pointer; }
 .terms-close:hover { background: rgba(255,255,255,.1); }
 .terms-body { overflow-y: auto; padding: 16px 32px 8px; color: rgba(255,255,255,.8); }
-.terms-list { margin-top: 16px; padding-left: 1.25rem; display: grid; gap: 12px; list-style: decimal; }
-.terms-list li::marker { color: rgb(var(--c-link)); font-family: var(--font-mono); }
-.terms-more { margin-top: 20px; font-size: .9375rem; }
-.terms-more a { color: rgb(var(--c-link)); text-decoration: underline; text-underline-offset: 3px; }
+.terms-list { margin-top: 16px; padding-left: 20px; list-style: decimal; }
+.terms-list li + li { margin-top: 12px; }
+.terms-list li::marker { color: rgb(77,163,255); font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace; }
+.terms-more { margin-top: 20px; font-size: 15px; }
+.terms-more a { color: rgb(77,163,255); text-decoration: underline; }
 .terms-more a:hover { color: #fff; }
 .terms-body:focus-visible { outline-offset: -4px; }
-.terms-hint { flex: 1 0 100%; font: 400 .8125rem var(--font-mono); color: rgb(var(--c-link)); }
+.terms-hint { flex: 1 0 100%; font-size: 13px; font-weight: 400; line-height: 1.5; color: rgb(77,163,255); text-align: left; }
 .terms-check.locked { cursor: not-allowed; color: rgba(255,255,255,.45); }
 .terms-check.locked .terms-box { border-style: dashed; opacity: .5; }
-.terms-check { display: flex; align-items: flex-start; gap: 12px; flex: 1 0 100%; min-height: 48px; padding-top: 10px; cursor: pointer; }
-.terms-check input { position: absolute; width: 1px; height: 1px; opacity: 0; }   /* real checkbox, hidden but still keyboard-focusable */
-.terms-box { flex: none; display: grid; place-items: center; width: 24px; height: 24px; margin-top: 1px; border: 2px solid rgba(255,255,255,.5); border-radius: 7px; transition: background-color .15s, border-color .15s; }
-.terms-box::after { content: ""; width: 6px; height: 11px; margin-top: -2px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg) scale(0); transition: transform .15s; }
-.terms-check input:checked + .terms-box { background: rgb(var(--c-brand)); border-color: rgb(var(--c-brand)); }
-.terms-check input:checked + .terms-box::after { transform: rotate(45deg) scale(1); }
+.terms-check { display: block; display: flex; align-items: flex-start; gap: 12px; flex: 1 0 100%; min-height: 48px; padding-top: 10px; cursor: pointer; text-align: left; }
+.terms-check input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.terms-box { flex: none; display: inline-block; vertical-align: top; width: 24px; height: 24px; margin-top: 1px; border: 2px solid rgba(255,255,255,.5); border-radius: 7px; transition: background-color .15s, border-color .15s; }
+.terms-box::after { content: ""; display: block; width: 6px; height: 11px; margin: 3px auto 0; border: solid #fff; border-width: 0 2.5px 2.5px 0; -webkit-transform: rotate(45deg) scale(0); -ms-transform: rotate(45deg) scale(0); transform: rotate(45deg) scale(0); transition: transform .15s; }
+.terms-check input:checked + .terms-box { background: rgb(26,92,255); border-color: rgb(26,92,255); }
+.terms-check input:checked + .terms-box::after { -webkit-transform: rotate(45deg) scale(1); -ms-transform: rotate(45deg) scale(1); transform: rotate(45deg) scale(1); }
 .terms-check input:focus-visible + .terms-box { outline: 3px solid #fff; outline-offset: 3px; }
-.terms-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; padding: 20px 32px 28px; border-top: 1px solid rgba(255,255,255,.1); margin-top: 16px; }
-html:has(dialog[open]) { overflow: hidden; }   /* stop the page scrolling behind the pop-up */
+.terms-actions { display: block; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; padding: 20px 32px 28px; border-top: 1px solid rgba(255,255,255,.1); margin-top: 16px; text-align: right; }
+@supports (display: grid) { .terms-box::after { display: grid; margin: -2px 0 0; } .terms-box { display: grid; place-items: center; } }
 
 /* ---------- 7. FOOTER ---------- */
-.site-footer { overflow: hidden; border-top: 1px solid rgba(255,255,255,.1); background: rgb(var(--c-ink)); padding-top: 40px; text-align: center; }
-.copyright { padding-inline: 20px; font: 400 .8125rem var(--font-mono); color: rgba(255,255,255,.75); }
-.wordmark { margin-top: 24px; padding-bottom: 16px; white-space: nowrap; user-select: none; font: 800 min(12.5vw, 13rem)/1 var(--font-display); letter-spacing: -.025em; background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,.12), rgba(255,255,255,.04)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.site-footer { overflow: hidden; border-top: 1px solid rgba(255,255,255,.1); background: rgb(0,0,0); padding-top: 40px; text-align: center; }
+.copyright { padding-left: 20px; padding-right: 20px; font-size: 13px; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,.75); }
+.wordmark { margin-top: 24px; padding-bottom: 16px; white-space: nowrap; -webkit-user-select: none; user-select: none; font-size: 48px; font-size: 12.5vw; font-weight: 800; line-height: 1; letter-spacing: -.025em; color: #262626; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) { .wordmark { color: transparent; background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,.12), rgba(255,255,255,.04)); -webkit-background-clip: text; background-clip: text; } }
 
-/* ---------- 8. ANIMATIONS ---------- */
-@keyframes rise  { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: none; } }
-@keyframes sheen { from { background-position: 150% 0, 0 0; } to { background-position: -50% 0, 0 0; } }
-@keyframes drift { 0%, 100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(40px,-30px,0) scale(1.12); } }
-@keyframes pop   { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: none; } }
-@keyframes fade  { from { opacity: 0; } to { opacity: 1; } }
-@keyframes panel { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-
-.hw { background-image: linear-gradient(105deg, transparent 38%, rgb(var(--c-link)) 50%, transparent 62%), linear-gradient(#fff, #fff); background-size: 300% 100%, 100% 100%; background-position: 150% 0, 0 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
-@media (prefers-reduced-motion: no-preference) {
-  .hw { animation: rise .9s cubic-bezier(.2,.8,.2,1) both, sheen .95s ease-out both; }
-  .hw:nth-child(1) { animation-delay: 80ms, 1400ms; }
-  .hw:nth-child(2) { animation-delay: 160ms, 1500ms; }
-  .hw:nth-child(3) { animation-delay: 240ms, 1600ms; }
-  .hw:nth-child(4) { animation-delay: 320ms, 1700ms; }
-  .hw:nth-child(5) { animation-delay: 400ms, 1800ms; }
-  .hw:nth-child(6) { animation-delay: 480ms, 1900ms; }
-  .hw:nth-child(7) { animation-delay: 560ms, 2000ms; }
-  .glow { animation: drift 16s ease-in-out infinite; }
-  .glow-teal { animation-delay: -8s; }
-  .mnav:not([hidden]) { animation: panel .25s ease-out; }
-  .terms[open] { animation: pop .25s ease-out; }
-  .terms[open]::backdrop { animation: fade .25s ease-out; }
+/* ---------- 8. COLUMN FALLBACK + old browsers ---------- */
+/* browsers without CSS grid (about 2016 and older) keep the two-column cards using floats; grid browsers undo this below */
+.release:after { content: ""; display: block; clear: both; }
+@media (min-width: 901px) {
+  .release-main { float: left; width: 62%; margin-right: 4%; }
+  .download-box { float: left; width: 34%; }
 }
-/* "Animations" switch OFF: stop every animation and transition */
-html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after, html[data-motion="off"] ::backdrop { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.meta div { min-height: 92px; }
+@media (min-width: 421px) { .meta div { float: left; width: 50%; } }
+@supports (display: grid) {
+  .release-main, .download-box, .meta div { float: none; width: auto; margin: 0; min-height: 0; }
+  .release:after { display: none; }
+}
+/* browsers without flex "gap" (the script adds .no-flex-gap): same spacing with margins */
+.no-flex-gap .header-row > * + * { margin-left: 16px; }
+.no-flex-gap .brand img { margin-right: 10px; }
+.no-flex-gap .nav > * + * { margin-left: 4px; }
+.no-flex-gap .btn svg, .no-flex-gap .download-link svg, .no-flex-gap .sha-copy svg { margin: 0 8px; }
+.no-flex-gap .hero-actions > * { margin: 0 14px 14px 0; }
+.no-flex-gap .download-box > * + * { margin-top: 14px; }
+.no-flex-gap .meta div > * + * { margin-top: 6px; }
+.no-flex-gap .terms-head > * + * { margin-left: 16px; }
+.no-flex-gap .terms-check > * + * { margin-left: 12px; }
+.no-flex-gap .terms-actions > * { margin: 0 0 0 12px; }
 
-/* ---------- 9. PHONE / TABLET ---------- */
+/* ---------- 9. PHONE / TABLET + wider screens ---------- */
+@media (min-width: 524px) { .hero-title { font-size: 8.4vw; } }
+@media (min-width: 1571px) { .hero-title { font-size: 132px; } }
+@media (min-width: 700px) { .section-title { font-size: 6vw; } }
+@media (min-width: 1334px) { .section-title { font-size: 80px; } }
+@media (min-width: 854px) { .release-title { font-size: 3vw; } }
+@media (min-width: 1067px) { .release-title { font-size: 32px; } }
+@media (min-width: 1664px) { .wordmark { font-size: 208px; } }
+@media (min-width: 901px) { .mnav { display: none; } }
 @media (max-width: 900px) {
-  .nav, .header-row > .motion-switch { display: none; }
+  .nav { display: none; }
   .burger { display: block; }
-  .mnav:not([hidden]) { display: block; }
   .hero { min-height: 0; padding-top: 48px; }
-  .release { grid-template-columns: 1fr; padding: 28px; gap: 28px; }
-  .downloads { padding-block: 96px; }
+  .release { grid-template-columns: 1fr; padding: 28px; grid-gap: 28px; gap: 28px; }
+  .downloads { padding-top: 96px; padding-bottom: 96px; }
 }
 @media (max-width: 420px) {
   .meta { grid-template-columns: 1fr; }
-  .hero-text { font-size: 1.5rem; }
+  .hero-text { font-size: 24px; }
 }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, ::before, ::after { transition: none !important; } }
 </style>
-<!-- Without JavaScript the pop-up, switch and menu button cannot work: hide them (the plain download fallback is shown instead) -->
-<noscript><style>[data-open-terms], [data-open-sha], .motion-switch, .burger { display: none; }</style></noscript>
+<!--[if lt IE 9]><style>
+.release:after { content: ""; display: block; clear: both; }
+.release-main { float: left; width: 62%; margin-right: 4%; }
+.download-box { float: left; width: 34%; }
+.meta div { float: left; width: 50%; }
+</style><![endif]-->
+<!--[if lt IE 8]><style>
+.release, .meta { zoom: 1; }
+.release-main, .download-box, .meta div { display: inline; zoom: 1; }
+</style><![endif]-->
+<!-- Without JavaScript the SHA pop-up and menu button cannot work: hide them ("Download ISO" then goes straight to Drive) -->
+<noscript><style>[data-open-sha], .burger { display: none; }</style></noscript>
 </head>
 
 <body>
@@ -394,7 +394,6 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
       <a href="index.html">Home</a>
       <a href="faq.html">FAQ</a>
     </nav>
-    <button type="button" class="motion-switch" role="switch" aria-checked="true" data-motion-switch><span>Animations</span><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
 
     <!-- Phone menu button -->
     <button id="burger" type="button" class="burger" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span></button>
@@ -403,12 +402,9 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
   <!-- Phone menu panel -->
   <div id="mnav" class="mnav" hidden>
     <nav aria-label="Mobile">
-      <a href="index.html" class="mnav-link">Home<svg class="icon" aria-hidden="true"><use href="#i-ar"/></svg></a>
-      <a href="faq.html" class="mnav-link">FAQ<svg class="icon" aria-hidden="true"><use href="#i-ar"/></svg></a>
+      <a href="index.html" class="mnav-link">Home<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
+      <a href="faq.html" class="mnav-link">FAQ<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
     </nav>
-    <div class="mnav-actions">
-      <button type="button" class="motion-switch" role="switch" aria-checked="true" data-motion-switch><span>Animations</span><span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span></button>
-    </div>
   </div>
 </header>
 
@@ -420,12 +416,12 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
   <span class="glow glow-teal" aria-hidden="true"></span>
 
   <div>
-    <h1 id="hero-h" class="hero-title"><span class="hw">Thank</span> <span class="hw">you</span> <span class="hw">for</span> <span class="hw">being</span> <span class="hw">an</span> <span class="hw">early</span> <span class="hw">supporter</span></h1>
+    <h1 id="hero-h" class="hero-title">Thank you for being an early supporter</h1>
     <p class="hero-text">Download the lightweight OS designed for older hardware.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#downloads"><svg class="icon" aria-hidden="true"><use href="#i-dl"/></svg>Download Now</a>
-      <a class="btn btn-ghost" href="/installation">Installation Guide<svg class="icon" aria-hidden="true"><use href="#i-ar"/></svg></a>
-      <a class="btn btn-ghost" href="#downloads">Versions<svg class="icon" aria-hidden="true"><use href="#i-ar"/></svg></a>
+      <a class="btn btn-primary" href="#downloads"><svg class="icon" aria-hidden="true"><use href="#i-dl" xlink:href="#i-dl"/></svg>Download Now</a>
+      <a class="btn btn-ghost" href="/installation">Installation Guide<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
+      <a class="btn btn-ghost" href="#downloads">Versions<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
     </div>
   </div>
 </section>
@@ -439,7 +435,7 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
 
     <!-- x86 (stable) -->
     <article class="release release-stable">
-      <div>
+      <div class="release-main">
         <h3 class="release-title">InvictusOS Sagaris x86/32-bit</h3>
         <p class="release-text">Current recommended build. Optimized for older desktops, notebooks and legacy x86 hardware.</p>
         <dl class="meta">
@@ -450,19 +446,18 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
         </dl>
       </div>
       <div class="download-box">
-        <button type="button" class="download-link" data-open-terms aria-haspopup="dialog"><svg class="icon" aria-hidden="true"><use href="#i-dl"/></svg>Download ISO</button>
+        <!-- Opens the terms pop-up. Without JavaScript it is a normal link straight to Drive. Keep this Drive address the same as the one in the pop-up. -->
+        <a class="download-link" href="https://drive.google.com/file/d/1EZewkSJiRmBteu5a2VFD5zyncvxFnvHD/view" target="_blank" rel="noopener noreferrer" data-open-terms aria-haspopup="dialog"><svg class="icon" aria-hidden="true"><use href="#i-dl" xlink:href="#i-dl"/></svg>Download ISO</a>
         <button type="button" class="text-link" data-open-sha aria-haspopup="dialog">Check SHA-256</button>
-        <!-- Shown only when JavaScript is off. Keep this Drive address the same as the one in the pop-up. -->
         <noscript>
           <p class="download-note">By downloading you agree to the <a href="terms.html">Terms &amp; Conditions</a>.</p>
-          <a class="download-link" href="https://drive.google.com/file/d/1EZewkSJiRmBteu5a2VFD5zyncvxFnvHD/view" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-dl"/></svg>Agree and continue<span class="sr-only"> (opens Google Drive in a new tab)</span></a>
         </noscript>
       </div>
     </article>
 
     <!-- x64 (upcoming) -->
     <article class="release release-upcoming">
-      <div>
+      <div class="release-main">
         <span class="pill">Upcoming</span>
         <h3 class="release-title">InvictusOS Sagaris x64/64-bit</h3>
         <p class="release-text">Upcoming build. Optimized for older desktops, notebooks and legacy x64 hardware.</p>
@@ -480,7 +475,7 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
 
     <!-- XIPHOS (upcoming) -->
     <article class="release release-upcoming">
-      <div>
+      <div class="release-main">
         <span class="pill">Upcoming</span>
         <h3 class="release-title">InvictusOS XIPHOS</h3>
         <p class="release-text">Upcoming build. A better and more improved version.</p>
@@ -510,7 +505,7 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
 <dialog id="terms" class="terms" aria-labelledby="terms-h">
   <div class="terms-head">
     <h2 id="terms-h" class="terms-title">Terms &amp; Conditions</h2>
-    <button type="button" class="terms-close" aria-label="Close" data-close-terms><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+    <button type="button" class="terms-close" aria-label="Close" data-close-terms><svg class="icon" aria-hidden="true"><use href="#i-x" xlink:href="#i-x"/></svg></button>
   </div>
 
   <!-- EDIT THE TERMS HERE: change the sentences, add or remove <li> lines -->
@@ -538,7 +533,7 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
     </label>
     <button type="button" class="btn btn-ghost" data-close-terms>Cancel</button>
     <!-- DOWNLOAD LINK: edit data-href below to change where "Agree and continue" goes -->
-    <button type="button" class="btn btn-primary" id="agree" data-href="https://drive.google.com/file/d/1EZewkSJiRmBteu5a2VFD5zyncvxFnvHD/view" disabled aria-describedby="agree-hint">Agree and continue<svg class="icon" aria-hidden="true"><use href="#i-ar"/></svg><span class="sr-only"> (opens Google Drive in a new tab)</span></button>
+    <button type="button" class="btn btn-primary" id="agree" data-href="https://drive.google.com/file/d/1EZewkSJiRmBteu5a2VFD5zyncvxFnvHD/view" disabled aria-describedby="agree-hint">Agree and continue<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg><span class="sr-only"> (opens Google Drive in a new tab)</span></button>
     <span id="agree-hint" class="sr-only">Tick the checkbox to enable this button.</span>
   </div>
 </dialog>
@@ -553,7 +548,7 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
     <p class="sha-label" id="sha-label">SHA-256</p>
     <!-- SHA-256 CHECKSUM: replace the 64-character value below with the hash of your ISO (lowercase) -->
     <code class="sha-value" id="sha-value" aria-labelledby="sha-label">PASTE_YOUR_64_CHARACTER_HASH_HERE</code>
-    <button type="button" class="btn sha-copy" id="sha-copy" autofocus><svg class="icon" aria-hidden="true"><use href="#i-dl"/></svg><span id="sha-copy-label">Copy hash</span></button>
+    <button type="button" class="btn sha-copy" id="sha-copy" autofocus><svg class="icon" aria-hidden="true"><use href="#i-dl" xlink:href="#i-dl"/></svg><span id="sha-copy-label">Copy hash</span></button>
     <p class="sha-status" id="sha-status" role="status" aria-live="polite"></p>
     <p>How to verify:</p>
     <pre><code>Windows (PowerShell): Get-FileHash .\InvictusOS.iso -Algorithm SHA256
@@ -567,153 +562,140 @@ macOS:                shasum -a 256 InvictusOS.iso</code></pre>
   </div>
 </dialog>
 
-<!-- ======== BEHAVIOUR (commented, plain JavaScript) ======== -->
+<!-- ======== BEHAVIOUR (commented, plain old-style JavaScript: works from IE9 on; older browsers use the plain Drive link) ======== -->
 <script>
 (function () {
   var d = document.documentElement;
-  var burger = document.getElementById("burger");
-  var panel = document.getElementById("mnav");
-  var switches = [].slice.call(document.querySelectorAll("[data-motion-switch]"));
-  var heads = [].slice.call(document.querySelectorAll("main h2"));
-  var mark = document.getElementById("fwm");
-  var foot = document.querySelector("footer");
-  var calm = false, ticking = false;
 
-  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
-  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
-  function progress(el) { var r = el.getBoundingClientRect(); return clamp((innerHeight - r.top) / (innerHeight + r.height)); }
-  function animating() { return d.getAttribute("data-motion") !== "off"; }
+  // old browsers without flex "gap": let the CSS use margins instead
+  try {
+    var box = document.createElement("div");
+    box.style.cssText = "display:flex;flex-direction:column;row-gap:1px";
+    box.appendChild(document.createElement("div"));
+    box.appendChild(document.createElement("div"));
+    d.appendChild(box);
+    if (box.scrollHeight !== 1 && (" " + d.className + " ").indexOf(" no-flex-gap ") < 0) d.className += " no-flex-gap";
+    d.removeChild(box);
+  } catch (e) {}
+
+  if (!document.querySelectorAll || !window.addEventListener) return;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var has = function (el, c) { return (" " + el.className + " ").indexOf(" " + c + " ") > -1; };
+  var add = function (el, c) { if (!has(el, c)) el.className += (el.className ? " " : "") + c; };
+  var remove = function (el, c) { el.className = (" " + el.className + " ").replace(" " + c + " ", " ").replace(/^\s+|\s+$/g, ""); };
+  var each = function (sel, fn) { var l = document.querySelectorAll(sel), i; for (i = 0; i < l.length; i++) fn(l[i]); };
+  var openUrl = function (url) { var w = window.open(url, "_blank"); try { if (w) w.opener = null; } catch (e) {} };
 
   // copyright year
-  document.getElementById("copyright-year").textContent = new Date().getFullYear();
+  $("copyright-year").textContent = new Date().getFullYear();
+
+  // ---- phone menu ----
+  var burger = $("burger"), panel = $("mnav");
+  function menuOpen() { return !panel.hasAttribute("hidden"); }
+  function setMenu(open) {
+    if (open) panel.removeAttribute("hidden"); else panel.setAttribute("hidden", "");
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  function insideLink(node) { while (node && node !== panel) { if (node.tagName === "A") return true; node = node.parentNode; } return false; }
+  burger.addEventListener("click", function () { setMenu(!menuOpen()); }, false);
+  panel.addEventListener("click", function (e) { if (insideLink(e.target)) setMenu(false); }, false);
+  document.addEventListener("click", function (e) { if (menuOpen() && !panel.contains(e.target) && !burger.contains(e.target)) setMenu(false); }, false);
+  window.addEventListener("resize", function () { if ((window.innerWidth || d.clientWidth) > 900) setMenu(false); }, false);
+
+  // ---- pop-ups: use the browser's own <dialog> when it has one, otherwise a fixed box ----
+  var terms = $("terms"), sha = $("sha"), opener = null;
+  var native = typeof terms.showModal === "function";
+  function isOpen(dlg) { return dlg.hasAttribute("open"); }
+  function openDialog(dlg, from) {
+    opener = from;
+    if (native) dlg.showModal();
+    else { dlg.setAttribute("open", ""); add(dlg, "dlg-fallback"); dlg.setAttribute("tabindex", "-1"); dlg.focus(); }
+    add(d, "dlg-open");
+  }
+  function closeDialog(dlg) {
+    if (native) { dlg.close(); return; }          // the "close" event below does the rest
+    dlg.removeAttribute("open"); remove(dlg, "dlg-fallback"); closed(dlg);
+  }
+  function closed(dlg) {                           // runs after either kind of close
+    if (!isOpen(terms) && !isOpen(sha)) remove(d, "dlg-open");
+    if (dlg === terms) resetTerms(); else shaReset();
+    if (opener && opener.focus) { try { opener.focus(); } catch (e) {} }
+  }
+  terms.addEventListener("close", function () { closed(terms); }, false);
+  sha.addEventListener("close", function () { closed(sha); }, false);
+  terms.addEventListener("click", function (e) { if (e.target === terms) closeDialog(terms); }, false);   // click outside the box closes it
+  sha.addEventListener("click", function (e) { if (e.target === sha) closeDialog(sha); }, false);
+  if (!native) {
+    document.addEventListener("click", function (e) {
+      var o = isOpen(terms) ? terms : (isOpen(sha) ? sha : null);
+      if (o && !o.contains(e.target)) closeDialog(o);
+    }, false);
+  }
+  document.addEventListener("keydown", function (e) {
+    var esc = e.key === "Escape" || e.key === "Esc" || e.keyCode === 27;
+    if (!esc) return;
+    if (!native && isOpen(sha)) closeDialog(sha);
+    else if (!native && isOpen(terms)) closeDialog(terms);
+    else if (menuOpen()) { setMenu(false); burger.focus(); }
+  }, false);
 
   // ---- terms pop-up: "Download ISO" opens it, "Agree and continue" goes to Google Drive ----
-  var terms = document.getElementById("terms");
-  var check = document.getElementById("agree-check");
-  var agree = document.getElementById("agree");
-  var termsBody = terms.querySelector(".terms-body");
-  var checkLabel = terms.querySelector(".terms-check");
-  var hint = document.getElementById("terms-hint");
+  var check = $("agree-check"), agree = $("agree"), hint = $("terms-hint");
+  var termsBody = terms.querySelector(".terms-body"), checkLabel = terms.querySelector(".terms-check");
   var haveRead = false;
-  function lockTerms(locked) {                       // locked = the visitor has not reached the end of the terms yet
+  function lockTerms(locked) {                     // locked = the visitor has not reached the end of the terms yet
     haveRead = !locked;
     check.disabled = locked;
-    checkLabel.classList.toggle("locked", locked);
-    hint.hidden = !locked;
-    if (locked) { check.checked = false; agree.disabled = true; }
+    if (locked) { add(checkLabel, "locked"); hint.removeAttribute("hidden"); check.checked = false; agree.disabled = true; }
+    else { remove(checkLabel, "locked"); hint.setAttribute("hidden", ""); }
   }
   function reachedEnd() { return termsBody.scrollTop + termsBody.clientHeight >= termsBody.scrollHeight - 4; }
   function checkRead() { if (!haveRead && reachedEnd()) lockTerms(false); }
-  [].forEach.call(document.querySelectorAll("[data-open-terms]"), function (b) {
-    b.addEventListener("click", function () {
-      terms.showModal();
+  function resetTerms() { check.checked = false; agree.disabled = true; lockTerms(true); }
+  resetTerms();                                    // also clears a ticked box the browser may restore on reload
+  each("[data-open-terms]", function (b) {
+    b.addEventListener("click", function (e) {
+      if (e.preventDefault) e.preventDefault();    // stop the plain link; show the terms first
+      if (e.stopPropagation) e.stopPropagation();
+      openDialog(terms, b);
       termsBody.scrollTop = 0;
       lockTerms(true);
-      checkRead();                                   // short terms that fit without scrolling unlock straight away
-    });
+      checkRead();                                 // short terms that fit without scrolling unlock straight away
+    }, false);
   });
-  [].forEach.call(document.querySelectorAll("[data-close-terms]"), function (b) { b.addEventListener("click", function () { terms.close(); }); });
-  terms.addEventListener("click", function (e) { if (e.target === terms) terms.close(); });   // click outside the box closes it
-  function resetTerms() { check.checked = false; agree.disabled = true; lockTerms(true); }
-  resetTerms();                                                                                  // also clears a ticked box the browser may restore on reload
-  termsBody.addEventListener("scroll", checkRead, { passive: true });                           // unlock when the end is reached
-  addEventListener("resize", function () { if (terms.open) checkRead(); });
-  check.addEventListener("change", function () { agree.disabled = !check.checked; });           // button is off until the box is ticked
-  terms.addEventListener("close", resetTerms);                                                   // every time the pop-up closes, start fresh
+  each("[data-close-terms]", function (b) { b.addEventListener("click", function () { closeDialog(terms); }, false); });
+  termsBody.addEventListener("scroll", checkRead, false);
+  window.addEventListener("resize", function () { if (isOpen(terms)) checkRead(); }, false);
+  check.addEventListener("change", function () { agree.disabled = !check.checked; }, false);
   agree.addEventListener("click", function () {
     if (agree.disabled) return;
-    window.open(agree.getAttribute("data-href"), "_blank", "noopener,noreferrer");              // go to Google Drive
-    terms.close();
-  });
+    openUrl(agree.getAttribute("data-href"));      // go to Google Drive
+    closeDialog(terms);
+  }, false);
 
   // ---- SHA-256 pop-up: open / close / copy the hash ----
-  var sha = document.getElementById("sha");
-  var shaValue = document.getElementById("sha-value");
-  var shaCopy = document.getElementById("sha-copy");
-  var shaLabel = document.getElementById("sha-copy-label");
-  var shaStatus = document.getElementById("sha-status");
-  var shaTimer = 0;
+  var shaValue = $("sha-value"), shaCopy = $("sha-copy"), shaLabel = $("sha-copy-label"), shaStatus = $("sha-status"), shaTimer = 0;
   function shaReset() { clearTimeout(shaTimer); shaLabel.textContent = "Copy hash"; shaStatus.textContent = ""; }
-  function selectHash() { var r = document.createRange(); r.selectNodeContents(shaValue); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  function selectHash() { var r = document.createRange(); r.selectNodeContents(shaValue); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
   function shaDone(ok) {
     shaLabel.textContent = ok ? "Copied!" : "Copy hash";
     shaStatus.textContent = ok ? "Hash copied to clipboard." : "Selected. Press Ctrl+C (or Cmd+C) to copy.";
     clearTimeout(shaTimer); shaTimer = setTimeout(shaReset, 2500);
   }
   function legacyCopy() { var ok = false; selectHash(); try { ok = document.execCommand("copy"); } catch (e) {} shaDone(ok); }
-  [].forEach.call(document.querySelectorAll("[data-open-sha]"), function (b) { b.addEventListener("click", function () { shaReset(); sha.showModal(); }); });
-  [].forEach.call(document.querySelectorAll("[data-close-sha]"), function (b) { b.addEventListener("click", function () { sha.close(); }); });
-  sha.addEventListener("click", function (e) { if (e.target === sha) sha.close(); });          // click outside the box closes it
-  sha.addEventListener("close", shaReset);
-  shaValue.addEventListener("click", selectHash);                                                // click the hash to select all of it
+  each("[data-open-sha]", function (b) {
+    b.addEventListener("click", function (e) { if (e.stopPropagation) e.stopPropagation(); shaReset(); openDialog(sha, b); }, false);
+  });
+  each("[data-close-sha]", function (b) { b.addEventListener("click", function () { closeDialog(sha); }, false); });
+  shaValue.addEventListener("click", selectHash, false);                         // click the hash to select all of it
   shaCopy.addEventListener("click", function () {
-    var t = shaValue.textContent.trim();
+    var t = shaValue.textContent.replace(/^\s+|\s+$/g, "");
     selectHash();
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { shaDone(true); }, legacyCopy);
     else legacyCopy();
-  });
-
-  // ---- phone menu ----------------------------------------------------------
-  function setMenu(open) {
-    panel.hidden = !open;
-    burger.setAttribute("aria-expanded", String(open));
-    burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  }
-  burger.addEventListener("click", function () { setMenu(burger.getAttribute("aria-expanded") !== "true"); });
-  panel.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
-  document.addEventListener("click", function (e) { if (!panel.hidden && !panel.contains(e.target) && !burger.contains(e.target)) setMenu(false); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { setMenu(false); burger.focus(); } });
-  addEventListener("resize", function () { if (innerWidth > 900) setMenu(false); });
-
-  // ---- scroll effects (headings drift, footer wordmark rises) ---
-  function update() {
-    if (!animating() || calm) return;
-    heads.forEach(function (h, i) { h.style.translate = ((progress(h.parentNode) - .5) * (i % 2 ? -5 : 5)).toFixed(2) + "vw 0"; });
-    var f = foot.getBoundingClientRect();
-    mark.style.transform = "translate3d(0," + ((1 - clamp((innerHeight - f.top) / (f.height * .8))) * 70).toFixed(1) + "px,0)";
-  }
-  function reset() {
-    heads.forEach(function (h) { h.style.translate = ""; });
-    mark.style.transform = "";
-  }
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); } }
-  addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", onScroll);
-
-  // ---- the "Animations" switch (same setting as the main page) --------------
-  function setMotion(on, save) {
-    d.setAttribute("data-motion", on ? "on" : "off");
-    switches.forEach(function (s) { s.setAttribute("aria-checked", String(on)); });
-    if (save) { store("iv-motion", on ? "on" : "off"); calm = false; }
-    if (on) update(); else reset();
-  }
-  var saved = store("iv-motion");
-  calm = matchMedia("(prefers-reduced-motion:reduce)").matches && !saved;   // reduced-motion visitors start with movement off
-  setMotion(saved ? saved === "on" : true, false);
-  switches.forEach(function (s) { s.addEventListener("click", function () { setMotion(!animating(), true); }); });
-
-  // ---- eased mouse-wheel scrolling (touch + keyboard stay native) -----------
-  var target = 0, current = 0, gliding = false, last = 0, mouse = matchMedia("(pointer:fine)").matches;
-  function glide(t) {
-    var dt = last ? Math.min(t - last, 100) : 16; last = t;
-    var diff = target - current;
-    current += diff * (1 - Math.exp(-dt / 90));
-    if (Math.abs(diff) < .4) { current = target; gliding = false; last = 0; }
-    scrollTo({ top: current, behavior: "instant" });
-    if (gliding) requestAnimationFrame(glide);
-  }
-  addEventListener("wheel", function (e) {
-    if (!mouse || !animating() || calm || document.querySelector("dialog[open]") || e.ctrlKey || e.defaultPrevented || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-    for (var el = e.target; el && el !== document.body && el.nodeType === 1; el = el.parentNode) {
-      if (el.scrollHeight > el.clientHeight && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) return;
-    }
-    e.preventDefault();
-    if (!gliding) { current = target = scrollY; }
-    var dy = e.deltaMode === 1 ? e.deltaY * 32 : e.deltaMode === 2 ? e.deltaY * innerHeight : e.deltaY;
-    target = Math.max(0, Math.min(d.scrollHeight - innerHeight, target + dy));
-    if (!gliding) { gliding = true; requestAnimationFrame(glide); }
-  }, { passive: false });
-  addEventListener("scroll", function () { if (!gliding) current = target = scrollY; }, { passive: true });
+  }, false);
 })();
 </script>
 </body>
