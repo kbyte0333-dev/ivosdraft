@@ -18,8 +18,7 @@
    TERMS POP-UP  : search  ======== TERMS  - edit the terms text there.
    TERMS FLOW    : the checkbox stays locked until the terms text has been scrolled to the end.
    TERMS PAGE    : link guessed as  terms.html  (search for it to change).
-   COLOURS       : written straight into the style block (search for the numbers, e.g. 26,92,255).
-   LOOKS         : style block, parts 3-7 (each part is labelled).
+   COLOURS/LOOKS : the shared stylesheet  style.css  (part 5 = this page; the header is part 3, shared by every page).
 
    SECURITY      : scripts are locked by a hash in the Content-Security-Policy
    tag. Text, link and CSS edits are fine. If you edit the script block, open
@@ -28,7 +27,7 @@
    understand the hash ignore it, very old ones need it to run the script).
   ===========================================================================
 -->
-<html lang="en">
+<html lang="en" class="p-dl">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,8 +50,8 @@
 <!-- Security: only this site's own files and data: images are allowed. Nothing is loaded from other websites. -->
 <meta http-equiv="Content-Security-Policy" content="
     default-src 'none';
-    script-src 'sha256-AJH9lP1XNJOuwjx3NClQ16aa7Rm7gYGeVCkKFV4iQMg=' 'unsafe-inline';
-    style-src 'unsafe-inline';
+    script-src 'sha256-VmY3w60R3vijJ0sMP1gWcNOuoaS8PLPHXa9HHZgm6BQ=' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
     font-src 'self';
     img-src 'self' data:;
     connect-src 'none';
@@ -127,244 +126,16 @@
 
 <!--[if lt IE 9]><script>(function(){var t="abbr article aside dialog figure footer header main nav section".split(" "),i=t.length;while(i--){document.createElement(t[i]);}document.documentElement.className+=" no-flex-gap";})();</script><![endif]-->
 <!--[if lte IE 6]><style>.mnav{display:none}</style><![endif]-->
-<style>
-/* =========================================================================
-   InvictusOS download page - styles
-   0. FONTS   1. COLOURS   2. BASE   3. HEADER + PHONE MENU   4. HERO
-   5. DOWNLOADS   6. POP-UPS   7. FOOTER   8. COLUMN FALLBACK   9. PHONE / TABLET
-   ========================================================================= */
-
-/* ---------- 0. FONTS (self-hosted in assets/fonts) ---------- */
-@font-face { font-family: "JetBrains Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/JetBrainsMono-Medium.woff2") format("woff2"), url("assets/fonts/JetBrainsMono-Medium.woff") format("woff"); }
-@font-face { font-family: "JetBrains Mono"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/JetBrainsMono-Regular.woff2") format("woff2"), url("assets/fonts/JetBrainsMono-Regular.woff") format("woff"); }
-@font-face { font-family: "Manrope"; font-weight: 700; font-style: normal; font-display: swap; src: url("assets/fonts/Manrope-Bold.woff2") format("woff2"), url("assets/fonts/Manrope-Bold.woff") format("woff"); }
-@font-face { font-family: "Manrope"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/Manrope-Medium.woff2") format("woff2"), url("assets/fonts/Manrope-Medium.woff") format("woff"); }
-@font-face { font-family: "Manrope"; font-weight: 400; font-style: normal; font-display: swap; src: url("assets/fonts/Manrope-Regular.woff2") format("woff2"), url("assets/fonts/Manrope-Regular.woff") format("woff"); }
-@font-face { font-family: "Sora"; font-weight: 700; font-style: normal; font-display: swap; src: url("assets/fonts/Sora-Bold.woff2") format("woff2"), url("assets/fonts/Sora-Bold.woff") format("woff"); }
-@font-face { font-family: "Sora"; font-weight: 800; font-style: normal; font-display: swap; src: url("assets/fonts/Sora-ExtraBold.woff2") format("woff2"), url("assets/fonts/Sora-ExtraBold.woff") format("woff"); }
-@font-face { font-family: "Sora"; font-weight: 500; font-style: normal; font-display: swap; src: url("assets/fonts/Sora-Medium.woff2") format("woff2"), url("assets/fonts/Sora-Medium.woff") format("woff"); }
-
-/* ---------- 1. COLOURS (written straight into the rules so every browser understands them; numbers are R,G,B) ----------
-   navy 10,10,28 (header, deep panels)   ink 0,0,0 (black bands, footer)   card 20,20,20 (dark cards)
-   brand 26,92,255 (bright blue)   link 77,163,255 (light blue links)   ok 34,197,94 (green)
-   page gradient: indigo 26,26,166  ->  mid 28,34,150  ->  teal 29,91,134 */
-
-/* ---------- 2. BASE ---------- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-::before { box-sizing: border-box; margin: 0; padding: 0; }
-::after { box-sizing: border-box; margin: 0; padding: 0; }
-article, aside, figure, footer, header, main, nav, section { display: block; }
-html { background: #1a1aa6; color: #fff; font-family: Manrope, system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif; scroll-behavior: smooth; scroll-padding-top: 88px; -webkit-text-size-adjust: 100%; }
-body { font-size: 16px; font-weight: 400; line-height: 1.625; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-img, svg { display: block; max-width: 100%; }
-main { overflow-x: clip; }
-a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
-button, input { font-family: inherit; }
-[hidden] { display: none !important; }
-/* shared font families (each written once) */
-.brand, .mnav-link, .hero-title, .hero-text, .section-title, .release-title, .meta dd, .terms-title, .wordmark { font-family: Sora, system-ui, "Segoe UI", Tahoma, Arial, sans-serif; }
-.label, .meta dt, .sha-label, .sha-value, .sha-body pre, .pill, .sha-status, .terms-hint, .copyright { font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace; }
-/* very thin, minimal scrollbar (page + the terms list) */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,.28); border: 2px solid transparent; background-clip: padding-box; border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.55); background-clip: padding-box; }
-@supports not selector(::-webkit-scrollbar) { html, .terms-body { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.3) transparent; } }
-::selection { background: rgb(26,92,255); color: #fff; }
-:focus-visible { outline: 3px solid #fff; outline-offset: 3px; border-radius: 6px; }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); clip: rect(1px 1px 1px 1px); white-space: nowrap; border: 0; }
-.skip { position: absolute; left: 12px; top: -64px; z-index: 100; padding: 12px 20px; border-radius: 8px; background: #fff; color: rgb(10,10,28); font-weight: 700; }
-.skip:focus { top: 12px; }
-.sprite { position: absolute; width: 0; height: 0; }
-
-/* page background layers: dark graph lines over the page gradient + film grain (the gradient lives here, not on html, so scrolling stays cheap) */
-.bg-grid, .bg-grain { position: fixed; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
-.bg-grid { z-index: -1; background-image: linear-gradient(rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(135deg, #1a1aa6 0%, #1c2296 45%, #1d5b86 100%); background-size: 48px 48px, 48px 48px, 100% 100%; }
-.bg-grain { display: none; z-index: 55; opacity: .07; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-@supports (mix-blend-mode: overlay) { .bg-grain { display: block; } }
-
-/* buttons used all over the page */
-.btn { display: inline-block; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 15px 32px; border-radius: 999px; font-size: 16px; font-weight: 500; line-height: 24px; text-align: center; border: 1px solid transparent; background: transparent; color: #fff; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s; }
-.btn-primary { background: #fff; color: rgb(10,10,28); font-weight: 700; }
-.btn-primary:hover { background: rgb(26,92,255); color: #fff; }
-.btn-ghost { border-color: rgba(255,255,255,.5); color: #fff; }
-.btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.1); }
-.btn:disabled, .btn:disabled:hover { background: rgba(255,255,255,.1); color: rgba(255,255,255,.4); border: 1px dashed rgba(255,255,255,.25); cursor: not-allowed; }
-.icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.btn .icon, .download-link .icon, .sha-copy .icon { display: inline-block; vertical-align: middle; }
-
-/* ---------- 3. HEADER + PHONE MENU ---------- */
-.site-header { position: sticky; top: 0; z-index: 50; background: rgba(10,10,28,.85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.1); }
-.header-row { position: relative; display: block; display: flex; align-items: center; gap: 16px; min-height: 68px; max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
-.brand { display: inline-block; display: flex; align-items: center; gap: 10px; min-height: 48px; font-size: 18px; font-weight: 700; line-height: 28px; white-space: nowrap; }
-.brand img { display: inline-block; vertical-align: middle; height: 32px; width: auto; }
-.nav { display: block; display: flex; align-items: center; gap: 4px; margin-left: auto; }
-.nav a { display: inline-block; display: flex; align-items: center; min-height: 48px; padding: 12px; line-height: 24px; border-radius: 8px; font-weight: 500; color: rgb(77,163,255); }
-.nav a:hover { color: #fff; }
-
-/* burger button (phones only) */
-.burger { display: none; position: relative; width: 48px; height: 48px; margin-left: auto; border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: none; cursor: pointer; }
-.burger-bar { position: absolute; left: 50%; width: 20px; height: 2px; margin-left: -10px; border-radius: 2px; background: #fff; transition: transform .25s ease, opacity .2s ease; }
-.burger-bar:nth-child(1) { top: 15px; }
-.burger-bar:nth-child(2) { top: 22px; }
-.burger-bar:nth-child(3) { top: 29px; }
-.burger[aria-expanded="true"] .burger-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.burger[aria-expanded="true"] .burger-bar:nth-child(2) { opacity: 0; }
-.burger[aria-expanded="true"] .burger-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-/* phone menu panel */
-.mnav { position: absolute; left: 0; right: 0; top: 100%; padding: 8px 20px 24px; background: rgb(10,10,28); border-bottom: 1px solid rgba(255,255,255,.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); }
-.mnav-link { display: block; display: flex; align-items: center; justify-content: space-between; min-height: 60px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.1); font-size: 20px; font-weight: 600; line-height: 28px; }
-.mnav-link:hover { color: rgb(77,163,255); }
-.mnav-link .icon { display: inline-block; vertical-align: middle; }
-
-/* ---------- 4. HERO ---------- */
-.hero { position: relative; display: block; display: flex; flex-direction: column; justify-content: center; max-width: 1280px; min-height: calc(100vh - 68px); min-height: calc(100svh - 68px); margin-left: auto; margin-right: auto; padding: 64px 20px 80px; }
-.glow { position: absolute; z-index: -1; border-radius: 50%; -webkit-filter: blur(100px); filter: blur(100px); pointer-events: none; }
-.glow-blue { right: -128px; top: 32px; width: 544px; height: 544px; background: rgba(26,92,255,.35); }
-.glow-teal { left: -128px; bottom: 0; width: 480px; height: 480px; background: rgba(29,91,134,.6); }
-.hero-title { font-size: 44px; font-weight: 800; line-height: .98; letter-spacing: -.04em; }
-.hero-text { max-width: 448px; margin-top: 28px; font-size: 28px; font-weight: 500; line-height: 1.2; letter-spacing: -.01em; color: rgba(255,255,255,.9); }
-.hero-actions { display: block; display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
-
-/* ---------- 5. DOWNLOADS ---------- */
-.downloads { position: relative; max-width: 1180px; margin-left: auto; margin-right: auto; padding: 144px 20px; }
-.label { font-size: 12px; font-weight: 500; line-height: 1.5; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
-.section-title { margin-top: 16px; font-size: 42px; font-weight: 800; line-height: .95; letter-spacing: -.035em; }
-.releases { margin-top: 56px; }
-.release + .release { margin-top: 20px; }
-
-.release { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); grid-gap: 40px; gap: 40px; padding: 40px; border-radius: 32px; border: 1px solid rgba(255,255,255,.15); background: rgb(20,20,20); }
-.release-stable { background: linear-gradient(160deg, rgba(34,197,94,.1), transparent 50%), rgb(20,20,20); }
-.release-upcoming { border: 1px dashed #2f5272; border: 1px dashed rgba(77,163,255,.5); background: rgb(0,0,0); }
-.release-title { font-size: 26px; font-weight: 700; line-height: 1.15; letter-spacing: -.02em; }
-.release-text { margin-top: 12px; max-width: 544px; color: rgba(255,255,255,.75); }
-.pill { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 500; line-height: 1.5; letter-spacing: .1em; text-transform: uppercase; border: 1px solid rgba(77,163,255,.6); background: rgba(77,163,255,.15); color: #7dd3fc; }
-
-/* version / architecture / size / status panel */
-.meta { display: grid; grid-template-columns: repeat(2, 1fr); grid-gap: 1px; gap: 1px; margin-top: 28px; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.2); }
-.meta div { display: block; display: flex; flex-direction: column; gap: 6px; padding: 20px; background: rgb(20,20,20); }
-.release-upcoming .meta div { background: rgb(8,8,8); }
-.meta dt { font-size: 12px; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,.7); }
-.meta dd { font-size: 20px; font-weight: 700; line-height: 1.625; letter-spacing: -.01em; }
-
-/* "Check SHA-256" link + its pop-up */
-.text-link { display: inline-block; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px; border: 0; background: none; font-size: 15px; font-weight: 500; line-height: 24px; color: rgb(77,163,255); text-decoration: underline; cursor: pointer; }
-.text-link:hover { color: #fff; }
-.sha-label { margin-top: 16px; font-size: 12px; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,.7); }
-.sha-value { display: block; margin-top: 8px; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgb(0,0,0); font-size: 14px; font-weight: 500; line-height: 1.5; color: rgb(77,163,255); overflow-wrap: anywhere; word-wrap: break-word; -webkit-user-select: all; -moz-user-select: all; user-select: all; cursor: copy; }
-.sha-copy { margin-top: 14px; min-height: 48px; gap: 8px; padding: 11px 20px; border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.12); font-size: 14px; font-weight: 500; color: rgba(255,255,255,.8); }
-.sha-copy:hover { background: rgba(255,255,255,.2); color: #fff; }
-.sha-copy .icon { width: 16px; height: 16px; }
-.sha-body a { color: rgb(77,163,255); text-decoration: underline; }
-.sha-body a:hover { color: #fff; }
-.sha-status { min-height: 1.5em; margin-top: 8px; text-align: center; font-size: 13px; font-weight: 400; color: rgb(34,197,94); }
-.sha-body pre { margin-top: 8px; padding: 14px; overflow-x: auto; border-radius: 12px; background: rgb(0,0,0); font-size: 13px; font-weight: 400; line-height: 1.6; color: rgba(255,255,255,.85); }
-.sha-body p + p { margin-top: 12px; }
-
-.download-box { display: block; display: flex; flex-direction: column; justify-content: center; gap: 14px; text-align: center; }
-.download-link { display: block; display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 60px; padding: 17px 20px; border: 0; border-radius: 999px; background: #fff; color: rgb(10,10,28); font-size: 16px; font-weight: 700; line-height: 26px; cursor: pointer; transition: background-color .2s, color .2s; }
-.download-link:hover { background: rgb(26,92,255); color: #fff; }
-.download-note { text-align: center; font-size: 14px; color: rgba(255,255,255,.75); }
-.download-note a { color: rgb(77,163,255); text-decoration: underline; }
-.download-disabled { display: block; display: flex; align-items: center; justify-content: center; min-height: 60px; padding: 16px 0; border-radius: 999px; border: 1px dashed rgba(255,255,255,.25); color: rgba(255,255,255,.4); font-weight: 700; line-height: 26px; cursor: not-allowed; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
-
-/* ---------- 6. POP-UPS (terms + SHA-256) ---------- */
-dialog { display: none; }
-.terms { width: 92vw; max-width: 576px; max-height: 90vh; margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 28px; background: rgb(20,20,20); color: #fff; box-shadow: 0 40px 120px -20px rgba(0,0,12,.8); }
-.terms[open] { display: block; display: flex; flex-direction: column; }
-.terms::backdrop { background: rgba(0,0,0,.7); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-/* browsers without a built-in <dialog>: the script opens it as a fixed box with a dark surround */
-.dlg-fallback { position: fixed; top: 5vh; left: 0; right: 0; z-index: 90; box-shadow: 0 0 0 9999px rgba(0,0,12,.7), 0 40px 120px -20px rgba(0,0,12,.8); }
-.dlg-open { overflow: hidden; }
-.terms-head { display: block; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 24px 0 32px; }
-.terms-title { font-size: 28px; font-weight: 800; line-height: 1.1; letter-spacing: -.02em; }
-.terms-close { display: block; width: 48px; height: 48px; padding: 13px; flex: none; border: 1px solid rgba(255,255,255,.2); border-radius: 12px; background: none; color: #fff; cursor: pointer; }
-.terms-close:hover { background: rgba(255,255,255,.1); }
-.terms-body { overflow-y: auto; padding: 16px 32px 8px; color: rgba(255,255,255,.8); }
-.terms-list { margin-top: 16px; padding-left: 20px; list-style: decimal; }
-.terms-list li + li { margin-top: 12px; }
-.terms-list li::marker { color: rgb(77,163,255); font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace; }
-.terms-more { margin-top: 20px; font-size: 15px; }
-.terms-more a { color: rgb(77,163,255); text-decoration: underline; }
-.terms-more a:hover { color: #fff; }
-.terms-body:focus-visible { outline-offset: -4px; }
-.terms-hint { flex: 1 0 100%; font-size: 13px; font-weight: 400; line-height: 1.5; color: rgb(77,163,255); text-align: left; }
-.terms-check.locked { cursor: not-allowed; color: rgba(255,255,255,.45); }
-.terms-check.locked .terms-box { border-style: dashed; opacity: .5; }
-.terms-check { display: block; display: flex; align-items: flex-start; gap: 12px; flex: 1 0 100%; min-height: 48px; padding-top: 10px; cursor: pointer; text-align: left; }
-.terms-check input { position: absolute; width: 1px; height: 1px; opacity: 0; }
-.terms-box { flex: none; display: inline-block; vertical-align: top; width: 24px; height: 24px; margin-top: 1px; border: 2px solid rgba(255,255,255,.5); border-radius: 7px; transition: background-color .15s, border-color .15s; }
-.terms-box::after { content: ""; display: block; width: 6px; height: 11px; margin: 3px auto 0; border: solid #fff; border-width: 0 2.5px 2.5px 0; -webkit-transform: rotate(45deg) scale(0); -ms-transform: rotate(45deg) scale(0); transform: rotate(45deg) scale(0); transition: transform .15s; }
-.terms-check input:checked + .terms-box { background: rgb(26,92,255); border-color: rgb(26,92,255); }
-.terms-check input:checked + .terms-box::after { -webkit-transform: rotate(45deg) scale(1); -ms-transform: rotate(45deg) scale(1); transform: rotate(45deg) scale(1); }
-.terms-check input:focus-visible + .terms-box { outline: 3px solid #fff; outline-offset: 3px; }
-.terms-actions { display: block; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; padding: 20px 32px 28px; border-top: 1px solid rgba(255,255,255,.1); margin-top: 16px; text-align: right; }
-@supports (display: grid) { .terms-box::after { display: grid; margin: -2px 0 0; } .terms-box { display: grid; place-items: center; } }
-
-/* ---------- 7. FOOTER ---------- */
-.site-footer { overflow: hidden; border-top: 1px solid rgba(255,255,255,.1); background: rgb(0,0,0); padding-top: 40px; text-align: center; }
-.copyright { padding-left: 20px; padding-right: 20px; font-size: 13px; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,.75); }
-.wordmark { margin-top: 24px; padding-bottom: 16px; white-space: nowrap; -webkit-user-select: none; user-select: none; font-size: 48px; font-size: 12.5vw; font-weight: 800; line-height: 1; letter-spacing: -.025em; color: #262626; }
-@supports ((-webkit-background-clip: text) or (background-clip: text)) { .wordmark { color: transparent; background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,.12), rgba(255,255,255,.04)); -webkit-background-clip: text; background-clip: text; } }
-
-/* ---------- 8. COLUMN FALLBACK + old browsers ---------- */
-/* browsers without CSS grid (about 2016 and older) keep the two-column cards using floats; grid browsers undo this below */
-.release:after { content: ""; display: block; clear: both; }
-@media (min-width: 901px) {
-  .release-main { float: left; width: 62%; margin-right: 4%; }
-  .download-box { float: left; width: 34%; }
-}
-.meta div { min-height: 92px; }
-@media (min-width: 421px) { .meta div { float: left; width: 50%; } }
-@supports (display: grid) {
-  .release-main, .download-box, .meta div { float: none; width: auto; margin: 0; min-height: 0; }
-  .release:after { display: none; }
-}
-/* browsers without flex "gap" (the script adds .no-flex-gap): same spacing with margins */
-.no-flex-gap .header-row > * + * { margin-left: 16px; }
-.no-flex-gap .brand img { margin-right: 10px; }
-.no-flex-gap .nav > * + * { margin-left: 4px; }
-.no-flex-gap .btn svg, .no-flex-gap .download-link svg, .no-flex-gap .sha-copy svg { margin: 0 8px; }
-.no-flex-gap .hero-actions > * { margin: 0 14px 14px 0; }
-.no-flex-gap .download-box > * + * { margin-top: 14px; }
-.no-flex-gap .meta div > * + * { margin-top: 6px; }
-.no-flex-gap .terms-head > * + * { margin-left: 16px; }
-.no-flex-gap .terms-check > * + * { margin-left: 12px; }
-.no-flex-gap .terms-actions > * { margin: 0 0 0 12px; }
-
-/* ---------- 9. PHONE / TABLET + wider screens ---------- */
-@media (min-width: 524px) { .hero-title { font-size: 8.4vw; } }
-@media (min-width: 1571px) { .hero-title { font-size: 132px; } }
-@media (min-width: 700px) { .section-title { font-size: 6vw; } }
-@media (min-width: 1334px) { .section-title { font-size: 80px; } }
-@media (min-width: 854px) { .release-title { font-size: 3vw; } }
-@media (min-width: 1067px) { .release-title { font-size: 32px; } }
-@media (min-width: 1664px) { .wordmark { font-size: 208px; } }
-@media (min-width: 901px) { .mnav { display: none; } }
-@media (max-width: 900px) {
-  .nav { display: none; }
-  .burger { display: block; }
-  .hero { min-height: 0; padding-top: 48px; }
-  .release { grid-template-columns: 1fr; padding: 28px; grid-gap: 28px; gap: 28px; }
-  .downloads { padding-top: 96px; padding-bottom: 96px; }
-}
-@media (max-width: 420px) {
-  .meta { grid-template-columns: 1fr; }
-  .hero-text { font-size: 24px; }
-}
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, ::before, ::after { transition: none !important; } }
-</style>
+<link rel="stylesheet" href="style.css">
 <!--[if lt IE 9]><style>
-.release:after { content: ""; display: block; clear: both; }
-.release-main { float: left; width: 62%; margin-right: 4%; }
-.download-box { float: left; width: 34%; }
-.meta div { float: left; width: 50%; }
+.p-dl .release:after { content: ""; display: block; clear: both; }
+.p-dl .release-main { float: left; width: 62%; margin-right: 4%; }
+.p-dl .download-box { float: left; width: 34%; }
+.p-dl .meta div { float: left; width: 50%; }
 </style><![endif]-->
 <!--[if lt IE 8]><style>
-.release, .meta { zoom: 1; }
-.release-main, .download-box, .meta div { display: inline; zoom: 1; }
+.p-dl .release, .p-dl .meta { zoom: 1; }
+.p-dl .release-main, .p-dl .download-box, .p-dl .meta div { display: inline; zoom: 1; }
 </style><![endif]-->
 <!-- Without JavaScript the SHA pop-up and menu button cannot work: hide them ("Download ISO" then goes straight to Drive) -->
 <noscript><style>[data-open-sha], .burger { display: none; }</style></noscript>
@@ -374,8 +145,8 @@ dialog { display: none; }
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ======== BACKGROUND LAYERS (graph, film grain) ======== -->
-<div class="bg-grid" aria-hidden="true"></div>
-<div class="bg-grain" aria-hidden="true"></div>
+<div class="grid-lines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
 <!-- icon sprite -->
 <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs>
@@ -387,12 +158,12 @@ dialog { display: none; }
 <!-- ======== HEADER / NAVIGATION ======== -->
 <header class="site-header">
   <div class="header-row">
-    <a href="index.html" class="brand" aria-label="InvictusOS home"><img src="assets/logo.png" alt="" width="38" height="32">InvictusOS</a>
+    <a href="index.html" class="brand-link" aria-label="InvictusOS home"><img src="assets/logo.png" alt="" width="38" height="32" class="logo">InvictusOS</a>
 
     <!-- Desktop navigation (hidden on phones) -->
     <nav class="nav" aria-label="Primary">
-      <a href="index.html">Home</a>
-      <a href="faq.html">FAQ</a>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
     </nav>
 
     <!-- Phone menu button -->
@@ -602,7 +373,7 @@ macOS:                shasum -a 256 InvictusOS.iso</code></pre>
   burger.addEventListener("click", function () { setMenu(!menuOpen()); }, false);
   panel.addEventListener("click", function (e) { if (insideLink(e.target)) setMenu(false); }, false);
   document.addEventListener("click", function (e) { if (menuOpen() && !panel.contains(e.target) && !burger.contains(e.target)) setMenu(false); }, false);
-  window.addEventListener("resize", function () { if ((window.innerWidth || d.clientWidth) > 900) setMenu(false); }, false);
+  window.addEventListener("resize", function () { if ((window.innerWidth || d.clientWidth) >= 960) setMenu(false); }, false);
 
   // ---- pop-ups: use the browser's own <dialog> when it has one, otherwise a fixed box ----
   var terms = $("terms"), sha = $("sha"), opener = null;
