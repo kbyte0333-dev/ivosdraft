@@ -48,7 +48,7 @@ button { padding: 0; border: 0; background: none; color: inherit; font: inherit;
 .grid-lines { z-index: -10; background-image: linear-gradient(rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.34) 1px, transparent 1px), linear-gradient(135deg, #1a1aa6 0%, #1c2296 45%, #1d5b86 100%); background-size: 48px 48px, 48px 48px, 100% 100%; }
 .grain { display: none; z-index: 55; opacity: .07; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='1' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 @supports (mix-blend-mode: overlay) { .grain { display: block; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, ::before, ::after { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .burger-bar, .faq-button, .faq-arrow, .link-row, .link-row-arrow, .arm .rq, .arm .rq svg, .terms-box, .terms-box::after { transition: none !important; } }
 
 /* ---------- 3. HEADER + PHONE MENU (same on every page) ---------- */
 .brand-link, .mnav-link { font-family: Sora, system-ui, "Segoe UI", Tahoma, Arial, sans-serif; }
