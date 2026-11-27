@@ -532,7 +532,7 @@ font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
 
 
 <nav class="navbar">
-  <a class="nav-logo" href="https://webinvictusos.neocities.org/">
+  <a class="nav-logo" href="../assets/logo.svg">
     <img src="invicn.svg" alt="InvictusOS logo" onerror="this.style.display='none'">
     <span>InvictusOS</span>
   </a>
@@ -573,7 +573,7 @@ font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
   </div>
   <div class="toast-body">
     <span class="toast-title">Notice</span>
-    <span class="toast-msg">Our installer is under development. Please use the Google Drive ISO downloads for now.</span>
+    <span class="toast-msg">This walkthrogh is meant for InvictusOS Sagaris. The updated walkthrough for XIPHOS will be provided shortly.</span>
   </div>
   <button class="toast-close" id="toastClose" aria-label="Dismiss">✕</button>
 </div>
@@ -595,11 +595,11 @@ font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
       <div class="req-col">
         <div class="req-col-label">Minimum</div>
         <ul>
-          <li>990 MHz CPU (Pentium III / Atom-class)</li>
+          <li>900 MHz CPU (Pentium III / Atom-class)</li>
           <li>512 MB RAM</li>
           <li>5 GB free disk space</li>
           <li>BIOS / Legacy boot support</li>
-          <li>512 x 300 display
+          <li>640 x 480 display
         </ul>
       </div>
       <div class="req-col">
@@ -607,14 +607,14 @@ font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
         <ul>
           <li>1 GHz+ CPU</li>
           <li>1 GB+ RAM</li>
-          <li>5.8 GB+ free disk space</li>
+          <li>15 GB free disk space</li>
           <li>1024 x 600 display or higher</li>
         </ul>
       </div>
       <div class="req-col">
         <div class="req-col-label">Installation Media (REQUIRED)</div>
         <ul>
-          <li>4 GB or larger USB drive</li>
+          <li>3 GB or larger USB drive/DVD</li>
           <li>InvictusOS Sagaris ISO image</li>
           <li>ISO writer: balenaEtcher, dd, Rufus or similar</li>
         </ul>
@@ -673,7 +673,7 @@ font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
         </div>
         <div class="step-body">
           <div class="step-title">Boot from USB</div>
-          <p class="step-desc">Plug the USB into the target device. Enter the boot menu or BIOS (by pressing F2/F10/F12/Del, etc. while the machine is booting up. The exact key depends on your PC manufacturer). Choose the USB device as the boot source. Select the InvictusOS live option in the boot menu.</p>
+          <p class="step-desc">Plug the USB/DVD into the target device. Enter the boot menu or BIOS (by pressing F2/F10/F12/Del, etc. while the machine is booting up. The exact key depends on your PC manufacturer). Choose the USB device as the boot source. Select the InvictusOS live option in the boot menu.</p>
         </div>
       </div>
       <div class="step">
@@ -694,7 +694,7 @@ font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
         </div>
     <div class="step-body">
           <div class="step-title">First boot</div>
-          <p class="step-desc">Shut down the live session and remove the USB drive. Power on and boot from the internal disk. Create your user and finish setup.</p>
+          <p class="step-desc">Shut down the live session and remove the USB drive/DVD. Power on and boot from the internal disk. Create your user and finish setup.</p>
         </div>
       </div>
     </div>
@@ -808,6 +808,10 @@ font-size: clamp(1.4rem, 3vw, 1.7rem); font-weight: 700;
             <li>Then, for GRUB enter your whole disk <code>/dev/sda</code> and for <code>/boot</code>, leave it blank</li>
             <li>Then, select ext4 as partition type.</li>
             <li>Then, for <code>/</code> select <code>/dev/sda1</code> and for swap select <code>/dev/sda2</code></li>
+            <div class="guide-note warn">
+            <strong>Warning:</strong> Do not blindly enter /dev/sda. On some machines, your bootable USB drive is assigned /dev/sda, which will cause the installer to overwrite itself. Confirm your drive size before proceeding.
+
+            </div>
             <li> A bunch of text will start scrolling</li>
             <li>Change username or password if desired.</li>
           <div class="guide-note warn">
