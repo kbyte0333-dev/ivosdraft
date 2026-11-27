@@ -17,7 +17,7 @@
                    JavaScript is off it goes straight to Drive.
    TERMS POP-UP  : search  ======== TERMS  - edit the terms text there.
    TERMS FLOW    : the checkbox stays locked until the terms text has been scrolled to the end.
-   TERMS PAGE    : link guessed as  terms.html  (search for it to change).
+   TERMS PAGE    : link guessed as  /terms  (search for it to change).
    COLOURS/LOOKS : the shared stylesheet  style.css  (part 5 = this page; the header is part 3, shared by every page).
 
    SECURITY      : scripts are locked by a hash in the Content-Security-Policy
@@ -38,12 +38,12 @@
 <meta name="description" content="Download InvictusOS Sagaris x86/32-bit, the lightweight operating system for older hardware, and see the upcoming x64 and XIPHOS builds.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#0a0a1c">
-<link rel="canonical" href="https://webinvictusos.neocities.org/download.html">
+<link rel="canonical" href="https://webinvictusos.neocities.org/downloads/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="InvictusOS">
 <meta property="og:title" content="InvictusOS | Downloads">
 <meta property="og:description" content="Download the lightweight OS designed for older hardware.">
-<meta property="og:url" content="https://webinvictusos.neocities.org/download.html">
+<meta property="og:url" content="https://webinvictusos.neocities.org/downloads/">
 <meta property="og:image" content="https://webinvictusos.neocities.org/assets/desktop.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -69,17 +69,17 @@
   "@graph": [
     {
       "@type": "CollectionPage",
-      "@id": "https://webinvictusos.neocities.org/download.html#webpage",
-      "url": "https://webinvictusos.neocities.org/download.html",
+      "@id": "https://webinvictusos.neocities.org/downloads/#webpage",
+      "url": "https://webinvictusos.neocities.org/downloads/",
       "name": "InvictusOS | Downloads",
       "description": "Download the lightweight OS designed for older hardware.",
       "isPartOf": { "@type": "WebSite", "name": "InvictusOS", "url": "https://webinvictusos.neocities.org/" },
       "inLanguage": "en",
-      "mainEntity": { "@id": "https://webinvictusos.neocities.org/download.html#versions" }
+      "mainEntity": { "@id": "https://webinvictusos.neocities.org/downloads/#versions" }
     },
     {
       "@type": "ItemList",
-      "@id": "https://webinvictusos.neocities.org/download.html#versions",
+      "@id": "https://webinvictusos.neocities.org/downloads/#versions",
       "name": "InvictusOS Versions",
       "itemListElement": [
         {
@@ -126,7 +126,7 @@
 
 <!--[if lt IE 9]><script>(function(){var t="abbr article aside dialog figure footer header main nav section".split(" "),i=t.length;while(i--){document.createElement(t[i]);}document.documentElement.className+=" no-flex-gap";})();</script><![endif]-->
 <!--[if lte IE 6]><style>.mnav{display:none}</style><![endif]-->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/style.css">
 <!--[if lt IE 9]><style>
 .p-dl .release:after { content: ""; display: block; clear: both; }
 .p-dl .release-main { float: left; width: 62%; margin-right: 4%; }
@@ -158,12 +158,12 @@
 <!-- ======== HEADER / NAVIGATION ======== -->
 <header class="site-header">
   <div class="header-row">
-    <a href="index.html" class="brand-link" aria-label="InvictusOS home"><img src="assets/logo.png" alt="" width="38" height="32" class="logo">InvictusOS</a>
+    <a href="/" class="brand-link" aria-label="InvictusOS home"><img src="/assets/logo.png" alt="" width="38" height="32" class="logo">InvictusOS</a>
 
     <!-- Desktop navigation (hidden on phones) -->
     <nav class="nav" aria-label="Primary">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="/" class="nav-link">Home</a>
+      <a href="/faq" class="nav-link">FAQ</a>
     </nav>
 
     <!-- Phone menu button -->
@@ -173,8 +173,8 @@
   <!-- Phone menu panel -->
   <div id="mnav" class="mnav" hidden>
     <nav aria-label="Mobile">
-      <a href="index.html" class="mnav-link">Home<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
-      <a href="faq.html" class="mnav-link">FAQ<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
+      <a href="/" class="mnav-link">Home<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
+      <a href="/faq" class="mnav-link">FAQ<svg class="icon" aria-hidden="true"><use href="#i-ar" xlink:href="#i-ar"/></svg></a>
     </nav>
   </div>
 </header>
@@ -221,7 +221,7 @@
         <a class="download-link" href="https://drive.google.com/file/d/1EZewkSJiRmBteu5a2VFD5zyncvxFnvHD/view" target="_blank" rel="noopener noreferrer" data-open-terms aria-haspopup="dialog"><svg class="icon" aria-hidden="true"><use href="#i-dl" xlink:href="#i-dl"/></svg>Download ISO</a>
         <button type="button" class="text-link" data-open-sha aria-haspopup="dialog">Check SHA-256</button>
         <noscript>
-          <p class="download-note">By downloading you agree to the <a href="terms.html">Terms &amp; Conditions</a>.</p>
+          <p class="download-note">By downloading you agree to the <a href="/terms">Terms &amp; Conditions</a>.</p>
         </noscript>
       </div>
     </article>
@@ -290,8 +290,8 @@
       <li>The ISO is hosted on Google Drive, so Google&rsquo;s own terms and privacy policy apply to the download.</li>
       <li>These terms may change as the project develops.</li>
     </ol>
-    <!-- LINK TO YOUR FULL TERMS PAGE: change terms.html if your page has another name -->
-    <p class="terms-more"><a href="terms.html" target="_blank" rel="noopener noreferrer">Read the full Terms &amp; Conditions<span class="sr-only"> (opens in a new tab)</span></a></p>
+    <!-- LINK TO YOUR FULL TERMS PAGE: change /terms if your page has another name -->
+    <p class="terms-more"><a href="/terms" target="_blank" rel="noopener noreferrer">Read the full Terms &amp; Conditions<span class="sr-only"> (opens in a new tab)</span></a></p>
   </div>
 
   <div class="terms-actions">
